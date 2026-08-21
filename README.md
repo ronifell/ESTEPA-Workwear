@@ -276,3 +276,18 @@ the catalogue to `./.data/` and uploads to `./public/uploads/`, so it needs a
 writable, persistent disk: on read-only or ephemeral filesystems (serverless
 platforms) the panel reports that it could not save instead of losing the
 change silently, and moving the catalogue to PostgreSQL is the right answer.
+
+### Behind a reverse proxy
+
+`ecosystem.config.cjs` holds the PM2 configuration used on the VPS. Start the
+server with `-H localhost`, never `-H 127.0.0.1`.
+
+English URLs are served by rewriting them onto the Spanish filesystem routes,
+and Next decides whether a rewrite is internal by comparing its origin against
+the origin it built from the `-H` hostname. `-H 127.0.0.1` makes those two
+disagree, so every English page is proxy-fetched over the public protocol
+instead of being resolved internally and the whole `/en` site answers 500,
+while Spanish keeps working because its URLs need no rewrite. Since `localhost`
+resolves to `::1` first on modern Node, the config also sets
+`NODE_OPTIONS=--dns-result-order=ipv4first` to keep the socket on
+`127.0.0.1:3000` where nginx expects it.
