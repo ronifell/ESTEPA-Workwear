@@ -1,4 +1,4 @@
-import { products as staticProducts } from "@/data/products";
+import { readCatalogue } from "@/lib/storage/product-store";
 import type {
   Product,
   ProductCategoryId,
@@ -9,9 +9,10 @@ import type {
 /**
  * Single access point to the catalogue.
  *
- * Pages and components never import `@/data/products` directly, so moving the
- * catalogue to PostgreSQL later only requires changing the body of these
- * functions (they are already async for that reason).
+ * Pages and components never read the catalogue directly, so the underlying
+ * source can change without touching the UI. Today it is the editable store
+ * (`.data/products.json`, seeded from `@/data/products`); moving it to
+ * PostgreSQL later only requires changing the body of these functions.
  */
 
 export interface ProductFilters {
@@ -56,35 +57,45 @@ function applyFilters(source: readonly Product[], filters: ProductFilters): Prod
 }
 
 export async function getProducts(filters: ProductFilters = {}): Promise<Product[]> {
-  return applyFilters(staticProducts, filters);
+  return applyFilters(await readCatalogue(), filters);
 }
 
 export async function getFeaturedProducts(limit = 6): Promise<Product[]> {
-  return applyFilters(staticProducts, { featured: true, limit });
+  return applyFilters(await readCatalogue(), { featured: true, limit });
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  return staticProducts.find((product) => product.slug === slug && product.active) ?? null;
+  const catalogue = await readCatalogue();
+  return catalogue.find((product) => product.slug === slug && product.active) ?? null;
 }
 
 export async function getProductById(id: string): Promise<Product | null> {
-  return staticProducts.find((product) => product.id === id) ?? null;
+  const catalogue = await readCatalogue();
+  return catalogue.find((product) => product.id === id) ?? null;
 }
 
 export async function getProductsByIds(ids: readonly string[]): Promise<Product[]> {
-  const index = new Map(staticProducts.map((product) => [product.id, product]));
+  const catalogue = await readCatalogue();
+  const index = new Map(catalogue.map((product) => [product.id, product]));
   return ids
     .map((id) => index.get(id))
     .filter((product): product is Product => product !== undefined);
 }
 
 export async function getAllProductSlugs(): Promise<string[]> {
-  return staticProducts.filter((product) => product.active).map((product) => product.slug);
+  const catalogue = await readCatalogue();
+  return catalogue.filter((product) => product.active).map((product) => product.slug);
+}
+
+/** Every product, including inactive ones. Used by the admin panel only. */
+export async function getAllProductsForAdmin(): Promise<Product[]> {
+  return readCatalogue();
 }
 
 /** Products sharing a sector or a protection with the given one. */
 export async function getRelatedProducts(product: Product, limit = 3): Promise<Product[]> {
-  const candidates = staticProducts.filter(
+  const catalogue = await readCatalogue();
+  const candidates = catalogue.filter(
     (candidate) => candidate.active && candidate.id !== product.id,
   );
 
@@ -117,7 +128,7 @@ export async function getRelatedProducts(product: Product, limit = 3): Promise<P
 
 export async function countProductsBySector(): Promise<Record<SectorId, number>> {
   const counts: Record<SectorId, number> = { mining: 0, "oil-gas": 0, industry: 0 };
-  for (const product of staticProducts) {
+  for (const product of await readCatalogue()) {
     if (!product.active) continue;
     for (const sector of product.sectors) counts[sector] += 1;
   }
@@ -132,7 +143,7 @@ export async function countProductsByProtection(): Promise<Record<ProtectionId, 
     "flash-fire": 0,
     "high-visibility": 0,
   };
-  for (const product of staticProducts) {
+  for (const product of await readCatalogue()) {
     if (!product.active) continue;
     for (const protection of product.protections) counts[protection] += 1;
   }

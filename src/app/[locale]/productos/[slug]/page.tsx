@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 
 import { AddToCart } from "@/components/products/add-to-cart";
+import { JsonLd } from "@/components/seo/json-ld";
 import { ProductGallery } from "@/components/products/product-gallery";
 import { ProductGrid } from "@/components/products/product-grid";
 import { SpecBlock } from "@/components/products/spec-block";
@@ -72,12 +72,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
   return (
     <>
-      <Script
+      <JsonLd
         id={`product-jsonld-${product.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildProductSchema(product, locale)),
-        }}
+        data={buildProductSchema(product, locale)}
       />
 
       <Section tone="default" className="pt-8 pb-0 sm:pt-10 lg:pt-12 lg:pb-0" flush>

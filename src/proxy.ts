@@ -107,5 +107,8 @@ export function proxy(request: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|images|icons|documents|.*\\..*).*)"],
+  matcher: [
+    // `admin` is excluded on purpose: the panel is internal and single-language.
+    "/((?!api|admin|_next/static|_next/image|images|icons|documents|uploads|.*\\..*).*)",
+  ],
 };

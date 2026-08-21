@@ -266,27 +266,31 @@
 }
 
 /*
- * Scroll-reveal: elements start hidden and animate once observed.
+ * Scroll-reveal: hide until the IntersectionObserver marks the block visible.
  *
- * Gated behind `.js-ready` (set by next/script in the locale layout) so content is
- * never invisible when JavaScript is unavailable, blocked or still loading.
+ * Gated on `scripting: enabled` so a browser with JavaScript disabled (or
+ * without this media query) never leaves content invisible. No runtime script
+ * is required — `next/script` is a Client Component and React 19 will not
+ * execute a `<script>` it renders on the client.
  */
 @layer components {
-  .js-ready .reveal {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0);
-    transition:
-      opacity 0.7s var(--ease-out-industrial),
-      transform 0.7s var(--ease-out-industrial);
+  @media (scripting: enabled) {
+    .reveal {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+      transition:
+        opacity 0.7s var(--ease-out-industrial),
+        transform 0.7s var(--ease-out-industrial);
+    }
+
+    .reveal[data-visible="true"] {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
 
-  .js-ready .reveal[data-visible="true"] {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .js-ready .reveal {
+  @media (scripting: enabled) and (prefers-reduced-motion: reduce) {
+    .reveal {
       opacity: 1;
       transform: none;
       transition: none;

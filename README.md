@@ -65,11 +65,15 @@ src/
       productos/[slug]/    Product detail
       pedido/[id]/         Order confirmation
       legal/               Privacy, terms, returns
+    admin/                 Admin panel (single language, not indexed)
+      productos/           Product list, editor, creation
     api/contact/           Contact form endpoint
     api/orders/            Order (quotation request) endpoint
+    api/admin/             Login, logout, product CRUD, media uploads
     sitemap.ts, robots.ts, global-error.tsx
   components/
     layout/  home/  sectors/  products/  cart/  checkout/  forms/  legal/
+    admin/                 Login form, product table, product editor
     shared/                Page hero, CTA section, protection icons
     ui/                    Button, Field, Notice, Section, Badge, icons…
     providers/             i18n and cart context
@@ -77,8 +81,9 @@ src/
   data/                    Products, sectors, protections, provinces
   i18n/                    Dictionaries, localized route map, helpers
   lib/
+    admin/                 Credentials, session, panel copy and options
     repositories/          Data access (swappable: static data → database)
-    storage/               Lead and order persistence (file store / Prisma)
+    storage/               Catalogue, lead and order persistence
     validation/            Zod schemas shared by client and API routes
     seo.ts  format.ts  product-filters.ts  rate-limit.ts  utils.ts
   proxy.ts                 Locale detection and localized URL rewrites
@@ -92,7 +97,7 @@ No component hardcodes business content. To change the site:
 | To change…                        | Edit…                                       |
 | --------------------------------- | ------------------------------------------- |
 | Any visible text                  | `src/i18n/dictionaries/{es,en}.ts`          |
-| Products                          | `src/data/products.ts`                      |
+| Products                          | `/admin` (or `src/data/products.ts` seed)   |
 | Sector pages content              | `src/data/sectors.ts`                       |
 | Protection categories             | `src/data/protections.ts`                   |
 | Contact details, socials, regions | `src/config/site.ts` + environment variables |
@@ -144,6 +149,64 @@ Both API routes are rate limited per IP and protected by a honeypot field.
 
 ---
 
+## Admin panel
+
+`/admin` is a small internal panel for loading the catalogue. It needs no
+database and no third-party service.
+
+### Access
+
+Accounts live in the environment file, nowhere else:
+
+```bash
+# One account
+ADMIN_EMAIL=admin@estepaworkwear.com
+ADMIN_PASSWORD=una-clave-larga
+
+# Or several: "email:password", separated by commas or newlines
+ADMIN_USERS=ana@estepaworkwear.com:clave-de-ana, luis@estepaworkwear.com:clave-de-luis
+
+# Signs the session cookie (any long random string)
+ADMIN_SESSION_SECRET=
+```
+
+While all of them are empty the login screen says so and nobody can get in.
+`ADMIN_USERS` and the single-account pair can be combined; a password may
+contain `:` but not `,`.
+
+Signing in sets an HMAC-signed, HttpOnly session cookie that expires after
+eight hours (`Secure` in production). Removing an account from the environment
+invalidates its sessions on the next request. Every admin API route verifies
+the session itself, so no mutation depends on the page guard. Login attempts
+are rate limited per IP, the panel is `noindex` via both metadata and an
+`X-Robots-Tag` header, and it is excluded from the locale proxy.
+
+### Editing products
+
+The editor covers the full `Product` model: identifiers, Spanish/English name
+and descriptions, category, sectors, protections, images, price and currency,
+sizes, benefits, technical features, materials, recommended use, care,
+certifications, downloadable documents, size variants, and the featured /
+visible / preliminary flags.
+
+Two rules keep the data honest:
+
+- **Spanish is the source language.** Leaving an English field empty reuses the
+  Spanish text instead of publishing a blank string.
+- **Empty blocks stay empty.** Sections with no content are not stored, so the
+  storefront keeps showing its explicit "pending" state rather than inventing
+  specifications.
+
+Images and PDFs can be uploaded (`POST /api/admin/uploads`) or referenced by
+path or URL. Uploads are identified by file signature — not by extension or
+declared MIME type — and land in `public/uploads/`, which is git-ignored.
+
+Saving revalidates the storefront, so prerendered pages (home, catalogue,
+sector pages, product detail in both languages, sitemap) reflect the change on
+the next request without a rebuild.
+
+---
+
 ## Persistence
 
 `src/lib/storage/index.ts` resolves the backend at runtime:
@@ -160,8 +223,14 @@ npm run db:push
 npm run db:seed     # optional: loads the placeholder catalogue
 ```
 
-Product reads go through `src/lib/repositories/products.ts`, which is already
-async. Pointing it at the `Product` table swaps the static catalogue for the
+The catalogue has its own store (`src/lib/storage/product-store.ts`).
+`src/data/products.ts` is the seed: while nobody has saved a change from the
+panel there is no file on disk and the site renders that seed. The first save
+writes `./.data/products.json`, which then becomes the source of truth —
+deleting that file restores the seed.
+
+All product reads go through `src/lib/repositories/products.ts`, which is
+already async. Pointing it at the `Product` table swaps the file store for the
 database without touching a single page or component.
 
 ---
@@ -173,8 +242,12 @@ heroes and CTA bands, exported as optimized JPEGs and served through
 `next/image` (AVIF/WebP, responsive sizes, lazy below the fold).
 
 Products have no photography yet, so `PlaceholderImage` draws a schematic
-silhouette per category instead of a broken or stock-looking image. Adding
-entries to a product's `images` array replaces it automatically.
+silhouette per category instead of a broken or stock-looking image. Adding an
+image from the admin panel (or to a product's `images` array) replaces it
+automatically.
+
+Photography uploaded from the panel goes to `public/uploads/`, separate from
+the curated art in `public/images/` and git-ignored.
 
 ---
 
@@ -196,3 +269,10 @@ Standard Next.js deployment. Set `NEXT_PUBLIC_SITE_URL` to the production
 origin so canonical URLs, the sitemap and Open Graph tags are absolute. Add
 `DATABASE_URL` when the database is ready; the file store is only appropriate
 for a single-instance host with a persistent disk.
+
+Set the admin credentials (`ADMIN_EMAIL` / `ADMIN_PASSWORD` or `ADMIN_USERS`)
+and a random `ADMIN_SESSION_SECRET` in the host's environment. The panel writes
+the catalogue to `./.data/` and uploads to `./public/uploads/`, so it needs a
+writable, persistent disk: on read-only or ephemeral filesystems (serverless
+platforms) the panel reports that it could not save instead of losing the
+change silently, and moving the catalogue to PostgreSQL is the right answer.

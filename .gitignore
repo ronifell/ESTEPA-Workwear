@@ -15,7 +15,11 @@ next-env.d.ts
 src/generated/
 
 # Local persistence used when no DATABASE_URL is configured
+# (contact leads, orders and the catalogue edited from /admin)
 .data/
+
+# Product media uploaded from the admin panel
+public/uploads/
 
 .DS_Store
 Thumbs.db
