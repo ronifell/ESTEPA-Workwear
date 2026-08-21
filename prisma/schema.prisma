@@ -1,0 +1,119 @@
+// ESTEPA Workwear — PostgreSQL schema.
+//
+// The storefront runs without a database (see src/lib/storage/file-store.ts).
+// Setting DATABASE_URL switches leads and orders to PostgreSQL, and the Product
+// model is ready to take over the catalogue once the real products arrive.
+//
+//   npm run db:generate   # generate the client
+//   npm run db:push       # create the tables
+//   npm run db:seed       # load the placeholder catalogue
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+// The connection URL lives in `prisma.config.ts` (Prisma 7).
+datasource db {
+  provider = "postgresql"
+}
+
+/// Localized fields are stored as JSON objects shaped as { "es": ..., "en": ... }
+/// so adding a language never requires a migration.
+model Product {
+  id               String   @id
+  slug             String   @unique
+  name             Json
+  shortDescription Json
+  description      Json
+
+  category    String
+  sectors     String[]
+  protections String[]
+
+  images Json @default("[]")
+
+  price    Int?
+  currency String @default("ARS")
+
+  sizes String[]
+
+  certifications    Json @default("[]")
+  benefits          Json @default("{}")
+  technicalFeatures Json @default("[]")
+  materials         Json @default("{}")
+  recommendedUse    Json @default("{}")
+  care              Json @default("{}")
+  documents         Json @default("[]")
+
+  featured    Boolean @default(false)
+  active      Boolean @default(true)
+  preliminary Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([active, featured])
+  @@map("products")
+}
+
+model ContactLead {
+  id        String   @id
+  createdAt DateTime @default(now())
+  locale    String
+
+  name    String
+  company String
+  role    String?
+  email   String
+  phone   String?
+  region  String?
+  sector  String
+  message String
+
+  handled Boolean @default(false)
+
+  @@index([createdAt])
+  @@map("contact_leads")
+}
+
+model Order {
+  id        String   @id
+  reference String   @unique
+  createdAt DateTime @default(now())
+  locale    String
+
+  /// pending_review | awaiting_payment | confirmed | cancelled
+  status String @default("pending_review")
+
+  customer Json
+  delivery Json
+
+  subtotal Int?
+  currency String @default("ARS")
+
+  /// Reserved for the payment gateway that will be integrated later.
+  paymentProvider  String?
+  paymentReference String?
+
+  items OrderItem[]
+
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  orderId   String
+  productId String
+  slug      String
+  name      String
+  size      String?
+  quantity  Int
+  unitPrice Int?
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@map("order_items")
+}
