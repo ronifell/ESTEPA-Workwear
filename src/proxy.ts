@@ -46,9 +46,16 @@ function withLocaleCookie(response: NextResponse, locale: Locale): NextResponse 
   return response;
 }
 
-/** Keeps the original search params and hash while changing the pathname. */
+/**
+ * Keeps the original search params and hash while changing the pathname.
+ *
+ * Cloning `nextUrl` rather than parsing `request.url` matters behind a reverse
+ * proxy: `request.url` resolves to the internal origin (`localhost:3000`), so a
+ * rewrite built from it looks cross-origin to Next and gets proxy-fetched over
+ * the public protocol instead of being resolved internally.
+ */
 function buildUrl(request: NextRequest, pathname: string): URL {
-  const url = new URL(request.url);
+  const url = request.nextUrl.clone();
   url.pathname = pathname;
   return url;
 }
