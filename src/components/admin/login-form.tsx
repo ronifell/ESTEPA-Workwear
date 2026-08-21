@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,6 @@ import { Notice } from "@/components/ui/notice";
 import { adminCopy } from "@/lib/admin/copy";
 
 export function LoginForm() {
-  const router = useRouter();
   const copy = adminCopy.login;
 
   const [email, setEmail] = useState("");
@@ -25,12 +23,15 @@ export function LoginForm() {
       const response = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
-        router.replace("/admin");
-        router.refresh();
+        // Full document request so the new session cookie is sent. Client-side
+        // routing can replay a cached RSC payload from before the cookie existed.
+        // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- auth cookie must be on the next document request
+        window.location.assign("/admin");
         return;
       }
 

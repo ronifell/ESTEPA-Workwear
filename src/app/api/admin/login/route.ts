@@ -5,6 +5,7 @@ import {
   buildSessionCookieOptions,
   createSessionToken,
   isAdminConfigured,
+  isHttpsRequest,
   verifyCredentials,
 } from "@/lib/admin/auth";
 import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
@@ -48,6 +49,10 @@ export async function POST(request: Request) {
 
   const { token, maxAge } = createSessionToken(email);
   const response = NextResponse.json({ ok: true, email });
-  response.cookies.set(ADMIN_COOKIE, token, buildSessionCookieOptions(maxAge));
+  response.cookies.set(
+    ADMIN_COOKIE,
+    token,
+    buildSessionCookieOptions(maxAge, isHttpsRequest(request)),
+  );
   return response;
 }

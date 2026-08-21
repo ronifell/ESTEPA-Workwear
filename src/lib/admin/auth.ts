@@ -170,11 +170,30 @@ export function getAdminSessionFromRequest(request: Request): AdminSession | nul
   return verifySessionToken(token ? decodeURIComponent(token) : undefined);
 }
 
-export function buildSessionCookieOptions(maxAge: number) {
+/**
+ * Whether the *browser* is on HTTPS. Behind nginx this is `X-Forwarded-Proto`,
+ * not `NODE_ENV`: a production process served over HTTP (IP access before DNS
+ * and Let's Encrypt are in place) must not set `Secure` on the session cookie,
+ * or the browser stores nothing and login appears to fail.
+ */
+export function isHttpsRequest(request: Request): boolean {
+  const forwarded = request.headers.get("x-forwarded-proto");
+  if (forwarded) {
+    return forwarded.split(",")[0]?.trim().toLowerCase() === "https";
+  }
+
+  try {
+    return new URL(request.url).protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+export function buildSessionCookieOptions(maxAge: number, secure: boolean) {
   return {
     httpOnly: true,
     sameSite: "lax" as const,
-    secure: process.env.NODE_ENV === "production",
+    secure,
     path: "/",
     maxAge,
   };
