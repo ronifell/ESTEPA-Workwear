@@ -158,6 +158,11 @@ export const en: Dictionary = {
     technicalDescription:
       "This section will present the materials, constructions and specifications of each solution once the manufacturer's technical documentation is confirmed.",
     technicalPlaceholder: "Technical information in preparation",
+    frartex: {
+      eyebrow: "Line fabric",
+      standards: "FRARTEX line standards",
+      cta: "View oil and gas products",
+    },
     productsTitle: "Recommended products",
     productsDescription: "Solutions from our catalogue associated with this sector.",
     ctaTitle: "Need advice for your operation?",
@@ -233,6 +238,10 @@ export const en: Dictionary = {
       "Technical data sheets and certificates will be published once provided by the manufacturer.",
     related: "Related products",
     intendedApplication: "Intended application",
+    technicalSheet: "Technical information",
+    standards: "Standards",
+    colors: "Colours",
+    frartexBadge: "{name} fabric",
     preliminaryTitle: "Data sheet in preparation",
     preliminaryDescription:
       "This product is part of ESTEPA's initial line. Technical specifications, materials and certifications will be published once validation with the manufacturer is complete.",

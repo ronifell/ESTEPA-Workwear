@@ -54,11 +54,47 @@ export interface Protection {
   readonly standards: readonly Certification[];
 }
 
+/** Pictogram used on the catalog-style certification badge. */
+export type CertificationIcon =
+  | "weld"
+  | "flame"
+  | "antistatic"
+  | "arc"
+  | "chemical"
+  | "rain"
+  | "cold"
+  | "ul"
+  | "badge";
+
 export interface Certification {
   readonly id: string;
   readonly name: string;
   readonly description?: LocalizedText;
   readonly logo?: string;
+  readonly icon?: CertificationIcon;
+}
+
+export interface ProductColor {
+  readonly id: string;
+  readonly name: LocalizedText;
+  readonly hex: string;
+}
+
+export interface FabricLayer {
+  readonly label: LocalizedText;
+  readonly value: LocalizedText;
+}
+
+/**
+ * Short catalog card: code, fabric name, composition and weight — the block
+ * that sits under the garment in a technical workwear catalogue.
+ */
+export interface TechnicalInfo {
+  readonly code: string;
+  readonly fabric: string;
+  readonly composition: LocalizedText;
+  readonly weight: string;
+  readonly layers?: readonly FabricLayer[];
 }
 
 export interface ProductDocument {
@@ -103,6 +139,11 @@ export interface Product {
   readonly protections: readonly ProtectionId[];
 
   readonly images: readonly ProductImage[];
+
+  /** Fabric family name when the garment uses a named tissue, e.g. "FRARTEX". */
+  readonly fabricFamily?: string;
+  readonly technicalInfo?: TechnicalInfo;
+  readonly colors?: readonly ProductColor[];
 
   /** Undefined until the client confirms commercial pricing. */
   readonly price?: number;

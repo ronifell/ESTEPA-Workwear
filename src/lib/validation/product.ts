@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { siteConfig } from "@/config/site";
+import { certificationIconIds } from "@/lib/certifications";
 import { categoryIds, protectionIds, sectorIds } from "@/lib/product-filters";
 import type { Product } from "@/types";
 
@@ -107,7 +108,45 @@ const certificationSchema = z.object({
   name: z.string().trim().min(1, "required").max(120, "max_length"),
   description: optionalLocalizedText(600),
   logo: optionalMediaPath,
+  icon: z.enum(certificationIconIds).optional(),
 });
+
+const colorSchema = z.object({
+  id: z.string().trim().min(1, "required").max(64, "max_length"),
+  name: localizedText(80),
+  hex: z
+    .string()
+    .trim()
+    .regex(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, "invalid_hex")
+    .transform((value) => value.toUpperCase()),
+});
+
+const fabricLayerSchema = z.object({
+  label: localizedText(80),
+  value: localizedText(240),
+});
+
+const technicalInfoSchema = z
+  .object({
+    code: z.string().trim().max(40, "max_length").default(""),
+    fabric: z.string().trim().max(80, "max_length").default(""),
+    composition: optionalLocalizedText(240),
+    weight: z.string().trim().max(80, "max_length").default(""),
+    layers: z.array(fabricLayerSchema).max(8).default([]),
+  })
+  .default({ code: "", fabric: "", composition: undefined, weight: "", layers: [] })
+  .transform((value) => {
+    if (!value.code && !value.fabric && !value.composition && !value.weight) {
+      return undefined;
+    }
+    return {
+      code: value.code,
+      fabric: value.fabric,
+      composition: value.composition ?? { es: "", en: "" },
+      weight: value.weight,
+      ...(value.layers.length > 0 ? { layers: value.layers } : {}),
+    };
+  });
 
 const documentSchema = z.object({
   id: identifier,
@@ -140,6 +179,10 @@ export const productInputSchema = z.object({
   protections: z.array(z.enum(protectionIds)).max(protectionIds.length).default([]),
 
   images: z.array(imageSchema).max(12).default([]),
+
+  fabricFamily: z.string().trim().max(40, "max_length").default(""),
+  technicalInfo: technicalInfoSchema,
+  colors: z.array(colorSchema).max(12).default([]),
 
   price: optionalAmount,
   currency: z.string().trim().length(3).toUpperCase().optional(),
@@ -182,6 +225,9 @@ export function toProduct(input: ProductInput): Product {
     sectors: [...new Set(input.sectors)],
     protections: [...new Set(input.protections)],
     images: input.images,
+    ...(input.fabricFamily ? { fabricFamily: input.fabricFamily } : {}),
+    ...(input.technicalInfo ? { technicalInfo: input.technicalInfo } : {}),
+    ...(input.colors.length > 0 ? { colors: input.colors } : {}),
     ...(input.price !== undefined
       ? { price: input.price, currency: input.currency ?? siteConfig.commerce.currency }
       : input.currency
@@ -208,6 +254,7 @@ export function toProduct(input: ProductInput): Product {
             name: certification.name,
             ...(certification.description ? { description: certification.description } : {}),
             ...(certification.logo ? { logo: certification.logo } : {}),
+            ...(certification.icon ? { icon: certification.icon } : {}),
           })),
         }
       : {}),

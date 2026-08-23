@@ -6,6 +6,8 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { ProductGallery } from "@/components/products/product-gallery";
 import { ProductGrid } from "@/components/products/product-grid";
 import { SpecBlock } from "@/components/products/spec-block";
+import { CertificationRow } from "@/components/products/certification-badge";
+import { TechnicalSheet } from "@/components/products/technical-sheet";
 import { CtaSection } from "@/components/shared/cta-section";
 import { ProtectionIcon } from "@/components/shared/protection-icon";
 import { Badge } from "@/components/ui/badge";
@@ -107,6 +109,8 @@ export default async function ProductDetailPage({ params }: PageProps) {
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-text-muted">
               {product.shortDescription[locale]}
             </p>
+
+            <TechnicalSheet product={product} locale={locale} />
 
             <div className="mt-6 flex flex-wrap gap-2">
               {product.sectors.map((id) => (
@@ -245,9 +249,18 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 })}
               </ul>
 
-              <Notice tone="pending" className="mt-6">
-                {dictionary.protectionPage.disclaimerDescription}
-              </Notice>
+              {(product.certifications ?? []).length > 0 ? (
+                <div className="mt-6 border-t border-border pt-5">
+                  <p className="mb-3 font-display text-[0.5625rem] font-semibold uppercase tracking-[0.14em] text-text-subtle">
+                    {copy.standards}
+                  </p>
+                  <CertificationRow certifications={product.certifications ?? []} compact />
+                </div>
+              ) : (
+                <Notice tone="pending" className="mt-6">
+                  {dictionary.protectionPage.disclaimerDescription}
+                </Notice>
+              )}
             </div>
 
             {product.sizes && product.sizes.length > 0 ? (

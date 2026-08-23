@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { TechnicalSheetCompact } from "@/components/products/technical-sheet";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRightIcon } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
@@ -47,11 +48,14 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
           />
         )}
 
-        {product.preliminary ? (
-          <div className="absolute left-3 top-3">
+        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
+          {product.preliminary ? (
             <Badge tone="pending">{dictionary.common.preliminaryContent}</Badge>
-          </div>
-        ) : null}
+          ) : null}
+          {product.fabricFamily ? (
+            <Badge tone="accent">{product.fabricFamily}</Badge>
+          ) : null}
+        </div>
       </div>
 
       <div className="flex flex-1 flex-col p-5 lg:p-6">
@@ -73,6 +77,8 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
         <p className="mt-2.5 line-clamp-3 text-sm leading-relaxed text-text-muted">
           {product.shortDescription[locale]}
         </p>
+
+        <TechnicalSheetCompact product={product} locale={locale} />
 
         {product.protections.length > 0 ? (
           <div className="mt-4">

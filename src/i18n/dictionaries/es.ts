@@ -165,6 +165,11 @@ export const es = {
     technicalDescription:
       "Esta sección presentará los materiales, construcciones y especificaciones de cada solución una vez confirmada la documentación técnica del fabricante.",
     technicalPlaceholder: "Información técnica en preparación",
+    frartex: {
+      eyebrow: "Tejido de la línea",
+      standards: "Normas de la línea FRARTEX",
+      cta: "Ver productos de petróleo y gas",
+    },
     productsTitle: "Productos recomendados",
     productsDescription: "Soluciones de nuestro catálogo asociadas a este sector.",
     ctaTitle: "¿Necesitás asesoramiento para tu operación?",
@@ -240,6 +245,10 @@ export const es = {
       "Las fichas técnicas y los certificados se publicarán cuando el fabricante los proporcione.",
     related: "Productos relacionados",
     intendedApplication: "Aplicación prevista",
+    technicalSheet: "Información técnica",
+    standards: "Normas",
+    colors: "Colores",
+    frartexBadge: "Tejido {name}",
     preliminaryTitle: "Ficha técnica en preparación",
     preliminaryDescription:
       "Este producto forma parte de la línea inicial de ESTEPA. Las especificaciones técnicas, materiales y certificaciones se publicarán una vez completada la validación con el fabricante.",

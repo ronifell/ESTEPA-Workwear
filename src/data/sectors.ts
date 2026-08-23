@@ -95,8 +95,8 @@ export const sectors: readonly Sector[] = [
       en: "Production fields, treatment plants and refineries present specific risks where apparel selection is part of the operation's safety system.",
     },
     intro: {
-      es: "Nuestra línea para petróleo y gas se orienta a operaciones donde conviven riesgos térmicos, eléctricos y de exposición a hidrocarburos, con requerimientos estrictos de identificación y visibilidad.",
-      en: "Our oil & gas line targets operations where thermal, electrical and hydrocarbon exposure risks coexist, with strict identification and visibility requirements.",
+      es: "Nuestra línea para petróleo y gas se construye sobre FRARTEX, un tejido inherente ignífugo y antiestático. Está orientada a operaciones donde conviven riesgos térmicos, eléctricos y de exposición a hidrocarburos, con requerimientos estrictos de identificación y visibilidad.",
+      en: "Our oil and gas line is built on FRARTEX, an inherent flame-resistant and antistatic fabric. It targets operations where thermal, electrical and hydrocarbon exposure risks coexist, with strict identification and visibility requirements.",
     },
     image: "/images/sectors/oil-gas.jpg",
     imageAlt: {

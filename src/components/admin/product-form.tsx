@@ -21,8 +21,15 @@ import { Button } from "@/components/ui/button";
 import { Field, TextInput } from "@/components/ui/field";
 import { Notice } from "@/components/ui/notice";
 import { adminCopy, translateFieldError } from "@/lib/admin/copy";
+import { certificationIconIds } from "@/lib/certifications";
 import { slugify } from "@/lib/utils";
+
+const CERTIFICATION_ICON_OPTIONS = certificationIconIds.map((id) => ({
+  value: id,
+  label: adminCopy.form.certifications.icons[id],
+}));
 import type {
+  CertificationIcon,
   Localized,
   LocalizedText,
   Product,
@@ -57,6 +64,13 @@ interface CertificationDraft {
   name: string;
   description: LocalizedDraft;
   logo: string;
+  icon: CertificationIcon;
+}
+
+interface ColorDraft {
+  id: string;
+  name: LocalizedDraft;
+  hex: string;
 }
 
 interface DocumentDraft {
@@ -89,6 +103,12 @@ interface Draft {
   price: string;
   currency: string;
   sizes: string;
+  fabricFamily: string;
+  techCode: string;
+  techFabric: string;
+  techComposition: LocalizedDraft;
+  techWeight: string;
+  colors: ColorDraft[];
   variants: VariantDraft[];
   certifications: CertificationDraft[];
   benefits: LocalizedDraft;
@@ -127,6 +147,12 @@ function toDraft(product: Product | null, defaultCurrency: string): Draft {
       price: "",
       currency: defaultCurrency,
       sizes: "",
+      fabricFamily: "",
+      techCode: "",
+      techFabric: "",
+      techComposition: { ...EMPTY },
+      techWeight: "",
+      colors: [],
       variants: [],
       certifications: [],
       benefits: { ...EMPTY },
@@ -158,6 +184,16 @@ function toDraft(product: Product | null, defaultCurrency: string): Draft {
     price: product.price === undefined ? "" : String(product.price),
     currency: product.currency ?? defaultCurrency,
     sizes: (product.sizes ?? []).join(", "),
+    fabricFamily: product.fabricFamily ?? "",
+    techCode: product.technicalInfo?.code ?? "",
+    techFabric: product.technicalInfo?.fabric ?? "",
+    techComposition: fromText(product.technicalInfo?.composition),
+    techWeight: product.technicalInfo?.weight ?? "",
+    colors: (product.colors ?? []).map((color) => ({
+      id: color.id,
+      name: fromText(color.name),
+      hex: color.hex,
+    })),
     variants: (product.variants ?? []).map((variant) => ({
       id: variant.id,
       sku: variant.sku,
@@ -172,6 +208,7 @@ function toDraft(product: Product | null, defaultCurrency: string): Draft {
       name: certification.name,
       description: fromText(certification.description),
       logo: certification.logo ?? "",
+      icon: certification.icon ?? "badge",
     })),
     benefits: fromList(product.benefits),
     technicalFeatures: (product.technicalFeatures ?? []).map((feature) => ({
@@ -231,6 +268,14 @@ function toPayload(draft: Draft): unknown {
       .split(/[,\n]/)
       .map((size) => size.trim())
       .filter((size) => size.length > 0),
+    fabricFamily: draft.fabricFamily.trim(),
+    technicalInfo: {
+      code: draft.techCode.trim(),
+      fabric: draft.techFabric.trim(),
+      composition: draft.techComposition,
+      weight: draft.techWeight.trim(),
+    },
+    colors: draft.colors,
     variants: draft.variants.map((variant) => ({
       id: variant.id,
       sku: variant.sku,
@@ -569,6 +614,134 @@ export function ProductForm({
         </RepeatableList>
       </AdminCard>
 
+      <AdminCard
+        title={copy.sections.technicalSheet.title}
+        description={copy.sections.technicalSheet.description}
+      >
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Field
+            id="product-fabric-family"
+            label={copy.fields.fabricFamily}
+            hint={copy.fields.fabricFamilyHint}
+          >
+            <TextInput
+              id="product-fabric-family"
+              value={draft.fabricFamily}
+              onChange={(event) => patch({ fabricFamily: event.target.value })}
+            />
+          </Field>
+          <Field id="product-tech-code" label={copy.fields.techCode} hint={copy.fields.techCodeHint}>
+            <TextInput
+              id="product-tech-code"
+              value={draft.techCode}
+              onChange={(event) => patch({ techCode: event.target.value })}
+            />
+          </Field>
+          <Field
+            id="product-tech-fabric"
+            label={copy.fields.techFabric}
+            hint={copy.fields.techFabricHint}
+          >
+            <TextInput
+              id="product-tech-fabric"
+              value={draft.techFabric}
+              onChange={(event) => patch({ techFabric: event.target.value })}
+            />
+          </Field>
+          <Field
+            id="product-tech-weight"
+            label={copy.fields.techWeight}
+            hint={copy.fields.techWeightHint}
+          >
+            <TextInput
+              id="product-tech-weight"
+              value={draft.techWeight}
+              onChange={(event) => patch({ techWeight: event.target.value })}
+            />
+          </Field>
+        </div>
+
+        <LocalizedTextField
+          id="product-tech-composition"
+          label={copy.fields.techComposition}
+          value={draft.techComposition}
+          onChange={(techComposition) => patch({ techComposition })}
+          errors={errors}
+          errorKey="technicalInfo.composition"
+        />
+
+        <RepeatableList
+          addLabel={copy.colors.add}
+          emptyLabel={copy.colors.empty}
+          count={draft.colors.length}
+          onAdd={() =>
+            patch({
+              colors: [...draft.colors, { id: "", name: { ...EMPTY }, hex: "#1B2A4A" }],
+            })
+          }
+        >
+          {draft.colors.map((color, index) => (
+            <RepeatableRow
+              key={index}
+              index={index}
+              onRemove={() => patch({ colors: removeAt(draft.colors, index) })}
+            >
+              <div className="grid gap-4 sm:grid-cols-3">
+                <Field
+                  id={`color-id-${index}`}
+                  label={copy.colors.id}
+                  error={translateFieldError(errors[`colors.${index}.id`])}
+                >
+                  <TextInput
+                    id={`color-id-${index}`}
+                    value={color.id}
+                    invalid={Boolean(errors[`colors.${index}.id`])}
+                    onChange={(event) =>
+                      patch({
+                        colors: updateAt(draft.colors, index, { ...color, id: event.target.value }),
+                      })
+                    }
+                  />
+                </Field>
+                <Field
+                  id={`color-hex-${index}`}
+                  label={copy.colors.hex}
+                  error={translateFieldError(errors[`colors.${index}.hex`])}
+                >
+                  <TextInput
+                    id={`color-hex-${index}`}
+                    value={color.hex}
+                    invalid={Boolean(errors[`colors.${index}.hex`])}
+                    onChange={(event) =>
+                      patch({
+                        colors: updateAt(draft.colors, index, { ...color, hex: event.target.value }),
+                      })
+                    }
+                  />
+                </Field>
+                <div className="flex items-end pb-2">
+                  <span
+                    className="size-9 border border-border"
+                    style={{ backgroundColor: color.hex }}
+                    aria-hidden
+                  />
+                </div>
+              </div>
+              <LocalizedTextField
+                id={`color-name-${index}`}
+                label={copy.colors.name}
+                value={color.name}
+                errors={errors}
+                errorKey={`colors.${index}.name`}
+                onChange={(name) =>
+                  patch({ colors: updateAt(draft.colors, index, { ...color, name }) })
+                }
+              />
+            </RepeatableRow>
+          ))}
+        </RepeatableList>
+      </AdminCard>
+
       <AdminCard title={copy.sections.specs.title} description={copy.sections.specs.description}>
         <LocalizedLinesField
           id="product-benefits"
@@ -671,7 +844,7 @@ export function ProductForm({
             patch({
               certifications: [
                 ...draft.certifications,
-                { id: "", name: "", description: { ...EMPTY }, logo: "" },
+                { id: "", name: "", description: { ...EMPTY }, logo: "", icon: "badge" },
               ],
             })
           }
@@ -684,7 +857,7 @@ export function ProductForm({
                 patch({ certifications: removeAt(draft.certifications, index) })
               }
             >
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-3">
                 <Field
                   id={`certification-id-${index}`}
                   label={copy.certifications.id}
@@ -726,6 +899,21 @@ export function ProductForm({
                     }
                   />
                 </Field>
+
+                <SelectRow
+                  id={`certification-icon-${index}`}
+                  label={copy.certifications.icon}
+                  value={certification.icon}
+                  options={CERTIFICATION_ICON_OPTIONS}
+                  onChange={(icon) =>
+                    patch({
+                      certifications: updateAt(draft.certifications, index, {
+                        ...certification,
+                        icon: icon as CertificationIcon,
+                      }),
+                    })
+                  }
+                />
               </div>
 
               <LocalizedTextField

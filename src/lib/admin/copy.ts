@@ -95,6 +95,11 @@ export const adminCopy = {
         description: "El precio sólo se muestra en el sitio si la visualización de precios está habilitada.",
       },
       images: { title: "Imágenes", description: "Sin imágenes el sitio muestra una silueta técnica." },
+      technicalSheet: {
+        title: "Ficha técnica corta",
+        description:
+          "El bloque de catálogo: código, tejido, composición, gramaje y colores. En petróleo y gas usá FRARTEX.",
+      },
       specs: { title: "Especificaciones", description: "Los bloques vacíos se muestran como “pendiente” en el sitio." },
       certifications: {
         title: "Certificaciones",
@@ -139,6 +144,23 @@ export const adminCopy = {
       preliminary: "Contenido preliminar",
       preliminaryHint:
         "Mientras esté activo, el sitio aclara que las especificaciones están pendientes de confirmación.",
+      fabricFamily: "Familia de tejido",
+      fabricFamilyHint: "Ejemplo: FRARTEX. Se muestra como sello en la ficha y en la tarjeta.",
+      techCode: "Código de producto",
+      techCodeHint: "El recuadro tipo catálogo. Ejemplo: EW241003.",
+      techFabric: "Nombre del tejido",
+      techFabricHint: "Ejemplo: FRARTEX-2400AS.",
+      techComposition: "Composición",
+      techWeight: "Gramaje / peso",
+      techWeightHint: "Ejemplo: 240 g/m² · 7 oz.",
+    },
+
+    colors: {
+      add: "Agregar color",
+      empty: "Sin colores cargados.",
+      id: "Identificador",
+      name: "Nombre",
+      hex: "Color (hex)",
     },
 
     images: {
@@ -170,6 +192,18 @@ export const adminCopy = {
       name: "Nombre de la norma",
       description: "Alcance",
       logo: "Logo (opcional)",
+      icon: "Pictograma",
+      icons: {
+        weld: "Soldadura",
+        flame: "Llama / calor",
+        antistatic: "Antiestático",
+        arc: "Arco eléctrico",
+        chemical: "Químicos",
+        rain: "Lluvia",
+        cold: "Frío",
+        ul: "UL Certified",
+        badge: "Placa de texto",
+      },
     },
 
     documents: {
@@ -230,6 +264,7 @@ export const adminCopy = {
     max_length: "Demasiado largo",
     invalid_identifier: "Usá minúsculas, números y guiones",
     invalid_path: "Debe empezar con / o con http",
+    invalid_hex: "Usá un color hexadecimal, por ejemplo #1B2A4A",
     min_one_sector: "Seleccioná al menos un sector",
     duplicate: "Ya está en uso",
     fallback: "Valor no válido",

@@ -1,4 +1,16 @@
-import type { Product } from "@/types";
+import {
+  FRARTEX_FAMILY,
+  fabrics,
+  frartexCertifications,
+  frartexColors,
+} from "@/data/fabrics";
+import type { Product, ProductColor } from "@/types";
+
+function pickColors(...ids: string[]): ProductColor[] {
+  return ids
+    .map((id) => frartexColors.find((color) => color.id === id))
+    .filter((color): color is ProductColor => color !== undefined);
+}
 
 /**
  * PUBLISHED CATALOGUE
@@ -52,6 +64,18 @@ export const products: readonly Product[] = [
     category: "coveralls",
     sectors: ["mining"],
     protections: ["high-visibility", "cut"],
+    technicalInfo: {
+      code: "EW241001",
+      fabric: "ESTEPA-TW245-HV",
+      composition: {
+        es: "60% algodón, 40% poliéster",
+        en: "60% cotton, 40% polyester",
+      },
+      weight: "245 g/m²",
+    },
+    colors: [
+      { id: "navy-hv", name: { es: "Azul marino / flúor", en: "Navy / fluorescent" }, hex: "#1B2A4A" },
+    ],
     images: [
       {
         src: "/images/products/overol-minero-cordillera-studio.jpg",
@@ -186,6 +210,18 @@ export const products: readonly Product[] = [
     category: "jackets",
     sectors: ["mining", "industry"],
     protections: ["high-visibility"],
+    technicalInfo: {
+      code: "EW241002",
+      fabric: "ESTEPA-CV260-WR",
+      composition: {
+        es: "65% poliéster, 35% algodón, acabado repelente al agua",
+        en: "65% polyester, 35% cotton, water-repellent finish",
+      },
+      weight: "260 g/m²",
+    },
+    colors: [
+      { id: "navy-hv", name: { es: "Azul marino / flúor", en: "Navy / fluorescent" }, hex: "#1B2A4A" },
+    ],
     images: [
       {
         src: "/images/products/campera-industrial-andes-studio.jpg",
@@ -325,16 +361,24 @@ export const products: readonly Product[] = [
     slug: "camisa-trabajo-pampa",
     name: { es: "Camisa de Trabajo Pampa", en: "Pampa Work Shirt" },
     shortDescription: {
-      es: "Camisa de manga larga en sarga de algodón para campos de producción y plantas de tratamiento, con cintas retrorreflectivas en antebrazos.",
-      en: "Long-sleeve cotton twill shirt for production fields and treatment plants, with retroreflective tapes on the forearms.",
+      es: "Camisa de manga larga en tejido FRARTEX para campos de producción y plantas de tratamiento, con cintas retrorreflectivas en antebrazos.",
+      en: "Long-sleeve FRARTEX shirt for production fields and treatment plants, with retroreflective tapes on the forearms.",
     },
     description: {
-      es: "La Pampa es la prenda superior de la línea de petróleo y gas. Se trabaja en sarga de algodón, un tejido natural que no se funde ni se adhiere a la piel frente a una fuente de calor, y que además respira en jornadas de sol abierto en el yacimiento. El corte mantiene la manga larga y el puño abotonado como criterio de cobertura permanente, con canesú reforzado en la espalda para soportar el movimiento repetido de brazos. Las cintas retrorreflectivas en los antebrazos hacen visibles las manos y los gestos durante maniobras nocturnas o en zonas de circulación de vehículos.",
-      en: "The Pampa is the upper garment of the oil and gas line. It is made in cotton twill, a natural fabric that does not melt or stick to the skin near a heat source and that breathes through long sunny days at the field. The cut keeps the long sleeve and buttoned cuff as a permanent coverage criterion, with a reinforced back yoke to withstand repeated arm movement. The retroreflective tapes on the forearms make hands and gestures visible during night manoeuvres or in vehicle traffic areas.",
+      es: "La Pampa es la prenda superior de la línea de petróleo y gas, cortada en FRARTEX-2400AS. El tejido inherente ignífugo y antiestático no se funde ni se adhiere a la piel frente a una fuente de calor, y respira en jornadas de sol abierto en el yacimiento. El corte mantiene la manga larga y el puño abotonado como criterio de cobertura permanente, con canesú reforzado en la espalda para soportar el movimiento repetido de brazos. Las cintas retrorreflectivas en los antebrazos hacen visibles las manos y los gestos durante maniobras nocturnas o en zonas de circulación de vehículos.",
+      en: "The Pampa is the upper garment of the oil and gas line, cut in FRARTEX-2400AS. The inherent flame-resistant and antistatic fabric does not melt or stick to the skin near a heat source, and it breathes through long sunny days at the field. The cut keeps the long sleeve and buttoned cuff as a permanent coverage criterion, with a reinforced back yoke to withstand repeated arm movement. The retroreflective tapes on the forearms make hands and gestures visible during night manoeuvres or in vehicle traffic areas.",
     },
     category: "shirts",
     sectors: ["oil-gas"],
     protections: ["flash-fire", "electrical"],
+    fabricFamily: FRARTEX_FAMILY,
+    technicalInfo: {
+      code: "EW241003",
+      fabric: fabrics.frartex.code,
+      composition: fabrics.frartex.composition,
+      weight: fabrics.frartex.weight,
+    },
+    colors: pickColors("khaki", "navy", "orange"),
     images: [
       {
         src: "/images/products/camisa-trabajo-pampa-studio.jpg",
@@ -354,19 +398,19 @@ export const products: readonly Product[] = [
       },
     ],
     sizes: [...SIZES],
-    certifications: [],
+    certifications: [...frartexCertifications],
     benefits: {
       es: [
-        "Sarga de algodón que respira en jornadas de sol abierto y no se adhiere a la piel frente al calor.",
+        "Tejido FRARTEX inherente: no se funde ni se adhiere a la piel frente al calor.",
+        "Fibra antiestática integrada, pensada para instalaciones energizadas.",
         "Cobertura permanente de brazos con manga larga y puño abotonado.",
         "Manos y gestos visibles en maniobras nocturnas gracias a las cintas en antebrazos.",
-        "Canesú reforzado en la espalda para el movimiento repetido de brazos y hombros.",
       ],
       en: [
-        "Cotton twill that breathes through sunny days and does not stick to the skin near heat.",
+        "Inherent FRARTEX fabric: does not melt or stick to the skin near heat.",
+        "Integrated antistatic fibre, intended for energised installations.",
         "Permanent arm coverage with long sleeves and buttoned cuffs.",
         "Hands and gestures visible during night manoeuvres thanks to the forearm tapes.",
-        "Reinforced back yoke for repeated arm and shoulder movement.",
       ],
     },
     technicalFeatures: [
@@ -380,8 +424,8 @@ export const products: readonly Product[] = [
       {
         label: { es: "Tejido", en: "Fabric" },
         value: {
-          es: "Sarga 100% algodón de 210 g/m².",
-          en: "100% cotton twill, 210 gsm.",
+          es: "FRARTEX-2400AS, 88% algodón / 10% nailon / 2% antiestático, 240 g/m².",
+          en: "FRARTEX-2400AS, 88% cotton / 10% nylon / 2% anti-static, 240 gsm.",
         },
       },
       {
@@ -414,21 +458,21 @@ export const products: readonly Product[] = [
       },
       {
         label: { es: "Color", en: "Colour" },
-        value: { es: "Arena.", en: "Sand." },
+        value: { es: "Arena, azul marino o naranja alta visibilidad.", en: "Khaki, navy or high-visibility orange." },
       },
     ],
     materials: {
       es: [
-        "Cuerpo: sarga 100% algodón, 210 g/m².",
+        "Cuerpo: FRARTEX-2400AS, 88% algodón / 10% nailon / 2% antiestático, 240 g/m².",
         "Cintas retrorreflectivas de 25 mm cosidas en antebrazos.",
         "Botones de poliéster de alta resistencia.",
-        "Hilo de costura de poliéster con costura reforzada en hombros y sisas.",
+        "Hilo de costura con costura reforzada en hombros y sisas.",
       ],
       en: [
-        "Body: 100% cotton twill, 210 gsm.",
+        "Body: FRARTEX-2400AS, 88% cotton / 10% nylon / 2% anti-static, 240 gsm.",
         "25 mm retroreflective tapes stitched on the forearms.",
         "High-strength polyester buttons.",
-        "Polyester sewing thread with reinforced seams at shoulders and armholes.",
+        "Reinforced sewing thread at shoulders and armholes.",
       ],
     },
     recommendedUse: {
@@ -456,16 +500,24 @@ export const products: readonly Product[] = [
     slug: "pantalon-cargo-calafate",
     name: { es: "Pantalón Cargo Calafate", en: "Calafate Cargo Trousers" },
     shortDescription: {
-      es: "Pantalón cargo en ripstop con rodillas de doble capa, seis bolsillos y cintas retrorreflectivas en las piernas.",
-      en: "Ripstop cargo trousers with double-layer knees, six pockets and retroreflective tapes on the legs.",
+      es: "Pantalón cargo en tejido FRARTEX con rodillas de doble capa, seis bolsillos y cintas retrorreflectivas en las piernas.",
+      en: "FRARTEX cargo trousers with double-layer knees, six pockets and retroreflective tapes on the legs.",
     },
     description: {
-      es: "El Calafate está construido alrededor de una idea simple: el pantalón se rompe siempre en los mismos lugares. Por eso usa un tejido ripstop, cuya trama de refuerzo detiene el avance de un desgarro en lugar de dejarlo correr, y suma rodillas de doble capa con acceso interno para rodilleras, pensadas para tareas de arrodillado sobre rejilla y hormigón. Los seis bolsillos incluyen dos cargo de fuelle que aceptan herramientas de mano sin deformar la pierna, y las cintas retrorreflectivas bajas mantienen visible el movimiento del operario a la altura donde lo ve el conductor de un equipo.",
-      en: "The Calafate is built around a simple idea: trousers always tear in the same places. That is why it uses a ripstop weave, whose reinforcing grid stops a tear from running instead of letting it spread, and adds double-layer knees with internal access for knee pads, made for kneeling on grating and concrete. The six pockets include two bellows cargo pockets that take hand tools without deforming the leg, and the low retroreflective tapes keep the worker's movement visible at the height a machine operator actually sees.",
+      es: "El Calafate es el pantalón de la línea de petróleo y gas, cortado en FRARTEX-2400AS. Está construido alrededor de una idea simple: el pantalón se rompe siempre en los mismos lugares. Por eso suma rodillas de doble capa con acceso interno para rodilleras, pensadas para tareas de arrodillado sobre rejilla y hormigón, y el mismo tejido inherente ignífugo en todo el cuerpo. Los seis bolsillos incluyen dos cargo de fuelle que aceptan herramientas de mano sin deformar la pierna, y las cintas retrorreflectivas bajas mantienen visible el movimiento del operario a la altura donde lo ve el conductor de un equipo.",
+      en: "The Calafate is the oil and gas line trouser, cut in FRARTEX-2400AS. It is built around a simple idea: trousers always tear in the same places. That is why it adds double-layer knees with internal access for knee pads, made for kneeling on grating and concrete, and uses the same inherent flame-resistant cloth throughout. The six pockets include two bellows cargo pockets that take hand tools without deforming the leg, and the low retroreflective tapes keep the worker's movement visible at the height a machine operator actually sees.",
     },
     category: "trousers",
     sectors: ["oil-gas", "industry"],
     protections: ["cut", "flash-fire"],
+    fabricFamily: FRARTEX_FAMILY,
+    technicalInfo: {
+      code: "EW241004",
+      fabric: fabrics.frartex.code,
+      composition: fabrics.frartex.composition,
+      weight: fabrics.frartex.weight,
+    },
+    colors: pickColors("graphite", "navy", "khaki"),
     images: [
       {
         src: "/images/products/pantalon-cargo-calafate-studio.jpg",
@@ -485,16 +537,16 @@ export const products: readonly Product[] = [
       },
     ],
     sizes: [...SIZES],
-    certifications: [],
+    certifications: [...frartexCertifications],
     benefits: {
       es: [
-        "Trama ripstop que frena el avance de un desgarro en lugar de dejarlo correr.",
+        "Cuerpo completo en FRARTEX inherente ignífugo y antiestático.",
         "Rodillas de doble capa con acceso interno para rodilleras.",
         "Seis bolsillos, dos de ellos cargo de fuelle, para herramientas de mano.",
         "Cintas retrorreflectivas bajas, a la altura en la que el operador de un equipo detecta el movimiento.",
       ],
       en: [
-        "Ripstop weave that stops a tear from running instead of letting it spread.",
+        "Full body in inherent flame-resistant and antistatic FRARTEX.",
         "Double-layer knees with internal access for knee pads.",
         "Six pockets, two of them bellows cargo, for hand tools.",
         "Low retroreflective tapes, at the height where a machine operator detects movement.",
@@ -511,8 +563,8 @@ export const products: readonly Product[] = [
       {
         label: { es: "Tejido", en: "Fabric" },
         value: {
-          es: "Ripstop de algodón y poliéster de 260 g/m².",
-          en: "Cotton-polyester ripstop, 260 gsm.",
+          es: "FRARTEX-2400AS, 88% algodón / 10% nailon / 2% antiestático, 240 g/m².",
+          en: "FRARTEX-2400AS, 88% cotton / 10% nylon / 2% anti-static, 240 gsm.",
         },
       },
       {
@@ -545,18 +597,18 @@ export const products: readonly Product[] = [
       },
       {
         label: { es: "Color", en: "Colour" },
-        value: { es: "Gris grafito.", en: "Graphite grey." },
+        value: { es: "Grafito, azul marino o arena.", en: "Graphite, navy or khaki." },
       },
     ],
     materials: {
       es: [
-        "Cuerpo: ripstop 65% algodón / 35% poliéster, 260 g/m².",
+        "Cuerpo: FRARTEX-2400AS, 88% algodón / 10% nailon / 2% antiestático, 240 g/m².",
         "Rodillas y tiro con refuerzo del mismo tejido en doble capa.",
         "Cintas retrorreflectivas de 50 mm cosidas en ambas piernas.",
         "Cierre metálico y botón troquelado de alta resistencia.",
       ],
       en: [
-        "Body: 65% cotton / 35% polyester ripstop, 260 gsm.",
+        "Body: FRARTEX-2400AS, 88% cotton / 10% nylon / 2% anti-static, 240 gsm.",
         "Knees and crotch reinforced with the same fabric in double layer.",
         "50 mm retroreflective tapes stitched on both legs.",
         "Metal zipper and heavy-duty stamped button.",
@@ -597,6 +649,18 @@ export const products: readonly Product[] = [
     category: "vests",
     sectors: ["mining", "oil-gas", "industry"],
     protections: ["high-visibility"],
+    technicalInfo: {
+      code: "EW241005",
+      fabric: "ESTEPA-HV150",
+      composition: {
+        es: "Malla 100% poliéster fluorescente y base de poliéster sólido",
+        en: "100% fluorescent polyester mesh with solid polyester lower panel",
+      },
+      weight: "150 g/m²",
+    },
+    colors: [
+      { id: "hv-navy", name: { es: "Amarillo flúor / marino", en: "Fluorescent yellow / navy" }, hex: "#D4E157" },
+    ],
     images: [
       {
         src: "/images/products/chaleco-alta-visibilidad-zonda-studio.jpg",
@@ -746,6 +810,18 @@ export const products: readonly Product[] = [
     category: "coveralls",
     sectors: ["industry"],
     protections: ["chemical"],
+    technicalInfo: {
+      code: "EW241006",
+      fabric: "ESTEPA-PU-CT",
+      composition: {
+        es: "Poliéster con recubrimiento de poliuretano",
+        en: "Polyurethane-coated polyester",
+      },
+      weight: "PU coated",
+    },
+    colors: [
+      { id: "slate", name: { es: "Gris pizarra", en: "Slate grey" }, hex: "#5C6370" },
+    ],
     images: [
       {
         src: "/images/products/overol-industrial-talampaya-studio.jpg",
@@ -894,6 +970,18 @@ export const products: readonly Product[] = [
     category: "shirts",
     sectors: ["industry"],
     protections: ["cut"],
+    technicalInfo: {
+      code: "EW241007",
+      fabric: "ESTEPA-TW220",
+      composition: {
+        es: "65% algodón, 35% poliéster",
+        en: "65% cotton, 35% polyester",
+      },
+      weight: "220 g/m²",
+    },
+    colors: [
+      { id: "steel", name: { es: "Azul acero", en: "Steel blue" }, hex: "#5B6B7A" },
+    ],
     images: [
       {
         src: "/images/products/camisa-industrial-uspallata-studio.jpg",

@@ -1,4 +1,5 @@
 import { ProductGrid } from "@/components/products/product-grid";
+import { FrartexBlock } from "@/components/sectors/frartex-block";
 import { CtaSection } from "@/components/shared/cta-section";
 import { PageHero } from "@/components/shared/page-hero";
 import { ProtectionIcon } from "@/components/shared/protection-icon";
@@ -154,22 +155,26 @@ export async function SectorPage({
         </ul>
 
         <Reveal delay={120} className="mt-12">
-          <div className="border border-border bg-surface-muted p-6 lg:p-8">
-            <div className="flex items-start gap-3">
-              <ClipboardIcon className="mt-0.5 size-5 shrink-0 text-accent" />
-              <div className="max-w-3xl">
-                <h3 className="font-display text-base font-semibold text-navy-900">
-                  {copy.technicalTitle}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  {copy.technicalDescription}
-                </p>
+          {sectorId === "oil-gas" ? (
+            <FrartexBlock locale={locale} />
+          ) : (
+            <div className="border border-border bg-surface-muted p-6 lg:p-8">
+              <div className="flex items-start gap-3">
+                <ClipboardIcon className="mt-0.5 size-5 shrink-0 text-accent" />
+                <div className="max-w-3xl">
+                  <h3 className="font-display text-base font-semibold text-navy-900">
+                    {copy.technicalTitle}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-text-muted">
+                    {copy.technicalDescription}
+                  </p>
+                </div>
               </div>
+              <Notice tone="pending" className="mt-6">
+                {copy.technicalPlaceholder}
+              </Notice>
             </div>
-            <Notice tone="pending" className="mt-6">
-              {copy.technicalPlaceholder}
-            </Notice>
-          </div>
+          )}
         </Reveal>
       </Section>
 
