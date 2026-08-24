@@ -58,7 +58,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       <div className="container-page relative py-14 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
-            <Logo locale={locale} variant="plate" />
+            <Logo locale={locale} inverse />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-text-inverse-muted">
               {dictionary.footer.description}
             </p>
