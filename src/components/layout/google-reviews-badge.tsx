@@ -48,16 +48,16 @@ export function GoogleReviewsBadge({
     : 5;
 
   const inner = (
-    <span className="flex flex-col items-center bg-white px-4 py-3 text-center">
+    <span className="flex flex-col items-start text-left">
       <GoogleWordmark />
-      <span className="mt-0.5 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-navy-900">
+      <span className="mt-0.5 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-text-inverse-muted">
         {dictionary.trust.googleReviews}
       </span>
       <span className="mt-1.5">
         <Stars count={filled} />
       </span>
       {rating ? (
-        <span className="mt-1 font-display text-xs font-semibold text-navy-800">
+        <span className="mt-1 font-display text-xs font-semibold text-text-inverse">
           {rating}
           {reviewCount ? ` · ${reviewCount}` : null}
         </span>
