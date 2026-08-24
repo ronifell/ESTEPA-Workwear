@@ -12,7 +12,6 @@ import {
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { siteConfig } from "@/config/site";
 import { getDictionary, type Dictionary } from "@/i18n";
 import type { Locale } from "@/types";
 
@@ -44,16 +43,9 @@ export function Corporate({ locale }: { readonly locale: Locale }) {
             />
           </div>
 
-          <ul className="mt-4 grid grid-cols-3 divide-x divide-border border border-border bg-surface">
-            {siteConfig.regions.map((region) => (
-              <li
-                key={region}
-                className="px-3 py-4 text-center font-display text-[0.625rem] font-semibold uppercase leading-tight tracking-[0.1em] text-text-muted"
-              >
-                {region}
-              </li>
-            ))}
-          </ul>
+          <p className="mt-4 border border-border bg-surface px-4 py-4 text-center font-display text-sm font-semibold leading-relaxed text-navy-900">
+            {dictionary.about.coverageStatement}
+          </p>
         </Reveal>
 
         <div className="lg:col-span-7">

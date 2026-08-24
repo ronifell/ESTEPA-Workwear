@@ -116,16 +116,9 @@ export default async function ContactPage({ params }: PageProps) {
               <h2 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-navy-900">
                 {dictionary.about.coverageTitle}
               </h2>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {siteConfig.regions.map((region) => (
-                  <li
-                    key={region}
-                    className="border border-border-strong px-3 py-1.5 font-display text-xs font-semibold text-text"
-                  >
-                    {region}
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-4 text-sm leading-relaxed text-text">
+                {dictionary.about.coverageStatement}
+              </p>
             </div>
 
             <div className="border border-border bg-surface p-6">

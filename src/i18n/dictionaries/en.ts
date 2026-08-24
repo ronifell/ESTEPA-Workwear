@@ -313,7 +313,9 @@ export const en: Dictionary = {
     sectorsTitle: "Sectors we work with",
     coverageTitle: "Coverage",
     coverageDescription:
-      "Our commercial development is initially focused on the following regions of Argentina.",
+      "We reach the whole country, with a focus on mining and energy basins.",
+    coverageStatement:
+      "We reach the whole country, with a focus on mining and energy basins.",
     coverageNote:
       "Ask us about operations in other provinces: we evaluate each case according to the volume and needs of the project.",
     historyTitle: "Our history",

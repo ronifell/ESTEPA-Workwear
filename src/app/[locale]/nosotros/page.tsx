@@ -8,7 +8,6 @@ import {
   ArrowRightIcon,
   GemIcon,
   LayersIcon,
-  MapPinIcon,
   ShieldCheckIcon,
   TargetIcon,
   type IconProps,
@@ -16,7 +15,6 @@ import {
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { siteConfig } from "@/config/site";
 import { sectors } from "@/data/sectors";
 import { getDictionary, resolveLocale, type Dictionary } from "@/i18n";
 import { getPath } from "@/i18n/routes";
@@ -168,24 +166,8 @@ export default async function AboutPage({ params }: PageProps) {
           </div>
 
           <div className="lg:col-span-7">
-            <ul className="grid gap-px border border-border-inverse bg-white/10 sm:grid-cols-3">
-              {siteConfig.regions.map((region, index) => (
-                <Reveal
-                  as="li"
-                  key={region}
-                  delay={index * 90}
-                  className="flex flex-col items-start gap-4 bg-navy-900 p-6 lg:p-8"
-                >
-                  <MapPinIcon className="size-7 text-bronze-300" strokeWidth={1.3} />
-                  <span className="font-display text-lg font-semibold text-text-inverse">
-                    {region}
-                  </span>
-                </Reveal>
-              ))}
-            </ul>
-
-            <p className="mt-6 text-sm leading-relaxed text-text-inverse-muted">
-              {copy.coverageNote}
+            <p className="font-display text-xl font-semibold leading-snug text-text-inverse sm:text-2xl">
+              {copy.coverageStatement}
             </p>
 
             <LocalizedLink

@@ -321,7 +321,9 @@ export const es = {
     sectorsTitle: "Sectores en los que trabajamos",
     coverageTitle: "Cobertura",
     coverageDescription:
-      "Nuestro desarrollo comercial está orientado inicialmente a las siguientes regiones de Argentina.",
+      "Llegamos a todo el país, con foco en las cuencas mineras y energéticas.",
+    coverageStatement:
+      "Llegamos a todo el país, con foco en las cuencas mineras y energéticas.",
     coverageNote:
       "Consultanos por operaciones en otras provincias: evaluamos cada caso según el volumen y las necesidades del proyecto.",
     historyTitle: "Nuestra historia",
