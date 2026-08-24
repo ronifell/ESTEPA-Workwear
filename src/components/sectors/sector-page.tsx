@@ -1,6 +1,7 @@
 import { ProductGrid } from "@/components/products/product-grid";
 import { FrartexBlock } from "@/components/sectors/frartex-block";
 import { CtaSection } from "@/components/shared/cta-section";
+import { CertStrip } from "@/components/shared/cert-strip";
 import { PageHero } from "@/components/shared/page-hero";
 import { ProtectionIcon } from "@/components/shared/protection-icon";
 import { buttonStyles } from "@/components/ui/button";
@@ -61,6 +62,10 @@ export async function SectorPage({
           </>
         }
       />
+
+      <Section tone="surface" className="py-8 lg:py-10" flush>
+        <CertStrip locale={locale} />
+      </Section>
 
       <Section tone="default">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">

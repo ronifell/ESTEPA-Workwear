@@ -6,6 +6,7 @@ import { FeaturedProducts } from "@/components/home/featured-products";
 import { Hero } from "@/components/home/hero";
 import { Industries } from "@/components/home/industries";
 import { Protections } from "@/components/home/protections";
+import { WhyCertified } from "@/components/home/why-certified";
 import { CtaSection } from "@/components/shared/cta-section";
 import { resolveLocale } from "@/i18n";
 import { buildMetadataFromDictionary } from "@/lib/seo";
@@ -25,6 +26,7 @@ export default async function HomePage({ params }: PageProps) {
   return (
     <>
       <Hero locale={locale} />
+      <WhyCertified locale={locale} />
       <Industries locale={locale} />
       <Protections locale={locale} />
       <FeaturedProducts locale={locale} />

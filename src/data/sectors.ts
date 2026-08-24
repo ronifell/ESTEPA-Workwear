@@ -27,8 +27,8 @@ export const sectors: readonly Sector[] = [
     },
     image: "/images/sectors/mining.jpg",
     imageAlt: {
-      es: "Operario minero con casco y ropa de alta visibilidad en una operación a cielo abierto",
-      en: "Mining worker with helmet and high-visibility clothing at an open-pit operation",
+      es: "Ropa ignífuga para minería: operario con indumentaria de alta visibilidad en una operación a cielo abierto",
+      en: "Flame-resistant mining workwear: worker in high-visibility apparel at an open-pit operation",
     },
     needs: [
       {
@@ -100,8 +100,8 @@ export const sectors: readonly Sector[] = [
     },
     image: "/images/sectors/oil-gas.jpg",
     imageAlt: {
-      es: "Trabajador de la industria petrolera junto a instalaciones de producción",
-      en: "Oil industry worker next to production facilities",
+      es: "Ropa antiestática petróleo y gas: trabajador con indumentaria FR certificada junto a instalaciones de producción",
+      en: "Antistatic oil and gas workwear: worker in certified FR apparel next to production facilities",
     },
     needs: [
       {
@@ -173,8 +173,8 @@ export const sectors: readonly Sector[] = [
     },
     image: "/images/sectors/industry.jpg",
     imageAlt: {
-      es: "Equipo de trabajo industrial en una planta de producción",
-      en: "Industrial work team in a production plant",
+      es: "Ropa de trabajo certificada para industria: equipo en una planta de producción",
+      en: "Certified industrial workwear: team in a production plant",
     },
     needs: [
       {

@@ -1,5 +1,6 @@
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { Logo } from "@/components/layout/logo";
+import { GoogleReviewsBadge } from "@/components/layout/google-reviews-badge";
 import { fullNav } from "@/components/layout/nav-config";
 import {
   FacebookIcon,
@@ -11,6 +12,7 @@ import {
   WhatsappIcon,
 } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
+import { WarrantyBadge } from "@/components/shared/warranty-badge";
 import { siteConfig } from "@/config/site";
 import { getDictionary } from "@/i18n";
 import type { RouteKey } from "@/i18n/routes";
@@ -49,7 +51,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   ].filter((entry): entry is { href: string; label: string; Icon: typeof MailIcon } => entry !== null);
 
   return (
-    <footer className="relative overflow-hidden bg-navy-900 text-text-inverse">
+    <footer className="relative overflow-hidden bg-navy-900 pb-24 text-text-inverse lg:pb-0">
       <div aria-hidden className="blueprint-grid absolute inset-0 opacity-60" />
       <div aria-hidden className="hazard-stripes absolute inset-x-0 top-0 h-1 opacity-70" />
 
@@ -153,7 +155,16 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-border-inverse pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 grid gap-8 border-t border-border-inverse pt-8 lg:grid-cols-12 lg:items-start">
+          <div className="lg:col-span-7">
+            <WarrantyBadge locale={locale} variant="footer" />
+          </div>
+          <div className="lg:col-span-5 lg:justify-self-end">
+            <GoogleReviewsBadge locale={locale} />
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-col gap-3 border-t border-border-inverse pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-text-inverse-muted/70">
             © {new Date().getFullYear()} {siteConfig.companyName}. {dictionary.footer.rights}
           </p>

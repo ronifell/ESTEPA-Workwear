@@ -56,13 +56,14 @@ export const en: Dictionary = {
 
   home: {
     hero: {
-      eyebrow: "Protection for every challenge",
-      title: "Technical apparel designed for work where safety is not negotiable.",
-      titleLead: "Technical apparel designed for work",
-      titleAccent: "where safety is not negotiable.",
+      eyebrow: "Certified workwear",
+      title: "Certified workwear for genuine protection.",
+      titleLead: "Certified workwear",
+      titleAccent: "for genuine protection.",
       description:
-        "ESTEPA develops workwear solutions for demanding industrial environments, with garments designed to support the protection, performance and confidence of the people who work every day.",
-      imageAlt: "Industrial worker wearing workwear and protective equipment",
+        "FR and antistatic apparel with international standards —NFPA, UL, ASTM, EN ISO—. Argentine design, global standards.",
+      imageAlt:
+        "ESTEPA certified flame-resistant workwear: industrial worker in FR apparel and protective equipment",
       scroll: "Discover more",
     },
     highlights: {
@@ -103,15 +104,15 @@ export const en: Dictionary = {
       cta: "View the full catalogue",
     },
     certifications: {
-      eyebrow: "Technical backing",
-      title: "Safety needs proof.",
+      eyebrow: "Certified apparel",
+      title: "Why certified?",
       description:
-        "Technical specifications and certifications are a fundamental part of selecting each solution. That is why we work to make sure every garment in our catalogue comes with its supporting documentation.",
-      note: "The technical documentation for each product will be published once validated with the manufacturer.",
+        "A certification is not a logo: it is proof that the garment was tested by an independent laboratory and meets a measurable protection standard.",
+      note: "Certificates and test reports are delivered during the operator homologation process.",
       cta: "View certifications",
-      placeholderTitle: "Reserved area for standards and certifications",
+      placeholderTitle: "International standards",
       placeholderDescription:
-        "Logos of the applicable standards will be added once the documentation is available.",
+        "NFPA 2112, UL Certified, ASTM F1506, EN ISO 11612, EN 1149 and more, depending on the line.",
     },
     corporate: {
       eyebrow: "About us",
@@ -181,6 +182,7 @@ export const en: Dictionary = {
       sector: "Sector",
       protection: "Type of protection",
       category: "Category",
+      standard: "Standard",
       all: "All",
       clear: "Clear filters",
       apply: "Apply",
@@ -252,10 +254,10 @@ export const en: Dictionary = {
     eyebrow: "Protection",
     title: "Certifications and types of protection",
     description:
-      "Choosing the right apparel starts with understanding the risk. In this section we explain the types of protection that guide the development of our solutions.",
-    disclaimerTitle: "About technical information",
+      "Choosing the right apparel starts with understanding the risk. In mining and oil & gas, clothing is personal protective equipment (PPE): if it fails, a person is put at risk.",
+    disclaimerTitle: "Test documentation",
     disclaimerDescription:
-      "ESTEPA does not publish standards, levels or certifications that are not backed by manufacturer documentation. Each specification is added only when the corresponding documentation is available.",
+      "Seals indicate the standards associated with each line. Laboratory certificates and test reports are delivered during operator and contractor homologation.",
     standardsTitle: "Applicable standards",
     standardsPending: "Standards under validation",
     relatedProductsTitle: "Related products",
@@ -314,6 +316,10 @@ export const en: Dictionary = {
       "Our commercial development is initially focused on the following regions of Argentina.",
     coverageNote:
       "Ask us about operations in other provinces: we evaluate each case according to the volume and needs of the project.",
+    historyTitle: "Our history",
+    historyPlaceholder:
+      "This section is reserved for the origin story of ESTEPA Workwear. Commercial copy will be supplied by the client.",
+    historyNote: "Text and photographs in preparation.",
     ctaTitle: "Let's work together on your team's safety.",
     ctaDescription: "Write to us and we will arrange a conversation with a technical advisor.",
   },
@@ -485,9 +491,52 @@ export const en: Dictionary = {
       "The order number does not exist or the link has expired. If you need help, get in touch.",
   },
 
+  trust: {
+    supportTitle: "Certified flame-resistant workwear for mining, oil and gas.",
+    whyCta: "Why certified?",
+    whyEyebrow: "ESTEPA difference",
+    whyTitle: "Why certified?",
+    whySubtitle:
+      "In mining and oil & gas, clothing is personal protective equipment. A verifiable standard is what authorises plant access and protects the person who wears it.",
+    whyMatterTitle: "Why certifications matter",
+    whyMatterBody:
+      "A certification is not a logo: it is proof that the garment was tested by an independent laboratory and meets a measurable protection standard. In mining, oil and gas, clothing is personal protective equipment (PPE). If it fails, a garment is not ruined: a person is put at risk.",
+    gainsTitle: "What they are for and what you gain",
+    gainReal: "Real, verifiable protection against flash fire, electric arc and heat.",
+    gainAccess:
+      "Authorisation to work: operators require specific standards from contractors; without the standard, you do not enter the mine or the plant.",
+    gainCompliance:
+      "Health and safety compliance backing, with lower legal exposure for the company.",
+    gainDurability:
+      "Proven durability: tests include performance after industrial laundering.",
+    catalogTitle: "International certifications we offer",
+    catalogNorth: "North America: NFPA 2112 · NFPA 70E · ASTM F1506 · UL Certified.",
+    catalogEurope: "Europe: EN ISO 11611 · EN ISO 11612 · EN 1149 · EN 61482.",
+    catalogArc: "Arc protection: CAT 2.",
+    catalogOther: "Others by line: ISO 20471 (high visibility) · EN ISO 13688 · IRAM (local standard).",
+    valueTitle: "The right price is not the lowest: it is the one that costs you least.",
+    valueBody:
+      "A certified ESTEPA garment withstands more industrial washes and keeps its FR protection in use. Fewer replacements, fewer purchase orders, less logistics for your operation. You pay a little more per garment and spend less per season.",
+    valueReplacements: "Fewer garment replacements per season.",
+    valueLogistics: "Less purchasing logistics and administration.",
+    valueProtection: "Certified protection that does not wash out on the first cycle.",
+    warrantyTitle: "1-year warranty against manufacturing defects.",
+    warrantyBody:
+      "Covers material and workmanship defects in garments used under the working conditions they were designed for. It does not cover wear from misuse or use outside specification.",
+    warrantyBadge: "1-year warranty against manufacturing defects",
+    googleReviews: "Reviews",
+    googleReviewsAria: "ESTEPA Workwear Google Reviews",
+    whatsappAria: "Message us on WhatsApp",
+    whatsappPrefill: "Hello, I want to quote certified ESTEPA workwear",
+    composition: "Composition",
+    certificatesNote:
+      "Certificates and test reports are delivered during operator and contractor homologation.",
+    stripLabel: "Reference standards",
+  },
+
   footer: {
     description:
-      "Technical apparel and workwear for mining, oil & gas, and industry.",
+      "Certified FR and antistatic apparel for mining, oil & gas, and industry.",
     navigationTitle: "Navigation",
     contactTitle: "Contact",
     legalTitle: "Legal",
@@ -611,34 +660,34 @@ export const en: Dictionary = {
 
   seo: {
     home: {
-      title: "ESTEPA Workwear | Technical apparel and workwear",
+      title: "ESTEPA Workwear — Certified Flame-Resistant Workwear | Mining & Oil Argentina",
       description:
-        "Technical apparel and workwear for mining, oil & gas, and industry. Solutions focused on worker safety.",
+        "Certified FR and antistatic apparel (NFPA 2112, EN ISO 11612, EN 1149) for mining, oil and gas. Argentine design, international standards.",
     },
     mining: {
-      title: "Mining workwear",
+      title: "Certified flame-resistant mining workwear",
       description:
-        "Workwear solutions designed for the challenges of the mining industry.",
+        "Certified industrial safety apparel for mining. FR and high-visibility workwear for operations in Argentina.",
     },
     oilGas: {
-      title: "Oil & gas workwear",
+      title: "Antistatic and FR workwear for oil and gas",
       description:
-        "Apparel prepared for demanding energy environments: fields, plants and refineries.",
+        "NFPA 2112 and EN ISO workwear for oil and gas. Certified flame-resistant and antistatic apparel for field and plant.",
     },
     work: {
-      title: "Industrial and general workwear",
+      title: "Certified industrial workwear",
       description:
-        "Workwear for construction, industry, logistics, operations and maintenance.",
+        "Certified industrial safety apparel for construction, logistics, operations and maintenance.",
     },
     products: {
-      title: "Products",
+      title: "Certified FR workwear",
       description:
-        "Catalogue of technical apparel organised by sector and type of protection.",
+        "Catalogue of certified flame-resistant, antistatic and high-visibility workwear for mining, oil and gas.",
     },
     protection: {
-      title: "Certifications and protection",
+      title: "FR workwear certifications",
       description:
-        "Types of protection that guide the development of our apparel solutions.",
+        "NFPA 2112, UL Certified, ASTM F1506, EN ISO 11612, EN 1149 and more. Why certified workwear matters.",
     },
     about: {
       title: "About us",

@@ -2,6 +2,7 @@ import { ChevronDownIcon, CloseIcon } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { protectionsById } from "@/data/protections";
 import { sectorsById } from "@/data/sectors";
+import { filterableStandardIds, standardsCatalog } from "@/data/standards";
 import { getDictionary } from "@/i18n";
 import {
   categoryIds,
@@ -64,9 +65,22 @@ export function ProductFilters({
         })),
       ],
     },
+    {
+      key: "standard",
+      label: copy.standard,
+      options: [
+        { value: null, label: copy.all },
+        ...filterableStandardIds.map((id) => ({
+          value: id,
+          label: standardsCatalog[id].name,
+        })),
+      ],
+    },
   ];
 
-  const isFiltered = Boolean(filters.sector || filters.protection || filters.category);
+  const isFiltered = Boolean(
+    filters.sector || filters.protection || filters.category || filters.standard,
+  );
 
   return (
     <div className="border border-border bg-surface">

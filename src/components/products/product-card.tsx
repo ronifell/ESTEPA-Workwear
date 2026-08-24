@@ -27,7 +27,7 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
   return (
     <article
       className={cn(
-        "group relative flex flex-col border border-border bg-surface transition-all duration-300 ease-[var(--ease-out-industrial)] hover:-translate-y-1 hover:border-border-strong hover:shadow-card-hover",
+        "group relative flex h-full flex-col border border-border bg-surface transition-all duration-300 ease-[var(--ease-out-industrial)] hover:-translate-y-1 hover:border-border-strong hover:shadow-card-hover",
         className,
       )}
     >
@@ -81,10 +81,10 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
         <TechnicalSheetCompact product={product} locale={locale} />
 
         {product.protections.length > 0 ? (
-          <div className="mt-4">
-            <p className="mb-2 font-display text-[0.5625rem] font-semibold uppercase tracking-[0.16em] text-text-subtle">
+          <div className="relative z-10 mt-4">
+            <h3 className="mb-2 border-t border-border pt-3 font-display text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-navy-900">
               {dictionary.product.intendedApplication}
-            </p>
+            </h3>
             <ul className="flex flex-wrap gap-1.5">
               {product.protections.map((id) => (
                 <li key={id}>

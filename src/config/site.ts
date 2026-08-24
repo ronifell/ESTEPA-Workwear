@@ -51,6 +51,16 @@ export const siteConfig = {
 
   /** Public asset that can be replaced when the final catalogue is ready. */
   catalogPdfUrl: process.env["NEXT_PUBLIC_CATALOG_PDF_URL"] ?? "",
+
+  /**
+   * Google Business profile. Leave empty until the live listing URL is
+   * confirmed — the footer still renders a visual badge, without inventing a rating.
+   */
+  google: {
+    reviewsUrl: process.env["NEXT_PUBLIC_GOOGLE_REVIEWS_URL"] ?? "",
+    rating: process.env["NEXT_PUBLIC_GOOGLE_RATING"] ?? "",
+    reviewCount: process.env["NEXT_PUBLIC_GOOGLE_REVIEW_COUNT"] ?? "",
+  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;

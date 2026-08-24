@@ -1,4 +1,5 @@
-import type { Certification, LocalizedText, ProductColor } from "@/types";
+import { getStandards } from "@/data/standards";
+import type { LocalizedText, ProductColor } from "@/types";
 
 /**
  * Named tissues used across the catalogue.
@@ -19,6 +20,10 @@ export const fabrics = {
     composition: {
       es: "88% algodón, 10% nailon, 2% antiestático",
       en: "88% cotton, 10% nylon, 2% anti-static",
+    } satisfies LocalizedText,
+    tooltip: {
+      es: "Tejido ignífugo de alto desempeño. 88% algodón / 10% nailon / 2% fibra antiestática · 240 g/m² (7 oz). Protección FR duradera a lavados industriales y disipación de carga estática.",
+      en: "High-performance flame-resistant fabric. 88% cotton / 10% nylon / 2% antistatic fibre · 240 g/m² (7 oz). Durable FR protection through industrial laundering, with static-charge dissipation.",
     } satisfies LocalizedText,
     shortDescription: {
       es: "Tejido inherente ignífugo y antiestático de la línea de petróleo y gas. No se funde ni se adhiere a la piel frente a una fuente de calor.",
@@ -53,86 +58,14 @@ export const frartexColors: readonly ProductColor[] = [
 ];
 
 /** Standards associated with the FRARTEX line in the manufacturer's catalogue. */
-export const frartexCertifications: readonly Certification[] = [
-  {
-    id: "en-11611",
-    name: "EN 11611",
-    icon: "weld",
-    description: {
-      es: "Ropa de protección para soldadura y procesos afines.",
-      en: "Protective clothing for use in welding and allied processes.",
-    },
-  },
-  {
-    id: "en-11612",
-    name: "EN 11612",
-    icon: "flame",
-    description: {
-      es: "Protección contra el calor y la llama.",
-      en: "Protection against heat and flame.",
-    },
-  },
-  {
-    id: "en-1149",
-    name: "EN 1149",
-    icon: "antistatic",
-    description: {
-      es: "Propiedades electrostáticas.",
-      en: "Electrostatic properties.",
-    },
-  },
-  {
-    id: "en-61482",
-    name: "EN 61482",
-    icon: "arc",
-    description: {
-      es: "Protección contra los riesgos térmicos de un arco eléctrico.",
-      en: "Protection against the thermal hazards of an electric arc.",
-    },
-  },
-  {
-    id: "ul",
-    name: "UL CERTIFIED",
-    icon: "ul",
-    description: {
-      es: "Certificación UL de indumentaria ignífuga.",
-      en: "UL certification for flame-resistant apparel.",
-    },
-  },
-  {
-    id: "nfpa-2112",
-    name: "NFPA 2112",
-    icon: "badge",
-    description: {
-      es: "Ropa resistente a la llama para exposición térmica de corta duración.",
-      en: "Flame-resistant clothing for short-duration thermal exposure.",
-    },
-  },
-  {
-    id: "astm-f1506",
-    name: "ASTM F1506",
-    icon: "badge",
-    description: {
-      es: "Especificación de desempeño para ropa resistente a la llama y al arco.",
-      en: "Performance specification for flame-resistant and arc-rated clothing.",
-    },
-  },
-  {
-    id: "nfpa-70e",
-    name: "NFPA 70E",
-    icon: "badge",
-    description: {
-      es: "Seguridad eléctrica en el lugar de trabajo.",
-      en: "Electrical safety in the workplace.",
-    },
-  },
-  {
-    id: "cat-2",
-    name: "CAT 2",
-    icon: "badge",
-    description: {
-      es: "Categoría de riesgo de arco eléctrico.",
-      en: "Arc-flash PPE category.",
-    },
-  },
-];
+export const frartexCertifications = getStandards([
+  "en-11611",
+  "en-11612",
+  "en-1149",
+  "en-61482",
+  "ul",
+  "nfpa-2112",
+  "astm-f1506",
+  "nfpa-70e",
+  "cat-2",
+]);

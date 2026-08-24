@@ -9,6 +9,7 @@ import { SpecBlock } from "@/components/products/spec-block";
 import { CertificationRow } from "@/components/products/certification-badge";
 import { TechnicalSheet } from "@/components/products/technical-sheet";
 import { CtaSection } from "@/components/shared/cta-section";
+import { WarrantyBadge } from "@/components/shared/warranty-badge";
 import { ProtectionIcon } from "@/components/shared/protection-icon";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
@@ -152,6 +153,8 @@ export default async function ProductDetailPage({ params }: PageProps) {
               <AddToCart product={product} />
             </div>
 
+            <WarrantyBadge locale={locale} className="mt-8" />
+
             {product.preliminary ? (
               <Notice tone="pending" className="mt-8" title={copy.preliminaryTitle}>
                 {copy.preliminaryDescription}
@@ -205,6 +208,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 title={copy.recommendedUse}
                 items={product.recommendedUse?.[locale]}
                 pendingLabel={copy.documentsPending}
+                tone="band"
               />
 
               <SpecBlock
@@ -217,7 +221,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
           <div className="space-y-5 lg:col-span-5">
             <div className="border border-border bg-surface p-6">
-              <h3 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-navy-900">
+              <h3 className="font-display text-sm font-bold uppercase tracking-[0.14em] text-navy-900">
                 {copy.protectionAndCertifications}
               </h3>
 
@@ -254,7 +258,11 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   <p className="mb-3 font-display text-[0.5625rem] font-semibold uppercase tracking-[0.14em] text-text-subtle">
                     {copy.standards}
                   </p>
-                  <CertificationRow certifications={product.certifications ?? []} compact />
+                  <CertificationRow
+                    certifications={product.certifications ?? []}
+                    locale={locale}
+                    compact
+                  />
                 </div>
               ) : (
                 <Notice tone="pending" className="mt-6">
@@ -265,7 +273,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
             {product.sizes && product.sizes.length > 0 ? (
               <div className="border border-border bg-surface p-6">
-                <h3 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-navy-900">
+                <h3 className="font-display text-sm font-bold uppercase tracking-[0.14em] text-navy-900">
                   {copy.sizesTitle}
                 </h3>
                 <ul className="mt-4 flex flex-wrap gap-2">
@@ -285,7 +293,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             ) : null}
 
             <div className="border border-border bg-surface p-6">
-              <h3 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-navy-900">
+              <h3 className="font-display text-sm font-bold uppercase tracking-[0.14em] text-navy-900">
                 {copy.documents}
               </h3>
 

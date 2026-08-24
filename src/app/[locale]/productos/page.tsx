@@ -30,6 +30,7 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
     ...(filters.sector ? { sectors: [filters.sector] } : {}),
     ...(filters.protection ? { protections: [filters.protection] } : {}),
     ...(filters.category ? { categories: [filters.category] } : {}),
+    ...(filters.standard ? { standard: filters.standard } : {}),
   });
 
   const resultsLabel =

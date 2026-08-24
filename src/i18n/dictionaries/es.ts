@@ -58,13 +58,14 @@ export const es = {
 
   home: {
     hero: {
-      eyebrow: "Protección que acompaña cada desafío",
-      title: "Indumentaria técnica diseñada para trabajar donde la seguridad no es negociable.",
-      titleLead: "Indumentaria técnica diseñada para trabajar",
-      titleAccent: "donde la seguridad no es negociable.",
+      eyebrow: "Ropa de trabajo certificada",
+      title: "Ropa de trabajo certificada para una verdadera protección.",
+      titleLead: "Ropa de trabajo certificada",
+      titleAccent: "para una verdadera protección.",
       description:
-        "ESTEPA desarrolla soluciones de indumentaria de trabajo orientadas a entornos industriales exigentes, con prendas diseñadas para acompañar la protección, el rendimiento y la confianza de quienes trabajan todos los días.",
-      imageAlt: "Operario industrial con indumentaria de trabajo y equipo de protección",
+        "Indumentaria FR y antiestática con normas internacionales —NFPA, UL, ASTM, EN ISO—. Diseño argentino, estándares globales.",
+      imageAlt:
+        "Ropa ignífuga certificada ESTEPA: operario industrial con indumentaria de trabajo FR y equipo de protección",
       scroll: "Descubrir más",
     },
     highlights: {
@@ -106,15 +107,15 @@ export const es = {
       cta: "Ver catálogo completo",
     },
     certifications: {
-      eyebrow: "Respaldo técnico",
-      title: "La seguridad necesita respaldo.",
+      eyebrow: "Ropa certificada",
+      title: "¿Por qué certificada?",
       description:
-        "Las especificaciones técnicas y las certificaciones son parte fundamental de la selección de cada solución. Por eso trabajamos para que cada prenda de nuestro catálogo esté acompañada por su documentación correspondiente.",
-      note: "La documentación técnica de cada producto se publicará una vez validada con el fabricante.",
+        "Una certificación no es un logo: es la prueba de que la prenda fue ensayada por un laboratorio independiente y cumple un estándar de protección medible.",
+      note: "Los certificados y reportes de ensayo se entregan en el proceso de homologación.",
       cta: "Ver certificaciones",
-      placeholderTitle: "Espacio reservado para normas y certificaciones",
+      placeholderTitle: "Normas internacionales",
       placeholderDescription:
-        "Los logos de las normas aplicables se incorporarán cuando la documentación esté disponible.",
+        "NFPA 2112, UL Certified, ASTM F1506, EN ISO 11612, EN 1149 y más, según la línea.",
     },
     corporate: {
       eyebrow: "Nosotros",
@@ -188,6 +189,7 @@ export const es = {
       sector: "Sector",
       protection: "Tipo de protección",
       category: "Categoría",
+      standard: "Norma",
       all: "Todos",
       clear: "Limpiar filtros",
       apply: "Aplicar",
@@ -259,10 +261,10 @@ export const es = {
     eyebrow: "Protección",
     title: "Certificaciones y tipos de protección",
     description:
-      "Elegir la indumentaria adecuada empieza por entender el riesgo. En esta sección explicamos los tipos de protección que orientan el desarrollo de nuestras soluciones.",
-    disclaimerTitle: "Sobre la información técnica",
+      "Elegir la indumentaria adecuada empieza por entender el riesgo. En minería, petróleo y gas la ropa es equipo de protección personal (EPP): si falla, se pone en riesgo a una persona.",
+    disclaimerTitle: "Documentación de ensayo",
     disclaimerDescription:
-      "ESTEPA no publica normas, niveles ni certificaciones que no estén respaldadas por documentación del fabricante. Cada especificación se incorpora únicamente cuando la documentación correspondiente está disponible.",
+      "Los sellos indican las normas asociadas a cada línea. Los certificados y reportes de laboratorio se entregan en el proceso de homologación de operadoras y contratistas.",
     standardsTitle: "Normas aplicables",
     standardsPending: "Normas en proceso de validación",
     relatedProductsTitle: "Productos relacionados",
@@ -322,6 +324,10 @@ export const es = {
       "Nuestro desarrollo comercial está orientado inicialmente a las siguientes regiones de Argentina.",
     coverageNote:
       "Consultanos por operaciones en otras provincias: evaluamos cada caso según el volumen y las necesidades del proyecto.",
+    historyTitle: "Nuestra historia",
+    historyPlaceholder:
+      "Esta sección está reservada para el relato de origen de ESTEPA Workwear. El contenido lo completa el equipo comercial.",
+    historyNote: "Texto y fotografías en preparación.",
     ctaTitle: "Trabajemos juntos en la seguridad de tu equipo.",
     ctaDescription:
       "Escribinos y coordinamos una conversación con un asesor técnico.",
@@ -495,9 +501,52 @@ export const es = {
       "El número de pedido no existe o el enlace expiró. Si necesitás ayuda, escribinos.",
   },
 
+  trust: {
+    supportTitle: "Ropa ignífuga certificada para minería, petróleo y gas.",
+    whyCta: "¿Por qué certificada?",
+    whyEyebrow: "Diferencial ESTEPA",
+    whyTitle: "¿Por qué certificada?",
+    whySubtitle:
+      "En minería, petróleo y gas la ropa es equipo de protección personal. Una norma verificable es lo que habilita el ingreso a planta y protege a quien la usa.",
+    whyMatterTitle: "Por qué importan las certificaciones",
+    whyMatterBody:
+      "Una certificación no es un logo: es la prueba de que la prenda fue ensayada por un laboratorio independiente y cumple un estándar de protección medible. En minería, petróleo y gas la ropa es equipo de protección personal (EPP). Si falla, no se arruina una prenda: se pone en riesgo a una persona.",
+    gainsTitle: "Para qué sirven y qué ganás",
+    gainReal: "Protección real y verificable ante fuego repentino, arco eléctrico y calor.",
+    gainAccess:
+      "Habilitación para trabajar: las operadoras exigen normas específicas a sus contratistas; sin la norma, no se entra a la mina ni a la planta.",
+    gainCompliance:
+      "Respaldo de cumplimiento en seguridad e higiene, con menor exposición legal para la empresa.",
+    gainDurability:
+      "Durabilidad comprobada: los ensayos incluyen el desempeño tras lavados industriales.",
+    catalogTitle: "Certificaciones internacionales que ofrecemos",
+    catalogNorth: "Norteamérica: NFPA 2112 · NFPA 70E · ASTM F1506 · UL Certified.",
+    catalogEurope: "Europa: EN ISO 11611 · EN ISO 11612 · EN 1149 · EN 61482.",
+    catalogArc: "Protección contra arco: CAT 2.",
+    catalogOther: "Otras según línea: ISO 20471 (alta visibilidad) · EN ISO 13688 · IRAM (norma local).",
+    valueTitle: "El precio correcto no es el más bajo: es el que menos te cuesta.",
+    valueBody:
+      "Una prenda ESTEPA certificada resiste más lavados industriales y mantiene su protección FR con el uso. Menos reposición, menos órdenes de compra, menos logística para tu operación. Pagás un poco más por prenda y gastás menos por temporada.",
+    valueReplacements: "Menos recambios de prenda por temporada.",
+    valueLogistics: "Menos logística y gestión de compras.",
+    valueProtection: "Protección certificada que no se degrada al primer lavado.",
+    warrantyTitle: "Garantía de 1 año contra defectos de fábrica.",
+    warrantyBody:
+      "Cubre defectos de materiales y confección en prendas usadas en las condiciones de trabajo para las que fueron diseñadas. No cubre desgaste por uso indebido o fuera de especificación.",
+    warrantyBadge: "Garantía 1 año contra defectos de fábrica",
+    googleReviews: "Reviews",
+    googleReviewsAria: "Google Reviews de ESTEPA Workwear",
+    whatsappAria: "Escribinos por WhatsApp",
+    whatsappPrefill: "Hola, quiero cotizar ropa certificada ESTEPA",
+    composition: "Composición",
+    certificatesNote:
+      "Los certificados y reportes de ensayo se entregan en el proceso de homologación de operadoras y contratistas.",
+    stripLabel: "Normas de referencia",
+  },
+
   footer: {
     description:
-      "Indumentaria técnica y ropa de trabajo para minería, petróleo y gas, e industria.",
+      "Indumentaria FR y antiestática certificada para minería, petróleo y gas, e industria.",
     navigationTitle: "Navegación",
     contactTitle: "Contacto",
     legalTitle: "Legal",
@@ -622,34 +671,34 @@ export const es = {
 
   seo: {
     home: {
-      title: "ESTEPA Workwear | Indumentaria técnica y ropa de trabajo",
+      title: "ESTEPA Workwear — Ropa de Trabajo Ignífuga Certificada | Minería y Petróleo Argentina",
       description:
-        "Indumentaria técnica y ropa de trabajo para minería, petróleo y gas, e industria. Soluciones orientadas a la seguridad del operario.",
+        "Indumentaria FR y antiestática certificada (NFPA 2112, EN ISO 11612, EN 1149) para minería, petróleo y gas. Diseño argentino, estándares internacionales.",
     },
     mining: {
-      title: "Indumentaria para minería",
+      title: "Ropa ignífuga certificada para minería",
       description:
-        "Soluciones de indumentaria de trabajo orientadas a los desafíos de la industria minera.",
+        "Indumentaria de seguridad industrial certificada para minería. Ropa de trabajo FR y alta visibilidad para operaciones en Argentina.",
     },
     oilGas: {
-      title: "Indumentaria para petróleo y gas",
+      title: "Ropa antiestática y FR para petróleo y gas",
       description:
-        "Indumentaria preparada para entornos energéticos exigentes: campos, plantas y refinerías.",
+        "Ropa de trabajo NFPA 2112 y EN ISO para petróleo y gas. Indumentaria ignífuga y antiestática certificada para yacimiento y planta.",
     },
     work: {
-      title: "Indumentaria para trabajo e industria",
+      title: "Ropa de trabajo certificada para industria",
       description:
-        "Ropa de trabajo para construcción, industria, logística, operaciones y mantenimiento.",
+        "Indumentaria de seguridad industrial certificada para construcción, logística, operaciones y mantenimiento.",
     },
     products: {
-      title: "Productos",
+      title: "Ropa de trabajo FR certificada",
       description:
-        "Catálogo de indumentaria técnica organizada por sector y tipo de protección.",
+        "Catálogo de ropa ignífuga certificada, antiestática y de alta visibilidad para minería, petróleo y gas.",
     },
     protection: {
-      title: "Certificaciones y protección",
+      title: "Certificaciones de ropa de trabajo FR",
       description:
-        "Tipos de protección que orientan el desarrollo de nuestras soluciones de indumentaria.",
+        "NFPA 2112, UL Certified, ASTM F1506, EN ISO 11612, EN 1149 y más. Por qué importa la ropa de trabajo certificada.",
     },
     about: {
       title: "Nosotros",

@@ -36,11 +36,11 @@ export function ProductGrid({
   return (
     <ul className={cn("grid grid-cols-1 gap-5 lg:gap-6", columnStyles[columns], className)}>
       {products.map((product, index) => (
-        <Reveal as="li" key={product.id} delay={Math.min(index, 5) * 60} className="flex">
+        <Reveal as="li" key={product.id} delay={Math.min(index, 5) * 60} className="flex h-full">
           <ProductCard
             product={product}
             locale={locale}
-            className="w-full"
+            className="h-full w-full"
             priority={prioritizeFirst && index === 0}
           />
         </Reveal>

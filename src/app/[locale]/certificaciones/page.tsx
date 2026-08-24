@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 
 import { ProductCard } from "@/components/products/product-card";
 import { CtaSection } from "@/components/shared/cta-section";
+import { CertStrip } from "@/components/shared/cert-strip";
 import { PageHero } from "@/components/shared/page-hero";
 import { ProtectionIcon } from "@/components/shared/protection-icon";
+import { CheckIcon } from "@/components/ui/icons";
 import { Notice } from "@/components/ui/notice";
 import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { protections } from "@/data/protections";
+import { filterableStandardIds } from "@/data/standards";
 import { getDictionary, resolveLocale } from "@/i18n";
 import { getPath } from "@/i18n/routes";
 import { getProducts } from "@/lib/repositories/products";
@@ -43,12 +46,62 @@ export default async function ProtectionPage({ params }: PageProps) {
         title={copy.title}
         description={copy.description}
         image="/images/sectors/oil-gas.jpg"
-        imageAlt=""
+        imageAlt={
+          locale === "es"
+            ? "Ropa antiestática petróleo y gas: indumentaria FR certificada ESTEPA en entorno energético"
+            : "Antistatic oil and gas workwear: ESTEPA certified FR apparel in an energy environment"
+        }
         breadcrumbs={[
           { label: dictionary.nav.home, href: getPath("home", locale) },
           { label: dictionary.nav.protection },
         ]}
       />
+
+      <Section id="por-que-certificada" tone="surface">
+        <SectionHeading
+          eyebrow={dictionary.trust.whyEyebrow}
+          title={dictionary.trust.whyTitle}
+          description={dictionary.trust.whyMatterBody}
+        />
+
+        <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <h3 className="font-display text-lg font-bold text-navy-900">
+              {dictionary.trust.gainsTitle}
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {[
+                dictionary.trust.gainReal,
+                dictionary.trust.gainAccess,
+                dictionary.trust.gainCompliance,
+                dictionary.trust.gainDurability,
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-text">
+                  <CheckIcon className="mt-0.5 size-4 shrink-0 text-accent" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="mt-8 font-display text-lg font-bold text-navy-900">
+              {dictionary.trust.catalogTitle}
+            </h3>
+            <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-text">
+              <li>{dictionary.trust.catalogNorth}</li>
+              <li>{dictionary.trust.catalogEurope}</li>
+              <li>{dictionary.trust.catalogArc}</li>
+              <li>{dictionary.trust.catalogOther}</li>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-6">
+            <CertStrip locale={locale} ids={filterableStandardIds} />
+            <p className="mt-4 text-xs leading-relaxed text-text-subtle">
+              {dictionary.trust.certificatesNote}
+            </p>
+          </div>
+        </div>
+      </Section>
 
       <Section tone="default" className="py-12 lg:py-14">
         <Reveal>
@@ -122,7 +175,7 @@ export default async function ProtectionPage({ params }: PageProps) {
                     {products.length > 0 ? (
                       <ul className="mt-4 grid gap-4 sm:grid-cols-2">
                         {products.map((product) => (
-                          <li key={product.id} className="flex">
+                          <li key={product.id} className="flex h-full">
                             <ProductCard product={product} locale={locale} className="w-full" />
                           </li>
                         ))}

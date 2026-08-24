@@ -5,6 +5,7 @@ import type {
   ProtectionId,
   SectorId,
 } from "@/types";
+import type { StandardId } from "@/data/standards";
 
 /**
  * Single access point to the catalogue.
@@ -22,10 +23,11 @@ export interface ProductFilters {
   readonly featured?: boolean;
   readonly limit?: number;
   readonly excludeIds?: readonly string[];
+  readonly standard?: StandardId;
 }
 
 function applyFilters(source: readonly Product[], filters: ProductFilters): Product[] {
-  const { sectors, protections, categories, featured, excludeIds, limit } = filters;
+  const { sectors, protections, categories, featured, excludeIds, limit, standard } = filters;
 
   let result = source.filter((product) => product.active);
 
@@ -43,6 +45,12 @@ function applyFilters(source: readonly Product[], filters: ProductFilters): Prod
 
   if (categories?.length) {
     result = result.filter((product) => categories.includes(product.category));
+  }
+
+  if (standard) {
+    result = result.filter((product) =>
+      (product.certifications ?? []).some((certification) => certification.id === standard),
+    );
   }
 
   if (featured !== undefined) {

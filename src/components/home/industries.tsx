@@ -6,7 +6,6 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { sectors } from "@/data/sectors";
 import { getDictionary } from "@/i18n";
-import { cn } from "@/lib/utils";
 import type { Locale, Sector } from "@/types";
 
 export function Industries({ locale }: { readonly locale: Locale }) {
@@ -20,16 +19,10 @@ export function Industries({ locale }: { readonly locale: Locale }) {
         description={dictionary.home.industries.description}
       />
 
-      {/* The first card is taller on desktop so the block reads as a composition. */}
-      <ul className="mt-12 grid gap-5 lg:mt-16 lg:grid-cols-3 lg:gap-6">
+      <ul className="mt-12 grid items-stretch gap-5 lg:mt-16 lg:grid-cols-3 lg:gap-6">
         {sectors.map((sector, index) => (
-          <Reveal
-            as="li"
-            key={sector.id}
-            delay={index * 90}
-            className={cn(index === 0 && "lg:row-span-2")}
-          >
-            <IndustryCard sector={sector} locale={locale} featured={index === 0} />
+          <Reveal as="li" key={sector.id} delay={index * 90} className="flex h-full">
+            <IndustryCard sector={sector} locale={locale} />
           </Reveal>
         ))}
       </ul>
@@ -40,19 +33,13 @@ export function Industries({ locale }: { readonly locale: Locale }) {
 interface IndustryCardProps {
   readonly sector: Sector;
   readonly locale: Locale;
-  readonly featured?: boolean;
 }
 
-export function IndustryCard({ sector, locale, featured = false }: IndustryCardProps) {
+export function IndustryCard({ sector, locale }: IndustryCardProps) {
   const dictionary = getDictionary(locale);
 
   return (
-    <article
-      className={cn(
-        "group relative isolate flex h-full flex-col justify-end overflow-hidden bg-navy-900 text-text-inverse",
-        featured ? "min-h-[26rem] lg:min-h-[34rem]" : "min-h-[20rem] lg:min-h-[16.25rem]",
-      )}
-    >
+    <article className="group relative isolate flex h-full min-h-[22rem] w-full flex-col overflow-hidden bg-navy-900 text-text-inverse lg:min-h-[24rem]">
       <Image
         src={sector.image}
         alt={sector.imageAlt[locale]}
@@ -69,13 +56,8 @@ export function IndustryCard({ sector, locale, featured = false }: IndustryCardP
         className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-accent transition-transform duration-500 ease-[var(--ease-out-industrial)] group-hover:scale-x-100"
       />
 
-      <div className="relative p-6 lg:p-7">
-        <h3
-          className={cn(
-            "font-display font-bold leading-tight text-text-inverse",
-            featured ? "text-2xl lg:text-3xl" : "text-xl lg:text-2xl",
-          )}
-        >
+      <div className="relative mt-auto flex flex-1 flex-col justify-end p-6 lg:p-7">
+        <h3 className="font-display text-xl font-bold leading-tight text-text-inverse lg:text-2xl">
           <LocalizedLink
             route={sector.routeKey}
             locale={locale}
@@ -85,16 +67,11 @@ export function IndustryCard({ sector, locale, featured = false }: IndustryCardP
           </LocalizedLink>
         </h3>
 
-        <p
-          className={cn(
-            "mt-3 text-sm leading-relaxed text-text-inverse-muted",
-            featured ? "max-w-md" : "line-clamp-2",
-          )}
-        >
-          {featured ? sector.intro[locale] : sector.tagline[locale]}
+        <p className="mt-3 line-clamp-4 min-h-[5.5rem] text-sm leading-relaxed text-text-inverse-muted">
+          {sector.intro[locale]}
         </p>
 
-        <span className="mt-5 inline-flex items-center gap-2 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-bronze-300">
+        <span className="mt-auto pt-5 inline-flex items-center gap-2 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-bronze-300">
           {dictionary.common.explore} {sector.name[locale]}
           <ArrowRightIcon className="size-3.5 transition-transform duration-300 group-hover:translate-x-1.5" />
         </span>

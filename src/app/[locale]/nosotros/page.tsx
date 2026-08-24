@@ -53,7 +53,11 @@ export default async function AboutPage({ params }: PageProps) {
         title={copy.title}
         description={copy.intro}
         image="/images/sectors/industry.jpg"
-        imageAlt=""
+        imageAlt={
+          locale === "es"
+            ? "Indumentaria de seguridad industrial certificada ESTEPA para trabajo e industria"
+            : "ESTEPA certified industrial safety apparel for work and industry"
+        }
         breadcrumbs={[
           { label: dictionary.nav.home, href: getPath("home", locale) },
           { label: dictionary.nav.about },
@@ -76,7 +80,11 @@ export default async function AboutPage({ params }: PageProps) {
             <div className="relative aspect-3/2 overflow-hidden bg-sand-200 lg:aspect-4/3">
               <Image
                 src="/images/hero/about-detail.jpg"
-                alt=""
+                alt={
+                  locale === "es"
+                    ? "Ropa de trabajo certificada ESTEPA: detalle de indumentaria técnica industrial"
+                    : "ESTEPA certified workwear: detail of technical industrial apparel"
+                }
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover"
@@ -189,6 +197,20 @@ export default async function AboutPage({ params }: PageProps) {
               <ArrowRightIcon className="size-4" />
             </LocalizedLink>
           </div>
+        </div>
+      </Section>
+
+      <Section id="nuestra-historia" tone="muted">
+        <SectionHeading
+          eyebrow={copy.eyebrow}
+          title={copy.historyTitle}
+          description={copy.historyPlaceholder}
+        />
+        <div className="mt-10 border border-dashed border-border-strong bg-surface px-6 py-16 text-center">
+          <span aria-hidden className="hazard-stripes mx-auto h-1 w-16 opacity-70" />
+          <p className="mt-6 font-display text-sm font-semibold uppercase tracking-[0.14em] text-text-subtle">
+            {copy.historyNote}
+          </p>
         </div>
       </Section>
 

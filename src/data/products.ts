@@ -80,8 +80,8 @@ export const products: readonly Product[] = [
       {
         src: "/images/products/overol-minero-cordillera-studio.jpg",
         alt: {
-          es: "Overol Minero Cordillera azul marino con canesú amarillo flúor y cintas retrorreflectivas, vista frontal sobre fondo neutro.",
-          en: "Navy blue Cordillera Mining Coverall with fluorescent yellow yoke and retroreflective tapes, front view on a neutral background.",
+          es: "Ropa de trabajo certificada: Overol Minero Cordillera azul marino con canesú amarillo flúor y cintas retrorreflectivas, vista frontal.",
+          en: "Certified workwear: navy Cordillera Mining Coverall with fluorescent yellow yoke and retroreflective tapes, front view.",
         },
         kind: "studio",
       },
@@ -361,8 +361,8 @@ export const products: readonly Product[] = [
     slug: "camisa-trabajo-pampa",
     name: { es: "Camisa de Trabajo Pampa", en: "Pampa Work Shirt" },
     shortDescription: {
-      es: "Camisa de manga larga en tejido FRARTEX para campos de producción y plantas de tratamiento, con cintas retrorreflectivas en antebrazos.",
-      en: "Long-sleeve FRARTEX shirt for production fields and treatment plants, with retroreflective tapes on the forearms.",
+      es: "Camisa ignífuga FR de algodón FRARTEX, ropa de trabajo certificada para petróleo y gas, con cintas retrorreflectivas en antebrazos.",
+      en: "FRARTEX FR cotton work shirt — certified flame-resistant apparel for oil and gas, with retroreflective forearm tapes.",
     },
     description: {
       es: "La Pampa es la prenda superior de la línea de petróleo y gas, cortada en FRARTEX-2400AS. El tejido inherente ignífugo y antiestático no se funde ni se adhiere a la piel frente a una fuente de calor, y respira en jornadas de sol abierto en el yacimiento. El corte mantiene la manga larga y el puño abotonado como criterio de cobertura permanente, con canesú reforzado en la espalda para soportar el movimiento repetido de brazos. Las cintas retrorreflectivas en los antebrazos hacen visibles las manos y los gestos durante maniobras nocturnas o en zonas de circulación de vehículos.",
@@ -383,8 +383,8 @@ export const products: readonly Product[] = [
       {
         src: "/images/products/camisa-trabajo-pampa-studio.jpg",
         alt: {
-          es: "Camisa de Trabajo Pampa en color arena con dos bolsillos de pecho y cintas retrorreflectivas en los antebrazos, vista frontal sobre fondo neutro.",
-          en: "Sand-coloured Pampa Work Shirt with two chest pockets and retroreflective tapes on the forearms, front view on a neutral background.",
+          es: "Camisa ignífuga FR algodón Pampa, ropa de trabajo certificada en color arena con bolsillos de pecho y cintas retrorreflectivas.",
+          en: "Pampa FR cotton flame-resistant work shirt, certified workwear in sand with chest pockets and retroreflective tapes.",
         },
         kind: "studio",
       },
@@ -500,8 +500,8 @@ export const products: readonly Product[] = [
     slug: "pantalon-cargo-calafate",
     name: { es: "Pantalón Cargo Calafate", en: "Calafate Cargo Trousers" },
     shortDescription: {
-      es: "Pantalón cargo en tejido FRARTEX con rodillas de doble capa, seis bolsillos y cintas retrorreflectivas en las piernas.",
-      en: "FRARTEX cargo trousers with double-layer knees, six pockets and retroreflective tapes on the legs.",
+      es: "Pantalón cargo ignífugo FRARTEX, ropa de trabajo certificada con rodillas de doble capa, seis bolsillos y cintas retrorreflectivas.",
+      en: "FRARTEX flame-resistant cargo trousers — certified workwear with double-layer knees, six pockets and retroreflective tapes.",
     },
     description: {
       es: "El Calafate es el pantalón de la línea de petróleo y gas, cortado en FRARTEX-2400AS. Está construido alrededor de una idea simple: el pantalón se rompe siempre en los mismos lugares. Por eso suma rodillas de doble capa con acceso interno para rodilleras, pensadas para tareas de arrodillado sobre rejilla y hormigón, y el mismo tejido inherente ignífugo en todo el cuerpo. Los seis bolsillos incluyen dos cargo de fuelle que aceptan herramientas de mano sin deformar la pierna, y las cintas retrorreflectivas bajas mantienen visible el movimiento del operario a la altura donde lo ve el conductor de un equipo.",
@@ -522,8 +522,8 @@ export const products: readonly Product[] = [
       {
         src: "/images/products/pantalon-cargo-calafate-studio.jpg",
         alt: {
-          es: "Pantalón Cargo Calafate en gris grafito con bolsillos de fuelle, rodillas reforzadas y cintas retrorreflectivas, vista frontal sobre fondo neutro.",
-          en: "Graphite grey Calafate Cargo Trousers with bellows pockets, reinforced knees and retroreflective tapes, front view on a neutral background.",
+          es: "Pantalón cargo ignífugo Calafate, ropa de trabajo FR certificada en grafito con bolsillos de fuelle y rodillas reforzadas.",
+          en: "Calafate flame-resistant cargo trousers, certified FR workwear in graphite with bellows pockets and reinforced knees.",
         },
         kind: "studio",
       },

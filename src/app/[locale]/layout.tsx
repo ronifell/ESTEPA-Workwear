@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { WhatsappFloat } from "@/components/layout/whatsapp-float";
 import { CartProvider } from "@/components/providers/cart-provider";
 import { I18nProvider } from "@/components/providers/i18n-provider";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -53,6 +54,16 @@ export async function generateMetadata({
       template: `%s | ${siteConfig.companyName}`,
     },
     description: dictionary.seo.home.description,
+    keywords: [
+      "ropa ignífuga certificada",
+      "ropa de trabajo FR Argentina",
+      "indumentaria ignífuga minería",
+      "ropa antiestática petróleo y gas",
+      "ropa de trabajo NFPA 2112",
+      "ropa FR arco eléctrico",
+      "ropa de alta visibilidad ignífuga",
+      "indumentaria de seguridad industrial certificada",
+    ],
     applicationName: siteConfig.companyName,
     alternates: buildAlternates("home", raw),
     icons: { icon: "/logo.png", apple: "/logo.png" },
@@ -101,6 +112,7 @@ export default async function LocaleLayout({
               {children}
             </main>
             <SiteFooter locale={raw} />
+            <WhatsappFloat />
           </CartProvider>
         </I18nProvider>
 

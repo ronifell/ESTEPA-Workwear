@@ -10,6 +10,8 @@ export interface SpecBlockProps {
   /** Text shown when the client has not supplied this information yet. */
   readonly pendingLabel: string;
   readonly className?: string;
+  /** Inverse band used for a primary callout such as recommended use. */
+  readonly tone?: "default" | "band";
 }
 
 /**
@@ -22,12 +24,21 @@ export function SpecBlock({
   children,
   pendingLabel,
   className,
+  tone = "default",
 }: SpecBlockProps) {
   const hasContent = Boolean(children) || (items && items.length > 0);
+  const band = tone === "band";
 
   return (
     <section className={cn("border-t border-border py-7 first:border-t-0 first:pt-0", className)}>
-      <h3 className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-navy-900">
+      <h3
+        className={cn(
+          "font-display font-bold uppercase tracking-[0.14em]",
+          band
+            ? "inline-block bg-navy-900 px-3 py-1.5 text-sm text-text-inverse"
+            : "text-sm text-navy-900 sm:text-base",
+        )}
+      >
         {title}
       </h3>
 

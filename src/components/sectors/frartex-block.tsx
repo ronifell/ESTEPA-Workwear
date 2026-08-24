@@ -36,10 +36,10 @@ export function FrartexBlock({ locale }: { readonly locale: Locale }) {
       </ul>
 
       <div className="mt-8">
-        <p className="mb-3 font-display text-[0.5625rem] font-semibold uppercase tracking-[0.14em] text-text-subtle">
+        <p className="mb-3 font-display text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-navy-900">
           {copy.standards}
         </p>
-        <CertificationRow certifications={frartexCertifications} />
+        <CertificationRow certifications={frartexCertifications} locale={locale} />
       </div>
 
       <LocalizedLink

@@ -6,8 +6,8 @@ import { Reveal } from "@/components/ui/reveal";
 type Tone = "default" | "muted" | "surface" | "inverse";
 
 const toneStyles: Record<Tone, string> = {
-  default: "bg-background text-text",
-  muted: "bg-surface-alt text-text",
+  default: "bg-background text-text industrial-texture",
+  muted: "bg-surface-alt text-text industrial-texture",
   surface: "bg-surface text-text",
   inverse: "bg-navy-900 text-text-inverse",
 };

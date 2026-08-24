@@ -1,6 +1,8 @@
+import { InfoTooltip } from "@/components/ui/info-tooltip";
 import { resolveCertificationIcon } from "@/lib/certifications";
+import { resolveStandard, standardAriaLabel } from "@/lib/standards";
 import { cn } from "@/lib/utils";
-import type { Certification, CertificationIcon } from "@/types";
+import type { Certification, CertificationIcon, Locale } from "@/types";
 
 function Pictogram({ icon }: { readonly icon: CertificationIcon }) {
   const common = {
@@ -82,28 +84,32 @@ function Pictogram({ icon }: { readonly icon: CertificationIcon }) {
   }
 }
 
-export function CertificationBadge({
+function BadgeFace({
   certification,
-  compact = false,
+  compact,
 }: {
   readonly certification: Certification;
-  readonly compact?: boolean;
+  readonly compact: boolean;
 }) {
   const icon = resolveCertificationIcon(certification);
 
   if (icon === "ul") {
     return (
       <span
-        title={certification.name}
         className={cn(
           "inline-flex flex-col items-center justify-center bg-navy-900 text-white",
-          compact ? "h-11 min-w-11 px-1.5" : "h-14 min-w-[3.5rem] px-2",
+          compact ? "h-12 min-w-12 px-1.5" : "h-16 min-w-[4.25rem] px-2.5",
         )}
       >
-        <span className={cn("font-display font-bold leading-none", compact ? "text-[0.65rem]" : "text-sm")}>
+        <span className={cn("font-display font-bold leading-none", compact ? "text-xs" : "text-base")}>
           UL
         </span>
-        <span className={cn("mt-0.5 font-display uppercase leading-none tracking-[0.08em]", compact ? "text-[0.4rem]" : "text-[0.5rem]")}>
+        <span
+          className={cn(
+            "mt-0.5 font-display uppercase leading-none tracking-[0.08em]",
+            compact ? "text-[0.45rem]" : "text-[0.5625rem]",
+          )}
+        >
           Certified
         </span>
       </span>
@@ -113,10 +119,9 @@ export function CertificationBadge({
   if (icon === "badge") {
     return (
       <span
-        title={certification.description?.es ?? certification.name}
         className={cn(
-          "inline-flex items-center justify-center border border-navy-900 bg-surface px-1.5 text-center font-display font-semibold uppercase leading-tight tracking-[0.04em] text-navy-900",
-          compact ? "h-11 min-w-11 text-[0.5rem]" : "h-14 min-w-[3.5rem] px-2 text-[0.625rem]",
+          "inline-flex items-center justify-center border-2 border-navy-900 bg-surface text-center font-display font-bold uppercase leading-tight tracking-[0.04em] text-navy-900",
+          compact ? "h-12 min-w-12 px-1.5 text-[0.5625rem]" : "h-16 min-w-[4.25rem] px-2 text-[0.6875rem]",
         )}
       >
         {certification.name}
@@ -125,28 +130,24 @@ export function CertificationBadge({
   }
 
   return (
-    <span
-      title={certification.description?.es ?? certification.name}
-      className={cn("inline-flex flex-col items-center", compact ? "w-11" : "w-14")}
-    >
+    <span className={cn("inline-flex flex-col items-center", compact ? "w-12" : "w-16")}>
       <span
         className={cn(
-          "flex items-center justify-center border border-navy-900 text-navy-900",
-          compact ? "size-8" : "size-10",
-          "clip-path-shield",
+          "flex items-center justify-center border-2 border-navy-900 bg-surface text-navy-900",
+          compact ? "size-10" : "size-12",
         )}
         style={{
           clipPath: "polygon(50% 0, 100% 12%, 100% 68%, 50% 100%, 0 68%, 0 12%)",
         }}
       >
-        <span className={compact ? "size-4" : "size-5"}>
+        <span className={compact ? "size-5" : "size-6"}>
           <Pictogram icon={icon} />
         </span>
       </span>
       <span
         className={cn(
-          "mt-1 text-center font-display font-semibold uppercase leading-none tracking-[0.06em] text-navy-900",
-          compact ? "text-[0.45rem]" : "text-[0.5625rem]",
+          "mt-1.5 text-center font-display font-bold uppercase leading-none tracking-[0.04em] text-navy-900",
+          compact ? "text-[0.5625rem]" : "text-[0.6875rem]",
         )}
       >
         {certification.name.replace(/\s+/g, "")}
@@ -155,22 +156,43 @@ export function CertificationBadge({
   );
 }
 
+export function CertificationBadge({
+  certification,
+  locale,
+  compact = false,
+}: {
+  readonly certification: Certification;
+  readonly locale: Locale;
+  readonly compact?: boolean;
+}) {
+  const resolved = resolveStandard(certification);
+  const description = resolved.description?.[locale] ?? resolved.name;
+
+  return (
+    <InfoTooltip label={standardAriaLabel(resolved, locale)} title={resolved.name} content={description}>
+      <BadgeFace certification={resolved} compact={compact} />
+    </InfoTooltip>
+  );
+}
+
 export function CertificationRow({
   certifications,
+  locale,
   compact = false,
   className,
 }: {
   readonly certifications: readonly Certification[];
+  readonly locale: Locale;
   readonly compact?: boolean;
   readonly className?: string;
 }) {
   if (certifications.length === 0) return null;
 
   return (
-    <ul className={cn("flex flex-wrap items-end gap-2", compact ? "gap-1.5" : "gap-2.5", className)}>
+    <ul className={cn("flex flex-wrap items-end gap-2.5", compact ? "gap-2" : "gap-3", className)}>
       {certifications.map((certification) => (
         <li key={certification.id}>
-          <CertificationBadge certification={certification} compact={compact} />
+          <CertificationBadge certification={certification} locale={locale} compact={compact} />
         </li>
       ))}
     </ul>

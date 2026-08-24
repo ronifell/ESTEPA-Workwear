@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { useCart } from "@/components/providers/cart-provider";
 import { useI18n } from "@/components/providers/i18n-provider";
@@ -16,16 +16,26 @@ export function AddToCart({ product }: { readonly product: Product }) {
   const { addProduct } = useCart();
 
   const sizes = product.sizes ?? [];
+  const sizeFieldRef = useRef<HTMLFieldSetElement>(null);
   const [size, setSize] = useState<string | null>(sizes.length === 1 ? (sizes[0] ?? null) : null);
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState<string | null>(null);
   const [added, setAdded] = useState(false);
+  const [shake, setShake] = useState(false);
 
   const hasPrice = siteConfig.commerce.pricesEnabled && product.price !== undefined;
+  const needsSize = sizes.length > 0 && !size;
+
+  function rejectSize() {
+    setError(dictionary.product.sizeRequired);
+    setShake(true);
+    window.setTimeout(() => setShake(false), 450);
+    sizeFieldRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
 
   function handleAdd() {
-    if (sizes.length > 0 && !size) {
-      setError(dictionary.product.sizeRequired);
+    if (needsSize) {
+      rejectSize();
       return;
     }
 
@@ -38,12 +48,21 @@ export function AddToCart({ product }: { readonly product: Product }) {
   return (
     <div className="space-y-6">
       {sizes.length > 0 ? (
-        <fieldset>
+        <fieldset
+          ref={sizeFieldRef}
+          id="product-size-selector"
+          className={cn(shake && "animate-shake")}
+        >
           <legend className="mb-3 flex items-baseline justify-between gap-4 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-text-muted">
             {dictionary.product.selectSize}
           </legend>
 
-          <div className="flex flex-wrap gap-2">
+          <div
+            className={cn(
+              "flex flex-wrap gap-2 border-2 p-2 transition-colors",
+              needsSize ? "border-danger" : "border-transparent",
+            )}
+          >
             {sizes.map((option) => (
               <button
                 key={option}
@@ -57,7 +76,9 @@ export function AddToCart({ product }: { readonly product: Product }) {
                   "min-w-12 border px-3 py-2 font-display text-sm font-semibold transition-colors",
                   size === option
                     ? "border-primary bg-primary text-primary-contrast"
-                    : "border-border-strong text-text hover:border-primary hover:text-primary",
+                    : needsSize
+                      ? "border-danger text-text hover:border-danger hover:bg-danger-soft"
+                      : "border-border-strong text-text hover:border-primary hover:text-primary",
                 )}
               >
                 {option}
@@ -85,7 +106,12 @@ export function AddToCart({ product }: { readonly product: Product }) {
           variant={added ? "accent" : "primary"}
           size="lg"
           onClick={handleAdd}
-          className="min-w-56 flex-1"
+          aria-disabled={needsSize || undefined}
+          className={cn(
+            "min-w-56 flex-1",
+            needsSize &&
+              "cursor-not-allowed opacity-50 hover:bg-primary hover:shadow-none active:translate-y-0",
+          )}
         >
           {added ? (
             <>
@@ -102,7 +128,7 @@ export function AddToCart({ product }: { readonly product: Product }) {
       </div>
 
       {error ? (
-        <p role="alert" className="text-sm font-medium text-danger">
+        <p role="alert" className="text-base font-bold text-danger">
           {error}
         </p>
       ) : null}

@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { CertStrip } from "@/components/shared/cert-strip";
 import { buttonStyles } from "@/components/ui/button";
 import {
   ArrowRightIcon,
@@ -29,8 +30,7 @@ export function Hero({ locale }: { readonly locale: Locale }) {
   const { hero, highlights } = dictionary.home;
 
   return (
-    <section className="relative overflow-hidden bg-sand-100">
-      {/* Photography bleeds to the right edge on large screens. */}
+    <section className="relative overflow-hidden bg-sand-100 industrial-texture">
       <div className="relative lg:grid lg:min-h-[38rem] lg:grid-cols-2 lg:items-stretch">
         <div className="order-2 relative h-64 w-full sm:h-80 lg:order-none lg:col-start-2 lg:h-auto">
           <Image
@@ -53,22 +53,30 @@ export function Hero({ locale }: { readonly locale: Locale }) {
 
         <div className="relative order-1 lg:order-none lg:col-start-1 lg:row-start-1">
           <div className="container-page lg:pr-0">
-            <div className="max-w-xl py-14 sm:py-20 lg:max-w-none lg:py-28 xl:py-32">
+            <div className="max-w-xl py-14 sm:py-20 lg:max-w-none lg:py-24 xl:py-28">
               <p className="eyebrow animate-rise text-accent">
                 <span aria-hidden className="h-px w-10 bg-accent/60" />
                 {hero.eyebrow}
               </p>
 
-              <h1 className="animate-rise mt-6 text-balance-tight text-[2rem] leading-[1.06] text-navy-900 sm:text-[2.75rem] lg:text-[3.25rem] xl:text-[3.5rem] [animation-delay:80ms]">
+              <h1 className="animate-rise mt-6 text-balance-tight text-[2rem] leading-[1.06] text-navy-900 sm:text-[2.75rem] lg:text-[3.15rem] xl:text-[3.4rem] [animation-delay:80ms]">
                 {hero.titleLead}{" "}
                 <span className="text-accent">{hero.titleAccent}</span>
               </h1>
 
-              <p className="animate-rise mt-7 max-w-lg text-base leading-relaxed text-text-muted sm:text-lg [animation-delay:160ms]">
+              <p className="animate-rise mt-6 max-w-lg text-base leading-relaxed text-text-muted sm:text-lg [animation-delay:160ms]">
                 {hero.description}
               </p>
 
-              <div className="animate-rise mt-10 flex flex-col gap-3 sm:flex-row [animation-delay:240ms]">
+              <h2 className="animate-rise mt-5 max-w-lg font-display text-base font-semibold text-navy-800 sm:text-lg [animation-delay:200ms]">
+                {dictionary.trust.supportTitle}
+              </h2>
+
+              <div className="animate-rise mt-8 [animation-delay:240ms]">
+                <CertStrip locale={locale} compact />
+              </div>
+
+              <div className="animate-rise mt-8 flex flex-col gap-3 sm:flex-row [animation-delay:280ms]">
                 <LocalizedLink
                   route="products"
                   locale={locale}
@@ -78,11 +86,12 @@ export function Hero({ locale }: { readonly locale: Locale }) {
                   <ArrowRightIcon className="size-4" />
                 </LocalizedLink>
                 <LocalizedLink
-                  route="protection"
+                  route="home"
                   locale={locale}
+                  hash="por-que-certificada"
                   className={buttonStyles("outline", "lg")}
                 >
-                  {dictionary.common.learnMore}
+                  {dictionary.trust.whyCta}
                 </LocalizedLink>
               </div>
             </div>
