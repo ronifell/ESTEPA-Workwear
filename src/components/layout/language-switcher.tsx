@@ -9,6 +9,7 @@ import { locales } from "@/config/site";
 import { localeLabels } from "@/i18n";
 import { getAlternatePath } from "@/i18n/routes";
 import { cn } from "@/lib/utils";
+import type { Locale } from "@/types";
 
 export interface LanguageSwitcherProps {
   readonly className?: string;
@@ -25,10 +26,45 @@ export interface LanguageSwitcherProps {
 export function LanguageSwitcher(props: LanguageSwitcherProps) {
   return (
     <Suspense
-      fallback={<span aria-hidden className={cn("block h-4 w-[3.25rem]", props.className)} />}
+      fallback={<span aria-hidden className={cn("block h-4 w-[5.5rem]", props.className)} />}
     >
       <LanguageSwitcherControls {...props} />
     </Suspense>
+  );
+}
+
+function ArgentinaFlag() {
+  return (
+    <svg viewBox="0 0 16 11" className="size-full" aria-hidden>
+      <rect width="16" height="11" fill="#74ACDF" />
+      <rect y="3.65" width="16" height="3.7" fill="#FFFFFF" />
+      <circle cx="8" cy="5.5" r="1.15" fill="#F6B40E" />
+    </svg>
+  );
+}
+
+function UnitedKingdomFlag() {
+  return (
+    <svg viewBox="0 0 16 11" className="size-full" aria-hidden>
+      <rect width="16" height="11" fill="#012169" />
+      <path d="M0 0 16 11M16 0 0 11" stroke="#FFFFFF" strokeWidth="2.4" />
+      <path d="M0 0 16 11M16 0 0 11" stroke="#C8102E" strokeWidth="1.15" />
+      <path d="M8 0v11M0 5.5h16" stroke="#FFFFFF" strokeWidth="3.6" />
+      <path d="M8 0v11M0 5.5h16" stroke="#C8102E" strokeWidth="2.1" />
+    </svg>
+  );
+}
+
+function LocaleFlag({ locale, inverse }: { readonly locale: Locale; readonly inverse: boolean }) {
+  return (
+    <span
+      className={cn(
+        "inline-block h-3.5 w-5 shrink-0 overflow-hidden rounded-[1px]",
+        inverse ? "ring-1 ring-white/25" : "ring-1 ring-black/15",
+      )}
+    >
+      {locale === "es" ? <ArgentinaFlag /> : <UnitedKingdomFlag />}
+    </span>
   );
 }
 
@@ -66,9 +102,10 @@ function LanguageSwitcherControls({ className, inverse = false }: LanguageSwitch
               href={href}
               hrefLang={candidate}
               aria-current={isActive ? "true" : undefined}
+              aria-label={localeLabels[candidate].full}
               title={localeLabels[candidate].full}
               className={cn(
-                "rounded-xs px-1 font-display text-xs font-semibold uppercase tracking-[0.1em] transition-colors",
+                "inline-flex items-center gap-1.5 rounded-xs px-1 font-display text-xs font-semibold uppercase tracking-[0.1em] transition-colors",
                 isActive
                   ? inverse
                     ? "text-text-inverse"
@@ -78,6 +115,7 @@ function LanguageSwitcherControls({ className, inverse = false }: LanguageSwitch
                     : "text-text-subtle hover:text-primary",
               )}
             >
+              <LocaleFlag locale={candidate} inverse={inverse} />
               {localeLabels[candidate].short}
             </Link>
           </span>
