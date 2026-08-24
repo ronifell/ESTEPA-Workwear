@@ -26,7 +26,7 @@ export function CertStrip({
         "border px-4 py-4 sm:px-5",
         tone === "inverse"
           ? "border-white/20 bg-white/5"
-          : "border-navy-900/15 bg-navy-50/90",
+          : "border-navy-900/25 bg-navy-50",
         className,
       )}
     >

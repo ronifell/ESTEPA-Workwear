@@ -39,7 +39,7 @@ export function WhyCertified({ locale }: { readonly locale: Locale }) {
         </Reveal>
 
         <Reveal delay={80} className="lg:col-span-5">
-          <CertStrip locale={locale} ids={filterableStandardIds} compact />
+          <CertStrip locale={locale} ids={filterableStandardIds} />
           <p className="mt-4 text-xs leading-relaxed text-text-subtle">{copy.certificatesNote}</p>
         </Reveal>
       </div>
