@@ -219,7 +219,7 @@ export const en: Dictionary = {
     sizesTitle: "Available sizes",
     sizeGuide: "Size guide",
     sizeGuideNote:
-      "The final measurement chart will be published together with the product data sheet.",
+      "Cut measurements (A–D) are on the technical data sheet. Final centimetre values are confirmed with the manufacturer.",
     addToCart: "Add to cart",
     addToRequest: "Add to request",
     added: "Added to cart",
@@ -237,7 +237,7 @@ export const en: Dictionary = {
     documents: "Documentation",
     documentsPending: "Documentation coming soon",
     documentsPendingDescription:
-      "Technical data sheets and certificates will be published once provided by the manufacturer.",
+      "Test certificates will be published once provided by the manufacturer.",
     related: "Related products",
     intendedApplication: "Intended application",
     technicalSheet: "Technical information",
@@ -248,6 +248,32 @@ export const en: Dictionary = {
     preliminaryDescription:
       "This product is part of ESTEPA's initial line. Technical specifications, materials and certifications will be published once validation with the manufacturer is complete.",
     notFound: "We could not find the product you are looking for.",
+    datasheet: "Technical data sheet",
+    datasheetTitle: "Technical data sheet — {name}",
+    datasheetPrint: "Print / save PDF",
+    datasheetBack: "Back to product",
+    datasheetLine: "{name} line",
+    datasheetFeatures: "Features",
+    datasheetCare: "Care",
+    datasheetSizeChart: "Size chart",
+    datasheetSizeUnit: "Size · cm",
+    datasheetCutTitle: "Cut measurements",
+    datasheetMeasurementsPending:
+      "Cells stay blank until the manufacturer supplies the cut chart in centimetres. Estimated measurements are not published.",
+    datasheetDiagramCaption: "Garment sketch with measurement points A, B, C and D.",
+    datasheetCertificatesPending:
+      "Test certificates are delivered during the homologation process.",
+    datasheetOpen: "View technical data sheet",
+    sizeMeasures: {
+      shoulder: "Shoulder width",
+      chest: "Chest width",
+      sleeve: "Sleeve length",
+      length: "Total length",
+      waist: "Waist",
+      hip: "Hip",
+      inseam: "Inseam",
+      hem: "Hem width",
+    },
   },
 
   protectionPage: {

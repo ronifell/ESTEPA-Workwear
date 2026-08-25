@@ -4,12 +4,23 @@ import {
   frartexCertifications,
   frartexColors,
 } from "@/data/fabrics";
-import type { Product, ProductColor } from "@/types";
+import type { Product, ProductColor, ProductImage } from "@/types";
 
 function pickColors(...ids: string[]): ProductColor[] {
   return ids
     .map((id) => frartexColors.find((color) => color.id === id))
     .filter((color): color is ProductColor => color !== undefined);
+}
+
+function extraViews(
+  slug: string,
+  back: ProductImage["alt"],
+  detail: ProductImage["alt"],
+): ProductImage[] {
+  return [
+    { src: `/images/products/${slug}-back.jpg`, alt: back, kind: "studio" },
+    { src: `/images/products/${slug}-detalle.jpg`, alt: detail, kind: "detail" },
+  ];
 }
 
 /**
@@ -93,6 +104,17 @@ export const products: readonly Product[] = [
         },
         kind: "in-use",
       },
+      ...extraViews(
+        "overol-minero-cordillera",
+        {
+          es: "Overol Minero Cordillera, vista posterior: canesú flúor y cintas retrorreflectivas sobre fondo neutro.",
+          en: "Cordillera Mining Coverall, back view: fluorescent yoke and retroreflective tapes on a neutral background.",
+        },
+        {
+          es: "Detalle del Overol Minero Cordillera: bolsillo cargo, rodilla reforzada y cintas retrorreflectivas.",
+          en: "Cordillera Mining Coverall detail: cargo pocket, reinforced knee and retroreflective tapes.",
+        },
+      ),
     ],
     sizes: [...SIZES],
     certifications: [],
@@ -239,6 +261,17 @@ export const products: readonly Product[] = [
         },
         kind: "in-use",
       },
+      ...extraViews(
+        "campera-industrial-andes",
+        {
+          es: "Campera Industrial Andes, vista posterior: paneles flúor en hombros y cintas retrorreflectivas.",
+          en: "Andes Industrial Jacket, back view: fluorescent shoulder panels and retroreflective tapes.",
+        },
+        {
+          es: "Detalle de la Campera Industrial Andes: tapeta, bolsillo de pecho y cinta retrorreflectiva.",
+          en: "Andes Industrial Jacket detail: storm flap, chest pocket and retroreflective tape.",
+        },
+      ),
     ],
     sizes: [...SIZES],
     certifications: [],
@@ -396,6 +429,17 @@ export const products: readonly Product[] = [
         },
         kind: "in-use",
       },
+      ...extraViews(
+        "camisa-trabajo-pampa",
+        {
+          es: "Camisa de Trabajo Pampa, vista posterior: canesú y cintas retrorreflectivas en mangas.",
+          en: "Pampa Work Shirt, back view: yoke and retroreflective sleeve tapes.",
+        },
+        {
+          es: "Detalle de la Camisa de Trabajo Pampa: bolsillos de pecho abotonados y cinta en manga.",
+          en: "Pampa Work Shirt detail: buttoned chest pockets and sleeve tape.",
+        },
+      ),
     ],
     sizes: [...SIZES],
     certifications: [...frartexCertifications],
@@ -535,6 +579,17 @@ export const products: readonly Product[] = [
         },
         kind: "in-use",
       },
+      ...extraViews(
+        "pantalon-cargo-calafate",
+        {
+          es: "Pantalón Cargo Calafate, vista posterior: bolsillos traseros, rodillas reforzadas y cinta retrorreflectiva baja.",
+          en: "Calafate Cargo Trousers, back view: rear pockets, reinforced knees and low retroreflective tape.",
+        },
+        {
+          es: "Detalle del Pantalón Cargo Calafate: bolsillo cargo de fuelle, rodilla articulada y cinta retrorreflectiva.",
+          en: "Calafate Cargo Trousers detail: bellows cargo pocket, articulated knee and retroreflective tape.",
+        },
+      ),
     ],
     sizes: [...SIZES],
     certifications: [...frartexCertifications],
@@ -678,6 +733,17 @@ export const products: readonly Product[] = [
         },
         kind: "in-use",
       },
+      ...extraViews(
+        "chaleco-alta-visibilidad-zonda",
+        {
+          es: "Chaleco de Alta Visibilidad Zonda, vista posterior: malla flúor, base marino y cintas retrorreflectivas.",
+          en: "Zonda High-Visibility Vest, back view: fluorescent mesh, navy panel and retroreflective tapes.",
+        },
+        {
+          es: "Detalle del Chaleco Zonda: bolsillo para radio, portalápices y cinta retrorreflectiva.",
+          en: "Zonda vest detail: radio pocket, pen slots and retroreflective tape.",
+        },
+      ),
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
     certifications: [],
@@ -839,6 +905,17 @@ export const products: readonly Product[] = [
         },
         kind: "in-use",
       },
+      ...extraViews(
+        "overol-industrial-talampaya",
+        {
+          es: "Overol Industrial Talampaya, vista posterior: capucha integrada, cintura elástica y costuras contrastadas.",
+          en: "Talampaya Industrial Coverall, back view: integrated hood, elastic waist and contrast seams.",
+        },
+        {
+          es: "Detalle del Overol Talampaya: tapeta cubierta, puño elastizado y tejido recubierto.",
+          en: "Talampaya Coverall detail: covered storm flap, elastic cuff and coated fabric.",
+        },
+      ),
     ],
     sizes: [...SIZES],
     certifications: [],
@@ -999,6 +1076,17 @@ export const products: readonly Product[] = [
         },
         kind: "in-use",
       },
+      ...extraViews(
+        "camisa-industrial-uspallata",
+        {
+          es: "Camisa Industrial Uspallata, vista posterior: canesú en contraste y codos reforzados.",
+          en: "Uspallata Industrial Shirt, back view: contrasting yoke and reinforced elbows.",
+        },
+        {
+          es: "Detalle de la Camisa Uspallata: canesú de hombro, bolsillo de pecho y codo de doble capa.",
+          en: "Uspallata Shirt detail: shoulder yoke, chest pocket and double-layer elbow.",
+        },
+      ),
     ],
     sizes: [...SIZES],
     certifications: [],

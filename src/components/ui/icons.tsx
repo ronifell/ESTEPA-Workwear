@@ -265,6 +265,17 @@ export function DownloadIcon(props: IconProps) {
   );
 }
 
+export function PrinterIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M7.2 9V3.8h9.6V9" />
+      <path d="M7.2 16.2H4.6A1.6 1.6 0 0 1 3 14.6v-4A1.6 1.6 0 0 1 4.6 9h14.8A1.6 1.6 0 0 1 21 10.6v4a1.6 1.6 0 0 1-1.6 1.6h-2.6" />
+      <path d="M7.2 13.4h9.6v6.8H7.2z" />
+      <path d="M16.6 11.8h.02" />
+    </Svg>
+  );
+}
+
 export function DocumentIcon(props: IconProps) {
   return (
     <Svg {...props}>

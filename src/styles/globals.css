@@ -296,6 +296,27 @@
   letter-spacing: -0.02em;
 }
 
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    background-image: none !important;
+  }
+
+  #main {
+    display: block;
+  }
+
+  .datasheet-page {
+    break-inside: avoid;
+  }
+}
+
 /*
  * Scroll-reveal: hide until the IntersectionObserver marks the block visible.
  *

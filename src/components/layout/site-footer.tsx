@@ -51,7 +51,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   ].filter((entry): entry is { href: string; label: string; Icon: typeof MailIcon } => entry !== null);
 
   return (
-    <footer className="relative overflow-hidden bg-navy-900 pb-24 text-text-inverse lg:pb-0">
+    <footer className="relative overflow-hidden bg-navy-900 pb-24 text-text-inverse print:hidden lg:pb-0">
       <div aria-hidden className="blueprint-grid absolute inset-0 opacity-60" />
       <div aria-hidden className="hazard-stripes absolute inset-x-0 top-0 h-1 opacity-70" />
 

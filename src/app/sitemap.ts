@@ -5,7 +5,13 @@ import { getPath, routes, type RouteKey } from "@/i18n/routes";
 import { getAllProductSlugs } from "@/lib/repositories/products";
 
 /** Routes that should never be indexed (transactional or user specific). */
-const excluded = new Set<RouteKey>(["cart", "checkout", "orderConfirmation", "productDetail"]);
+const excluded = new Set<RouteKey>([
+  "cart",
+  "checkout",
+  "orderConfirmation",
+  "productDetail",
+  "productDatasheet",
+]);
 
 const priorities: Partial<Record<RouteKey, number>> = {
   home: 1,
@@ -46,6 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (const slug of await getAllProductSlugs()) {
     push("productDetail", { slug });
+    push("productDatasheet", { slug });
   }
 
   return entries;

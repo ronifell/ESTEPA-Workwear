@@ -226,7 +226,7 @@ export const es = {
     sizesTitle: "Talles disponibles",
     sizeGuide: "Guía de talles",
     sizeGuideNote:
-      "La tabla de medidas definitiva se publicará junto con la ficha técnica del producto.",
+      "Las medidas de corte (A–D) están en la ficha técnica. Los centímetros definitivos se confirman con el fabricante.",
     addToCart: "Agregar al carrito",
     addToRequest: "Agregar a la solicitud",
     added: "Agregado al carrito",
@@ -244,7 +244,7 @@ export const es = {
     documents: "Documentación",
     documentsPending: "Documentación próximamente disponible",
     documentsPendingDescription:
-      "Las fichas técnicas y los certificados se publicarán cuando el fabricante los proporcione.",
+      "Los certificados de ensayo se publicarán cuando el fabricante los proporcione.",
     related: "Productos relacionados",
     intendedApplication: "Aplicación prevista",
     technicalSheet: "Información técnica",
@@ -255,6 +255,32 @@ export const es = {
     preliminaryDescription:
       "Este producto forma parte de la línea inicial de ESTEPA. Las especificaciones técnicas, materiales y certificaciones se publicarán una vez completada la validación con el fabricante.",
     notFound: "No encontramos el producto que estás buscando.",
+    datasheet: "Ficha técnica",
+    datasheetTitle: "Ficha técnica — {name}",
+    datasheetPrint: "Imprimir / guardar PDF",
+    datasheetBack: "Volver al producto",
+    datasheetLine: "Línea {name}",
+    datasheetFeatures: "Características",
+    datasheetCare: "Cuidados",
+    datasheetSizeChart: "Tabla de talles",
+    datasheetSizeUnit: "Talle · cm",
+    datasheetCutTitle: "Medidas de corte",
+    datasheetMeasurementsPending:
+      "Las celdas quedan en blanco hasta que el fabricante entregue la tabla de corte en centímetros. No publicamos medidas estimadas.",
+    datasheetDiagramCaption: "Croquis de la prenda con puntos de medida A, B, C y D.",
+    datasheetCertificatesPending:
+      "Los certificados de ensayo se entregan en el proceso de homologación.",
+    datasheetOpen: "Ver ficha técnica",
+    sizeMeasures: {
+      shoulder: "Ancho de hombro",
+      chest: "Ancho de pecho",
+      sleeve: "Largo de manga",
+      length: "Largo total",
+      waist: "Cintura",
+      hip: "Cadera",
+      inseam: "Entrepierna",
+      hem: "Ancho de bajo",
+    },
   },
 
   protectionPage: {

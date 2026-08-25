@@ -81,7 +81,7 @@ export function SiteHeader() {
 
       <header
         className={cn(
-          "sticky top-0 z-50 border-b bg-sand-100/95 backdrop-blur-sm transition-shadow duration-300",
+          "sticky top-0 z-50 border-b bg-sand-100/95 backdrop-blur-sm transition-shadow duration-300 print:hidden",
           isScrolled ? "border-border shadow-header" : "border-transparent",
         )}
       >

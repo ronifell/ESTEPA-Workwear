@@ -17,6 +17,7 @@ import { DocumentIcon, DownloadIcon } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { Notice } from "@/components/ui/notice";
 import { Section, SectionHeading } from "@/components/ui/section";
+import { buttonStyles } from "@/components/ui/button";
 import { locales, siteConfig } from "@/config/site";
 import { protectionsById } from "@/data/protections";
 import { sectorsById } from "@/data/sectors";
@@ -112,6 +113,16 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </p>
 
             <TechnicalSheet product={product} locale={locale} />
+
+            <LocalizedLink
+              route="productDatasheet"
+              locale={locale}
+              params={{ slug: product.slug }}
+              className={buttonStyles("outline", "md", "mt-4")}
+            >
+              <DocumentIcon className="size-4" />
+              {copy.datasheetOpen}
+            </LocalizedLink>
 
             <div className="mt-6 flex flex-wrap gap-2">
               {product.sectors.map((id) => (
@@ -287,7 +298,16 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   ))}
                 </ul>
                 <p className="mt-4 text-xs leading-relaxed text-text-subtle">
-                  <span className="font-semibold">{copy.sizeGuide}:</span> {copy.sizeGuideNote}
+                  <LocalizedLink
+                    route="productDatasheet"
+                    locale={locale}
+                    params={{ slug: product.slug }}
+                    className="font-semibold text-primary hover:text-accent"
+                  >
+                    {copy.sizeGuide}
+                  </LocalizedLink>
+                  {": "}
+                  {copy.sizeGuideNote}
                 </p>
               </div>
             ) : null}
@@ -297,28 +317,39 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 {copy.documents}
               </h3>
 
-              {availableDocuments.length > 0 ? (
-                <ul className="mt-4 space-y-2">
-                  {availableDocuments.map((document) => (
-                    <li key={document.id}>
-                      <a
-                        href={document.url}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="group flex items-center gap-3 border border-border px-4 py-3 transition-colors hover:border-primary"
-                      >
-                        <DocumentIcon className="size-4 shrink-0 text-accent" />
-                        <span className="flex-1 text-sm text-text">{document.label[locale]}</span>
-                        <DownloadIcon className="size-4 text-text-subtle transition-colors group-hover:text-primary" />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <Notice tone="pending" className="mt-4" title={copy.documentsPending}>
+              <ul className="mt-4 space-y-2">
+                <li>
+                  <LocalizedLink
+                    route="productDatasheet"
+                    locale={locale}
+                    params={{ slug: product.slug }}
+                    className="group flex items-center gap-3 border border-border px-4 py-3 transition-colors hover:border-primary"
+                  >
+                    <DocumentIcon className="size-4 shrink-0 text-accent" />
+                    <span className="flex-1 text-sm text-text">{copy.datasheet}</span>
+                    <DownloadIcon className="size-4 text-text-subtle transition-colors group-hover:text-primary" />
+                  </LocalizedLink>
+                </li>
+                {availableDocuments.map((document) => (
+                  <li key={document.id}>
+                    <a
+                      href={document.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="group flex items-center gap-3 border border-border px-4 py-3 transition-colors hover:border-primary"
+                    >
+                      <DocumentIcon className="size-4 shrink-0 text-accent" />
+                      <span className="flex-1 text-sm text-text">{document.label[locale]}</span>
+                      <DownloadIcon className="size-4 text-text-subtle transition-colors group-hover:text-primary" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              {availableDocuments.length === 0 ? (
+                <p className="mt-3 text-xs leading-relaxed text-text-subtle">
                   {copy.documentsPendingDescription}
-                </Notice>
-              )}
+                </p>
+              ) : null}
             </div>
           </div>
         </div>

@@ -100,7 +100,7 @@ export default async function LocaleLayout({
       <body className="flex min-h-dvh flex-col bg-background font-sans text-text antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:inline-flex focus:h-11 focus:items-center focus:bg-primary focus:px-5 focus:font-display focus:text-[0.8125rem] focus:font-semibold focus:uppercase focus:tracking-[0.1em] focus:text-primary-contrast"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:inline-flex focus:h-11 focus:items-center focus:bg-primary focus:px-5 focus:font-display focus:text-[0.8125rem] focus:font-semibold focus:uppercase focus:tracking-[0.1em] focus:text-primary-contrast print:hidden"
         >
           {dictionary.common.skipToContent}
         </a>

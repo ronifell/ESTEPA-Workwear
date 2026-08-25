@@ -15,6 +15,10 @@ export const routes = {
   work: { es: "/trabajo", en: "/work" },
   products: { es: "/productos", en: "/products" },
   productDetail: { es: "/productos/[slug]", en: "/products/[slug]" },
+  productDatasheet: {
+    es: "/productos/[slug]/ficha-tecnica",
+    en: "/products/[slug]/technical-sheet",
+  },
   protection: { es: "/certificaciones", en: "/protection" },
   about: { es: "/nosotros", en: "/about" },
   catalog: { es: "/catalogo", en: "/catalog" },
