@@ -1,8 +1,13 @@
+import type { ReactNode } from "react";
+
 import { InfoTooltip } from "@/components/ui/info-tooltip";
 import { resolveCertificationIcon } from "@/lib/certifications";
 import { resolveStandard, standardAriaLabel } from "@/lib/standards";
 import { cn } from "@/lib/utils";
 import type { Certification, CertificationIcon, Locale } from "@/types";
+
+const INK = "#0a1727";
+const FLAME = "var(--color-cert-flame)";
 
 function splitName(name: string): { kicker: string | null; title: string } {
   const iso = name.match(/^(EN ISO)\s+(.+)$/i);
@@ -12,6 +17,10 @@ function splitName(name: string): { kicker: string | null; title: string } {
   const body = name.match(/^(NFPA|ASTM|CAT|UL)\s+(.+)$/i);
   if (body?.[1] && body[2]) return { kicker: body[1], title: body[2] };
   return { kicker: null, title: name };
+}
+
+function plateSize(compact: boolean) {
+  return compact ? "size-12" : "size-14";
 }
 
 function MarkCaption({
@@ -24,7 +33,7 @@ function MarkCaption({
   readonly compact: boolean;
 }) {
   return (
-    <span className="mt-1 flex flex-col items-center text-center leading-[1.05]">
+    <span className="mt-1.5 flex min-h-[1.7rem] flex-col items-center justify-start text-center leading-[1.05]">
       {kicker ? (
         <span
           className={cn(
@@ -47,206 +56,179 @@ function MarkCaption({
   );
 }
 
-function ShieldPath() {
+function PlateFrame() {
   return (
-    <path
-      d="M24 3.4 42.2 10v16.2c0 10.4-7.4 18.4-18.2 21.4C13.2 44.6 5.8 36.6 5.8 26.2V10L24 3.4Z"
+    <rect
+      x="2.2"
+      y="2.2"
+      width="43.6"
+      height="43.6"
+      rx="5"
       fill="#fff"
-      stroke="#111"
-      strokeWidth="2.4"
-      strokeLinejoin="round"
+      stroke={INK}
+      strokeWidth="2.2"
     />
   );
 }
 
-function InnerFlame({ fill = "#111" }: { readonly fill?: string }) {
+function GlyphFlame({ fill }: { readonly fill: string }) {
   return (
-    <g fill={fill}>
-      <path d="M24 15.2c2.8 4.2 6.6 7 6.4 11.4 0 3.4-2.8 5.6-6.4 5.6s-6.4-2.2-6.4-5.6c0-4.4 3.6-7.2 6.4-11.4Z" />
-      <rect x="17.6" y="31.8" width="12.8" height="1.5" fill="#fff" />
+    <path
+      fill={fill}
+      d="M24 8.6c2.4 4.6 8.6 8.2 8 14.6-.3 2.8-2.8 4-5 2.4 3.2 4 5.4 8.6 1.4 13.6-1.6 2-3.6 2.8-5 2.6-1.4.2-3.4-.6-5-2.6-4-5-1.8-9.6 1.4-13.6-2.2 1.6-4.7.4-5-2.4C15.4 16.8 21.6 13.2 24 8.6Z"
+    />
+  );
+}
+
+function GlyphIsoFlame() {
+  return (
+    <g>
+      <path
+        fill={INK}
+        d="M24 11.4c2.2 3.6 6.8 6.4 6.6 11.4 0 1.9-1.5 2.9-3.1 2.1 2 2.8 3.2 5.8.9 9.1-1.1 1.6-2.8 2.4-4.4 2.2-1.6.2-3.3-.6-4.4-2.2-2.3-3.3-1.1-6.3.9-9.1-1.6.8-3.1-.2-3.1-2.1 0-5 4.4-7.8 6.6-11.4Z"
+      />
+      <rect x="16.5" y="35.4" width="15" height="1.7" rx="0.4" fill={INK} />
     </g>
   );
 }
 
-function InnerArc() {
+function GlyphWeld() {
   return (
-    <g fill="#111">
-      <path d="M20.2 15.2 15.6 27.8h5.2L18.4 39.2 32 23.6h-6.2z" />
-      <path d="M33.4 18.6 31.2 22.2l2.6.8-2 3.4 2.8-.4-1.2 3.2 2.8-2.2 1.6 2.6.4-3.4 2.8.4-2.2-2.8 2.2-1.6-2.8.2.2-3.2-2.8 1.4z" />
+    <g fill={INK}>
+      <path d="M16.2 15.6h15.6c.8 0 1.4.6 1.4 1.4v3.4H14.8v-3.4c0-.8.6-1.4 1.4-1.4Z" />
+      <path d="M14.2 21.2h19.6v11.2c0 1-.8 1.8-1.8 1.8H16c-1 0-1.8-.8-1.8-1.8V21.2Z" />
+      <path fill="#fff" d="M18.2 24h11.6v4.6H18.2z" />
+      <path d="M20.4 35.4 18.6 40.2h2.4l1.2-4.8h-1.8Zm6.4 0-1.8 4.8h2.4l1.2-4.8h-1.8Z" />
     </g>
   );
 }
 
-function InnerWeld() {
+function GlyphBolt() {
+  return <path fill={INK} d="M22.6 11.6 16.8 26.4h5.6L19.6 38.6 33.2 22.2h-6.4z" />;
+}
+
+function GlyphBurst() {
+  const rays = [0, 45, 90, 135, 180, 225, 270, 315] as const;
   return (
-    <g fill="#111">
-      <path d="M16.8 16.6h14.4c.7 0 1.2.5 1.2 1.2v3.2H15.6v-3.2c0-.7.5-1.2 1.2-1.2Z" />
-      <path d="M14.8 21.8h18.4v10.6c0 .9-.8 1.6-1.6 1.6H16.4c-.9 0-1.6-.7-1.6-1.6V21.8Z" />
-      <path fill="#fff" d="M18.4 24.4h11.2v4.2H18.4z" />
-      <path d="M20.4 35.6 18.8 40h2.2l1.1-4.4h-1.7Zm6.2 0L25 40h2.2l1.1-4.4h-1.7Z" />
+    <g stroke={INK} strokeWidth="1.55" strokeLinecap="round">
+      {rays.map((deg) => {
+        const angle = (deg * Math.PI) / 180;
+        return (
+          <line
+            key={deg}
+            x1={34.6}
+            y1={23.4}
+            x2={34.6 + Math.cos(angle) * 5.1}
+            y2={23.4 + Math.sin(angle) * 5.1}
+          />
+        );
+      })}
     </g>
   );
 }
 
-function InnerAntistatic() {
-  return <path fill="#111" d="M26.2 13.4 16.6 27.6h7.4L21.8 40.6l10.2-15.4h-7.2z" />;
-}
-
-function InnerChemical() {
+function GlyphArc() {
   return (
-    <g fill="none" stroke="#111" strokeWidth="1.8" strokeLinecap="round">
-      <path d="M20.2 14.4v6.4L15.2 30.6A3 3 0 0 0 17.8 35h12.4a3 3 0 0 0 2.6-4.4L25.8 20.8v-6.4" />
-      <path d="M18.6 14.4h10.8" />
+    <g>
+      <GlyphBolt />
+      <GlyphBurst />
     </g>
   );
 }
 
-function InnerRain() {
+function GlyphChemical() {
   return (
-    <g fill="none" stroke="#111" strokeWidth="1.8" strokeLinecap="round">
-      <path d="M17.6 24.2a5.6 5.6 0 0 1 10.8-2A4 4 0 0 1 30.2 30H18a3.8 3.8 0 0 1-.4-5.8Z" />
-      <path d="M20.4 33.2v2.4M24 33.2v2.4M27.6 33.2v2.4" />
+    <g fill="none" stroke={INK} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 13.8v6.2L15.2 30.4A3.1 3.1 0 0 0 17.9 35h12.2a3.1 3.1 0 0 0 2.7-4.6L25.8 20v-6.2" />
+      <path d="M18.4 13.8h11.2" />
     </g>
   );
 }
 
-function InnerCold() {
+function GlyphRain() {
   return (
-    <g fill="none" stroke="#111" strokeWidth="1.8" strokeLinecap="round">
-      <path d="M24 14.4v19.2M18.8 18.2l5.2 4.2 5.2-4.2M18.8 30l5.2-4.2 5.2 4.2M16.2 24h15.6" />
+    <g fill="none" stroke={INK} strokeWidth="1.8" strokeLinecap="round">
+      <path d="M17.4 24.2a5.8 5.8 0 0 1 11.2-2.1A4.1 4.1 0 0 1 30.4 30H17.8a3.9 3.9 0 0 1-.4-5.8Z" />
+      <path d="M20.4 33.4v2.6M24 33.4v2.6M27.6 33.4v2.6" />
     </g>
   );
 }
 
-function ShieldGlyph({ icon }: { readonly icon: CertificationIcon }) {
+function GlyphCold() {
   return (
-    <svg viewBox="0 0 48 56" aria-hidden className="size-full">
-      <ShieldPath />
-      {icon === "flame" ? <InnerFlame /> : null}
-      {icon === "arc" ? <InnerArc /> : null}
-      {icon === "weld" ? <InnerWeld /> : null}
-      {icon === "antistatic" ? <InnerAntistatic /> : null}
-      {icon === "chemical" ? <InnerChemical /> : null}
-      {icon === "rain" ? <InnerRain /> : null}
-      {icon === "cold" ? <InnerCold /> : null}
-      {icon === "badge" || icon === "ul" ? <InnerFlame /> : null}
+    <g fill="none" stroke={INK} strokeWidth="1.8" strokeLinecap="round">
+      <path d="M24 13.6v20.8M18.6 17.6l5.4 4.4 5.4-4.4M18.6 30.4l5.4-4.4 5.4 4.4M16 24h16" />
+    </g>
+  );
+}
+
+function PlateSvg({ children }: { readonly children: ReactNode }) {
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden className="size-full">
+      <PlateFrame />
+      {children}
     </svg>
   );
 }
 
-function UlCertifiedMark({
-  compact,
-  band,
-}: {
-  readonly compact: boolean;
-  readonly band: "Certified" | "Certificate";
-}) {
+function UlPlate({ band }: { readonly band: "Certified" | "Certificate" }) {
   return (
-    <span
-      className={cn(
-        "inline-flex overflow-hidden rounded-[0.4rem] border-[1.5px] border-navy-950 bg-white shadow-[0_1px_2px_rgb(10_23_39/0.12)]",
-        compact ? "h-[3.7rem] w-[2.75rem]" : "h-[4.6rem] w-[3.2rem]",
-      )}
-    >
-      <span className="flex h-full w-full flex-col">
-        <span className="flex flex-[1.15] items-center justify-center bg-white">
-          <span
-            className={cn(
-              "flex items-center justify-center rounded-full border-[1.6px] border-navy-950 font-display font-black leading-none tracking-tight text-navy-950",
-              compact ? "size-[1.45rem] text-[0.6rem]" : "size-[1.75rem] text-[0.72rem]",
-            )}
-          >
-            UL
-          </span>
+    <span className="flex size-full flex-col overflow-hidden rounded-[0.36rem] border-[2.2px] border-navy-900 bg-white">
+      <span className="flex flex-[1.15] items-center justify-center">
+        <span className="flex size-[1.35rem] items-center justify-center rounded-full border-[1.6px] border-navy-900 font-display text-[0.55rem] font-black leading-none tracking-tight text-navy-900 sm:size-[1.45rem] sm:text-[0.6rem]">
+          UL
         </span>
-        <span className="bg-navy-950 px-0.5 py-[0.12rem] text-center font-display font-bold uppercase leading-none tracking-[0.08em] text-white">
-          <span className={cn(compact ? "text-[0.4rem]" : "text-[0.45rem]", band === "Certificate" && "tracking-[0.01em]")}>
-            {band}
-          </span>
-        </span>
-        <span className="flex flex-[0.85] flex-col items-center justify-center bg-navy-950 px-0.5 pb-0.5">
-          <span
-            className={cn(
-              "font-display font-semibold uppercase leading-none tracking-[0.14em] text-white/85",
-              compact ? "text-[0.34rem]" : "text-[0.4rem]",
-            )}
-          >
-            Safety US
-          </span>
+      </span>
+      <span className="bg-navy-900 px-0.5 py-[0.14rem] text-center font-display text-[0.38rem] font-bold uppercase leading-none tracking-[0.08em] text-white">
+        {band}
+      </span>
+      <span className="flex flex-1 items-center justify-center bg-navy-900 px-0.5 pb-0.5">
+        <span className="font-display text-[0.32rem] font-semibold uppercase leading-none tracking-[0.12em] text-white/90">
+          Safety US
         </span>
       </span>
     </span>
   );
 }
 
-function NfpaFlameMark({
-  compact,
-  line2,
-}: {
-  readonly compact: boolean;
-  readonly line2: string;
-}) {
-  return (
-    <span className="inline-flex flex-col items-center">
-      <span className={cn(compact ? "size-[2.85rem]" : "size-[3.5rem]")}>
-        <svg viewBox="0 0 48 48" aria-hidden className="size-full">
-          <rect x="2.4" y="2.4" width="43.2" height="43.2" rx="5.2" fill="#fff" stroke="#111" strokeWidth="2.8" />
-          <g transform="translate(0 -1)">
-            <path
-              fill="var(--color-cert-flame)"
-              d="M24 7c4.5 6 11 10.5 10.2 18-.4 3.4-3.6 5-6.4 3.2 3.6 4.4 5.8 9 1.6 14-1.8 2.2-4.2 2.8-5.4 2.6-1.2.2-3.6-.4-5.4-2.6-4.2-5-2-9.6 1.6-14-2.8 1.8-6 .2-6.4-3.2C13 17.5 19.5 13 24 7Z"
-            />
-          </g>
-        </svg>
-      </span>
-      <MarkCaption kicker="NFPA" title={line2} compact={compact} />
-    </span>
-  );
-}
-
-function FramedMark({
+function CertMark({
   compact,
   kicker,
   title,
-  variant,
+  children,
 }: {
   readonly compact: boolean;
   readonly kicker: string | null;
   readonly title: string;
-  readonly variant: "arc" | "flame";
+  readonly children: ReactNode;
 }) {
   return (
-    <span className="inline-flex flex-col items-center">
-      <span className={cn(compact ? "size-[2.85rem]" : "size-[3.5rem]")}>
-        <svg viewBox="0 0 48 48" aria-hidden className="size-full">
-          <rect x="2.4" y="2.4" width="43.2" height="43.2" rx="5.2" fill="#fff" stroke="#111" strokeWidth="2.8" />
-          <g transform="translate(0 -2)">{variant === "flame" ? <InnerFlame fill="var(--color-cert-flame)" /> : <InnerArc />}</g>
-        </svg>
-      </span>
+    <span className={cn("inline-flex flex-col items-center", compact ? "w-[3.35rem]" : "w-[4rem]")}>
+      <span className={cn("shrink-0", plateSize(compact))}>{children}</span>
       <MarkCaption kicker={kicker} title={title} compact={compact} />
     </span>
   );
 }
 
-function ShieldMark({
-  compact,
-  icon,
-  kicker,
-  title,
-}: {
-  readonly compact: boolean;
-  readonly icon: CertificationIcon;
-  readonly kicker: string | null;
-  readonly title: string;
-}) {
-  return (
-    <span className="inline-flex flex-col items-center">
-      <span className={cn(compact ? "h-[3.05rem] w-[2.6rem]" : "h-[3.75rem] w-[3.2rem]")}>
-        <ShieldGlyph icon={icon} />
-      </span>
-      <MarkCaption kicker={kicker} title={title} compact={compact} />
-    </span>
-  );
+function glyphForIcon(icon: CertificationIcon) {
+  switch (icon) {
+    case "flame":
+      return <GlyphIsoFlame />;
+    case "arc":
+      return <GlyphArc />;
+    case "weld":
+      return <GlyphWeld />;
+    case "antistatic":
+      return <GlyphBolt />;
+    case "chemical":
+      return <GlyphChemical />;
+    case "rain":
+      return <GlyphRain />;
+    case "cold":
+      return <GlyphCold />;
+    default:
+      return <GlyphIsoFlame />;
+  }
 }
 
 function BadgeFace({
@@ -260,19 +242,53 @@ function BadgeFace({
   const { kicker, title } = splitName(certification.name);
   const id = certification.id;
 
-  if (id === "ul") return <UlCertifiedMark compact={compact} band="Certified" />;
-  if (id === "ul-certificate") return <UlCertifiedMark compact={compact} band="Certificate" />;
-  if (id === "nfpa-2112") return <NfpaFlameMark compact={compact} line2="2112" />;
-  if (id === "nfpa-70e") return <NfpaFlameMark compact={compact} line2="70E" />;
+  if (id === "ul" || icon === "ul") {
+    return (
+      <CertMark compact={compact} kicker="UL" title="Certified">
+        <UlPlate band="Certified" />
+      </CertMark>
+    );
+  }
+  if (id === "ul-certificate") {
+    return (
+      <CertMark compact={compact} kicker="UL" title="Certificate">
+        <UlPlate band="Certificate" />
+      </CertMark>
+    );
+  }
+  if (id === "nfpa-2112" || id === "nfpa-70e") {
+    return (
+      <CertMark compact={compact} kicker="NFPA" title={id === "nfpa-2112" ? "2112" : "70E"}>
+        <PlateSvg>
+          <GlyphFlame fill={FLAME} />
+        </PlateSvg>
+      </CertMark>
+    );
+  }
   if (id === "astm-f1506") {
-    return <FramedMark compact={compact} kicker="ASTM" title="F1506" variant="arc" />;
+    return (
+      <CertMark compact={compact} kicker="ASTM" title="F1506">
+        <PlateSvg>
+          <GlyphArc />
+        </PlateSvg>
+      </CertMark>
+    );
   }
   if (id === "cat-2") {
-    return <FramedMark compact={compact} kicker="CAT" title="2" variant="arc" />;
+    return (
+      <CertMark compact={compact} kicker="CAT" title="2">
+        <PlateSvg>
+          <GlyphArc />
+        </PlateSvg>
+      </CertMark>
+    );
   }
-  if (icon === "ul") return <UlCertifiedMark compact={compact} band="Certified" />;
 
-  return <ShieldMark compact={compact} icon={icon} kicker={kicker} title={title} />;
+  return (
+    <CertMark compact={compact} kicker={kicker} title={title}>
+      <PlateSvg>{glyphForIcon(icon)}</PlateSvg>
+    </CertMark>
+  );
 }
 
 export function CertificationBadge({
@@ -308,7 +324,7 @@ export function CertificationRow({
   if (certifications.length === 0) return null;
 
   return (
-    <ul className={cn("flex flex-wrap items-end", compact ? "gap-3" : "gap-4", className)}>
+    <ul className={cn("flex flex-wrap items-start", compact ? "gap-x-3 gap-y-3.5" : "gap-x-4 gap-y-4", className)}>
       {certifications.map((certification) => (
         <li key={certification.id}>
           <CertificationBadge certification={certification} locale={locale} compact={compact} />
