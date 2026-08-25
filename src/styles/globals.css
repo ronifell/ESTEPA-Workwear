@@ -80,6 +80,9 @@
   --color-danger: #d32f2f;
   --color-danger-soft: #fbeae8;
 
+  /* NFPA-style flame on certification marks. */
+  --color-cert-flame: #e31c23;
+
   /* Shape and depth ------------------------------------------------------ */
   --radius-xs: 2px;
   --radius-sm: 3px;

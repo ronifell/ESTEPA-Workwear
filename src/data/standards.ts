@@ -24,10 +24,10 @@ export const standardIds = [
 export type StandardId = (typeof standardIds)[number];
 
 export const heroStandardIds = [
-  "nfpa-2112",
   "ul",
-  "astm-f1506",
-  "ul-certificate",
+  "nfpa-2112",
+  "en-11612",
+  "en-61482",
   "nfpa-70e",
 ] as const satisfies readonly StandardId[];
 
