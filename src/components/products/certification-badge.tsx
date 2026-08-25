@@ -174,7 +174,7 @@ function StampMark({
 }
 
 function stampVariant(id: string, icon: CertificationIcon): "ul" | "nfpa" | "astm" | "cat" {
-  if (icon === "ul" || id === "ul") return "ul";
+  if (icon === "ul" || id === "ul" || id === "ul-certificate") return "ul";
   if (id === "cat-2") return "cat";
   if (id.startsWith("astm")) return "astm";
   return "nfpa";

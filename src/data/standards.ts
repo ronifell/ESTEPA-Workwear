@@ -14,6 +14,7 @@ export const standardIds = [
   "en-1149",
   "en-61482",
   "ul",
+  "ul-certificate",
   "nfpa-2112",
   "astm-f1506",
   "nfpa-70e",
@@ -22,10 +23,26 @@ export const standardIds = [
 
 export type StandardId = (typeof standardIds)[number];
 
-export const heroStandardIds = ["nfpa-2112", "ul", "astm-f1506"] as const satisfies readonly StandardId[];
+export const heroStandardIds = [
+  "nfpa-2112",
+  "ul",
+  "astm-f1506",
+  "ul-certificate",
+  "nfpa-70e",
+] as const satisfies readonly StandardId[];
 
 /** Standards offered as catalogue filters. */
-export const filterableStandardIds = standardIds;
+export const filterableStandardIds = [
+  "en-11611",
+  "en-11612",
+  "en-1149",
+  "en-61482",
+  "ul",
+  "nfpa-2112",
+  "astm-f1506",
+  "nfpa-70e",
+  "cat-2",
+] as const satisfies readonly StandardId[];
 
 const catalog = {
   "en-11611": {
@@ -71,6 +88,15 @@ const catalog = {
     description: {
       es: "Certificación independiente de Underwriters Laboratories que valida el cumplimiento de las normas declaradas.",
       en: "Independent Underwriters Laboratories certification that validates declared standard compliance.",
+    } satisfies LocalizedText,
+  },
+  "ul-certificate": {
+    id: "ul-certificate",
+    name: "UL Certificate",
+    icon: "badge",
+    description: {
+      es: "Certificado UL que acredita el cumplimiento de las normas de indumentaria FR declaradas.",
+      en: "UL certificate that attests compliance with the declared FR clothing standards.",
     } satisfies LocalizedText,
   },
   "nfpa-2112": {
