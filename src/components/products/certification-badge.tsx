@@ -7,8 +7,6 @@ import { cn } from "@/lib/utils";
 import type { Certification, CertificationIcon, Locale } from "@/types";
 
 const INK = "#0a1727";
-const FLAME_RED = "#e31c23";
-const FLAME_LIT = "#ff5c4a";
 
 function splitName(name: string): { kicker: string | null; title: string } {
   const iso = name.match(/^(EN ISO)\s+(.+)$/i);
@@ -87,23 +85,30 @@ function MarkStack({
   );
 }
 
-/** Three-tongue NFPA-style flame with a lit highlight. */
+/** NFPA 2112 / 70E mark: three-tongue red flame, not a single teardrop. */
 function NfpaFlameGlyph() {
   return (
     <g>
       <path
-        fill={FLAME_RED}
-        d="M32 11.2c3.4 6.2 12.2 11.2 11.2 20.4-.4 3.6-3.6 5.4-6.6 3.4 4.4 5.6 7.4 12.2 2 19.2-2.2 2.8-5.2 3.8-6.6 3.6-1.4.2-4.4-.8-6.6-3.6-5.4-7-2.4-13.6 2-19.2-3 2-6.2.2-6.6-3.4C19.8 22.4 28.6 17.4 32 11.2Z"
+        fill="#e30613"
+        d="M30.4 49.2C20.6 43.2 14.2 33.4 17.8 23.2C19.2 19.4 24 18.6 26.4 22.4C22.8 28.6 24.6 38.4 30.4 45.6Z"
       />
       <path
-        fill={FLAME_LIT}
-        d="M32 16.4c-2.2 4.8-6.8 8.2-6.4 12.8.2 1.8 1.6 2.6 3 1.8-1.6 3.4-2.2 6.6-.2 10.2 1.2 2.2 3.2 3 3.6 2.8V16.4Z"
-        opacity="0.95"
+        fill="#e30613"
+        d="M33.6 49.2C43.4 42.6 49.6 32.2 46.2 21.6C44.8 17.8 40 16.8 37.6 20.8C41.2 27.2 39.4 37.4 33.6 45.6Z"
+      />
+      <path
+        fill="#e30613"
+        d="M27.2 50.4C25.4 38.2 27.2 24.6 32 12.4C36.8 24.6 38.6 38.2 36.8 50.4C35.4 54.8 32 56.8 32 56.8C32 56.8 28.6 54.8 27.2 50.4Z"
+      />
+      <path
+        fill="#ff4d3c"
+        d="M31.2 20.6C28.6 28.4 28.4 37.2 31 46C29.2 37.6 29.2 28.8 31.2 20.6Z"
       />
       <path
         fill="#fff"
-        opacity="0.38"
-        d="M31.2 18.6c-1.2 3.2-3.6 5.6-3.4 8.4.4 1.2 1.4 1.4 2 .8-1 2.2-1.2 4.4.2 6.6.4-.8.8-2.2 1.2-4.2.6-2.8 0-7.2 0-11.6Z"
+        opacity="0.4"
+        d="M31.6 17.8C30 24.2 29.6 31.4 30.8 38.2C30.4 31.2 30.6 24.4 31.6 17.8Z"
       />
     </g>
   );
@@ -269,7 +274,7 @@ function NfpaPlate({ compact }: { readonly compact: boolean }) {
     <Graphic className={cn(compact ? "size-[2.85rem]" : "size-[3.5rem]")}>
       <svg viewBox="0 0 64 64" aria-hidden className="size-full">
         <SquareFrame />
-        <g transform="translate(0 1)">
+        <g transform="translate(32 34) scale(1.08) translate(-32 -34)">
           <NfpaFlameGlyph />
         </g>
       </svg>
