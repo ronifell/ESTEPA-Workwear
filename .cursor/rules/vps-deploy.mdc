@@ -1,0 +1,22 @@
+---
+description: Always commit, push, and deploy storefront changes to the VPS without asking.
+alwaysApply: true
+---
+
+# VPS deploy
+
+After finishing storefront or site work, **commit, push, and deploy to the VPS without asking**. Do not wait for a separate “please deploy” message.
+
+## Sequence
+
+1. Commit only the files that belong to the change (never `AGENTS.md`, `CLAUDE.md`, or `.env`).
+2. `git push origin HEAD`
+3. On the VPS (`root@195.200.14.123`, app at `/var/www/estepa-workwear`):
+
+```
+cd /var/www/estepa-workwear && git pull --ff-only origin main && npm run build && pm2 restart estepa --update-env
+```
+
+SSH from this Windows machine uses Plink (`C:\Users\ASAMI\scoop\apps\putty\current\plink.exe`) with host key `SHA256:ydRgUeosMCpfQE2duw0vpAuPfCvzRhy5b3EuJbyzBx0`. Keep PM2 on `ecosystem.config.cjs` (`-H localhost` and `NODE_OPTIONS=--dns-result-order=ipv4first`).
+
+Do not print the SSH password in user-facing replies.
