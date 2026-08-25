@@ -23,22 +23,36 @@ export function CertStrip({
   return (
     <div
       className={cn(
-        "border px-4 py-4 sm:px-5",
-        tone === "inverse"
-          ? "border-white/20 bg-white/5"
-          : "border-navy-900/25 bg-navy-50",
+        "overflow-hidden border",
+        tone === "inverse" ? "border-white/25 bg-white/5" : "border-navy-900 bg-white",
         className,
       )}
     >
-      <p
+      <div
         className={cn(
-          "mb-3 font-display text-[0.625rem] font-bold uppercase tracking-[0.16em]",
-          tone === "inverse" ? "text-bronze-300" : "text-navy-800",
+          "flex items-center gap-2.5 border-b px-4 py-2",
+          tone === "inverse" ? "border-white/20" : "border-navy-900 bg-navy-900",
         )}
       >
-        {dictionary.trust.stripLabel}
-      </p>
-      <CertificationRow certifications={certifications} locale={locale} compact={compact} />
+        <span aria-hidden className="hazard-stripes h-2 w-8 shrink-0 opacity-90" />
+        <p
+          className={cn(
+            "font-display text-[0.625rem] font-bold uppercase tracking-[0.16em]",
+            tone === "inverse" ? "text-bronze-300" : "text-white",
+          )}
+        >
+          {dictionary.trust.stripLabel}
+        </p>
+      </div>
+
+      <div className="overflow-x-auto px-4 py-5 sm:px-5">
+        <CertificationRow
+          certifications={certifications}
+          locale={locale}
+          compact={compact}
+          className={cn(certifications.length <= 5 && "justify-between sm:flex-nowrap")}
+        />
+      </div>
     </div>
   );
 }

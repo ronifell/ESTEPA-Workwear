@@ -73,7 +73,7 @@ export function Hero({ locale }: { readonly locale: Locale }) {
               </h2>
 
               <div className="animate-rise mt-8 [animation-delay:240ms]">
-                <CertStrip locale={locale} compact />
+                <CertStrip locale={locale} />
               </div>
 
               <div className="animate-rise mt-8 flex flex-col gap-3 sm:flex-row [animation-delay:280ms]">
