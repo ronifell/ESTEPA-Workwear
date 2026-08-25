@@ -85,30 +85,35 @@ function MarkStack({
   );
 }
 
-/** NFPA 2112 / 70E mark: three-tongue red flame, not a single teardrop. */
+/** Approved NFPA mark: five-tongue red flame. */
 function NfpaFlameGlyph() {
   return (
     <g>
       <path
         fill="#e30613"
-        d="M30.4 49.2C20.6 43.2 14.2 33.4 17.8 23.2C19.2 19.4 24 18.6 26.4 22.4C22.8 28.6 24.6 38.4 30.4 45.6Z"
+        d="M24.2 46.8C16.4 41.2 12.2 32.4 16.6 23.8C18.2 20.4 22.8 19.4 25.2 22.8C21.6 28.6 21.8 37.2 24.2 43.8Z"
       />
       <path
         fill="#e30613"
-        d="M33.6 49.2C43.4 42.6 49.6 32.2 46.2 21.6C44.8 17.8 40 16.8 37.6 20.8C41.2 27.2 39.4 37.4 33.6 45.6Z"
+        d="M39.8 46.8C47.6 40.8 51.6 31.6 47.4 22.6C45.8 19.2 41.2 18.2 38.8 21.8C42.4 27.8 42.2 36.8 39.8 43.8Z"
       />
       <path
         fill="#e30613"
-        d="M27.2 50.4C25.4 38.2 27.2 24.6 32 12.4C36.8 24.6 38.6 38.2 36.8 50.4C35.4 54.8 32 56.8 32 56.8C32 56.8 28.6 54.8 27.2 50.4Z"
+        d="M22.2 32.4C18.8 27.2 20.4 21.6 25.6 18.2C23.4 24.2 24.2 28.8 27.4 33.6C25.2 33.8 23.4 33.6 22.2 32.4Z"
       />
       <path
-        fill="#ff4d3c"
-        d="M31.2 20.6C28.6 28.4 28.4 37.2 31 46C29.2 37.6 29.2 28.8 31.2 20.6Z"
+        fill="#e30613"
+        d="M41.8 31.8C45.2 26.4 43.6 20.6 38.4 17.6C40.6 23.8 40 28.6 36.8 33.4C38.8 33.4 40.8 33 41.8 31.8Z"
       />
+      <path
+        fill="#e30613"
+        d="M27.6 51.2C25.4 39.2 27.2 24.8 32 12.2C36.8 24.8 38.6 39.2 36.4 51.2C35.2 55.4 32 57.2 32 57.2C32 57.2 28.8 55.4 27.6 51.2Z"
+      />
+      <path fill="#ff4d3c" d="M31.2 20.4C28.6 28.6 28.4 38 31 47.2C29.2 38.4 29.2 29 31.2 20.4Z" />
       <path
         fill="#fff"
-        opacity="0.4"
-        d="M31.6 17.8C30 24.2 29.6 31.4 30.8 38.2C30.4 31.2 30.6 24.4 31.6 17.8Z"
+        opacity="0.38"
+        d="M31.7 17.6C30.2 24.4 29.8 32.2 31 39.4C30.6 32 30.8 24.6 31.7 17.6Z"
       />
     </g>
   );
@@ -120,39 +125,32 @@ function IsoFlameGlyph() {
     <g fill={INK}>
       <path
         fillRule="evenodd"
-        d="M32 13.2c3.8 5.8 11.6 10.2 10.8 19.2-.3 3.2-3.2 4.8-5.8 3.2 3.6 4.8 5.8 10.4 1.4 16.2-1.8 2.4-4.4 3.4-6.4 3.2-2 .2-4.6-.8-6.4-3.2-4.4-5.8-2.2-11.4 1.4-16.2-2.6 1.6-5.5 0-5.8-3.2C20.4 23.4 28.2 19 32 13.2Zm0 11.4c1.8 2.8 4.6 4.8 4.4 8.2-.1 1.6-1.4 2.4-2.6 1.8 1.4 2.2 2.2 4.6.6 7.2-.8 1.2-2 1.8-2.4 1.7-.4.1-1.6-.5-2.4-1.7-1.6-2.6-.8-5 .6-7.2-1.2.6-2.5-.2-2.6-1.8-.2-3.4 2.6-5.4 4.4-8.2Z"
+        d="M32 18.2c3.6 5.4 11.2 9.6 10.4 18.2-.3 3-3.1 4.5-5.6 3 3.4 4.6 5.6 10 1.4 15.6-1.7 2.3-4.2 3.2-6.2 3-2 .2-4.5-.7-6.2-3-4.2-5.6-2-11 1.4-15.6-2.5 1.5-5.3 0-5.6-3C20.8 27.8 28.4 23.6 32 18.2Zm0 10.6c1.7 2.6 4.4 4.5 4.2 7.7-.1 1.5-1.3 2.2-2.5 1.7 1.3 2.1 2.1 4.4.6 6.8-.8 1.2-1.9 1.7-2.3 1.6-.4.1-1.5-.4-2.3-1.6-1.5-2.4-.7-4.7.6-6.8-1.2.5-2.4-.2-2.5-1.7-.2-3.2 2.5-5.1 4.2-7.7Z"
       />
-      <rect x="22.5" y="54.2" width="19" height="2.2" rx="0.6" />
+      <rect x="22.5" y="57.2" width="19" height="2.1" rx="0.5" />
     </g>
   );
 }
 
 function BoltGlyph() {
-  return (
-    <path
-      fill={INK}
-      d="M27.2 12.4 18.6 32.8h7.4L21.4 54.2l4.2.2 2.8 5.2-1.6-5.4h3.8L43.2 28.6H34.6L39.8 12.4Z"
-    />
-  );
-}
-
-function BurstGlyph({ cx, cy }: { readonly cx: number; readonly cy: number }) {
-  const radii = [8.4, 3.2, 7.6, 2.7, 9.2, 3.4, 6.9, 2.5, 8.8, 3.1, 7.2, 2.8, 8.1, 3.3, 6.6, 2.6];
-  const points = radii
-    .map((radius, index) => {
-      const angle = (Math.PI * 2 * index) / radii.length - Math.PI / 2;
-      return `${cx + radius * Math.cos(angle)},${cy + radius * Math.sin(angle)}`;
-    })
-    .join(" ");
-
-  return <polygon fill={INK} points={points} />;
+  return <path fill={INK} d="M29.2 20.4 19.6 40.8h7.2L23.4 58.6l3.8.2 2.6 4.6-1.4-4.8h3.6L44.8 36.2h-8.4L41.2 20.4Z" />;
 }
 
 function ArcGlyph() {
   return (
-    <g transform="translate(-4 0) scale(0.92)">
-      <BoltGlyph />
-      <BurstGlyph cx={48.5} cy={30} />
+    <g fill={INK}>
+      <path d="M25.6 21.2 16.8 39.8h6.6L20.2 56.4l3.4.2 2.4 4.4-1.4-4.6h3.4L41 34.6h-7.6L37.6 21.2Z" />
+      <polygon points="48.2,24.6 49.6,29.4 54.6,29.8 50.8,33.2 52.2,38.2 48.2,35.4 44.2,38.2 45.6,33.2 41.8,29.8 46.8,29.4" />
+      <polygon points="50.4,31.2 51.2,34.2 54.4,34.6 52,36.8 52.8,40 50.4,38.2 48,40 48.8,36.8 46.4,34.6 49.6,34.2" />
+    </g>
+  );
+}
+
+function SquareArcGlyph() {
+  return (
+    <g fill={INK}>
+      <path d="M24.8 14.8 16.2 33.6h6.8L19.6 51.2l3.6.2 2.6 4.8-1.5-5h3.6L41.6 29.8h-7.8L38.2 14.8Z" />
+      <polygon points="47.6,20.8 49.2,25.8 54.4,26.2 50.6,29.8 52.2,35 47.6,32 43,35 44.6,29.8 40.8,26.2 46,25.8" />
     </g>
   );
 }
@@ -160,11 +158,10 @@ function ArcGlyph() {
 function WeldGlyph() {
   return (
     <g fill={INK}>
-      <path d="M20.4 16.2h23.2c1.2 0 2.2.9 2.2 2.1v4.6H18.2v-4.6c0-1.2 1-2.1 2.2-2.1Z" />
-      <path d="M17.2 23.8h29.6v16.4c0 1.5-1.2 2.7-2.7 2.7H19.9c-1.5 0-2.7-1.2-2.7-2.7V23.8Z" />
-      <path fill="#fff" d="M23 27.6h18v7.2H23z" />
-      <path d="M22.2 27.6h1.4v7.2h-1.4z" opacity="0.35" />
-      <path d="M26.8 45.2 24.2 52.4h3.4l1.8-7.2h-2.6Zm10.2 0-2.6 7.2h3.4l1.8-7.2h-2.6Z" />
+      <path d="M21 20.8h22c1.2 0 2.2.8 2.2 2v3.4H18.8v-3.4c0-1.2 1-2 2.2-2Z" />
+      <path d="M18.4 27h27.2v15.6c0 1.6-1.3 2.8-2.8 2.8H21.2c-1.5 0-2.8-1.2-2.8-2.8V27Z" />
+      <rect x="23.2" y="30.4" width="17.6" height="7.2" fill="#fff" />
+      <path d="M24.4 47.2 22.2 54.2h3l1.6-7h-2.4zm13.4 0-2.2 7h3l1.6-7h-2.4z" />
     </g>
   );
 }
@@ -198,31 +195,19 @@ function ColdGlyph() {
 
 function SquareFrame() {
   return (
-    <>
-      <rect x="4.2" y="4.2" width="55.6" height="55.6" rx="8" fill="#fff" stroke={INK} strokeWidth="4.4" />
-      <rect x="8.2" y="8.2" width="47.6" height="47.6" rx="5.2" fill="none" stroke="#fff" strokeWidth="1.1" opacity="0.55" />
-    </>
+    <rect x="4.4" y="4.4" width="55.2" height="55.2" rx="8" fill="#fff" stroke={INK} strokeWidth="4.2" />
   );
 }
 
 function ShieldOutline() {
   return (
-    <>
-      <path
-        d="M32 3.6 58.4 13.2v24.2c0 16.4-14.6 28.8-26.4 33.2C20.2 66.2 5.6 53.8 5.6 37.4V13.2L32 3.6Z"
-        fill="#fff"
-        stroke={INK}
-        strokeWidth="3.6"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M32 8.2 53.6 16v20.4c0 13.6-12 24-21.6 27.8C22.4 60.4 10.4 50 10.4 36.4V16L32 8.2Z"
-        fill="none"
-        stroke="#fff"
-        strokeWidth="1.15"
-        opacity="0.5"
-      />
-    </>
+    <path
+      d="M32 4.2 57.6 13.4v23.6c0 15.8-14.2 27.8-25.6 32.2C20.6 64.8 6.4 52.8 6.4 37V13.4L32 4.2Z"
+      fill="#fff"
+      stroke={INK}
+      strokeWidth="3.4"
+      strokeLinejoin="round"
+    />
   );
 }
 
@@ -244,7 +229,7 @@ function UlCertifiedMark({
         <span className="flex flex-[1.15] items-center justify-center bg-white">
           <span
             className={cn(
-              "flex items-center justify-center rounded-full bg-navy-950 font-display font-black leading-none tracking-tight text-white ring-[1.5px] ring-navy-950 ring-offset-1 ring-offset-white",
+              "flex items-center justify-center rounded-full bg-navy-950 font-display font-black leading-none tracking-tight text-white",
               compact ? "size-[1.5rem] text-[0.58rem]" : "size-[1.85rem] text-[0.74rem]",
             )}
           >
@@ -274,7 +259,7 @@ function NfpaPlate({ compact }: { readonly compact: boolean }) {
     <Graphic className={cn(compact ? "size-[2.85rem]" : "size-[3.5rem]")}>
       <svg viewBox="0 0 64 64" aria-hidden className="size-full">
         <SquareFrame />
-        <g transform="translate(32 34) scale(1.08) translate(-32 -34)">
+        <g transform="translate(32 33) scale(1.06) translate(-32 -33)">
           <NfpaFlameGlyph />
         </g>
       </svg>
@@ -308,9 +293,9 @@ function ShieldPlate({
 }) {
   return (
     <Graphic className={cn(compact ? "h-[3.2rem] w-[2.65rem]" : "h-[3.9rem] w-[3.2rem]")}>
-      <svg viewBox="0 0 64 76" aria-hidden className="size-full">
+      <svg viewBox="0 0 64 78" aria-hidden className="size-full">
         <ShieldOutline />
-        <g transform="translate(0 2)">{children}</g>
+        {children}
       </svg>
     </Graphic>
   );
@@ -325,11 +310,7 @@ function glyphForIcon(icon: CertificationIcon) {
     case "weld":
       return <WeldGlyph />;
     case "antistatic":
-      return (
-        <g transform="translate(2 4) scale(0.92)">
-          <BoltGlyph />
-        </g>
-      );
+      return <BoltGlyph />;
     case "chemical":
       return <ChemicalGlyph />;
     case "rain":
@@ -377,9 +358,7 @@ function BadgeFace({
     return (
       <MarkStack compact={compact} kicker="ASTM" title="F1506">
         <SquarePlate compact={compact}>
-          <g transform="translate(2 2) scale(0.94)">
-            <ArcGlyph />
-          </g>
+          <SquareArcGlyph />
         </SquarePlate>
       </MarkStack>
     );
@@ -388,9 +367,7 @@ function BadgeFace({
     return (
       <MarkStack compact={compact} kicker="CAT" title="2">
         <SquarePlate compact={compact}>
-          <g transform="translate(2 2) scale(0.94)">
-            <ArcGlyph />
-          </g>
+          <SquareArcGlyph />
         </SquarePlate>
       </MarkStack>
     );
