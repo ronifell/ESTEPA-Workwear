@@ -136,7 +136,7 @@ export async function SectorPage({
                   route="protection"
                   locale={locale}
                   hash={id}
-                  className="group flex h-full flex-col border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong hover:shadow-card lg:p-7"
+                  className="group flex h-full flex-col rounded-3xl border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong hover:shadow-card lg:p-7"
                 >
                   <ProtectionIcon
                     id={id}
