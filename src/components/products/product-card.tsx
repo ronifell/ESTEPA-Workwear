@@ -83,7 +83,12 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
               <p className="mb-2 font-display text-[0.5625rem] font-semibold uppercase tracking-[0.14em] text-text-subtle">
                 {dictionary.product.overlayCerts}
               </p>
-              <CertificationRow certifications={certifications} locale={locale} compact />
+              <CertificationRow
+                certifications={certifications}
+                locale={locale}
+                compact
+                columns={3}
+              />
             </div>
           ) : null}
 

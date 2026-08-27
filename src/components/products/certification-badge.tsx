@@ -29,7 +29,7 @@ function MarkCaption({
   readonly compact: boolean;
 }) {
   return (
-    <span className="mt-2 flex min-h-[1.85rem] flex-col items-center justify-start text-center leading-[1.05]">
+    <span className="mt-2 flex min-h-[1.85rem] w-full min-w-0 flex-col items-center justify-start text-center leading-[1.05]">
       {kicker ? (
         <span
           className={cn(
@@ -66,7 +66,12 @@ function MarkStack({
   readonly children: ReactNode;
 }) {
   return (
-    <span className={cn("inline-flex flex-col items-center", compact ? "w-[3.6rem]" : "w-[4.4rem]")}>
+    <span
+      className={cn(
+        "inline-flex min-w-0 max-w-full flex-col items-center",
+        compact ? "w-[3.6rem]" : "w-[4.4rem]",
+      )}
+    >
       <span className={cn("flex items-end justify-center", compact ? "h-12" : "h-16")}>{children}</span>
       {caption ? <MarkCaption kicker={kicker} title={title} compact={compact} /> : null}
     </span>
@@ -551,7 +556,12 @@ export function CertificationBadge({
   const description = resolved.description?.[locale] ?? resolved.name;
 
   return (
-    <InfoTooltip label={standardAriaLabel(resolved, locale)} title={resolved.name} content={description}>
+    <InfoTooltip
+      label={standardAriaLabel(resolved, locale)}
+      title={resolved.name}
+      content={description}
+      className="max-w-full"
+    >
       <BadgeFace certification={resolved} compact={compact} />
     </InfoTooltip>
   );
@@ -561,25 +571,30 @@ export function CertificationRow({
   certifications,
   locale,
   compact = false,
+  columns,
   className,
 }: {
   readonly certifications: readonly Certification[];
   readonly locale: Locale;
   readonly compact?: boolean;
+  readonly columns?: 3;
   readonly className?: string;
 }) {
   if (certifications.length === 0) return null;
 
+  const threeAcross = columns === 3;
+
   return (
     <ul
       className={cn(
-        "flex flex-wrap items-start",
-        compact ? "gap-x-3.5 gap-y-4" : "gap-x-5 gap-y-5",
+        threeAcross
+          ? "grid w-full grid-cols-3 justify-items-center gap-x-1 gap-y-3"
+          : cn("flex flex-wrap items-start", compact ? "gap-x-3.5 gap-y-4" : "gap-x-5 gap-y-5"),
         className,
       )}
     >
       {certifications.map((certification) => (
-        <li key={certification.id}>
+        <li key={certification.id} className={threeAcross ? "flex min-w-0 w-full justify-center" : undefined}>
           <CertificationBadge certification={certification} locale={locale} compact={compact} />
         </li>
       ))}
