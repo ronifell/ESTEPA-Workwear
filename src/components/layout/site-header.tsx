@@ -17,7 +17,7 @@ import { getPath } from "@/i18n/routes";
 import { cn } from "@/lib/utils";
 
 const linkStyles =
-  "relative font-display text-[0.8125rem] font-semibold uppercase tracking-[0.09em] text-text-muted transition-colors hover:text-primary";
+  "relative shrink-0 whitespace-nowrap font-display text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-text-muted transition-colors hover:text-primary xl:text-[0.8125rem] xl:tracking-[0.09em]";
 
 const activeUnderline =
   "after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:bg-accent";
@@ -86,12 +86,12 @@ export function SiteHeader() {
         )}
       >
         <div className="container-page">
-          <div className="flex h-16 items-center justify-between gap-4 lg:h-20">
-            <Logo locale={locale} priority />
+          <div className="flex h-16 items-center gap-5 lg:h-20 lg:gap-8">
+            <Logo locale={locale} priority className="shrink-0" />
 
             <nav
               aria-label={dictionary.nav.mainNavigation}
-              className="hidden items-center gap-7 lg:flex xl:gap-9"
+              className="hidden min-w-0 flex-1 items-center justify-end gap-4 lg:flex xl:gap-6 2xl:gap-8"
             >
               <LocalizedLink
                 route="home"
@@ -168,12 +168,12 @@ export function SiteHeader() {
                     isActive(getPath(item.route, locale)) && `text-primary ${activeUnderline}`,
                   )}
                 >
-                  {dictionary.nav[item.labelKey]}
+                  {item.route === "faq" ? dictionary.nav.faqShort : dictionary.nav[item.labelKey]}
                 </LocalizedLink>
               ))}
             </nav>
 
-            <div className="flex items-center gap-1 sm:gap-3">
+            <div className="flex shrink-0 items-center gap-1 sm:gap-3">
               <LanguageSwitcher className="hidden sm:flex" />
               <span aria-hidden className="hidden h-4 w-px bg-border-strong sm:block" />
               <CartButton />

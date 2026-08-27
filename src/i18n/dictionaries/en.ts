@@ -42,6 +42,7 @@ export const en: Dictionary = {
     products: "Products",
     protection: "Certifications",
     faq: "FAQ",
+    faqShort: "FAQ",
     about: "About",
     catalog: "Catalogue",
     contact: "Contact",

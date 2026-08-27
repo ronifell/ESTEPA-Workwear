@@ -44,6 +44,7 @@ export const es = {
     products: "Productos",
     protection: "Certificaciones",
     faq: "Preguntas frecuentes",
+    faqShort: "Preguntas",
     about: "Nosotros",
     catalog: "Catálogo",
     contact: "Contacto",

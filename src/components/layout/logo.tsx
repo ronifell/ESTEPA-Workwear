@@ -47,7 +47,7 @@ export function Logo({
       <span
         aria-hidden
         className={cn(
-          "hidden font-display text-[0.625rem] font-semibold uppercase leading-none tracking-[0.32em] sm:block",
+          "hidden font-display text-[0.625rem] font-semibold uppercase leading-none tracking-[0.18em] sm:block",
           inverse ? "text-text-inverse-muted" : "text-text-muted",
         )}
       >
