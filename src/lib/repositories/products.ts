@@ -146,7 +146,6 @@ export async function countProductsBySector(): Promise<Record<SectorId, number>>
 export async function countProductsByProtection(): Promise<Record<ProtectionId, number>> {
   const counts: Record<ProtectionId, number> = {
     chemical: 0,
-    cut: 0,
     electrical: 0,
     "flash-fire": 0,
     "high-visibility": 0,

@@ -10,7 +10,6 @@ export type SectorId = "mining" | "oil-gas" | "industry";
 
 export type ProtectionId =
   | "chemical"
-  | "cut"
   | "electrical"
   | "flash-fire"
   | "high-visibility";

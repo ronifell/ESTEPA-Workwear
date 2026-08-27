@@ -2,7 +2,8 @@ import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { products as seedProducts } from "@/data/products";
-import type { Product } from "@/types";
+import { protectionIds } from "@/lib/product-filters";
+import type { Product, ProtectionId } from "@/types";
 
 import { StorageUnavailableError } from "./types";
 
@@ -29,6 +30,21 @@ interface CatalogueFile {
   readonly products: Product[];
 }
 
+function isProtectionId(value: string): value is ProtectionId {
+  return (protectionIds as readonly string[]).includes(value);
+}
+
+/** Drops retired protection tags so an older catalogue file cannot break the storefront. */
+function sanitizeProduct(product: Product): Product {
+  const protections = (product.protections as readonly string[]).filter(isProtectionId);
+  if (protections.length === product.protections.length) return product;
+  return { ...product, protections };
+}
+
+function sanitizeCatalogue(products: readonly Product[]): Product[] {
+  return products.map(sanitizeProduct);
+}
+
 /** True once the catalogue has been edited from the panel. */
 export async function isCatalogueOverridden(): Promise<boolean> {
   const content = await readFile(PRODUCTS_FILE, "utf8").catch(() => null);
@@ -38,15 +54,15 @@ export async function isCatalogueOverridden(): Promise<boolean> {
 /** Full catalogue, including inactive products. */
 export async function readCatalogue(): Promise<Product[]> {
   const content = await readFile(PRODUCTS_FILE, "utf8").catch(() => null);
-  if (content === null) return [...seedProducts];
+  if (content === null) return sanitizeCatalogue(seedProducts);
 
   try {
     const parsed = JSON.parse(content) as Partial<CatalogueFile>;
-    if (!Array.isArray(parsed.products)) return [...seedProducts];
-    return parsed.products;
+    if (!Array.isArray(parsed.products)) return sanitizeCatalogue(seedProducts);
+    return sanitizeCatalogue(parsed.products);
   } catch {
     // A corrupted file must not take the storefront down.
-    return [...seedProducts];
+    return sanitizeCatalogue(seedProducts);
   }
 }
 

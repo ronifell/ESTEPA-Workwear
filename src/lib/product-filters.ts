@@ -5,7 +5,6 @@ export const sectorIds = ["mining", "oil-gas", "industry"] as const;
 
 export const protectionIds = [
   "chemical",
-  "cut",
   "electrical",
   "flash-fire",
   "high-visibility",

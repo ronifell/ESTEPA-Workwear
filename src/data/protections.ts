@@ -23,20 +23,6 @@ export const protections: readonly Protection[] = [
     standards: [],
   },
   {
-    id: "cut",
-    icon: "cut",
-    name: { es: "Protección contra cortes", en: "Cut protection" },
-    shortDescription: {
-      es: "Para tareas con riesgo de corte, abrasión y contacto con bordes filosos.",
-      en: "For tasks with cut, abrasion and sharp-edge contact risks.",
-    },
-    description: {
-      es: "Soluciones orientadas a tareas donde existe contacto con bordes filosos, chapas, herramientas de corte o materiales abrasivos. El nivel de protección requerido se define a partir del análisis de la tarea y del tipo de contacto esperado.",
-      en: "Solutions aimed at tasks involving contact with sharp edges, metal sheets, cutting tools or abrasive materials. The required protection level is defined through task analysis and the type of contact expected.",
-    },
-    standards: [],
-  },
-  {
     id: "electrical",
     icon: "electrical",
     name: { es: "Riesgo eléctrico", en: "Electrical risk" },
@@ -53,14 +39,14 @@ export const protections: readonly Protection[] = [
   {
     id: "flash-fire",
     icon: "flash-fire",
-    name: { es: "Fuego repentino", en: "Flash fire" },
+    name: { es: "Ignífuga FR", en: "FR fire resistant" },
     shortDescription: {
-      es: "Para entornos con riesgo de ignición momentánea.",
-      en: "For environments with a momentary ignition risk.",
+      es: "Para entornos con riesgo de llama, calor e ignición.",
+      en: "For environments with flame, heat and ignition risk.",
     },
     description: {
-      es: "Prendas orientadas a entornos donde puede producirse una ignición momentánea, habituales en la industria del petróleo y el gas. El comportamiento del tejido frente a la llama es una característica que debe estar respaldada por ensayos del fabricante.",
-      en: "Garments intended for environments where momentary ignition can occur, common in the oil and gas industry. Fabric behaviour when exposed to flame is a characteristic that must be backed by manufacturer testing.",
+      es: "Prendas inherentes ignífugas para operaciones donde existe riesgo de llama, calor o ignición. El comportamiento del tejido frente al fuego debe estar respaldado por ensayos del fabricante.",
+      en: "Inherent flame-resistant garments for operations with flame, heat or ignition risk. Fabric behaviour when exposed to fire must be backed by manufacturer testing.",
     },
     standards: [],
   },

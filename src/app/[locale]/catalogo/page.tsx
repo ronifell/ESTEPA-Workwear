@@ -123,7 +123,7 @@ export default async function CatalogPage({ params }: PageProps) {
           title={copy.byProtectionTitle}
         />
 
-        <ul className="mt-10 grid gap-px border border-border bg-border sm:grid-cols-2 lg:mt-12 lg:grid-cols-5">
+        <ul className="mt-10 grid gap-px border border-border bg-border sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
           {protections.map((protection, index) => (
             <Reveal as="li" key={protection.id} delay={index * 70}>
               <LocalizedLink

@@ -74,7 +74,7 @@ export const products: readonly Product[] = [
     },
     category: "coveralls",
     sectors: ["mining"],
-    protections: ["high-visibility", "cut"],
+    protections: ["high-visibility"],
     technicalInfo: {
       code: "EW241001",
       fabric: "ESTEPA-TW245-HV",
@@ -553,7 +553,7 @@ export const products: readonly Product[] = [
     },
     category: "trousers",
     sectors: ["oil-gas", "industry"],
-    protections: ["cut", "flash-fire"],
+    protections: ["flash-fire"],
     fabricFamily: FRARTEX_FAMILY,
     technicalInfo: {
       code: "EW241004",
@@ -1046,7 +1046,7 @@ export const products: readonly Product[] = [
     },
     category: "shirts",
     sectors: ["industry"],
-    protections: ["cut"],
+    protections: [],
     technicalInfo: {
       code: "EW241007",
       fabric: "ESTEPA-TW220",

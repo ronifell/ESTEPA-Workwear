@@ -33,7 +33,7 @@ export function Protections({ locale }: { readonly locale: Locale }) {
           }
         />
 
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-5">
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
           {protections.map((protection, index) => (
             <Reveal
               as="li"

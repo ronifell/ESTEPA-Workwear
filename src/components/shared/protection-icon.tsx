@@ -1,6 +1,5 @@
 import {
   ChemicalIcon,
-  CutIcon,
   ElectricalIcon,
   FlashFireIcon,
   HighVisibilityIcon,
@@ -10,7 +9,6 @@ import type { ProtectionId } from "@/types";
 
 const map: Record<ProtectionId, (props: IconProps) => React.JSX.Element> = {
   chemical: ChemicalIcon,
-  cut: CutIcon,
   electrical: ElectricalIcon,
   "flash-fire": FlashFireIcon,
   "high-visibility": HighVisibilityIcon,
