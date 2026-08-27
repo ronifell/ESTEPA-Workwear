@@ -1,13 +1,12 @@
 import Image from "next/image";
 
 import { ProductImageOverlay } from "@/components/products/product-image-overlay";
-import { TechnicalSheetCompact } from "@/components/products/technical-sheet";
+import { ExploreHint } from "@/components/ui/explore-hint";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRightIcon } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { siteConfig } from "@/config/site";
-import { protectionsById } from "@/data/protections";
 import { getDictionary } from "@/i18n";
 import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -32,7 +31,7 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
         className,
       )}
     >
-      <div className="relative aspect-4/5 overflow-hidden bg-sand-200">
+      <div className="group/photo relative aspect-4/5 overflow-hidden bg-sand-200">
         {image ? (
           <Image
             src={image.src}
@@ -49,7 +48,7 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
           />
         )}
 
-        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
+        <div className="absolute left-3 top-3 z-10 flex flex-wrap gap-1.5">
           {product.preliminary ? (
             <Badge tone="pending">{dictionary.common.preliminaryContent}</Badge>
           ) : null}
@@ -59,14 +58,11 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
         </div>
 
         <ProductImageOverlay product={product} locale={locale} compact />
+        <ExploreHint label={dictionary.common.explore} />
       </div>
 
       <div className="flex flex-1 flex-col p-5 lg:p-6">
-        <p className="font-display text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-accent">
-          {dictionary.products.categories[product.category]}
-        </p>
-
-        <h3 className="mt-2.5 font-display text-lg font-semibold leading-snug text-navy-900">
+        <h3 className="sr-only">
           <LocalizedLink
             route="productDetail"
             locale={locale}
@@ -77,28 +73,8 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
           </LocalizedLink>
         </h3>
 
-        <p className="mt-2.5 line-clamp-3 text-sm leading-relaxed text-text-muted">
-          {product.shortDescription[locale]}
-        </p>
+        <p className="text-sm leading-relaxed text-text-muted">{product.shortDescription[locale]}</p>
 
-        <TechnicalSheetCompact product={product} locale={locale} />
-
-        {product.protections.length > 0 ? (
-          <div className="relative z-10 mt-4">
-            <h3 className="mb-2 border-t border-border pt-3 font-display text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-navy-900">
-              {dictionary.product.intendedApplication}
-            </h3>
-            <ul className="flex flex-wrap gap-1.5">
-              {product.protections.map((id) => (
-                <li key={id}>
-                  <Badge>{protectionsById[id].name[locale]}</Badge>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-
-        {/* Pinned to the bottom, stacked so no label wraps mid-phrase. */}
         <div className="mt-auto pt-6">
           <div className="flex flex-col gap-2.5 border-t border-border pt-4">
             <span

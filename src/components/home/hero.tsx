@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ProductImageOverlay } from "@/components/products/product-image-overlay";
 import { CertStrip } from "@/components/shared/cert-strip";
 import { buttonStyles } from "@/components/ui/button";
+import { ExploreHint } from "@/components/ui/explore-hint";
 import {
   ArrowRightIcon,
   GearIcon,
@@ -118,7 +119,7 @@ export function Hero({
                     route="productDetail"
                     locale={locale}
                     params={{ slug: product.slug }}
-                    className="group relative block aspect-4/5 overflow-hidden rounded-3xl border border-border bg-sand-200"
+                    className="group/photo relative block aspect-4/5 overflow-hidden rounded-3xl border border-border bg-sand-200"
                   >
                     {image ? (
                       <Image
@@ -130,6 +131,7 @@ export function Hero({
                       />
                     ) : null}
                     <ProductImageOverlay product={product} locale={locale} compact />
+                    <ExploreHint label={dictionary.common.explore} />
                   </LocalizedLink>
                 </li>
               );

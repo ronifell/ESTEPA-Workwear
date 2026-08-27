@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { ArrowRightIcon } from "@/components/ui/icons";
+import { ExploreHint } from "@/components/ui/explore-hint";
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -39,42 +39,35 @@ export function IndustryCard({ sector, locale }: IndustryCardProps) {
   const dictionary = getDictionary(locale);
 
   return (
-    <article className="group relative isolate flex h-full min-h-[22rem] w-full flex-col overflow-hidden rounded-3xl bg-navy-900 text-text-inverse lg:min-h-[24rem]">
+    <article className="group/photo relative isolate flex h-full min-h-[20rem] w-full flex-col overflow-hidden rounded-3xl bg-navy-900 text-text-inverse lg:min-h-[22rem]">
       <Image
         src={sector.image}
         alt={sector.imageAlt[locale]}
         fill
         sizes="(min-width: 1024px) 33vw, 100vw"
-        className="object-cover transition-transform duration-700 ease-[var(--ease-out-industrial)] group-hover:scale-105"
+        className="object-cover transition-transform duration-700 ease-[var(--ease-out-industrial)] group-hover/photo:scale-105"
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/65 to-navy-950/10 transition-opacity duration-500 group-hover:from-navy-950 group-hover:via-navy-950/75"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-accent transition-transform duration-500 ease-[var(--ease-out-industrial)] group-hover:scale-x-100"
+        className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/55 to-navy-950/10 transition-opacity duration-500 group-hover/photo:from-navy-950 group-hover/photo:via-navy-950/70"
       />
 
-      <div className="relative mt-auto flex flex-1 flex-col justify-end p-6 lg:p-7">
+      <ExploreHint label={dictionary.common.explore} />
+
+      <div className="relative z-30 mt-auto flex flex-1 flex-col justify-end p-6 lg:p-7">
         <h3 className="font-display text-xl font-bold leading-tight text-text-inverse lg:text-2xl">
           <LocalizedLink
             route={sector.routeKey}
             locale={locale}
-            className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+            className="after:absolute after:inset-0 after:z-30 after:content-[''] focus-visible:outline-none"
           >
             {sector.name[locale]}
           </LocalizedLink>
         </h3>
 
-        <p className="mt-3 line-clamp-4 min-h-[5.5rem] text-sm leading-relaxed text-text-inverse-muted">
-          {sector.intro[locale]}
+        <p className="mt-3 max-w-sm text-sm leading-relaxed text-text-inverse-muted">
+          {sector.tagline[locale]}
         </p>
-
-        <span className="mt-auto pt-5 inline-flex items-center gap-2 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-bronze-300">
-          {dictionary.common.explore} {sector.name[locale]}
-          <ArrowRightIcon className="size-3.5 transition-transform duration-300 group-hover:translate-x-1.5" />
-        </span>
       </div>
     </article>
   );
