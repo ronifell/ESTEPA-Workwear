@@ -125,6 +125,20 @@ export function buildProductSchema(product: Product, locale: Locale): Record<str
   };
 }
 
+export function buildFaqSchema(
+  items: readonly { readonly q: string; readonly a: string }[],
+): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+}
+
 /** Convenience wrapper for pages whose copy lives in the `seo` dictionary. */
 export function buildMetadataFromDictionary(
   route: RouteKey,

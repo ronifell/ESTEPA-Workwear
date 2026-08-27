@@ -304,7 +304,7 @@ function ShieldBody() {
 }
 
 function SquareBody() {
-  return <rect x="3" y="3" width="58" height="58" rx="7" fill="#fff" stroke={INK} strokeWidth="3.6" />;
+  return <rect x="3" y="3" width="58" height="58" rx="14" fill="#fff" stroke={INK} strokeWidth="3.6" />;
 }
 
 function UlCertifiedMark({
@@ -320,7 +320,7 @@ function UlCertifiedMark({
       aria-hidden
       className={cn(compact ? "h-12 w-[2.05rem]" : "h-16 w-[2.75rem]")}
     >
-      <rect x="1.2" y="1.2" width="45.6" height="69.6" rx="7" fill={INK} />
+      <rect x="1.2" y="1.2" width="45.6" height="69.6" rx="12" fill={INK} />
       <circle cx={24} cy={20.2} r={11.4} fill="#fff" />
       <text
         x="24"

@@ -23,7 +23,7 @@ export function CertStrip({
   return (
     <div
       className={cn(
-        "overflow-hidden border",
+        "overflow-hidden rounded-3xl border",
         tone === "inverse" ? "border-white/25 bg-white/5" : "border-navy-900 bg-white",
         className,
       )}

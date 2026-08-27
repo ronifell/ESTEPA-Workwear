@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { ProductImageOverlay } from "@/components/products/product-image-overlay";
 import { CertStrip } from "@/components/shared/cert-strip";
 import { buttonStyles } from "@/components/ui/button";
 import {
@@ -13,7 +14,7 @@ import {
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { getDictionary } from "@/i18n";
 import type { Dictionary } from "@/i18n";
-import type { Locale } from "@/types";
+import type { Locale, Product } from "@/types";
 
 const highlightIcons: readonly {
   readonly key: keyof Dictionary["home"]["highlights"];
@@ -25,22 +26,31 @@ const highlightIcons: readonly {
   { key: "support", Icon: HeadsetIcon },
 ];
 
-export function Hero({ locale }: { readonly locale: Locale }) {
+export function Hero({
+  locale,
+  products = [],
+}: {
+  readonly locale: Locale;
+  readonly products?: readonly Product[];
+}) {
   const dictionary = getDictionary(locale);
   const { hero, highlights } = dictionary.home;
+  const rail = products.slice(0, 4);
 
   return (
     <section className="relative overflow-hidden bg-sand-100 industrial-texture">
-      <div className="relative lg:grid lg:min-h-[38rem] lg:grid-cols-2 lg:items-stretch">
-        <div className="order-2 relative h-64 w-full sm:h-80 lg:order-none lg:col-start-2 lg:h-auto">
-          <Image
-            src="/images/hero/home.jpg"
-            alt={hero.imageAlt}
-            fill
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover object-[60%_center]"
-          />
+      <div className="relative lg:grid lg:min-h-[32rem] lg:grid-cols-2 lg:items-stretch">
+        <div className="order-2 relative h-64 w-full sm:h-80 lg:order-none lg:col-start-2 lg:h-auto lg:min-h-[32rem]">
+          <div className="absolute inset-0 overflow-hidden lg:inset-3 lg:rounded-3xl">
+            <Image
+              src="/images/hero/home.jpg"
+              alt={hero.imageAlt}
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover object-[60%_center]"
+            />
+          </div>
           <div
             aria-hidden
             className="absolute inset-0 hidden bg-gradient-to-r from-sand-100 via-sand-100/35 to-transparent lg:block"
@@ -68,10 +78,6 @@ export function Hero({ locale }: { readonly locale: Locale }) {
                 {hero.description}
               </p>
 
-              <h2 className="animate-rise mt-5 max-w-lg font-display text-base font-semibold text-navy-800 sm:text-lg [animation-delay:200ms]">
-                {dictionary.trust.supportTitle}
-              </h2>
-
               <div className="animate-rise mt-8 [animation-delay:240ms]">
                 <CertStrip locale={locale} />
               </div>
@@ -86,18 +92,51 @@ export function Hero({ locale }: { readonly locale: Locale }) {
                   <ArrowRightIcon className="size-4" />
                 </LocalizedLink>
                 <LocalizedLink
-                  route="home"
+                  route="contact"
                   locale={locale}
-                  hash="por-que-certificada"
                   className={buttonStyles("outline", "lg")}
                 >
-                  {dictionary.trust.whyCta}
+                  {dictionary.common.requestInformation}
                 </LocalizedLink>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {rail.length > 0 ? (
+        <div className="container-page pb-10 lg:pb-12">
+          <p className="mb-4 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-accent">
+            {hero.productRail}
+          </p>
+          <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {rail.map((product) => {
+              const image = product.images[0];
+              return (
+                <li key={product.id}>
+                  <LocalizedLink
+                    route="productDetail"
+                    locale={locale}
+                    params={{ slug: product.slug }}
+                    className="group relative block aspect-4/5 overflow-hidden rounded-3xl border border-border bg-sand-200"
+                  >
+                    {image ? (
+                      <Image
+                        src={image.src}
+                        alt={image.alt[locale]}
+                        fill
+                        sizes="(min-width: 1024px) 22vw, 50vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      />
+                    ) : null}
+                    <ProductImageOverlay product={product} locale={locale} compact />
+                  </LocalizedLink>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
 
       <div className="relative border-y border-border bg-sand-200/70">
         <div className="container-page">

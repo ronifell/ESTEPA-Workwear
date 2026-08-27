@@ -34,7 +34,7 @@ export function QuantitySelector({
   const inputSize = size === "sm" ? "h-9 w-10 text-sm" : "h-11 w-14 text-base";
 
   return (
-    <div className={cn("inline-flex items-stretch border border-border-strong", className)}>
+    <div className={cn("inline-flex items-stretch overflow-hidden rounded-full border border-border-strong", className)}>
       <button
         type="button"
         aria-label={decreaseLabel}

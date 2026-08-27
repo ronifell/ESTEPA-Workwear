@@ -41,7 +41,7 @@ export function WarrantyBadge({
   }
 
   return (
-    <aside className={cn("flex items-start gap-3 border border-border bg-surface-muted p-4", className)}>
+    <aside className={cn("flex items-start gap-3 rounded-2xl border border-border bg-surface-muted p-4", className)}>
       <ShieldCheckIcon className="mt-0.5 size-6 shrink-0 text-accent" strokeWidth={1.3} />
       <div>
         <p className="font-display text-sm font-bold text-navy-900">{copy.warrantyTitle}</p>

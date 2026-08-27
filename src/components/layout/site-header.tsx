@@ -132,13 +132,13 @@ export function SiteHeader() {
                   hidden={!isSectorsOpen}
                   className="absolute left-1/2 top-full z-50 w-[26rem] -translate-x-1/2 pt-4"
                 >
-                  <div className="animate-fade border border-border bg-surface p-2 shadow-card-hover">
+                  <div className="animate-fade rounded-2xl border border-border bg-surface p-2 shadow-card-hover">
                     {sectors.map((sector) => (
                       <LocalizedLink
                         key={sector.id}
                         route={sector.routeKey}
                         locale={locale}
-                        className="group flex items-start gap-3 rounded-xs p-3 transition-colors hover:bg-sand-100"
+                        className="group flex items-start gap-3 rounded-2xl p-3 transition-colors hover:bg-sand-100"
                       >
                         <span
                           aria-hidden

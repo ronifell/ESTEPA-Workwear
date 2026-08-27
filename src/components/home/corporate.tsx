@@ -33,7 +33,7 @@ export function Corporate({ locale }: { readonly locale: Locale }) {
     <Section tone="default">
       <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
         <Reveal className="lg:col-span-5">
-          <div className="relative aspect-4/5 overflow-hidden bg-sand-200 sm:aspect-3/2 lg:aspect-4/5">
+          <div className="relative aspect-4/5 overflow-hidden rounded-3xl bg-sand-200 sm:aspect-3/2 lg:aspect-4/5">
             <Image
               src="/images/hero/about-detail.jpg"
               alt=""
@@ -43,7 +43,7 @@ export function Corporate({ locale }: { readonly locale: Locale }) {
             />
           </div>
 
-          <p className="mt-4 border border-border bg-surface px-4 py-4 text-center font-display text-sm font-semibold leading-relaxed text-navy-900">
+          <p className="mt-4 rounded-2xl border border-border bg-surface px-4 py-4 text-center font-display text-sm font-semibold leading-relaxed text-navy-900">
             {dictionary.about.coverageStatement}
           </p>
         </Reveal>
@@ -58,7 +58,7 @@ export function Corporate({ locale }: { readonly locale: Locale }) {
           <ul className="mt-10 grid gap-x-8 gap-y-7 sm:grid-cols-2">
             {points.map(({ key, Icon }, index) => (
               <Reveal as="li" key={key} delay={index * 80} className="flex gap-4">
-                <span className="flex size-11 shrink-0 items-center justify-center border border-border bg-surface text-navy-700">
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl border border-border bg-surface text-navy-700">
                   <Icon className="size-5" strokeWidth={1.4} />
                 </span>
                 <div>

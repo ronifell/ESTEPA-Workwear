@@ -43,6 +43,7 @@ export const es = {
     work: "Trabajo",
     products: "Productos",
     protection: "Certificaciones",
+    faq: "Preguntas frecuentes",
     about: "Nosotros",
     catalog: "Catálogo",
     contact: "Contacto",
@@ -60,13 +61,14 @@ export const es = {
     hero: {
       eyebrow: "Ropa de trabajo certificada",
       title: "Ropa de trabajo certificada para una verdadera protección.",
-      titleLead: "Ropa de trabajo certificada",
-      titleAccent: "para una verdadera protección.",
+      titleLead: "Vendemos ropa de trabajo",
+      titleAccent: "certificada para minería, petróleo e industria.",
       description:
-        "Indumentaria FR y antiestática con normas internacionales —NFPA, UL, ASTM, EN ISO—. Diseño argentino, estándares globales.",
+        "Overoles, camisas, pantalones y camperas FR y antiestáticos, con normas internacionales —NFPA, UL, ASTM, EN ISO—. Diseño argentino, estándares globales.",
       imageAlt:
         "Ropa ignífuga certificada ESTEPA: operario industrial con indumentaria de trabajo FR y equipo de protección",
       scroll: "Descubrir más",
+      productRail: "Prendas de la línea",
     },
     highlights: {
       certified: {
@@ -100,10 +102,10 @@ export const es = {
       cta: "Ver todas las protecciones",
     },
     featured: {
-      eyebrow: "Catálogo",
-      title: "Productos destacados",
+      eyebrow: "Ropa de trabajo",
+      title: "El catálogo ESTEPA",
       description:
-        "Una selección de las soluciones que forman parte de nuestra línea inicial.",
+        "Overoles, camisas, pantalones y camperas para minería, petróleo y gas e industria.",
       cta: "Ver catálogo completo",
     },
     certifications: {
@@ -146,6 +148,12 @@ export const es = {
       },
       cta: "Conocer ESTEPA",
     },
+    faq: {
+      eyebrow: "Ayuda",
+      title: "Preguntas frecuentes",
+      description: "Talles, lavado, certificaciones y cómo pedir una cotización.",
+      cta: "Ver todas las preguntas",
+    },
     cta: {
       title: "Encontrá la protección adecuada para tu operación.",
       description:
@@ -184,12 +192,19 @@ export const es = {
     description:
       "Catálogo de indumentaria técnica organizada por sector y por tipo de protección.",
     filters: {
-      title: "Filtros",
+      title: "Buscar prenda",
       openFilters: "Filtrar",
+      closeFilters: "Cerrar menú",
+      hideFilters: "Ocultar filtros",
+      pillarsLead: "Elegí en este orden",
       sector: "Sector",
+      sectorHint: "¿En qué entorno trabaja el equipo?",
       protection: "Tipo de protección",
+      protectionHint: "¿Qué riesgo tiene que cubrir la prenda?",
       category: "Categoría",
-      standard: "Norma",
+      standard: "Normas",
+      standardHint: "¿Qué norma pide tu operación?",
+      step: "Paso {n}",
       all: "Todos",
       clear: "Limpiar filtros",
       apply: "Aplicar",
@@ -225,6 +240,7 @@ export const es = {
     priceOnRequest: "Precio a confirmar",
     priceNote: "Solicitá una cotización y te enviamos la información comercial.",
     selectSize: "Seleccionar talle",
+    findMySize: "Encontrar mi talle",
     sizeRequired: "Elegí un talle para continuar.",
     sizesTitle: "Talles disponibles",
     sizeGuide: "Guía de talles",
@@ -250,6 +266,8 @@ export const es = {
       "Los certificados de ensayo se publicarán cuando el fabricante los proporcione.",
     related: "Productos relacionados",
     intendedApplication: "Aplicación prevista",
+    solutionsLabel: "Solución",
+    overlayCerts: "Certificaciones",
     technicalSheet: "Información técnica",
     standards: "Normas",
     colors: "Colores",
@@ -284,6 +302,42 @@ export const es = {
       inseam: "Entrepierna",
       hem: "Ancho de bajo",
     },
+    sizeSimulator: {
+      title: "Asistente de talle",
+      subtitle:
+        "Ingresá tus medidas en centímetros. El asistente cruza pecho, cintura, cadera y largo de brazo con la tabla de talles de trabajo y te muestra los cuidados de lavado de esta prenda.",
+      badge: "Asistente",
+      howToTitle: "Cómo medir",
+      howToNote: "Las tallas se refieren a medidas corporales, no a las dimensiones de la prenda.",
+      unit: "cm",
+      unitOnly: "Solo cm",
+      chest: "Pecho",
+      chestHelp: "Alrededor del pecho, justo debajo de los brazos y cruzando los omóplatos.",
+      waist: "Cintura",
+      waistHelp: "Alrededor de la parte más estrecha del torso.",
+      hip: "Cadera",
+      hipHelp: "Alrededor del punto más ancho de las caderas.",
+      arm: "Largo de brazo",
+      armHelp: "Desde el centro de la nuca, cruzando el hombro, hasta la muñeca.",
+      analyze: "Recomendar talle",
+      analyzing: "Analizando medidas…",
+      resultTitle: "Talle recomendado",
+      resultExact: "{size} cubre tus medidas con holgura de trabajo.",
+      resultBetween:
+        "Estás entre {a} y {b}. Para indumentaria de trabajo recomendamos {size}, con holgura para movimiento y capas.",
+      resultOff: "El talle más cercano a tus medidas es {size}. Si trabajás con capas, consultanos.",
+      resultNone: "No encontramos un talle con estas medidas. Escribinos y te ayudamos.",
+      applySize: "Usar este talle",
+      chartTitle: "Tabla de talles",
+      chartCaption: "Medidas corporales de referencia en centímetros, no dimensiones de corte.",
+      careTitle: "Cuidados de lavado",
+      reset: "Volver a medir",
+      missing: "Completá al menos pecho o cintura.",
+      sizeCol: "Talle",
+      confidenceHigh: "Ajuste preciso",
+      confidenceMid: "Ajuste orientativo",
+      confidenceLow: "Consultar asesor",
+    },
   },
 
   protectionPage: {
@@ -316,6 +370,51 @@ export const es = {
           "Contrastamos cada requisito con la documentación técnica del fabricante antes de recomendar una solución.",
       },
     },
+  },
+
+  faqPage: {
+    eyebrow: "Ayuda",
+    title: "Preguntas frecuentes",
+    description:
+      "Respuestas sobre la ropa que vendemos, cómo elegir talle, cómo lavar las prendas y qué significan las certificaciones.",
+    items: [
+      {
+        q: "¿Qué ropa vende ESTEPA?",
+        a: "Ropa de trabajo técnica: overoles, camisas, pantalones, camperas y chalecos para minería, petróleo y gas e industria. El catálogo está organizado por sector, tipo de protección y norma.",
+      },
+      {
+        q: "¿Qué significa que una prenda está certificada?",
+        a: "Una certificación es el ensayo de un laboratorio independiente que verifica que el tejido cumple una norma medible (NFPA, UL, ASTM, EN ISO). No es un logo decorativo: es la prueba de que la prenda fue evaluada para un riesgo concreto.",
+      },
+      {
+        q: "¿Cómo elijo el talle correcto?",
+        a: "En cada ficha está el asistente de talle. Ingresás pecho, cintura, cadera y largo de brazo en centímetros —son medidas del cuerpo, no de la prenda— y te recomendamos el talle con holgura de trabajo. La tabla está solo en cm.",
+      },
+      {
+        q: "¿Cómo se lava la ropa ignífuga?",
+        a: "Del revés, en agua fría o a 30 °C, sin cloro ni suavizantes que dejen residuos. Secar al aire o a baja temperatura y no planchar sobre las cintas retrorreflectivas. Cada prenda muestra sus cuidados en la ficha y en el asistente de talle.",
+      },
+      {
+        q: "¿Las normas aplican a todas las prendas?",
+        a: "No. Cada línea y cada tejido tiene su propio set. Las prendas FRARTEX publican las normas asociadas; en el resto, las certificaciones se muestran cuando el fabricante entrega la documentación de ensayo.",
+      },
+      {
+        q: "¿Cuál es la diferencia entre las tres líneas?",
+        a: "Minería está pensada para visibilidad y abrasión en jornadas largas. Petróleo y gas se construye sobre FRARTEX, ignífugo y antiestático. Trabajo e industria cubre el uso diario en construcción, logística y mantenimiento.",
+      },
+      {
+        q: "¿Cómo pido una cotización?",
+        a: "Agregá prendas al carrito o escribinos desde Contacto. Un asesor confirma disponibilidad, plazos y precio. Las solicitudes del sitio no son una compra cerrada hasta esa confirmación.",
+      },
+      {
+        q: "¿Hacen envíos a todo el país?",
+        a: "Sí. Llegamos a todo el país, con foco en las cuencas mineras y energéticas. Si tu operación está en otra provincia, evaluamos el caso según el volumen y las necesidades del proyecto.",
+      },
+      {
+        q: "¿Puedo personalizar las prendas con el logo de la empresa?",
+        a: "Sí. Bordado o identificación corporativa se cotiza aparte y las condiciones se aclaran antes de confirmar el pedido.",
+      },
+    ],
   },
 
   about: {
@@ -730,6 +829,11 @@ export const es = {
       title: "Certificaciones de ropa de trabajo FR",
       description:
         "NFPA 2112, UL Certified, ASTM F1506, EN ISO 11612, EN 1149 y más. Por qué importa la ropa de trabajo certificada.",
+    },
+    faq: {
+      title: "Preguntas frecuentes",
+      description:
+        "Talles, lavado, certificaciones y cómo pedir ropa de trabajo ESTEPA.",
     },
     about: {
       title: "Nosotros",

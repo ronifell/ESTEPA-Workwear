@@ -83,7 +83,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         aria-modal={open || undefined}
         aria-label={dictionary.nav.mainNavigation}
         className={cn(
-          "absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-sand-100 shadow-2xl transition-transform duration-300 ease-[var(--ease-out-industrial)]",
+          "absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-sand-100 shadow-2xl transition-transform duration-300 ease-[var(--ease-out-industrial)] rounded-l-3xl",
           open ? "translate-x-0" : "translate-x-full",
         )}
       >

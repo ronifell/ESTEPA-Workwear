@@ -39,7 +39,7 @@ export function IndustryCard({ sector, locale }: IndustryCardProps) {
   const dictionary = getDictionary(locale);
 
   return (
-    <article className="group relative isolate flex h-full min-h-[22rem] w-full flex-col overflow-hidden bg-navy-900 text-text-inverse lg:min-h-[24rem]">
+    <article className="group relative isolate flex h-full min-h-[22rem] w-full flex-col overflow-hidden rounded-3xl bg-navy-900 text-text-inverse lg:min-h-[24rem]">
       <Image
         src={sector.image}
         alt={sector.imageAlt[locale]}

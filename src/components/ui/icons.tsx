@@ -379,6 +379,23 @@ export function SpinnerIcon(props: IconProps) {
   );
 }
 
+export function FilterIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M4 6h16M7 12h10M10 18h4" />
+    </Svg>
+  );
+}
+
+export function SparkleIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M12 3.2 13.4 8.6 18.8 10 13.4 11.4 12 16.8 10.6 11.4 5.2 10 10.6 8.6Z" />
+      <path d="M18.2 14.4 18.9 16.8 21.4 17.5 18.9 18.2 18.2 20.6 17.5 18.2 15 17.5 17.5 16.8Z" />
+    </Svg>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /* Product category silhouettes (used by the placeholder artwork)              */
 /* -------------------------------------------------------------------------- */

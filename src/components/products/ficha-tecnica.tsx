@@ -175,7 +175,7 @@ export function FichaTecnica({
 
         <div className="lg:col-span-6">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
-            <div className="relative aspect-4/5 overflow-hidden border border-border bg-sand-100">
+            <div className="relative aspect-4/5 overflow-hidden rounded-3xl border border-border bg-sand-100">
               {photo ? (
                 <Image
                   src={photo.src}

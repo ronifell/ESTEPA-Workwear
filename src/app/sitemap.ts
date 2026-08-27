@@ -21,6 +21,7 @@ const priorities: Partial<Record<RouteKey, number>> = {
   work: 0.8,
   catalog: 0.7,
   protection: 0.7,
+  faq: 0.6,
   about: 0.6,
   contact: 0.6,
 };

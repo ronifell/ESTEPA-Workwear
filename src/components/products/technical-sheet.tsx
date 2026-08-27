@@ -161,7 +161,7 @@ export function TechnicalSheet({
   }
 
   return (
-    <div className="mt-8 border border-border bg-surface-muted p-5 sm:p-6">
+    <div className="mt-8 rounded-3xl border border-border bg-surface-muted p-5 sm:p-6">
       <h2 className="font-display text-sm font-bold uppercase tracking-[0.16em] text-navy-900">
         {dictionary.product.technicalSheet}
       </h2>

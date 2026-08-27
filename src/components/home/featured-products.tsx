@@ -4,12 +4,16 @@ import { ArrowRightIcon } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { getDictionary } from "@/i18n";
-import { getFeaturedProducts } from "@/lib/repositories/products";
-import type { Locale } from "@/types";
+import type { Locale, Product } from "@/types";
 
-export async function FeaturedProducts({ locale }: { readonly locale: Locale }) {
+export function FeaturedProducts({
+  locale,
+  products,
+}: {
+  readonly locale: Locale;
+  readonly products: readonly Product[];
+}) {
   const dictionary = getDictionary(locale);
-  const products = await getFeaturedProducts(6);
 
   return (
     <Section tone="muted">

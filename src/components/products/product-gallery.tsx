@@ -12,6 +12,7 @@ import {
 } from "react";
 
 import { useI18n } from "@/components/providers/i18n-provider";
+import { ProductImageOverlay } from "@/components/products/product-image-overlay";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/ui/icons";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
@@ -162,7 +163,7 @@ export function ProductGallery({ product }: { readonly product: Product }) {
     <div className="flex flex-col gap-4">
       <div
         className={cn(
-          "relative aspect-4/5 overflow-hidden border border-border bg-sand-200 touch-pan-y select-none",
+          "relative aspect-4/5 overflow-hidden rounded-3xl border border-border bg-sand-200 touch-pan-y select-none",
           canSlide && (isDragging ? "cursor-grabbing" : "cursor-grab"),
         )}
         role="group"
@@ -223,7 +224,7 @@ export function ProductGallery({ product }: { readonly product: Product }) {
               onClick={goPrev}
               onPointerDown={(event) => event.stopPropagation()}
               aria-label={dictionary.product.galleryPrevious}
-              className="absolute left-3 top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center border border-border bg-white/90 text-navy-900 shadow-card transition-colors hover:border-primary hover:bg-white"
+              className="absolute left-3 top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white/90 text-navy-900 shadow-card transition-colors hover:border-primary hover:bg-white"
             >
               <ArrowLeftIcon className="size-4" />
             </button>
@@ -232,7 +233,7 @@ export function ProductGallery({ product }: { readonly product: Product }) {
               onClick={goNext}
               onPointerDown={(event) => event.stopPropagation()}
               aria-label={dictionary.product.galleryNext}
-              className="absolute right-3 top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center border border-border bg-white/90 text-navy-900 shadow-card transition-colors hover:border-primary hover:bg-white"
+              className="absolute right-3 top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white/90 text-navy-900 shadow-card transition-colors hover:border-primary hover:bg-white"
             >
               <ArrowRightIcon className="size-4" />
             </button>
@@ -243,6 +244,10 @@ export function ProductGallery({ product }: { readonly product: Product }) {
           <div className="pointer-events-none absolute left-4 top-4 z-10">
             <Badge tone="pending">{dictionary.common.preliminaryContent}</Badge>
           </div>
+        ) : null}
+
+        {activeIndex === 0 ? (
+          <ProductImageOverlay product={product} locale={locale} />
         ) : null}
       </div>
 
@@ -259,7 +264,7 @@ export function ProductGallery({ product }: { readonly product: Product }) {
                 aria-label={format(dictionary.product.thumbnail, { index: index + 1 })}
                 aria-current={index === activeIndex ? "true" : undefined}
                 className={cn(
-                  "relative block aspect-square w-full overflow-hidden border transition-colors",
+                  "relative block aspect-square w-full overflow-hidden rounded-2xl border transition-colors",
                   index === activeIndex
                     ? "border-primary"
                     : "border-border hover:border-border-strong",

@@ -46,7 +46,7 @@ export function Notice({
   return (
     <div
       role={role}
-      className={cn("flex gap-3 rounded-xs border px-4 py-3.5", style.wrapper, className)}
+      className={cn("flex gap-3 rounded-2xl border px-4 py-3.5", style.wrapper, className)}
     >
       <Icon className={cn("mt-0.5 size-4 shrink-0", style.icon)} />
       <div className="min-w-0 text-sm leading-relaxed">

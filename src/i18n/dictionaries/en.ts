@@ -41,6 +41,7 @@ export const en: Dictionary = {
     work: "Work",
     products: "Products",
     protection: "Certifications",
+    faq: "FAQ",
     about: "About",
     catalog: "Catalogue",
     contact: "Contact",
@@ -58,13 +59,14 @@ export const en: Dictionary = {
     hero: {
       eyebrow: "Certified workwear",
       title: "Certified workwear for genuine protection.",
-      titleLead: "Certified workwear",
-      titleAccent: "for genuine protection.",
+      titleLead: "We sell certified workwear",
+      titleAccent: "for mining, oil and gas, and industry.",
       description:
-        "FR and antistatic apparel with international standards —NFPA, UL, ASTM, EN ISO—. Argentine design, global standards.",
+        "Coveralls, shirts, trousers and jackets — FR and antistatic — with international standards —NFPA, UL, ASTM, EN ISO—. Argentine design, global standards.",
       imageAlt:
         "ESTEPA certified flame-resistant workwear: industrial worker in FR apparel and protective equipment",
       scroll: "Discover more",
+      productRail: "Garments in the line",
     },
     highlights: {
       certified: {
@@ -98,9 +100,10 @@ export const en: Dictionary = {
       cta: "View all protections",
     },
     featured: {
-      eyebrow: "Catalogue",
-      title: "Featured products",
-      description: "A selection of the solutions that make up our initial line.",
+      eyebrow: "Workwear",
+      title: "The ESTEPA catalogue",
+      description:
+        "Coveralls, shirts, trousers and jackets for mining, oil and gas, and industry.",
       cta: "View the full catalogue",
     },
     certifications: {
@@ -138,6 +141,12 @@ export const en: Dictionary = {
         },
       },
       cta: "About ESTEPA",
+    },
+    faq: {
+      eyebrow: "Help",
+      title: "Frequently asked questions",
+      description: "Sizing, laundering, certifications and how to request a quote.",
+      cta: "View all questions",
     },
     cta: {
       title: "Find the right protection for your operation.",
@@ -177,12 +186,19 @@ export const en: Dictionary = {
     description:
       "Catalogue of technical apparel organised by sector and type of protection.",
     filters: {
-      title: "Filters",
+      title: "Find a garment",
       openFilters: "Filter",
+      closeFilters: "Close menu",
+      hideFilters: "Hide filters",
+      pillarsLead: "Choose in this order",
       sector: "Sector",
+      sectorHint: "Which environment does the team work in?",
       protection: "Type of protection",
+      protectionHint: "Which risk does the garment need to cover?",
       category: "Category",
-      standard: "Standard",
+      standard: "Standards",
+      standardHint: "Which standard does your operation require?",
+      step: "Step {n}",
       all: "All",
       clear: "Clear filters",
       apply: "Apply",
@@ -218,6 +234,7 @@ export const en: Dictionary = {
     priceOnRequest: "Price on request",
     priceNote: "Request a quote and we will send you the commercial information.",
     selectSize: "Select size",
+    findMySize: "Find my size",
     sizeRequired: "Choose a size to continue.",
     sizesTitle: "Available sizes",
     sizeGuide: "Size guide",
@@ -243,6 +260,8 @@ export const en: Dictionary = {
       "Test certificates will be published once provided by the manufacturer.",
     related: "Related products",
     intendedApplication: "Intended application",
+    solutionsLabel: "Solution",
+    overlayCerts: "Certifications",
     technicalSheet: "Technical information",
     standards: "Standards",
     colors: "Colours",
@@ -277,6 +296,42 @@ export const en: Dictionary = {
       inseam: "Inseam",
       hem: "Hem width",
     },
+    sizeSimulator: {
+      title: "Size assistant",
+      subtitle:
+        "Enter your measurements in centimetres. The assistant matches chest, waist, hip and arm length to the workwear size chart and shows this garment’s wash care.",
+      badge: "Assistant",
+      howToTitle: "How to measure",
+      howToNote: "Sizing refers to body measurements, not garment dimensions.",
+      unit: "cm",
+      unitOnly: "CM only",
+      chest: "Chest",
+      chestHelp: "Around the chest, just under the arms and across the shoulder blades.",
+      waist: "Waist",
+      waistHelp: "Around the narrowest part of the torso.",
+      hip: "Hip",
+      hipHelp: "Around the widest point of the hips.",
+      arm: "Arm length",
+      armHelp: "From the centre back of the neck, across the shoulder, down to the wrist.",
+      analyze: "Recommend size",
+      analyzing: "Reading measurements…",
+      resultTitle: "Recommended size",
+      resultExact: "{size} covers your measurements with workwear ease.",
+      resultBetween:
+        "You sit between {a} and {b}. For workwear we recommend {size}, with room to move and layer.",
+      resultOff: "The closest size to your measurements is {size}. If you layer underneath, ask us.",
+      resultNone: "We could not match these measurements to a size. Get in touch and we will help.",
+      applySize: "Use this size",
+      chartTitle: "Size chart",
+      chartCaption: "Reference body measurements in centimetres, not cut dimensions.",
+      careTitle: "Wash care",
+      reset: "Measure again",
+      missing: "Enter at least chest or waist.",
+      sizeCol: "Size",
+      confidenceHigh: "Precise fit",
+      confidenceMid: "Indicative fit",
+      confidenceLow: "Ask an advisor",
+    },
   },
 
   protectionPage: {
@@ -309,6 +364,51 @@ export const en: Dictionary = {
           "We check every requirement against the manufacturer's technical documentation before recommending a solution.",
       },
     },
+  },
+
+  faqPage: {
+    eyebrow: "Help",
+    title: "Frequently asked questions",
+    description:
+      "Answers about the workwear we sell, how to choose a size, how to wash the garments and what certifications mean.",
+    items: [
+      {
+        q: "What does ESTEPA sell?",
+        a: "Technical workwear: coveralls, shirts, trousers, jackets and vests for mining, oil and gas, and industry. The catalogue is organised by sector, type of protection and standard.",
+      },
+      {
+        q: "What does it mean that a garment is certified?",
+        a: "A certification is an independent laboratory test that verifies the fabric meets a measurable standard (NFPA, UL, ASTM, EN ISO). It is not a decorative logo: it is proof the garment was evaluated for a specific risk.",
+      },
+      {
+        q: "How do I choose the right size?",
+        a: "Each product page has a size assistant. Enter chest, waist, hip and arm length in centimetres — body measurements, not garment dimensions — and we recommend a size with workwear ease. The chart is in centimetres only.",
+      },
+      {
+        q: "How should flame-resistant garments be washed?",
+        a: "Inside out, in cold water or at 30 °C, without chlorine or residue-leaving softeners. Air dry or tumble on low, and never iron over retroreflective tapes. Each garment lists its care on the product page and in the size assistant.",
+      },
+      {
+        q: "Do the standards apply to every garment?",
+        a: "No. Each line and fabric has its own set. FRARTEX garments publish the associated standards; elsewhere, certifications appear once the manufacturer supplies the test documentation.",
+      },
+      {
+        q: "What is the difference between the three lines?",
+        a: "Mining is built for visibility and abrasion on long shifts. Oil and gas is built on FRARTEX, flame-resistant and antistatic. Work and industry covers daily use in construction, logistics and maintenance.",
+      },
+      {
+        q: "How do I request a quote?",
+        a: "Add garments to the cart or write to us from Contact. An advisor confirms availability, lead times and price. Website requests are not a confirmed purchase until that confirmation.",
+      },
+      {
+        q: "Do you ship nationwide?",
+        a: "Yes. We cover the whole country, with a focus on mining and energy basins. If your operation is in another province, we assess the case by volume and project needs.",
+      },
+      {
+        q: "Can garments be customised with a company logo?",
+        a: "Yes. Embroidery or corporate identification is quoted separately and the conditions are clarified before the order is confirmed.",
+      },
+    ],
   },
 
   about: {
@@ -719,6 +819,11 @@ export const en: Dictionary = {
       title: "FR workwear certifications",
       description:
         "NFPA 2112, UL Certified, ASTM F1506, EN ISO 11612, EN 1149 and more. Why certified workwear matters.",
+    },
+    faq: {
+      title: "Frequently asked questions",
+      description:
+        "Sizing, laundering, certifications and how to order ESTEPA workwear.",
     },
     about: {
       title: "About us",

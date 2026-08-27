@@ -33,13 +33,13 @@ export function Protections({ locale }: { readonly locale: Locale }) {
           }
         />
 
-        <ul className="mt-12 grid gap-px border border-border-inverse bg-white/10 sm:grid-cols-2 lg:mt-16 lg:grid-cols-5">
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-5">
           {protections.map((protection, index) => (
             <Reveal
               as="li"
               key={protection.id}
               delay={index * 70}
-              className="group flex flex-col bg-navy-900 p-6 transition-colors duration-300 hover:bg-navy-800 lg:p-7"
+              className="group flex flex-col rounded-3xl border border-white/15 bg-navy-900 p-6 transition-colors duration-300 hover:bg-navy-800 lg:p-7"
             >
               <ProtectionIcon
                 id={protection.id}

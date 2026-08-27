@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { ProductImageOverlay } from "@/components/products/product-image-overlay";
 import { TechnicalSheetCompact } from "@/components/products/technical-sheet";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRightIcon } from "@/components/ui/icons";
@@ -27,7 +28,7 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col border border-border bg-surface transition-all duration-300 ease-[var(--ease-out-industrial)] hover:-translate-y-1 hover:border-border-strong hover:shadow-card-hover",
+        "group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-300 ease-[var(--ease-out-industrial)] hover:-translate-y-1 hover:border-border-strong hover:shadow-card-hover",
         className,
       )}
     >
@@ -56,6 +57,8 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
             <Badge tone="accent">{product.fabricFamily}</Badge>
           ) : null}
         </div>
+
+        <ProductImageOverlay product={product} locale={locale} compact />
       </div>
 
       <div className="flex flex-1 flex-col p-5 lg:p-6">

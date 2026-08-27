@@ -20,6 +20,7 @@ export const routes = {
     en: "/products/[slug]/technical-sheet",
   },
   protection: { es: "/certificaciones", en: "/protection" },
+  faq: { es: "/preguntas-frecuentes", en: "/faq" },
   about: { es: "/nosotros", en: "/about" },
   catalog: { es: "/catalogo", en: "/catalog" },
   contact: { es: "/contacto", en: "/contact" },

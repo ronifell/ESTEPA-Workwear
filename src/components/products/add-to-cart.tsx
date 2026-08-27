@@ -7,6 +7,7 @@ import { useI18n } from "@/components/providers/i18n-provider";
 import { Button } from "@/components/ui/button";
 import { CartIcon, CheckIcon } from "@/components/ui/icons";
 import { QuantitySelector } from "@/components/ui/quantity-selector";
+import { SizeSimulator } from "@/components/products/size-simulator";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
@@ -53,13 +54,23 @@ export function AddToCart({ product }: { readonly product: Product }) {
           id="product-size-selector"
           className={cn(shake && "animate-shake")}
         >
-          <legend className="mb-3 flex items-baseline justify-between gap-4 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-text-muted">
-            {dictionary.product.selectSize}
-          </legend>
+          <legend className="sr-only">{dictionary.product.selectSize}</legend>
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <p className="font-display text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-text-muted">
+              {dictionary.product.selectSize}
+            </p>
+            <SizeSimulator
+              product={product}
+              onSelectSize={(value) => {
+                setSize(value);
+                setError(null);
+              }}
+            />
+          </div>
 
           <div
             className={cn(
-              "flex flex-wrap gap-2 border-2 p-2 transition-colors",
+              "flex flex-wrap gap-2 rounded-2xl border-2 p-2 transition-colors",
               needsSize ? "border-danger" : "border-transparent",
             )}
           >
@@ -73,7 +84,7 @@ export function AddToCart({ product }: { readonly product: Product }) {
                 }}
                 aria-pressed={size === option}
                 className={cn(
-                  "min-w-12 border px-3 py-2 font-display text-sm font-semibold transition-colors",
+                  "min-w-12 rounded-2xl border px-3 py-2 font-display text-sm font-semibold transition-colors",
                   size === option
                     ? "border-primary bg-primary text-primary-contrast"
                     : needsSize

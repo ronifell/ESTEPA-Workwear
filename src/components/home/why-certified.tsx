@@ -44,14 +44,14 @@ export function WhyCertified({ locale }: { readonly locale: Locale }) {
         </Reveal>
       </div>
 
-      <Reveal delay={120} className="mt-12 border border-border bg-surface-muted p-6 lg:mt-16 lg:p-8">
+      <Reveal delay={120} className="mt-12 rounded-3xl border border-border bg-surface-muted p-6 lg:mt-16 lg:p-8">
         <h3 className="font-display text-xl font-bold text-navy-900 sm:text-2xl">{copy.valueTitle}</h3>
         <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text sm:text-base">{copy.valueBody}</p>
         <ul className="mt-6 grid gap-3 sm:grid-cols-3">
           {valuePoints.map((item) => (
             <li
               key={item}
-              className="border border-border bg-surface px-4 py-3 font-display text-sm font-semibold text-navy-900"
+              className="rounded-2xl border border-border bg-surface px-4 py-3 font-display text-sm font-semibold text-navy-900"
             >
               {item}
             </li>

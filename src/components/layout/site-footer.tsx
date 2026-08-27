@@ -74,7 +74,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                         target="_blank"
                         rel="noreferrer noopener"
                         aria-label={label}
-                        className="flex size-10 items-center justify-center border border-border-inverse text-text-inverse-muted transition-colors hover:border-accent hover:text-accent"
+                        className="flex size-10 items-center justify-center rounded-2xl border border-border-inverse text-text-inverse-muted transition-colors hover:border-accent hover:text-accent"
                       >
                         <Icon className="size-4.5" />
                       </a>

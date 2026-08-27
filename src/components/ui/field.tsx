@@ -9,7 +9,7 @@ import { ChevronDownIcon } from "@/components/ui/icons";
 import { cn } from "@/lib/utils";
 
 const controlStyles =
-  "w-full rounded-xs border bg-surface px-3.5 py-2.5 text-[0.9375rem] text-text transition-colors placeholder:text-text-subtle focus:outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/15 disabled:cursor-not-allowed disabled:bg-sand-100";
+  "w-full rounded-2xl border bg-surface px-3.5 py-2.5 text-[0.9375rem] text-text transition-colors placeholder:text-text-subtle focus:outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/15 disabled:cursor-not-allowed disabled:bg-sand-100";
 
 export interface FieldProps {
   readonly id: string;

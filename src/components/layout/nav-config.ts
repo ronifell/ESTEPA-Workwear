@@ -17,6 +17,7 @@ export const sectorNav: readonly NavItem[] = [
 export const primaryNav: readonly NavItem[] = [
   { route: "products", labelKey: "products" },
   { route: "protection", labelKey: "protection" },
+  { route: "faq", labelKey: "faq" },
   { route: "about", labelKey: "about" },
   { route: "contact", labelKey: "contact" },
 ];
@@ -28,6 +29,7 @@ export const fullNav: readonly NavItem[] = [
   { route: "products", labelKey: "products" },
   { route: "catalog", labelKey: "catalog" },
   { route: "protection", labelKey: "protection" },
+  { route: "faq", labelKey: "faq" },
   { route: "about", labelKey: "about" },
   { route: "contact", labelKey: "contact" },
 ];

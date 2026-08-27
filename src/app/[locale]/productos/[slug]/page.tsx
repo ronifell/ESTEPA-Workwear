@@ -178,7 +178,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       <Section tone="muted">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-7">
-            <div className="border border-border bg-surface p-6 lg:p-8">
+            <div className="rounded-3xl border border-border bg-surface p-6 lg:p-8">
               <SpecBlock title={copy.overview} pendingLabel={copy.documentsPending}>
                 <p className="text-sm leading-relaxed text-text">{product.description[locale]}</p>
               </SpecBlock>
@@ -231,7 +231,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           </div>
 
           <div className="space-y-5 lg:col-span-5">
-            <div className="border border-border bg-surface p-6">
+            <div className="rounded-3xl border border-border bg-surface p-6">
               <h3 className="font-display text-sm font-bold uppercase tracking-[0.14em] text-navy-900">
                 {copy.protectionAndCertifications}
               </h3>
@@ -283,7 +283,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </div>
 
             {product.sizes && product.sizes.length > 0 ? (
-              <div className="border border-border bg-surface p-6">
+              <div className="rounded-3xl border border-border bg-surface p-6">
                 <h3 className="font-display text-sm font-bold uppercase tracking-[0.14em] text-navy-900">
                   {copy.sizesTitle}
                 </h3>
@@ -291,7 +291,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   {product.sizes.map((size) => (
                     <li
                       key={size}
-                      className="border border-border-strong px-3 py-1.5 font-display text-xs font-semibold text-text"
+                      className="min-w-12 rounded-2xl border border-border-strong px-3 py-1.5 font-display text-xs font-semibold text-text"
                     >
                       {size}
                     </li>
@@ -312,7 +312,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
               </div>
             ) : null}
 
-            <div className="border border-border bg-surface p-6">
+            <div className="rounded-3xl border border-border bg-surface p-6">
               <h3 className="font-display text-sm font-bold uppercase tracking-[0.14em] text-navy-900">
                 {copy.documents}
               </h3>
@@ -323,7 +323,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                     route="productDatasheet"
                     locale={locale}
                     params={{ slug: product.slug }}
-                    className="group flex items-center gap-3 border border-border px-4 py-3 transition-colors hover:border-primary"
+                    className="group flex items-center gap-3 rounded-2xl border border-border px-4 py-3 transition-colors hover:border-primary"
                   >
                     <DocumentIcon className="size-4 shrink-0 text-accent" />
                     <span className="flex-1 text-sm text-text">{copy.datasheet}</span>
@@ -336,7 +336,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                       href={document.url}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="group flex items-center gap-3 border border-border px-4 py-3 transition-colors hover:border-primary"
+                      className="group flex items-center gap-3 rounded-2xl border border-border px-4 py-3 transition-colors hover:border-primary"
                     >
                       <DocumentIcon className="size-4 shrink-0 text-accent" />
                       <span className="flex-1 text-sm text-text">{document.label[locale]}</span>
