@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { CertificationRow } from "@/components/products/certification-badge";
 import { ProductImageOverlay } from "@/components/products/product-image-overlay";
 import { ExploreHint } from "@/components/ui/explore-hint";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +23,7 @@ export interface ProductCardProps {
 export function ProductCard({ product, locale, className, priority }: ProductCardProps) {
   const dictionary = getDictionary(locale);
   const image = product.images[0];
+  const certifications = product.certifications ?? [];
   const showPrice = siteConfig.commerce.pricesEnabled && product.price !== undefined;
 
   return (
@@ -76,6 +78,15 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
         <p className="text-sm leading-relaxed text-text-muted">{product.shortDescription[locale]}</p>
 
         <div className="mt-auto pt-6">
+          {certifications.length > 0 ? (
+            <div className="relative z-10 mb-4">
+              <p className="mb-2 font-display text-[0.5625rem] font-semibold uppercase tracking-[0.14em] text-text-subtle">
+                {dictionary.product.overlayCerts}
+              </p>
+              <CertificationRow certifications={certifications} locale={locale} compact />
+            </div>
+          ) : null}
+
           <div className="flex flex-col gap-2.5 border-t border-border pt-4">
             <span
               className={cn(
