@@ -4,6 +4,7 @@ import Image from "next/image";
 import { CtaSection } from "@/components/shared/cta-section";
 import { PageHero } from "@/components/shared/page-hero";
 import { buttonStyles } from "@/components/ui/button";
+import { ExploreHint } from "@/components/ui/explore-hint";
 import {
   ArrowRightIcon,
   GemIcon,
@@ -75,7 +76,11 @@ export default async function AboutPage({ params }: PageProps) {
           </Reveal>
 
           <Reveal delay={120} className="lg:col-span-5">
-            <div className="relative aspect-3/2 overflow-hidden bg-sand-200 lg:aspect-4/3">
+            <LocalizedLink
+              route="products"
+              locale={locale}
+              className="group/photo relative block aspect-3/2 overflow-hidden rounded-3xl bg-sand-200 lg:aspect-4/3"
+            >
               <Image
                 src="/images/hero/about-detail.jpg"
                 alt={
@@ -85,9 +90,10 @@ export default async function AboutPage({ params }: PageProps) {
                 }
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover/photo:scale-[1.04]"
               />
-            </div>
+              <ExploreHint label={dictionary.common.explore} />
+            </LocalizedLink>
           </Reveal>
         </div>
       </Section>
@@ -123,16 +129,17 @@ export default async function AboutPage({ params }: PageProps) {
               <LocalizedLink
                 route={sector.routeKey}
                 locale={locale}
-                className="group relative flex h-full flex-col overflow-hidden border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
+                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
               >
-                <div className="relative aspect-16/9 overflow-hidden bg-sand-200">
+                <div className="group/photo relative aspect-16/9 overflow-hidden bg-sand-200">
                   <Image
                     src={sector.image}
                     alt={sector.imageAlt[locale]}
                     fill
                     sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 group-hover/photo:scale-105"
                   />
+                  <ExploreHint label={dictionary.common.explore} />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
                   <h3 className="font-display text-lg font-semibold text-navy-900">
@@ -141,10 +148,6 @@ export default async function AboutPage({ params }: PageProps) {
                   <p className="mt-2.5 text-sm leading-relaxed text-text-muted">
                     {sector.tagline[locale]}
                   </p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 font-display text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-primary transition-colors group-hover:text-accent">
-                    {dictionary.common.explore}
-                    <ArrowRightIcon className="size-3 transition-transform duration-200 group-hover:translate-x-1" />
-                  </span>
                 </div>
               </LocalizedLink>
             </Reveal>

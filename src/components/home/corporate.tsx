@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { buttonStyles } from "@/components/ui/button";
+import { ExploreHint } from "@/components/ui/explore-hint";
 import {
   ArrowRightIcon,
   GemIcon,
@@ -33,15 +34,20 @@ export function Corporate({ locale }: { readonly locale: Locale }) {
     <Section tone="default">
       <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
         <Reveal className="lg:col-span-5">
-          <div className="relative aspect-4/5 overflow-hidden rounded-3xl bg-sand-200 sm:aspect-3/2 lg:aspect-4/5">
+          <LocalizedLink
+            route="about"
+            locale={locale}
+            className="group/photo relative block aspect-4/5 overflow-hidden rounded-3xl bg-sand-200 sm:aspect-3/2 lg:aspect-4/5"
+          >
             <Image
               src="/images/hero/about-detail.jpg"
-              alt=""
+              alt={dictionary.home.corporate.title}
               fill
               sizes="(min-width: 1024px) 40vw, 100vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-500 group-hover/photo:scale-[1.04]"
             />
-          </div>
+            <ExploreHint label={dictionary.common.explore} />
+          </LocalizedLink>
 
           <p className="mt-4 rounded-2xl border border-border bg-surface px-4 py-4 text-center font-display text-sm font-semibold leading-relaxed text-navy-900">
             {dictionary.about.coverageStatement}
