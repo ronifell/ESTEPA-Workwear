@@ -36,6 +36,7 @@ export function measuresForCategory(category: ProductCategoryId): readonly BodyM
     case "vests":
       return ["chest", "waist", "hip"];
     case "coveralls":
+    case "sets":
       return ["chest", "waist", "hip", "arm"];
     default:
       return ["chest", "hip", "arm"];

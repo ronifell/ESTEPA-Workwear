@@ -1,6 +1,7 @@
 import {
   CoverallsIcon,
   JacketIcon,
+  SetsIcon,
   ShirtIcon,
   TrousersIcon,
   VestIcon,
@@ -13,6 +14,7 @@ const categoryIcons: Record<ProductCategoryId, (props: IconProps) => React.JSX.E
   coveralls: CoverallsIcon,
   jackets: JacketIcon,
   trousers: TrousersIcon,
+  sets: SetsIcon,
   shirts: ShirtIcon,
   vests: VestIcon,
 };

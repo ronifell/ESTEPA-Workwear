@@ -226,6 +226,7 @@ export const es = {
       coveralls: "Overoles",
       jackets: "Camperas",
       trousers: "Pantalones",
+      sets: "Conjuntos",
       shirts: "Camisas",
       vests: "Chalecos",
     },

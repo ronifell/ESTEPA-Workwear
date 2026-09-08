@@ -220,6 +220,7 @@ export const en: Dictionary = {
       coveralls: "Coveralls",
       jackets: "Jackets",
       trousers: "Trousers",
+      sets: "Sets",
       shirts: "Shirts",
       vests: "Vests",
     },

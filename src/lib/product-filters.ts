@@ -14,6 +14,7 @@ export const categoryIds = [
   "coveralls",
   "jackets",
   "trousers",
+  "sets",
   "shirts",
   "vests",
 ] as const;

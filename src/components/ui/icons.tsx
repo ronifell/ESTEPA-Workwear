@@ -446,3 +446,14 @@ export function VestIcon(props: IconProps) {
     </Svg>
   );
 }
+
+/** Jacket + trousers as a two-piece set. */
+export function SetsIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M8.8 2.4h6.4l2.8 1.8L20 8.2l-1.8.7V12H5.8V8.9L4 8.2l1.8-4z" />
+      <path d="M12 2.8V12" />
+      <path d="M7 12.8h10l.8 8.6H14.2L12 16.2 9.8 21.4H6.2z" />
+    </Svg>
+  );
+}

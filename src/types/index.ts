@@ -18,6 +18,7 @@ export type ProductCategoryId =
   | "coveralls"
   | "jackets"
   | "trousers"
+  | "sets"
   | "shirts"
   | "vests";
 

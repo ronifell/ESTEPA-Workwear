@@ -15,6 +15,7 @@ export const sizeMeasureKeys: Record<
   shirts: { A: "shoulder", B: "chest", C: "sleeve", D: "length" },
   trousers: { A: "waist", B: "hip", C: "inseam", D: "length" },
   coveralls: { A: "chest", B: "waist", C: "inseam", D: "length" },
+  sets: { A: "chest", B: "waist", C: "inseam", D: "length" },
   vests: { A: "shoulder", B: "chest", C: "length", D: "hem" },
 };
 
@@ -162,11 +163,40 @@ function VestDrawing() {
   );
 }
 
+function SetDrawing() {
+  return (
+    <>
+      <path
+        d="M72 32 L100 22 L128 32 L156 46 L148 68 L140 64 L140 102 L60 102 L60 64 L52 68 L44 46 Z"
+        fill="none"
+        stroke={INK}
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M100 22 V102" stroke={INK} strokeWidth="1.1" />
+      <path d="M88 28 L100 42 L112 28" fill="none" stroke={INK} strokeWidth="1.1" />
+      <path
+        d="M68 106 H132 L140 188 H108 L100 128 L92 188 H60 Z"
+        fill="none"
+        stroke={INK}
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M68 118 H132" stroke={INK} strokeWidth="1.1" />
+      <Dim x1={50} y1={78} x2={150} y2={78} letter="A" labelSide="end" />
+      <Dim x1={68} y1={118} x2={132} y2={118} letter="B" labelSide="mid" />
+      <Dim x1={108} y1={128} x2={108} y2={188} letter="C" labelSide="end" />
+      <Dim x1={28} y1={22} x2={28} y2={188} letter="D" labelSide="mid" />
+    </>
+  );
+}
+
 const drawings: Record<ProductCategoryId, () => ReactNode> = {
   jackets: JacketDrawing,
   shirts: ShirtDrawing,
   trousers: TrousersDrawing,
   coveralls: CoverallDrawing,
+  sets: SetDrawing,
   vests: VestDrawing,
 };
 
