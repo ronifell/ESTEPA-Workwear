@@ -7,6 +7,7 @@ import { SizeDiagram, sizeMeasureIds, sizeMeasureKeys } from "@/components/produ
 import { siteConfig } from "@/config/site";
 import { sectorsById } from "@/data/sectors";
 import { format, getDictionary } from "@/i18n";
+import { primaryProductImage } from "@/lib/product-media";
 import { cn } from "@/lib/utils";
 import type { Locale, Product } from "@/types";
 
@@ -41,7 +42,7 @@ export function FichaTecnica({
   const copy = dictionary.product;
   const info = product.technicalInfo;
   const sector = sectorsById[product.sectors[0] ?? "industry"];
-  const photo = product.images.find((image) => image.kind === "studio") ?? product.images[0];
+  const photo = primaryProductImage(product);
   const certifications = product.certifications ?? [];
   const featured = SHEET_MARK_IDS.map((id) =>
     certifications.find((certification) => certification.id === id),

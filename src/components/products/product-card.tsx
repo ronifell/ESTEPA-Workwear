@@ -10,6 +10,7 @@ import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { siteConfig } from "@/config/site";
 import { getDictionary } from "@/i18n";
 import { formatPrice } from "@/lib/format";
+import { primaryProductImage } from "@/lib/product-media";
 import { cn } from "@/lib/utils";
 import type { Locale, Product } from "@/types";
 
@@ -22,7 +23,7 @@ export interface ProductCardProps {
 
 export function ProductCard({ product, locale, className, priority }: ProductCardProps) {
   const dictionary = getDictionary(locale);
-  const image = product.images[0];
+  const image = primaryProductImage(product);
   const certifications = product.certifications ?? [];
   const showPrice = siteConfig.commerce.pricesEnabled && product.price !== undefined;
 

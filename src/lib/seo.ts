@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { locales, siteConfig } from "@/config/site";
 import { getDictionary } from "@/i18n";
 import { getPath, type RouteKey, type RouteParams } from "@/i18n/routes";
+import { primaryProductImage } from "@/lib/product-media";
 import type { Locale, Product } from "@/types";
 
 /** Canonical + hreflang alternates for a localized route. */
@@ -101,7 +102,7 @@ export function buildOrganizationSchema(locale: Locale): Record<string, unknown>
  * markup never advertises an amount the business has not confirmed.
  */
 export function buildProductSchema(product: Product, locale: Locale): Record<string, unknown> {
-  const image = product.images[0]?.src;
+  const image = primaryProductImage(product)?.src;
   const priced = siteConfig.commerce.pricesEnabled && product.price !== undefined;
 
   return {

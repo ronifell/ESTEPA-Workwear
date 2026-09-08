@@ -15,6 +15,7 @@ import {
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { getDictionary } from "@/i18n";
 import type { Dictionary } from "@/i18n";
+import { primaryProductImage } from "@/lib/product-media";
 import type { Locale, Product } from "@/types";
 
 const highlightIcons: readonly {
@@ -112,7 +113,7 @@ export function Hero({
           </p>
           <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {rail.map((product) => {
-              const image = product.images[0];
+              const image = primaryProductImage(product);
               return (
                 <li key={product.id}>
                   <LocalizedLink

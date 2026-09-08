@@ -6,6 +6,7 @@ import { useState } from "react";
 import {
   AdminCard,
   CheckboxGroup,
+  ImageKindPicker,
   LocalizedLinesField,
   LocalizedTextField,
   MediaField,
@@ -596,11 +597,9 @@ export function ProductForm({
                 }
               />
 
-              <SelectRow
+              <ImageKindPicker
                 id={`image-kind-${index}`}
-                label={copy.images.kind}
                 value={image.kind}
-                options={options.imageKinds}
                 onChange={(kind) =>
                   patch({
                     images: updateAt(draft.images, index, {

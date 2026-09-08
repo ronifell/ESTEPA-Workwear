@@ -13,6 +13,7 @@ import {
 
 import { siteConfig } from "@/config/site";
 import { clamp } from "@/lib/utils";
+import { primaryProductImage } from "@/lib/product-media";
 import type { CartLine, CartLineSnapshot, Product } from "@/types";
 
 const STORAGE_KEY = "estepa.cart.v1";
@@ -28,7 +29,7 @@ function toSnapshot(product: Product): CartLineSnapshot {
     category: product.category,
   };
 
-  const image = product.images[0]?.src;
+  const image = primaryProductImage(product)?.src;
 
   return {
     ...snapshot,

@@ -94,7 +94,11 @@ export const adminCopy = {
         title: "Datos comerciales",
         description: "El precio sólo se muestra en el sitio si la visualización de precios está habilitada.",
       },
-      images: { title: "Imágenes", description: "Sin imágenes el sitio muestra una silueta técnica." },
+      images: {
+        title: "Imágenes",
+        description:
+          "Estudio es la foto del catálogo y de la ficha. En uso, detalle y material aparecen en la galería del producto.",
+      },
       technicalSheet: {
         title: "Ficha técnica corta",
         description:
@@ -171,12 +175,20 @@ export const adminCopy = {
       src: "Archivo o URL",
       alt: "Texto alternativo",
       altHint: "Describe la imagen para lectores de pantalla.",
-      kind: "Tipo de toma",
+      kind: "Para qué es esta foto",
+      kindHint:
+        "Elegí cómo se usa en el sitio. Con una sola foto se muestra igual; el tipo importa cuando hay varias.",
       kinds: {
         studio: "Estudio",
         "in-use": "En uso",
         detail: "Detalle",
         material: "Material",
+      },
+      kindHelp: {
+        studio: "Prenda sola, fondo neutro. Es la foto principal del catálogo y de la ficha técnica.",
+        "in-use": "La prenda puesta, en una situación de trabajo.",
+        detail: "Acercamiento: bolsillo, costura, cinta o refuerzo.",
+        material: "El tejido de cerca, para ver la trama.",
       },
     },
 

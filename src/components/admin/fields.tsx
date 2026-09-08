@@ -350,6 +350,61 @@ export function SelectRow({
   );
 }
 
+const IMAGE_KINDS = ["studio", "in-use", "detail", "material"] as const;
+
+/** Explains each photo role so the editor sees an immediate change, not a silent dropdown. */
+export function ImageKindPicker({
+  id,
+  value,
+  onChange,
+}: {
+  readonly id: string;
+  readonly value: string;
+  readonly onChange: (next: string) => void;
+}) {
+  const copy = adminCopy.form.images;
+
+  return (
+    <fieldset className="space-y-2">
+      <legend className="font-display text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-text-muted">
+        {copy.kind}
+      </legend>
+      <p className="text-xs text-text-subtle">{copy.kindHint}</p>
+      <div className="grid gap-2 sm:grid-cols-2">
+        {IMAGE_KINDS.map((kind) => {
+          const selected = value === kind;
+          return (
+            <label
+              key={kind}
+              className={cn(
+                "cursor-pointer rounded-2xl border px-3.5 py-3 transition-colors",
+                selected
+                  ? "border-primary bg-primary-soft"
+                  : "border-border-strong bg-surface hover:border-primary/40",
+              )}
+            >
+              <input
+                type="radio"
+                name={id}
+                value={kind}
+                checked={selected}
+                onChange={() => onChange(kind)}
+                className="sr-only"
+              />
+              <span className="block font-display text-sm font-semibold text-navy-900">
+                {copy.kinds[kind]}
+              </span>
+              <span className="mt-1 block text-xs leading-relaxed text-text-muted">
+                {copy.kindHelp[kind]}
+              </span>
+            </label>
+          );
+        })}
+      </div>
+    </fieldset>
+  );
+}
+
 /**
  * File input paired with a text field: the file is uploaded to
  * `/api/admin/uploads` and the resulting public path is written back, but a

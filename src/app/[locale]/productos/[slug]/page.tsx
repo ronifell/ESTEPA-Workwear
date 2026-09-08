@@ -24,6 +24,7 @@ import { sectorsById } from "@/data/sectors";
 import { getDictionary, resolveLocale } from "@/i18n";
 import { getPath } from "@/i18n/routes";
 import { formatPrice } from "@/lib/format";
+import { primaryProductImage } from "@/lib/product-media";
 import {
   getAllProductSlugs,
   getProductBySlug,
@@ -51,13 +52,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: getDictionary(locale).notFound.title, robots: { index: false } };
   }
 
+  const image = primaryProductImage(product);
+
   return buildPageMetadata({
     route: "productDetail",
     locale,
     params: { slug },
     title: product.name[locale],
     description: product.shortDescription[locale],
-    ...(product.images[0] ? { image: product.images[0].src } : {}),
+    ...(image ? { image: image.src } : {}),
   });
 }
 

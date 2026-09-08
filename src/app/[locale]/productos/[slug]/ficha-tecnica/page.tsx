@@ -10,6 +10,7 @@ import { locales } from "@/config/site";
 import { format, getDictionary, resolveLocale } from "@/i18n";
 import { getPath } from "@/i18n/routes";
 import { getAllProductSlugs, getProductBySlug } from "@/lib/repositories/products";
+import { primaryProductImage } from "@/lib/product-media";
 import { buildPageMetadata } from "@/lib/seo";
 
 interface PageProps {
@@ -33,13 +34,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: dictionary.notFound.title, robots: { index: false } };
   }
 
+  const image = primaryProductImage(product);
+
   return buildPageMetadata({
     route: "productDatasheet",
     locale,
     params: { slug },
     title: format(dictionary.product.datasheetTitle, { name: product.name[locale] }),
     description: product.shortDescription[locale],
-    ...(product.images[0] ? { image: product.images[0].src } : {}),
+    ...(image ? { image: image.src } : {}),
   });
 }
 
