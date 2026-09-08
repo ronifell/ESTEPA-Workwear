@@ -12,7 +12,7 @@ const FLAME = "#d0121a";
 function splitName(name: string): { kicker: string | null; title: string } {
   const iso = name.match(/^(EN ISO)\s+(.+)$/i);
   if (iso?.[1] && iso[2]) return { kicker: iso[1], title: iso[2] };
-  const en = name.match(/^(EN)\s+(\d[\dA-Z.]*)$/i);
+  const en = name.match(/^(EN)\s+(\d[\dA-Z][\dA-Z.-]*)$/i);
   if (en?.[1] && en[2]) return { kicker: en[1], title: en[2] };
   const body = name.match(/^(NFPA|ASTM|CAT|UL)\s+(.+)$/i);
   if (body?.[1] && body[2]) return { kicker: body[1], title: body[2] };

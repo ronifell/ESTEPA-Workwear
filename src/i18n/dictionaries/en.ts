@@ -274,7 +274,8 @@ export const en: Dictionary = {
     notFound: "We could not find the product you are looking for.",
     datasheet: "Technical data sheet",
     datasheetTitle: "Technical data sheet — {name}",
-    datasheetPrint: "Print / save PDF",
+    datasheetPrint: "Print",
+    datasheetDownload: "Download PDF",
     datasheetBack: "Back to product",
     datasheetLine: "{name} line",
     datasheetFeatures: "Features",
@@ -643,9 +644,10 @@ export const en: Dictionary = {
     gainDurability:
       "Proven durability: tests include performance after industrial laundering.",
     catalogTitle: "International certifications we offer",
-    catalogNorth: "North America: NFPA 2112 · NFPA 70E · ASTM F1506 · UL Certified.",
-    catalogEurope: "Europe: EN ISO 11611 · EN ISO 11612 · EN 1149 · EN 61482.",
-    catalogArc: "Arc protection: CAT 2.",
+    catalogNorth: "North America: NFPA 2112 · NFPA 70E · ASTM F1506 · ASTM F1959 · UL Certified.",
+    catalogEurope:
+      "Europe: EN ISO 11611 · EN ISO 11612 · EN 1149 · EN 61482-2 · EN 13034 · EN 17353 · EN 342 · EN 343.",
+    catalogArc: "Electric arc: EN 61482-2 · ASTM F1959 · CAT 2.",
     catalogOther: "Others by line: ISO 20471 (high visibility) · EN ISO 13688 · IRAM (local standard).",
     valueTitle: "The right price is not the lowest: it is the one that costs you least.",
     valueBody:

@@ -5,9 +5,12 @@ const ICON_BY_ID: Record<string, CertificationIcon> = {
   "en-11612": "flame",
   "en-1149": "antistatic",
   "en-61482": "arc",
+  "en-61482-2": "arc",
   "en-13034": "chemical",
+  "en-17353": "badge",
   "en-343": "rain",
   "en-342": "cold",
+  "astm-f1959": "arc",
   ul: "ul",
 };
 

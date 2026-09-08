@@ -1,9 +1,11 @@
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { FRARTEX_FAMILY, frartexCertifications } from "@/data/fabrics";
 import { products as seedProducts } from "@/data/products";
+import { canonicalizeStandardId, isStandardId, standardsCatalog } from "@/data/standards";
 import { protectionIds } from "@/lib/product-filters";
-import type { Product, ProtectionId } from "@/types";
+import type { Certification, Product, ProtectionId } from "@/types";
 
 import { StorageUnavailableError } from "./types";
 
@@ -34,11 +36,69 @@ function isProtectionId(value: string): value is ProtectionId {
   return (protectionIds as readonly string[]).includes(value);
 }
 
-/** Drops retired protection tags so an older catalogue file cannot break the storefront. */
+function aliasCertificationId(certification: Certification): string {
+  const fromId = canonicalizeStandardId(certification.id);
+  if (fromId !== certification.id) return fromId;
+
+  const name = certification.name.replace(/\s+/g, " ").trim();
+  if (/^EN\s*6148$/i.test(name) || /^EN\s*61482$/i.test(name)) return "en-61482-2";
+  return certification.id;
+}
+
+function sanitizeCertifications(
+  certifications: readonly Certification[] | undefined,
+): readonly Certification[] | undefined {
+  if (!certifications) return certifications;
+
+  const seen = new Set<string>();
+  const next: Certification[] = [];
+
+  for (const certification of certifications) {
+    const id = aliasCertificationId(certification);
+    if (seen.has(id)) continue;
+    seen.add(id);
+
+    if (isStandardId(id)) {
+      const fromCatalog = standardsCatalog[id];
+      next.push({
+        ...certification,
+        id,
+        name: fromCatalog.name,
+        description: fromCatalog.description,
+        icon: fromCatalog.icon ?? certification.icon,
+      });
+      continue;
+    }
+
+    next.push(id === certification.id ? certification : { ...certification, id });
+  }
+
+  return next;
+}
+
+function withLineCertifications(
+  product: Product,
+  certifications: readonly Certification[] | undefined,
+): readonly Certification[] | undefined {
+  if (product.fabricFamily !== FRARTEX_FAMILY) return certifications;
+
+  const seen = new Set((certifications ?? []).map((item) => item.id));
+  const merged = [...(certifications ?? [])];
+  for (const extra of frartexCertifications) {
+    if (seen.has(extra.id)) continue;
+    merged.push(extra);
+    seen.add(extra.id);
+  }
+  return merged;
+}
+
+/** Drops retired tags and remaps withdrawn standard ids. */
 function sanitizeProduct(product: Product): Product {
-  const protections = (product.protections as readonly string[]).filter(isProtectionId);
-  if (protections.length === product.protections.length) return product;
-  return { ...product, protections };
+  return {
+    ...product,
+    protections: (product.protections as readonly string[]).filter(isProtectionId),
+    certifications: withLineCertifications(product, sanitizeCertifications(product.certifications)),
+  };
 }
 
 function sanitizeCatalogue(products: readonly Product[]): Product[] {
@@ -70,7 +130,7 @@ export async function writeCatalogue(products: readonly Product[]): Promise<void
   const payload: CatalogueFile = {
     version: 1,
     updatedAt: new Date().toISOString(),
-    products: [...products],
+    products: sanitizeCatalogue(products),
   };
 
   try {

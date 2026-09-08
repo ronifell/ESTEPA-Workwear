@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import type { Locale, Product } from "@/types";
 
 /** Marks shown beside the photo on the sheet — same family as the competitor layout, ESTEPA ids only. */
-const SHEET_MARK_IDS = ["ul", "nfpa-2112", "en-11612", "en-61482"] as const;
+const SHEET_MARK_IDS = ["ul", "nfpa-2112", "en-11612", "en-61482-2"] as const;
 
 function publicHost(): string {
   try {

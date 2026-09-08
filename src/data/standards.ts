@@ -12,22 +12,33 @@ export const standardIds = [
   "en-11611",
   "en-11612",
   "en-1149",
-  "en-61482",
+  "en-61482-2",
+  "en-13034",
+  "en-17353",
+  "en-342",
+  "en-343",
   "ul",
   "ul-certificate",
   "nfpa-2112",
   "astm-f1506",
+  "astm-f1959",
   "nfpa-70e",
   "cat-2",
 ] as const;
 
 export type StandardId = (typeof standardIds)[number];
 
+/** Ids written by older catalogue files, rewritten on read. */
+export const standardIdAliases: Record<string, StandardId> = {
+  "en-61482": "en-61482-2",
+  "en-6148": "en-61482-2",
+};
+
 export const heroStandardIds = [
   "ul",
   "nfpa-2112",
   "en-11612",
-  "en-61482",
+  "en-61482-2",
   "nfpa-70e",
 ] as const satisfies readonly StandardId[];
 
@@ -36,10 +47,15 @@ export const filterableStandardIds = [
   "en-11611",
   "en-11612",
   "en-1149",
-  "en-61482",
+  "en-61482-2",
+  "en-13034",
+  "en-17353",
+  "en-342",
+  "en-343",
   "ul",
   "nfpa-2112",
   "astm-f1506",
+  "astm-f1959",
   "nfpa-70e",
   "cat-2",
 ] as const satisfies readonly StandardId[];
@@ -72,13 +88,49 @@ const catalog = {
       en: "Electrostatic properties: dissipates static charge. Required in explosive atmospheres (ATEX).",
     } satisfies LocalizedText,
   },
-  "en-61482": {
-    id: "en-61482",
-    name: "EN 61482",
+  "en-61482-2": {
+    id: "en-61482-2",
+    name: "EN 61482-2",
     icon: "arc",
     description: {
-      es: "Protección contra arco eléctrico (norma IEC/EN): reduce el riesgo de quemaduras por arco.",
-      en: "Electric-arc protection (IEC/EN): reduces the risk of arc burns.",
+      es: "Ropa de protección contra los peligros térmicos de un arco eléctrico (IEC/EN 61482-2).",
+      en: "Protective clothing against the thermal hazards of an electric arc (IEC/EN 61482-2).",
+    } satisfies LocalizedText,
+  },
+  "en-13034": {
+    id: "en-13034",
+    name: "EN 13034",
+    icon: "chemical",
+    description: {
+      es: "Protección limitada contra salpicaduras de productos químicos líquidos (Tipo 6 / PB [6]).",
+      en: "Limited protection against liquid chemical splashes (Type 6 / PB [6]).",
+    } satisfies LocalizedText,
+  },
+  "en-17353": {
+    id: "en-17353",
+    name: "EN 17353",
+    icon: "badge",
+    description: {
+      es: "Equipos de visibilidad mejorada para situaciones de riesgo medio, distintos de EN ISO 20471.",
+      en: "Enhanced-visibility equipment for medium-risk situations, distinct from EN ISO 20471.",
+    } satisfies LocalizedText,
+  },
+  "en-342": {
+    id: "en-342",
+    name: "EN 342",
+    icon: "cold",
+    description: {
+      es: "Ropa de protección contra el frío: aislamiento térmico y resistencia al paso del aire.",
+      en: "Protective clothing against cold: thermal insulation and resistance to air penetration.",
+    } satisfies LocalizedText,
+  },
+  "en-343": {
+    id: "en-343",
+    name: "EN 343",
+    icon: "rain",
+    description: {
+      es: "Ropa de protección contra la lluvia: resistencia al agua y transpirabilidad.",
+      en: "Protective clothing against rain: water penetration resistance and breathability.",
     } satisfies LocalizedText,
   },
   ul: {
@@ -117,6 +169,15 @@ const catalog = {
       en: "North American FR clothing standard for electric arc and momentary flame, for electrical work.",
     } satisfies LocalizedText,
   },
+  "astm-f1959": {
+    id: "astm-f1959",
+    name: "ASTM F1959",
+    icon: "arc",
+    description: {
+      es: "Método de ensayo de arco eléctrico (ATPV / EBT) usado para calificar el desempeño térmico de la prenda.",
+      en: "Electric-arc test method (ATPV / EBT) used to rate the garment's thermal performance.",
+    } satisfies LocalizedText,
+  },
   "nfpa-70e": {
     id: "nfpa-70e",
     name: "NFPA 70E",
@@ -143,6 +204,10 @@ export const standardsList: readonly Certification[] = standardIds.map((id) => c
 
 export function isStandardId(value: string | null | undefined): value is StandardId {
   return Boolean(value && standardIds.some((id) => id === value));
+}
+
+export function canonicalizeStandardId(value: string): string {
+  return standardIdAliases[value] ?? value;
 }
 
 export function getStandard(id: StandardId): Certification {

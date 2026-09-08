@@ -280,7 +280,8 @@ export const es = {
     notFound: "No encontramos el producto que estás buscando.",
     datasheet: "Ficha técnica",
     datasheetTitle: "Ficha técnica — {name}",
-    datasheetPrint: "Imprimir / guardar PDF",
+    datasheetPrint: "Imprimir",
+    datasheetDownload: "Descargar PDF",
     datasheetBack: "Volver al producto",
     datasheetLine: "Línea {name}",
     datasheetFeatures: "Características",
@@ -652,9 +653,10 @@ export const es = {
     gainDurability:
       "Durabilidad comprobada: los ensayos incluyen el desempeño tras lavados industriales.",
     catalogTitle: "Certificaciones internacionales que ofrecemos",
-    catalogNorth: "Norteamérica: NFPA 2112 · NFPA 70E · ASTM F1506 · UL Certified.",
-    catalogEurope: "Europa: EN ISO 11611 · EN ISO 11612 · EN 1149 · EN 61482.",
-    catalogArc: "Protección contra arco: CAT 2.",
+    catalogNorth: "Norteamérica: NFPA 2112 · NFPA 70E · ASTM F1506 · ASTM F1959 · UL Certified.",
+    catalogEurope:
+      "Europa: EN ISO 11611 · EN ISO 11612 · EN 1149 · EN 61482-2 · EN 13034 · EN 17353 · EN 342 · EN 343.",
+    catalogArc: "Arco eléctrico: EN 61482-2 · ASTM F1959 · CAT 2.",
     catalogOther: "Otras según línea: ISO 20471 (alta visibilidad) · EN ISO 13688 · IRAM (norma local).",
     valueTitle: "El precio correcto no es el más bajo: es el que menos te cuesta.",
     valueBody:

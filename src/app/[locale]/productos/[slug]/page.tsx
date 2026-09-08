@@ -7,6 +7,7 @@ import { ProductGallery } from "@/components/products/product-gallery";
 import { ProductGrid } from "@/components/products/product-grid";
 import { SpecBlock } from "@/components/products/spec-block";
 import { CertificationRow } from "@/components/products/certification-badge";
+import { DatasheetPdfLink } from "@/components/products/datasheet-pdf-link";
 import { TechnicalSheet } from "@/components/products/technical-sheet";
 import { CtaSection } from "@/components/shared/cta-section";
 import { WarrantyBadge } from "@/components/shared/warranty-badge";
@@ -119,15 +120,14 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
             <TechnicalSheet product={product} locale={locale} />
 
-            <LocalizedLink
-              route="productDatasheet"
+            <DatasheetPdfLink
+              slug={product.slug}
               locale={locale}
-              params={{ slug: product.slug }}
               className={buttonStyles("outline", "md", "mt-4")}
             >
               <DocumentIcon className="size-4" />
               {copy.datasheetOpen}
-            </LocalizedLink>
+            </DatasheetPdfLink>
 
             <div className="mt-6 flex flex-wrap gap-2">
               {product.sectors.map((id) => (
@@ -303,14 +303,13 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   ))}
                 </ul>
                 <p className="mt-4 text-xs leading-relaxed text-text-subtle">
-                  <LocalizedLink
-                    route="productDatasheet"
+                  <DatasheetPdfLink
+                    slug={product.slug}
                     locale={locale}
-                    params={{ slug: product.slug }}
                     className="font-semibold text-primary hover:text-accent"
                   >
                     {copy.sizeGuide}
-                  </LocalizedLink>
+                  </DatasheetPdfLink>
                   {": "}
                   {copy.sizeGuideNote}
                 </p>
@@ -324,16 +323,15 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
               <ul className="mt-4 space-y-2">
                 <li>
-                  <LocalizedLink
-                    route="productDatasheet"
+                  <DatasheetPdfLink
+                    slug={product.slug}
                     locale={locale}
-                    params={{ slug: product.slug }}
                     className="group flex items-center gap-3 rounded-2xl border border-border px-4 py-3 transition-colors hover:border-primary"
                   >
                     <DocumentIcon className="size-4 shrink-0 text-accent" />
                     <span className="flex-1 text-sm text-text">{copy.datasheet}</span>
                     <DownloadIcon className="size-4 text-text-subtle transition-colors group-hover:text-primary" />
-                  </LocalizedLink>
+                  </DatasheetPdfLink>
                 </li>
                 {availableDocuments.map((document) => (
                   <li key={document.id}>

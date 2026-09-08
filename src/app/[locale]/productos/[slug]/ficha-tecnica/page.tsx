@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { DatasheetPdfLink } from "@/components/products/datasheet-pdf-link";
 import { FichaTecnica } from "@/components/products/ficha-tecnica";
 import { PrintDatasheetButton } from "@/components/products/print-datasheet-button";
 import { ArrowLeftIcon } from "@/components/ui/icons";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { LocalizedLink } from "@/components/ui/localized-link";
+import { buttonStyles } from "@/components/ui/button";
 import { locales } from "@/config/site";
 import { format, getDictionary, resolveLocale } from "@/i18n";
 import { getPath } from "@/i18n/routes";
@@ -68,7 +70,16 @@ export default async function ProductDatasheetPage({ params }: PageProps) {
             <ArrowLeftIcon className="size-4" />
             {copy.datasheetBack}
           </LocalizedLink>
-          <PrintDatasheetButton label={copy.datasheetPrint} />
+          <div className="flex flex-wrap items-center gap-2">
+            <DatasheetPdfLink
+              slug={product.slug}
+              locale={locale}
+              className={buttonStyles("primary", "sm")}
+            >
+              {copy.datasheetDownload}
+            </DatasheetPdfLink>
+            <PrintDatasheetButton label={copy.datasheetPrint} />
+          </div>
         </div>
 
         <Breadcrumbs
