@@ -27,11 +27,11 @@ export default async function HomePage({ params }: PageProps) {
 
   return (
     <>
-      <Hero locale={locale} products={featured} />
+      <Hero locale={locale} />
+      <Certifications locale={locale} />
       <FeaturedProducts locale={locale} products={featured} />
       <Industries locale={locale} />
       <Protections locale={locale} />
-      <Certifications locale={locale} />
       <Corporate locale={locale} />
       <HomeFaq locale={locale} />
       <CtaSection locale={locale} />

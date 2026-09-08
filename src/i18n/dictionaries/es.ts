@@ -9,7 +9,7 @@ export const es = {
     viewProduct: "Ver producto",
     viewAll: "Ver todo",
     contactUs: "Contactarnos",
-    requestInformation: "Solicitar información",
+    requestInformation: "Cotizar",
     talkToAdvisor: "Hablar con un asesor",
     learnMore: "Conocer nuestras soluciones",
     explore: "Explorar",
@@ -61,9 +61,9 @@ export const es = {
   home: {
     hero: {
       eyebrow: "Ropa de trabajo certificada",
-      title: "Ropa de trabajo certificada para una verdadera protección.",
-      titleLead: "Vendemos ropa de trabajo",
-      titleAccent: "certificada para minería, petróleo e industria.",
+      title: "La certificación que las operadoras te exigen. En cada prenda.",
+      titleLead: "La certificación que las operadoras te exigen.",
+      titleAccent: "En cada prenda.",
       description:
         "Overoles, camisas, pantalones y camperas FR y antiestáticos, con normas internacionales —NFPA, UL, ASTM, EN ISO—. Diseño argentino, estándares globales.",
       imageAlt:
@@ -239,7 +239,7 @@ export const es = {
     galleryPrevious: "Imagen anterior",
     galleryNext: "Imagen siguiente",
     galleryStatus: "Imagen {current} de {total}",
-    priceOnRequest: "Precio a confirmar",
+    priceOnRequest: "Precio por cotizar",
     priceNote: "Solicitá una cotización y te enviamos la información comercial.",
     selectSize: "Seleccionar talle",
     findMySize: "Encontrar mi talle",
@@ -488,7 +488,7 @@ export const es = {
     title: "Hablemos sobre tu operación",
     description:
       "Contanos qué necesitás y un asesor se pondrá en contacto para ayudarte a definir la indumentaria adecuada.",
-    formTitle: "Solicitar información",
+    formTitle: "Cotizar",
     infoTitle: "Datos de contacto",
     infoPending: "Los datos de contacto se publicarán próximamente.",
     responseTitle: "Tiempo de respuesta",
@@ -803,7 +803,7 @@ export const es = {
 
   seo: {
     home: {
-      title: "ESTEPA Workwear — Ropa de Trabajo Ignífuga Certificada | Minería y Petróleo Argentina",
+      title: "Ropa de Trabajo FR Certificada | Minería y Petróleo — ESTEPA",
       description:
         "Indumentaria FR y antiestática certificada (NFPA 2112, EN ISO 11612, EN 1149) para minería, petróleo y gas. Diseño argentino, estándares internacionales.",
     },

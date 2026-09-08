@@ -57,7 +57,7 @@ export const adminCopy = {
     deleteConfirm: (name: string) =>
       `¿Eliminar "${name}"? El producto se quita del catálogo y de la web.`,
     deleteError: "No se pudo eliminar el producto.",
-    noPrice: "A confirmar",
+    noPrice: "Por cotizar",
     states: {
       active: "Publicado",
       inactive: "Oculto",
@@ -134,7 +134,7 @@ export const adminCopy = {
       sectorsHint: "Seleccioná al menos uno.",
       protections: "Tipos de protección",
       price: "Precio",
-      priceHint: "Dejalo vacío para mostrar “Precio a confirmar”.",
+      priceHint: "Dejalo vacío para mostrar “Precio por cotizar”.",
       currency: "Moneda",
       sizes: "Talles",
       sizesHint: "Separados por coma. Ejemplo: S, M, L, XL",

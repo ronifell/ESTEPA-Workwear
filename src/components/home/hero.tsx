@@ -1,9 +1,7 @@
 import Image from "next/image";
 
-import { ProductImageOverlay } from "@/components/products/product-image-overlay";
 import { CertStrip } from "@/components/shared/cert-strip";
 import { buttonStyles } from "@/components/ui/button";
-import { ExploreHint } from "@/components/ui/explore-hint";
 import {
   ArrowRightIcon,
   GearIcon,
@@ -15,8 +13,7 @@ import {
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { getDictionary } from "@/i18n";
 import type { Dictionary } from "@/i18n";
-import { primaryProductImage } from "@/lib/product-media";
-import type { Locale, Product } from "@/types";
+import type { Locale } from "@/types";
 
 const highlightIcons: readonly {
   readonly key: keyof Dictionary["home"]["highlights"];
@@ -28,16 +25,9 @@ const highlightIcons: readonly {
   { key: "support", Icon: HeadsetIcon },
 ];
 
-export function Hero({
-  locale,
-  products = [],
-}: {
-  readonly locale: Locale;
-  readonly products?: readonly Product[];
-}) {
+export function Hero({ locale }: { readonly locale: Locale }) {
   const dictionary = getDictionary(locale);
   const { hero, highlights } = dictionary.home;
-  const rail = products.slice(0, 4);
 
   return (
     <section className="relative overflow-hidden bg-sand-100 industrial-texture">
@@ -105,41 +95,6 @@ export function Hero({
           </div>
         </div>
       </div>
-
-      {rail.length > 0 ? (
-        <div className="container-page pb-10 lg:pb-12">
-          <p className="mb-4 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-accent">
-            {hero.productRail}
-          </p>
-          <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {rail.map((product) => {
-              const image = primaryProductImage(product);
-              return (
-                <li key={product.id}>
-                  <LocalizedLink
-                    route="productDetail"
-                    locale={locale}
-                    params={{ slug: product.slug }}
-                    className="group/photo relative block aspect-4/5 overflow-hidden rounded-3xl border border-border bg-sand-200"
-                  >
-                    {image ? (
-                      <Image
-                        src={image.src}
-                        alt={image.alt[locale]}
-                        fill
-                        sizes="(min-width: 1024px) 22vw, 50vw"
-                        className="object-contain transition-transform duration-500 group-hover:scale-[1.04]"
-                      />
-                    ) : null}
-                    <ProductImageOverlay product={product} locale={locale} compact />
-                    <ExploreHint label={dictionary.common.explore} />
-                  </LocalizedLink>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : null}
 
       <div className="relative border-y border-border bg-sand-200/70">
         <div className="container-page">

@@ -47,7 +47,7 @@ export function buildPageMetadata({
   const url = getPath(route, locale, params);
 
   return {
-    title,
+    title: route === "home" ? { absolute: title } : title,
     description,
     alternates: buildAlternates(route, locale, params),
     openGraph: {

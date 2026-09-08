@@ -60,8 +60,8 @@ export default async function OpengraphImage({
           >
             {dictionary.common.brandTagline}
           </span>
-          <span style={{ fontSize: 62, fontWeight: 700, lineHeight: 1.1, maxWidth: 940 }}>
-            {dictionary.home.hero.titleLead}
+          <span style={{ fontSize: 52, fontWeight: 700, lineHeight: 1.12, maxWidth: 940 }}>
+            {dictionary.home.hero.titleLead} {dictionary.home.hero.titleAccent}
           </span>
         </div>
 

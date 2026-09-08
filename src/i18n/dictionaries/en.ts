@@ -7,7 +7,7 @@ export const en: Dictionary = {
     viewProduct: "View product",
     viewAll: "View all",
     contactUs: "Contact us",
-    requestInformation: "Request information",
+    requestInformation: "Get a quote",
     talkToAdvisor: "Talk to an advisor",
     learnMore: "Discover our solutions",
     explore: "Explore",
@@ -59,9 +59,9 @@ export const en: Dictionary = {
   home: {
     hero: {
       eyebrow: "Certified workwear",
-      title: "Certified workwear for genuine protection.",
-      titleLead: "We sell certified workwear",
-      titleAccent: "for mining, oil and gas, and industry.",
+      title: "The certification operators require. In every garment.",
+      titleLead: "The certification operators require.",
+      titleAccent: "In every garment.",
       description:
         "Coveralls, shirts, trousers and jackets — FR and antistatic — with international standards —NFPA, UL, ASTM, EN ISO—. Argentine design, global standards.",
       imageAlt:
@@ -233,7 +233,7 @@ export const en: Dictionary = {
     galleryPrevious: "Previous image",
     galleryNext: "Next image",
     galleryStatus: "Image {current} of {total}",
-    priceOnRequest: "Price on request",
+    priceOnRequest: "Price on quote",
     priceNote: "Request a quote and we will send you the commercial information.",
     selectSize: "Select size",
     findMySize: "Find my size",
@@ -480,7 +480,7 @@ export const en: Dictionary = {
     title: "Let's talk about your operation",
     description:
       "Tell us what you need and an advisor will get in touch to help you define the right apparel.",
-    formTitle: "Request information",
+    formTitle: "Get a quote",
     infoTitle: "Contact details",
     infoPending: "Contact details will be published soon.",
     responseTitle: "Response time",
@@ -793,7 +793,7 @@ export const en: Dictionary = {
 
   seo: {
     home: {
-      title: "ESTEPA Workwear — Certified Flame-Resistant Workwear | Mining & Oil Argentina",
+      title: "Certified FR Workwear | Mining & Oil — ESTEPA",
       description:
         "Certified FR and antistatic apparel (NFPA 2112, EN ISO 11612, EN 1149) for mining, oil and gas. Argentine design, international standards.",
     },
