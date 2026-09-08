@@ -183,7 +183,7 @@ export function FichaTecnica({
                   fill
                   priority
                   sizes="(min-width: 1024px) 28vw, 70vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
               ) : null}
             </div>

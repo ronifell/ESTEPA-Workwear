@@ -33,7 +33,16 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
         className,
       )}
     >
-      <div className="group/photo relative aspect-4/5 overflow-hidden bg-sand-200">
+      <LocalizedLink
+        route="productDetail"
+        locale={locale}
+        params={{ slug: product.slug }}
+        className="absolute inset-0 z-[1] rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+      >
+        <h3 className="sr-only">{product.name[locale]}</h3>
+      </LocalizedLink>
+
+      <div className="group/photo relative aspect-4/5 overflow-hidden bg-sand-100">
         {image ? (
           <Image
             src={image.src}
@@ -41,7 +50,7 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
             fill
             priority={priority}
             sizes="(min-width: 1280px) 22rem, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-500 ease-[var(--ease-out-industrial)] group-hover:scale-[1.03]"
+            className="object-contain transition-transform duration-500 ease-[var(--ease-out-industrial)] group-hover:scale-[1.03]"
           />
         ) : (
           <PlaceholderImage
@@ -50,7 +59,7 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
           />
         )}
 
-        <div className="absolute left-3 top-3 z-10 flex flex-wrap gap-1.5">
+        <div className="pointer-events-none absolute left-3 top-3 z-10 flex flex-wrap gap-1.5">
           {product.preliminary ? (
             <Badge tone="pending">{dictionary.common.preliminaryContent}</Badge>
           ) : null}
@@ -64,17 +73,6 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
       </div>
 
       <div className="flex flex-1 flex-col p-5 lg:p-6">
-        <h3 className="sr-only">
-          <LocalizedLink
-            route="productDetail"
-            locale={locale}
-            params={{ slug: product.slug }}
-            className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
-          >
-            {product.name[locale]}
-          </LocalizedLink>
-        </h3>
-
         <p className="text-sm leading-relaxed text-text-muted">{product.shortDescription[locale]}</p>
 
         <div className="mt-auto pt-6">

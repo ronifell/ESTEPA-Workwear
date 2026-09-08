@@ -127,7 +127,7 @@ export function Hero({
                         alt={image.alt[locale]}
                         fill
                         sizes="(min-width: 1024px) 22vw, 50vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        className="object-contain transition-transform duration-500 group-hover:scale-[1.04]"
                       />
                     ) : null}
                     <ProductImageOverlay product={product} locale={locale} compact />

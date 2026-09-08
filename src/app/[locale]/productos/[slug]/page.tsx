@@ -35,6 +35,8 @@ interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
 
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const slugs = await getAllProductSlugs();
   return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));

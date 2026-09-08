@@ -197,7 +197,7 @@ export function ProductGallery({ product }: { readonly product: Product }) {
                   priority={index === (canSlide ? 1 : 0)}
                   draggable={false}
                   sizes="(min-width: 1024px) 45vw, 100vw"
-                  className="pointer-events-none object-cover"
+                  className="pointer-events-none object-contain"
                 />
               </div>
             ))}
