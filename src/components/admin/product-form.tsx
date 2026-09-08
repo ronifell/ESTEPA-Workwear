@@ -18,6 +18,7 @@ import {
   type OptionItem,
 } from "@/components/admin/fields";
 import { Button } from "@/components/ui/button";
+import { ColorPicker } from "@/components/ui/color-picker";
 import { Field, TextInput } from "@/components/ui/field";
 import { Notice } from "@/components/ui/notice";
 import { adminCopy, translateFieldError } from "@/lib/admin/copy";
@@ -686,7 +687,7 @@ export function ProductForm({
               index={index}
               onRemove={() => patch({ colors: removeAt(draft.colors, index) })}
             >
-              <div className="grid gap-4 sm:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <Field
                   id={`color-id-${index}`}
                   label={copy.colors.id}
@@ -706,26 +707,21 @@ export function ProductForm({
                 <Field
                   id={`color-hex-${index}`}
                   label={copy.colors.hex}
+                  hint={copy.colors.hexHint}
                   error={translateFieldError(errors[`colors.${index}.hex`])}
                 >
-                  <TextInput
+                  <ColorPicker
                     id={`color-hex-${index}`}
                     value={color.hex}
+                    chooseLabel={copy.colors.pick}
                     invalid={Boolean(errors[`colors.${index}.hex`])}
-                    onChange={(event) =>
+                    onChange={(hex) =>
                       patch({
-                        colors: updateAt(draft.colors, index, { ...color, hex: event.target.value }),
+                        colors: updateAt(draft.colors, index, { ...color, hex }),
                       })
                     }
                   />
                 </Field>
-                <div className="flex items-end pb-2">
-                  <span
-                    className="size-9 border border-border"
-                    style={{ backgroundColor: color.hex }}
-                    aria-hidden
-                  />
-                </div>
               </div>
               <LocalizedTextField
                 id={`color-name-${index}`}

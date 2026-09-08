@@ -160,7 +160,9 @@ export const adminCopy = {
       empty: "Sin colores cargados.",
       id: "Identificador",
       name: "Nombre",
-      hex: "Color (hex)",
+      hex: "Color",
+      hexHint: "Hacé clic en el recuadro para elegir el color.",
+      pick: "Elegir color",
     },
 
     images: {
