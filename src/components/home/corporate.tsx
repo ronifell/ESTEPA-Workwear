@@ -20,10 +20,10 @@ const points: readonly {
   readonly key: keyof Dictionary["home"]["corporate"]["points"];
   readonly Icon: (props: IconProps) => React.JSX.Element;
 }[] = [
-  { key: "specialization", Icon: TargetIcon },
-  { key: "quality", Icon: GemIcon },
-  { key: "safety", Icon: ShieldCheckIcon },
-  { key: "service", Icon: LayersIcon },
+  { key: "trust", Icon: ShieldCheckIcon },
+  { key: "standard", Icon: GemIcon },
+  { key: "risk", Icon: TargetIcon },
+  { key: "support", Icon: LayersIcon },
 ];
 
 export function Corporate({ locale }: { readonly locale: Locale }) {

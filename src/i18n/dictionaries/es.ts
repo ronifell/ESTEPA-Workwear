@@ -122,29 +122,29 @@ export const es = {
     },
     corporate: {
       eyebrow: "Nosotros",
-      title: "Preparados para los entornos que exigen más.",
+      title: "De la montaña al trabajo. El mismo estándar.",
       description:
-        "ESTEPA Workwear nace con un objetivo claro: acompañar la seguridad de quienes trabajan en entornos industriales exigentes. Trabajamos con foco en la especialización, la calidad de los materiales y la atención a las necesidades concretas de cada operación.",
+        "ESTEPA nació en la pared, no en una oficina. Somos Martin y Carlos, dos montañistas con certificación IRATA nivel 3: traemos a la minería y al petróleo argentino el estándar que aprendimos en los Alpes suizos.",
       points: {
-        specialization: {
-          title: "Especialización",
+        trust: {
+          title: "Le confiamos la vida antes de venderlo",
           description:
-            "Trabajamos exclusivamente en indumentaria orientada a entornos industriales.",
+            "Cinco años en trabajo vertical: elegimos cada prenda desde el lado del que depende de ella.",
         },
-        quality: {
-          title: "Calidad",
+        standard: {
+          title: "Estándar sin descuento",
           description:
-            "Selección de materiales orientada a la durabilidad y al uso intensivo.",
+            "El mismo nivel de certificación y ensayo que exige la industria europea.",
         },
-        safety: {
-          title: "Enfoque en seguridad",
+        risk: {
+          title: "El riesgo primero",
           description:
-            "Cada decisión de producto parte del riesgo que enfrenta el operario.",
+            "Cada decisión arranca del peligro real del puesto: fuego, arco, visibilidad, frío.",
         },
-        service: {
-          title: "Atención industrial",
+        support: {
+          title: "Acompañamiento técnico",
           description:
-            "Acompañamiento técnico y comercial para empresas y contratistas.",
+            "Asesoramos a empresas y contratistas, incluida la documentación para homologación.",
         },
       },
       cta: "Conocer ESTEPA",
@@ -422,31 +422,39 @@ export const es = {
 
   about: {
     eyebrow: "Nosotros",
-    title: "Una marca creada para acompañar la seguridad industrial.",
-    intro:
-      "ESTEPA Workwear es una marca de indumentaria técnica y ropa de trabajo orientada a sectores donde la seguridad del operario es determinante.",
-    missionTitle: "Nuestra misión",
-    missionDescription:
-      "Proporcionar soluciones de indumentaria de trabajo orientadas a acompañar la seguridad en entornos industriales exigentes.",
-    approachTitle: "Nuestro enfoque",
+    title: "De la montaña al trabajo. El mismo estándar.",
+    intro: "ESTEPA nació en la pared, no en una oficina.",
+    storyTitle: "Nuestra historia",
+    story: [
+      "ESTEPA nació en la pared, no en una oficina. Somos Martin y Carlos, dos montañistas que durante cinco años trabajamos en los Alpes suizos haciendo trabajo vertical: mantenimiento y obra en altura, sostenidos por una cuerda, en un entorno donde las condiciones son tan extremas como las de nuestro propio país. Ahí crecimos profesionalmente hasta obtener las máximas certificaciones de acceso por cuerda —IRATA nivel 3—, el grado que solo alcanza quien es responsable de la seguridad de todo un equipo.",
+      "En esos años aprendimos algo que no se enseña en un catálogo: la diferencia entre una prenda certificada y una que solo lo parece no es un papel, es el margen. En Suiza ese estándar no se discute —se ensaya, se documenta y se cumple— y nosotros lo vivimos puestos, turno tras turno, con la vida colgada del equipo que llevábamos encima.",
+      "Volvimos a casa y encontramos la otra cara. En los entornos más duros de Argentina —la minería, el petróleo, la estepa que le da nombre a esta marca— la gente trabaja expuesta a los mismos riesgos, muchas veces con equipo que no está a la altura. ESTEPA existe para cerrar esa brecha: traer el estándar que aprendimos afuera a quienes lo necesitan acá. Por eso cada prenda lleva el nombre de un lugar de este país —Cordillera, Andes, Pampa, Calafate, Zonda, Talampaya—: están pensadas para el terreno donde se van a usar, por gente que sabe lo que es depender del equipo que lleva puesto.",
+    ],
+    closing:
+      "No vendemos ropa de trabajo. Traemos el estándar que nos cuidó afuera.",
+    approachTitle: "Pilares",
     approachDescription:
-      "Trabajamos sobre cuatro ejes que definen cada decisión de producto.",
+      "Cuatro decisiones que definen cómo elegimos cada prenda.",
     approach: {
-      safety: {
-        title: "Seguridad",
-        description: "El riesgo real de la operación es el punto de partida.",
+      trust: {
+        title: "Le confiamos la vida antes de venderlo",
+        description:
+          "Cinco años en trabajo vertical con certificación IRATA 3: elegimos cada prenda desde el lado del que depende de ella, no desde el del que la despacha.",
       },
-      quality: {
-        title: "Calidad",
-        description: "Materiales y construcción orientados al uso intensivo.",
+      standard: {
+        title: "Estándar sin descuento",
+        description:
+          "El mismo nivel de certificación y ensayo que exige la industria europea, aplicado a lo que ofrecemos acá.",
       },
-      specialization: {
-        title: "Especialización",
-        description: "Foco exclusivo en indumentaria para entornos industriales.",
+      risk: {
+        title: "El riesgo primero",
+        description:
+          "Cada decisión de producto arranca del peligro real del puesto: fuego repentino, arco eléctrico, visibilidad, frío. Primero el riesgo, después la prenda.",
       },
-      service: {
-        title: "Atención a la industria",
-        description: "Acompañamiento a empresas, contratistas y equipos de seguridad.",
+      support: {
+        title: "Acompañamiento técnico",
+        description:
+          "Asesoramos a empresas y contratistas antes y después de la compra, incluida la documentación para homologación.",
       },
     },
     sectorsTitle: "Sectores en los que trabajamos",
@@ -457,10 +465,6 @@ export const es = {
       "Llegamos a todo el país, con foco en las cuencas mineras y energéticas.",
     coverageNote:
       "Consultanos por operaciones en otras provincias: evaluamos cada caso según el volumen y las necesidades del proyecto.",
-    historyTitle: "Nuestra historia",
-    historyPlaceholder:
-      "Esta sección está reservada para el relato de origen de ESTEPA Workwear. El contenido lo completa el equipo comercial.",
-    historyNote: "Texto y fotografías en preparación.",
     ctaTitle: "Trabajemos juntos en la seguridad de tu equipo.",
     ctaDescription:
       "Escribinos y coordinamos una conversación con un asesor técnico.",
@@ -842,7 +846,7 @@ export const es = {
     about: {
       title: "Nosotros",
       description:
-        "ESTEPA Workwear: indumentaria técnica orientada a la seguridad en entornos industriales.",
+        "De la montaña al trabajo. Martin y Carlos, IRATA nivel 3, traen a la minería y el petróleo argentino el estándar aprendido en los Alpes.",
     },
     catalog: {
       title: "Catálogo digital",

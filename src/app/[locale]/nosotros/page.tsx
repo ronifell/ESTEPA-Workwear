@@ -29,10 +29,10 @@ const approachIcons: readonly {
   readonly key: keyof Dictionary["about"]["approach"];
   readonly Icon: (props: IconProps) => React.JSX.Element;
 }[] = [
-  { key: "safety", Icon: ShieldCheckIcon },
-  { key: "quality", Icon: GemIcon },
-  { key: "specialization", Icon: TargetIcon },
-  { key: "service", Icon: LayersIcon },
+  { key: "trust", Icon: ShieldCheckIcon },
+  { key: "standard", Icon: GemIcon },
+  { key: "risk", Icon: TargetIcon },
+  { key: "support", Icon: LayersIcon },
 ];
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -63,23 +63,27 @@ export default async function AboutPage({ params }: PageProps) {
         ]}
       />
 
-      <Section tone="default">
+      <Section id="nuestra-historia" tone="default">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-7">
             <p className="eyebrow mb-5 text-accent">
               <span aria-hidden className="h-px w-8 bg-accent/50" />
-              {copy.missionTitle}
+              {copy.storyTitle}
             </p>
-            <p className="text-xl leading-relaxed text-navy-900 sm:text-2xl sm:leading-relaxed">
-              {copy.missionDescription}
-            </p>
+            <div className="space-y-5">
+              {copy.story.map((paragraph) => (
+                <p key={paragraph} className="text-base leading-relaxed text-text sm:text-lg sm:leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </Reveal>
 
           <Reveal delay={120} className="lg:col-span-5">
             <LocalizedLink
               route="products"
               locale={locale}
-              className="group/photo relative block aspect-3/2 overflow-hidden rounded-3xl bg-sand-200 lg:aspect-4/3"
+              className="group/photo relative block aspect-3/2 overflow-hidden rounded-3xl bg-sand-200 lg:aspect-4/5"
             >
               <Image
                 src="/images/hero/about-detail.jpg"
@@ -120,6 +124,15 @@ export default async function AboutPage({ params }: PageProps) {
         </ul>
       </Section>
 
+      <Section tone="inverse" className="relative overflow-hidden">
+        <div aria-hidden className="blueprint-grid absolute inset-0 opacity-60" />
+        <Reveal className="relative max-w-4xl">
+          <p className="font-display text-2xl font-semibold leading-snug text-text-inverse sm:text-3xl sm:leading-snug">
+            {copy.closing}
+          </p>
+        </Reveal>
+      </Section>
+
       <Section tone="default">
         <SectionHeading eyebrow={dictionary.common.sectors} title={copy.sectorsTitle} />
 
@@ -155,21 +168,18 @@ export default async function AboutPage({ params }: PageProps) {
         </ul>
       </Section>
 
-      <Section tone="inverse" className="relative overflow-hidden">
-        <div aria-hidden className="blueprint-grid absolute inset-0 opacity-60" />
-
+      <Section tone="muted" className="relative overflow-hidden">
         <div className="relative grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <SectionHeading
               eyebrow={copy.coverageTitle}
               title={copy.coverageTitle}
               description={copy.coverageDescription}
-              inverse
             />
           </div>
 
           <div className="lg:col-span-7">
-            <p className="font-display text-xl font-semibold leading-snug text-text-inverse sm:text-2xl">
+            <p className="font-display text-xl font-semibold leading-snug text-navy-900 sm:text-2xl">
               {copy.coverageStatement}
             </p>
 
@@ -182,20 +192,6 @@ export default async function AboutPage({ params }: PageProps) {
               <ArrowRightIcon className="size-4" />
             </LocalizedLink>
           </div>
-        </div>
-      </Section>
-
-      <Section id="nuestra-historia" tone="muted">
-        <SectionHeading
-          eyebrow={copy.eyebrow}
-          title={copy.historyTitle}
-          description={copy.historyPlaceholder}
-        />
-        <div className="mt-10 border border-dashed border-border-strong bg-surface px-6 py-16 text-center">
-          <span aria-hidden className="hazard-stripes mx-auto h-1 w-16 opacity-70" />
-          <p className="mt-6 font-display text-sm font-semibold uppercase tracking-[0.14em] text-text-subtle">
-            {copy.historyNote}
-          </p>
         </div>
       </Section>
 

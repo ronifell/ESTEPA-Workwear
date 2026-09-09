@@ -120,25 +120,29 @@ export const en: Dictionary = {
     },
     corporate: {
       eyebrow: "About us",
-      title: "Ready for the environments that demand the most.",
+      title: "From the mountain to the job. The same standard.",
       description:
-        "ESTEPA Workwear was created with a clear purpose: to support the safety of people working in demanding industrial environments. We focus on specialisation, material quality and attention to the specific needs of every operation.",
+        "ESTEPA was born on the rock face, not in an office. We're Martin and Carlos, two climbers with IRATA Level 3 certification: we bring the standard we learned in the Swiss Alps to Argentine mining and oil and gas.",
       points: {
-        specialization: {
-          title: "Specialisation",
-          description: "We work exclusively on apparel for industrial environments.",
+        trust: {
+          title: "We trusted our lives to it first",
+          description:
+            "Five years of vertical work: we choose every garment from the side of the person who depends on it.",
         },
-        quality: {
-          title: "Quality",
-          description: "Material selection focused on durability and intensive use.",
+        standard: {
+          title: "No discount on the standard",
+          description:
+            "The same level of certification and testing the European industry demands.",
         },
-        safety: {
-          title: "Safety focus",
-          description: "Every product decision starts from the risk the worker faces.",
+        risk: {
+          title: "Risk first",
+          description:
+            "Every product decision starts from the real hazard: flash fire, electric arc, visibility, cold.",
         },
-        service: {
-          title: "Industrial support",
-          description: "Technical and commercial support for companies and contractors.",
+        support: {
+          title: "Technical support",
+          description:
+            "We advise companies and contractors, including the documentation for homologation.",
         },
       },
       cta: "About ESTEPA",
@@ -416,30 +420,38 @@ export const en: Dictionary = {
 
   about: {
     eyebrow: "About us",
-    title: "A brand created to support industrial safety.",
-    intro:
-      "ESTEPA Workwear is a technical apparel and workwear brand focused on sectors where worker safety is decisive.",
-    missionTitle: "Our mission",
-    missionDescription:
-      "To provide workwear solutions designed to support safety in demanding industrial environments.",
-    approachTitle: "Our approach",
-    approachDescription: "We work along four principles that shape every product decision.",
+    title: "From the mountain to the job. The same standard.",
+    intro: "ESTEPA was born on the rock face, not in an office.",
+    storyTitle: "Our story",
+    story: [
+      "ESTEPA was born on the rock face, not in an office. We're Martin and Carlos, two climbers who spent five years working in the Swiss Alps doing vertical work: high-altitude maintenance and construction, held by a rope, in an environment as extreme as the one back home. Those years took us to the highest rope-access certification — IRATA Level 3 — the grade held only by those responsible for the safety of an entire team.",
+      "What we learned there isn't in any catalogue: the difference between a garment that's certified and one that only looks it isn't a piece of paper — it's the margin. In Switzerland that standard isn't up for debate; it's tested, documented and met. We lived it wearing it, shift after shift, with our lives hanging from the equipment on our backs.",
+      "We came home and found the other side. In Argentina's harshest environments — mining, oil and gas, the steppe that gives this brand its name — people face the same risks, often with gear that isn't up to the job. ESTEPA exists to close that gap: to bring the standard we learned abroad to the people who need it here. That's why every garment carries the name of a place in this country — Cordillera, Andes, Pampa, Calafate, Zonda, Talampaya — built for the terrain where it will be worn, by people who know what it means to depend on the equipment they have on.",
+    ],
+    closing:
+      "We don't sell workwear. We bring home the standard that kept us safe abroad.",
+    approachTitle: "Pillars",
+    approachDescription: "Four decisions that shape how we choose every garment.",
     approach: {
-      safety: {
-        title: "Safety",
-        description: "The real risk of the operation is the starting point.",
+      trust: {
+        title: "We trusted our lives to it before selling it",
+        description:
+          "Five years of vertical work with IRATA Level 3 certification: we choose every garment from the side of the person who depends on it, not the one who ships it.",
       },
-      quality: {
-        title: "Quality",
-        description: "Materials and construction designed for intensive use.",
+      standard: {
+        title: "No discount on the standard",
+        description:
+          "The same level of certification and testing the European industry demands, applied to what we offer here.",
       },
-      specialization: {
-        title: "Specialisation",
-        description: "Exclusive focus on apparel for industrial environments.",
+      risk: {
+        title: "Risk first",
+        description:
+          "Every product decision starts from the real hazard of the job: flash fire, electric arc, visibility, cold. Risk first, garment second.",
       },
-      service: {
-        title: "Industry support",
-        description: "Support for companies, contractors and safety teams.",
+      support: {
+        title: "Technical support",
+        description:
+          "We advise companies and contractors before and after the purchase, including the documentation for homologation.",
       },
     },
     sectorsTitle: "Sectors we work with",
@@ -450,10 +462,6 @@ export const en: Dictionary = {
       "We reach the whole country, with a focus on mining and energy basins.",
     coverageNote:
       "Ask us about operations in other provinces: we evaluate each case according to the volume and needs of the project.",
-    historyTitle: "Our history",
-    historyPlaceholder:
-      "This section is reserved for the origin story of ESTEPA Workwear. Commercial copy will be supplied by the client.",
-    historyNote: "Text and photographs in preparation.",
     ctaTitle: "Let's work together on your team's safety.",
     ctaDescription: "Write to us and we will arrange a conversation with a technical advisor.",
   },
@@ -832,7 +840,7 @@ export const en: Dictionary = {
     about: {
       title: "About us",
       description:
-        "ESTEPA Workwear: technical apparel focused on safety in industrial environments.",
+        "From the mountain to the job. Martin and Carlos, IRATA Level 3, bring the standard learned in the Alps to Argentine mining and oil and gas.",
     },
     catalog: {
       title: "Digital catalogue",
