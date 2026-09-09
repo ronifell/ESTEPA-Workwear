@@ -144,7 +144,7 @@ export function buildFaqSchema(
 export function buildMetadataFromDictionary(
   route: RouteKey,
   locale: Locale,
-  key: keyof ReturnType<typeof getDictionary>["seo"],
+  key: Exclude<keyof ReturnType<typeof getDictionary>["seo"], "keywords">,
 ): Metadata {
   const { seo } = getDictionary(locale);
   return buildPageMetadata({

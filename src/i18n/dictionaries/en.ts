@@ -802,6 +802,16 @@ export const en: Dictionary = {
   },
 
   seo: {
+    keywords: [
+      "certified flame-resistant workwear",
+      "FR workwear Argentina",
+      "flame-resistant mining apparel",
+      "antistatic oil and gas workwear",
+      "NFPA 2112 workwear",
+      "FR electric arc workwear",
+      "flame-resistant high-visibility workwear",
+      "certified industrial safety apparel",
+    ],
     home: {
       title: "Certified FR Workwear | Mining & Oil — ESTEPA",
       description:

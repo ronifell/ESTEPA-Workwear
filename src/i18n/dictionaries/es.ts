@@ -808,6 +808,16 @@ export const es = {
   },
 
   seo: {
+    keywords: [
+      "ropa ignífuga certificada",
+      "ropa de trabajo FR Argentina",
+      "indumentaria ignífuga minería",
+      "ropa antiestática petróleo y gas",
+      "ropa de trabajo NFPA 2112",
+      "ropa FR arco eléctrico",
+      "ropa de alta visibilidad ignífuga",
+      "indumentaria de seguridad industrial certificada",
+    ],
     home: {
       title: "Ropa de Trabajo FR Certificada | Minería y Petróleo — ESTEPA",
       description:
