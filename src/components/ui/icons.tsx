@@ -204,6 +204,21 @@ export function CartIcon(props: IconProps) {
   );
 }
 
+export function HeartIcon({
+  filled = false,
+  ...props
+}: IconProps & { readonly filled?: boolean }) {
+  return (
+    <Svg
+      {...props}
+      fill={filled ? "currentColor" : "none"}
+      strokeWidth={filled ? 1.2 : 1.5}
+    >
+      <path d="M12 20.4 4.7 13.5a4.6 4.6 0 0 1 6.5-6.5L12 8l.8-1a4.6 4.6 0 0 1 6.5 6.5Z" />
+    </Svg>
+  );
+}
+
 export function MenuIcon(props: IconProps) {
   return (
     <Svg {...props}>

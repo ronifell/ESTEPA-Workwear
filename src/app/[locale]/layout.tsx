@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { WhatsappFloat } from "@/components/layout/whatsapp-float";
 import { CartProvider } from "@/components/providers/cart-provider";
+import { FavoritesProvider } from "@/components/providers/favorites-provider";
 import { I18nProvider } from "@/components/providers/i18n-provider";
 import { JsonLd } from "@/components/seo/json-ld";
 import { locales, siteConfig } from "@/config/site";
@@ -98,12 +99,14 @@ export default async function LocaleLayout({
 
         <I18nProvider locale={raw} dictionary={dictionary}>
           <CartProvider>
-            <SiteHeader />
-            <main id="main" className="flex-1">
-              {children}
-            </main>
-            <SiteFooter locale={raw} />
-            <WhatsappFloat />
+            <FavoritesProvider>
+              <SiteHeader />
+              <main id="main" className="flex-1">
+                {children}
+              </main>
+              <SiteFooter locale={raw} />
+              <WhatsappFloat />
+            </FavoritesProvider>
           </CartProvider>
         </I18nProvider>
 

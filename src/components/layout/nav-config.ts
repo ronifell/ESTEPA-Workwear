@@ -28,6 +28,7 @@ export const fullNav: readonly NavItem[] = [
   ...sectorNav,
   { route: "products", labelKey: "products" },
   { route: "catalog", labelKey: "catalog" },
+  { route: "favorites", labelKey: "favorites" },
   { route: "protection", labelKey: "protection" },
   { route: "faq", labelKey: "faq" },
   { route: "about", labelKey: "about" },

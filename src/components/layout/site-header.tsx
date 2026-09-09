@@ -5,6 +5,7 @@ import { useEffect, useId, useRef, useState } from "react";
 
 import { CartButton } from "@/components/cart/cart-button";
 import { MiniCart } from "@/components/cart/mini-cart";
+import { FavoritesNavButton } from "@/components/favorites/favorites-nav-button";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { Logo } from "@/components/layout/logo";
 import { MobileMenu } from "@/components/layout/mobile-menu";
@@ -176,6 +177,7 @@ export function SiteHeader() {
             <div className="flex shrink-0 items-center gap-1 sm:gap-3">
               <LanguageSwitcher className="hidden sm:flex" />
               <span aria-hidden className="hidden h-4 w-px bg-border-strong sm:block" />
+              <FavoritesNavButton />
               <CartButton />
               <button
                 type="button"

@@ -7,6 +7,7 @@ import { getAllProductSlugs } from "@/lib/repositories/products";
 /** Routes that should never be indexed (transactional or user specific). */
 const excluded = new Set<RouteKey>([
   "cart",
+  "favorites",
   "checkout",
   "orderConfirmation",
   "productDetail",

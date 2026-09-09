@@ -53,6 +53,8 @@ export const es = {
     mainNavigation: "Navegación principal",
     cart: "Carrito",
     cartItems: "Artículos en el carrito",
+    favorites: "Favoritos",
+    favoritesItems: "Productos en favoritos",
     language: "Idioma",
     changeLanguage: "Cambiar idioma",
     solutions: "Soluciones",
@@ -565,6 +567,21 @@ export const es = {
     summary: "Resumen",
   },
 
+  favorites: {
+    title: "Favoritos",
+    eyebrow: "Tu lista",
+    empty: {
+      title: "Todavía no hay favoritos",
+      description: "Tocá el corazón en un producto para guardarlo y volver a verlo acá.",
+      cta: "Ver productos",
+    },
+    add: "Agregar a favoritos",
+    remove: "Quitar de favoritos",
+    clear: "Vaciar favoritos",
+    item: "prenda",
+    items: "prendas",
+  },
+
   checkout: {
     title: "Finalizar solicitud",
     steps: {
@@ -871,6 +888,10 @@ export const es = {
     cart: {
       title: "Carrito",
       description: "Revisá los productos seleccionados antes de enviar tu solicitud.",
+    },
+    favorites: {
+      title: "Favoritos",
+      description: "Los productos que guardaste para consultarlos después.",
     },
     checkout: {
       title: "Finalizar solicitud",

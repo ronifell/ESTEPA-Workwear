@@ -8,6 +8,7 @@ import { ProductGrid } from "@/components/products/product-grid";
 import { SpecBlock } from "@/components/products/spec-block";
 import { CertificationRow } from "@/components/products/certification-badge";
 import { DatasheetPdfLink } from "@/components/products/datasheet-pdf-link";
+import { FavoriteButton } from "@/components/products/favorite-button";
 import { TechnicalSheet } from "@/components/products/technical-sheet";
 import { CtaSection } from "@/components/shared/cta-section";
 import { WarrantyBadge } from "@/components/shared/warranty-badge";
@@ -120,14 +121,17 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
             <TechnicalSheet product={product} locale={locale} />
 
-            <DatasheetPdfLink
-              slug={product.slug}
-              locale={locale}
-              className={buttonStyles("outline", "md", "mt-4")}
-            >
-              <DocumentIcon className="size-4" />
-              {copy.datasheetOpen}
-            </DatasheetPdfLink>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <DatasheetPdfLink
+                slug={product.slug}
+                locale={locale}
+                className={buttonStyles("outline", "md")}
+              >
+                <DocumentIcon className="size-4" />
+                {copy.datasheetOpen}
+              </DatasheetPdfLink>
+              <FavoriteButton productId={product.id} variant="labeled" />
+            </div>
 
             <div className="mt-6 flex flex-wrap gap-2">
               {product.sectors.map((id) => (

@@ -51,6 +51,8 @@ export const en: Dictionary = {
     mainNavigation: "Main navigation",
     cart: "Cart",
     cartItems: "Items in cart",
+    favorites: "Favorites",
+    favoritesItems: "Items in favorites",
     language: "Language",
     changeLanguage: "Change language",
     solutions: "Solutions",
@@ -560,6 +562,21 @@ export const en: Dictionary = {
     summary: "Summary",
   },
 
+  favorites: {
+    title: "Favorites",
+    eyebrow: "Your list",
+    empty: {
+      title: "No favorites yet",
+      description: "Tap the heart on a product to save it and come back to it here.",
+      cta: "View products",
+    },
+    add: "Add to favorites",
+    remove: "Remove from favorites",
+    clear: "Clear favorites",
+    item: "garment",
+    items: "garments",
+  },
+
   checkout: {
     title: "Complete your request",
     steps: {
@@ -865,6 +882,10 @@ export const en: Dictionary = {
     cart: {
       title: "Cart",
       description: "Review the selected products before sending your request.",
+    },
+    favorites: {
+      title: "Favorites",
+      description: "The products you saved to look at later.",
     },
     checkout: {
       title: "Complete your request",

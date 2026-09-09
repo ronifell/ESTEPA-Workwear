@@ -24,6 +24,7 @@ export const routes = {
   about: { es: "/nosotros", en: "/about" },
   catalog: { es: "/catalogo", en: "/catalog" },
   contact: { es: "/contacto", en: "/contact" },
+  favorites: { es: "/favoritos", en: "/favorites" },
   cart: { es: "/carrito", en: "/cart" },
   checkout: { es: "/checkout", en: "/checkout" },
   orderConfirmation: { es: "/pedido/[id]", en: "/order/[id]" },

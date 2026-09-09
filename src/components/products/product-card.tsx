@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { CertificationRow } from "@/components/products/certification-badge";
+import { FavoriteButton } from "@/components/products/favorite-button";
 import { ProductImageOverlay } from "@/components/products/product-image-overlay";
 import { ExploreHint } from "@/components/ui/explore-hint";
 import { Badge } from "@/components/ui/badge";
@@ -42,6 +43,10 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
       >
         <h3 className="sr-only">{product.name[locale]}</h3>
       </LocalizedLink>
+
+      <div className="absolute right-3 top-3 z-20">
+        <FavoriteButton productId={product.id} />
+      </div>
 
       <div className="group/photo relative aspect-4/5 overflow-hidden bg-sand-100">
         {image ? (
