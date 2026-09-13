@@ -475,7 +475,7 @@ export const en: Dictionary = {
       "Browse our lines organised by sector, type of protection and product category.",
     downloadTitle: "PDF catalogue",
     downloadDescription:
-      "A downloadable version will be available once the final content is ready.",
+      "Download the FR technical catalogue as a PDF: shirts, coveralls, jackets, trousers, suits and certifications.",
     bySectorTitle: "By sector",
     byProtectionTitle: "By type of protection",
     byCategoryTitle: "By product category",

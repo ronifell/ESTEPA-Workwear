@@ -50,7 +50,10 @@ export const siteConfig = {
   },
 
   /** Public asset that can be replaced when the final catalogue is ready. */
-  catalogPdfUrl: process.env["NEXT_PUBLIC_CATALOG_PDF_URL"] ?? "",
+  catalogPdfUrl: (() => {
+    const fromEnv = process.env["NEXT_PUBLIC_CATALOG_PDF_URL"]?.trim() ?? "";
+    return fromEnv.length > 0 ? fromEnv : "/documents/ESTEPA-catalogo-tecnico-FR.pdf";
+  })(),
 
   /**
    * Google Business profile. Leave empty until the live listing URL is

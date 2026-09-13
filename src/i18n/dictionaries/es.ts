@@ -479,7 +479,7 @@ export const es = {
       "Recorré nuestras líneas organizadas por sector, tipo de protección y categoría de producto.",
     downloadTitle: "Catálogo en PDF",
     downloadDescription:
-      "Una versión descargable estará disponible cuando el contenido definitivo esté listo.",
+      "Descargá el catálogo técnico FR en PDF: camisas, overoles, camperas, pantalones, conjuntos y certificaciones.",
     bySectorTitle: "Por sector",
     byProtectionTitle: "Por tipo de protección",
     byCategoryTitle: "Por categoría de producto",
