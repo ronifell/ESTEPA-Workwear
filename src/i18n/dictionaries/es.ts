@@ -178,8 +178,8 @@ export const es = {
       "Esta sección presentará los materiales, construcciones y especificaciones de cada solución una vez confirmada la documentación técnica del fabricante.",
     technicalPlaceholder: "Información técnica en preparación",
     frartex: {
-      eyebrow: "Tejido de la línea",
-      standards: "Normas de la línea FRARTEX",
+      eyebrow: "Tejidos de la línea",
+      standards: "Normas de la línea FR",
       cta: "Ver productos de petróleo y gas",
     },
     productsTitle: "Productos recomendados",
@@ -401,11 +401,11 @@ export const es = {
       },
       {
         q: "¿Las normas aplican a todas las prendas?",
-        a: "No. Cada línea y cada tejido tiene su propio set. Las prendas FRARTEX publican las normas asociadas; en el resto, las certificaciones se muestran cuando el fabricante entrega la documentación de ensayo.",
+        a: "No. Cada prenda publica las normas de su ficha: NFPA 2112, NFPA 70E, ASTM F1506, EN ISO 11612, EN 1149-5 y otras, según el modelo.",
       },
       {
         q: "¿Cuál es la diferencia entre las tres líneas?",
-        a: "Minería está pensada para visibilidad y abrasión en jornadas largas. Petróleo y gas se construye sobre FRARTEX, ignífugo y antiestático. Trabajo e industria cubre el uso diario en construcción, logística y mantenimiento.",
+        a: "Minería está pensada para visibilidad y abrasión en jornadas largas. Petróleo y gas usa ropa FR certificada (algodón/nailon e inherente de aramida). Trabajo e industria cubre el uso diario y los conjuntos de alta visibilidad o lluvia.",
       },
       {
         q: "¿Cómo pido una cotización?",
@@ -430,7 +430,7 @@ export const es = {
     story: [
       "ESTEPA nació en la pared, no en una oficina. Somos Martin y Carlos, dos montañistas que durante cinco años trabajamos en los Alpes suizos haciendo trabajo vertical: mantenimiento y obra en altura, sostenidos por una cuerda, en un entorno donde las condiciones son tan extremas como las de nuestro propio país. Ahí crecimos profesionalmente hasta obtener las máximas certificaciones de acceso por cuerda —IRATA nivel 3—, el grado que solo alcanza quien es responsable de la seguridad de todo un equipo.",
       "En esos años aprendimos algo que no se enseña en un catálogo: la diferencia entre una prenda certificada y una que solo lo parece no es un papel, es el margen. En Suiza ese estándar no se discute —se ensaya, se documenta y se cumple— y nosotros lo vivimos puestos, turno tras turno, con la vida colgada del equipo que llevábamos encima.",
-      "Volvimos a casa y encontramos la otra cara. En los entornos más duros de Argentina —la minería, el petróleo, la estepa que le da nombre a esta marca— la gente trabaja expuesta a los mismos riesgos, muchas veces con equipo que no está a la altura. ESTEPA existe para cerrar esa brecha: traer el estándar que aprendimos afuera a quienes lo necesitan acá. Por eso cada prenda lleva el nombre de un lugar de este país —Cordillera, Andes, Pampa, Calafate, Zonda, Talampaya—: están pensadas para el terreno donde se van a usar, por gente que sabe lo que es depender del equipo que lleva puesto.",
+      "Volvimos a casa y encontramos la otra cara. En los entornos más duros de Argentina —la minería, el petróleo, la estepa que le da nombre a esta marca— la gente trabaja expuesta a los mismos riesgos, muchas veces con equipo que no está a la altura. ESTEPA existe para cerrar esa brecha: traer el estándar que aprendimos afuera a quienes lo necesitan acá. Cada prenda está pensada para el terreno donde se va a usar, por gente que sabe lo que es depender del equipo que lleva puesto.",
     ],
     closing:
       "No vendemos ropa de trabajo. Traemos el estándar que nos cuidó afuera.",

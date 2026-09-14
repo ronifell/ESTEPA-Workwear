@@ -140,7 +140,7 @@ export interface Product {
 
   readonly images: readonly ProductImage[];
 
-  /** Fabric family name when the garment uses a named tissue, e.g. "FRARTEX". */
+  /** Fabric family name when the garment uses a named tissue, e.g. "FR 88/12". */
   readonly fabricFamily?: string;
   readonly technicalInfo?: TechnicalInfo;
   readonly colors?: readonly ProductColor[];

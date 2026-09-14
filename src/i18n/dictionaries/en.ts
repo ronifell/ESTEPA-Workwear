@@ -176,8 +176,8 @@ export const en: Dictionary = {
       "This section will present the materials, constructions and specifications of each solution once the manufacturer's technical documentation is confirmed.",
     technicalPlaceholder: "Technical information in preparation",
     frartex: {
-      eyebrow: "Line fabric",
-      standards: "FRARTEX line standards",
+      eyebrow: "Line fabrics",
+      standards: "FR line standards",
       cta: "View oil and gas products",
     },
     productsTitle: "Recommended products",
@@ -399,11 +399,11 @@ export const en: Dictionary = {
       },
       {
         q: "Do the standards apply to every garment?",
-        a: "No. Each line and fabric has its own set. FRARTEX garments publish the associated standards; elsewhere, certifications appear once the manufacturer supplies the test documentation.",
+        a: "No. Each garment publishes the standards on its sheet: NFPA 2112, NFPA 70E, ASTM F1506, EN ISO 11612, EN 1149-5 and others, depending on the model.",
       },
       {
         q: "What is the difference between the three lines?",
-        a: "Mining is built for visibility and abrasion on long shifts. Oil and gas is built on FRARTEX, flame-resistant and antistatic. Work and industry covers daily use in construction, logistics and maintenance.",
+        a: "Mining is built for visibility and abrasion on long shifts. Oil and gas uses certified FR apparel (cotton/nylon and inherent aramid). Work and industry covers daily use plus hi-vis and rain suits.",
       },
       {
         q: "How do I request a quote?",
@@ -428,7 +428,7 @@ export const en: Dictionary = {
     story: [
       "ESTEPA was born on the rock face, not in an office. We're Martin and Carlos, two climbers who spent five years working in the Swiss Alps doing vertical work: high-altitude maintenance and construction, held by a rope, in an environment as extreme as the one back home. Those years took us to the highest rope-access certification — IRATA Level 3 — the grade held only by those responsible for the safety of an entire team.",
       "What we learned there isn't in any catalogue: the difference between a garment that's certified and one that only looks it isn't a piece of paper — it's the margin. In Switzerland that standard isn't up for debate; it's tested, documented and met. We lived it wearing it, shift after shift, with our lives hanging from the equipment on our backs.",
-      "We came home and found the other side. In Argentina's harshest environments — mining, oil and gas, the steppe that gives this brand its name — people face the same risks, often with gear that isn't up to the job. ESTEPA exists to close that gap: to bring the standard we learned abroad to the people who need it here. That's why every garment carries the name of a place in this country — Cordillera, Andes, Pampa, Calafate, Zonda, Talampaya — built for the terrain where it will be worn, by people who know what it means to depend on the equipment they have on.",
+      "We came home and found the other side. In Argentina's harshest environments — mining, oil and gas, the steppe that gives this brand its name — people face the same risks, often with gear that isn't up to the job. ESTEPA exists to close that gap: to bring the standard we learned abroad to the people who need it here. Every garment is built for the terrain where it will be worn, by people who know what it means to depend on the equipment they have on.",
     ],
     closing:
       "We don't sell workwear. We bring home the standard that kept us safe abroad.",

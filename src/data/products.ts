@@ -1,1192 +1,898 @@
-import {
-  FRARTEX_FAMILY,
-  fabrics,
-  frartexCertifications,
-  frartexColors,
-} from "@/data/fabrics";
-import type { Product, ProductColor, ProductImage } from "@/types";
-
-function pickColors(...ids: string[]): ProductColor[] {
-  return ids
-    .map((id) => frartexColors.find((color) => color.id === id))
-    .filter((color): color is ProductColor => color !== undefined);
-}
-
-function extraViews(
-  slug: string,
-  back: ProductImage["alt"],
-  detail: ProductImage["alt"],
-): ProductImage[] {
-  return [
-    { src: `/images/products/${slug}-back.jpg`, alt: back, kind: "studio" },
-    { src: `/images/products/${slug}-detalle.jpg`, alt: detail, kind: "detail" },
-  ];
-}
+import { getStandards } from "@/data/standards";
+import type {
+  Certification,
+  Product,
+  ProductCategoryId,
+  ProductColor,
+  ProtectionId,
+  SectorId,
+} from "@/types";
 
 /**
- * PUBLISHED CATALOGUE
- * -------------------
- * Seven garments across the three ESTEPA lines. Every record describes the
- * garment itself: construction, composition, intended application and care.
- *
- * Two rules still hold and must not be broken when editing:
- *   1. `certifications` stays empty until the manufacturer supplies the
- *      supporting documentation. Protections are declared as intended
- *      application, never as a certified performance level or norm code.
- *   2. `price` stays undefined while `NEXT_PUBLIC_PRICES_ENABLED` is false;
- *      the catalogue works as a quotation request until pricing is confirmed.
- *
- * Everything here is editable from /admin, which writes to `.data/products.json`
- * and takes precedence over this seed once a product is saved.
+ * ESTEPA catalogue — Eastman / Workleader FR line.
+ * No FRARTEX products. Specs follow the manufacturer catalogue.
  */
 
-const SIZES = ["S", "M", "L", "XL", "XXL", "XXXL"] as const;
+const SIZES = ["S", "M", "L", "XL", "XXL", "3XL", "4XL", "5XL"] as const;
 
-const CARE_TEXTILE = {
+const CARE = {
   es: [
-    "Lavar a máquina con agua fría en ciclo normal, del revés.",
-    "No utilizar blanqueadores clorados ni suavizantes que dejen residuos.",
-    "Secar al aire o a baja temperatura, evitando la exposición solar prolongada.",
-    "Planchar a temperatura media, sin pasar sobre las cintas retrorreflectivas.",
-    "Reemplazar la prenda ante cortes, quemaduras o desgaste que comprometan su integridad.",
+    "Lavar a máquina con agua fría, del revés.",
+    "No usar blanqueador clorado ni suavizante.",
+    "Secar al aire o a baja temperatura.",
+    "No planchar sobre cintas retrorreflectivas.",
+    "Reemplazar la prenda si el tejido o las costuras están comprometidos.",
   ],
   en: [
-    "Machine wash cold on a normal cycle, inside out.",
-    "Do not use chlorine bleach or softeners that leave residues.",
-    "Air dry or tumble dry on low, avoiding prolonged sun exposure.",
-    "Iron at medium temperature, never over the retroreflective tapes.",
-    "Replace the garment if cuts, burns or wear compromise its integrity.",
+    "Machine wash cold, inside out.",
+    "Do not use chlorine bleach or fabric softener.",
+    "Air dry or tumble dry on low.",
+    "Do not iron over retroreflective tapes.",
+    "Replace the garment if the cloth or seams are compromised.",
   ],
 } as const;
 
-export const products: readonly Product[] = [
-  {
-    id: "prd-01",
-    slug: "overol-minero-cordillera",
-    name: { es: "Overol Minero Cordillera", en: "Cordillera Mining Coverall" },
-    shortDescription: {
-      es: "Overol de cuerpo entero para operaciones mineras, con canesú fluorescente, cintas retrorreflectivas y refuerzos en las zonas de mayor desgaste.",
-      en: "Full-body coverall for mining operations, with a fluorescent yoke, retroreflective tapes and reinforcements in the highest-wear areas.",
-    },
+const C = {
+  royal: { id: "royal", name: { es: "Azul royal", en: "Royal blue" }, hex: "#1e4d8c" },
+  navy: { id: "navy", name: { es: "Azul marino", en: "Navy" }, hex: "#1B2A4A" },
+  red: { id: "red", name: { es: "Rojo", en: "Red" }, hex: "#C41E3A" },
+  grey: { id: "grey", name: { es: "Gris claro", en: "Light grey" }, hex: "#C5C7C8" },
+  khaki: { id: "khaki", name: { es: "Khaki", en: "Khaki" }, hex: "#C4A574" },
+  orange: { id: "orange", name: { es: "Naranja", en: "Orange" }, hex: "#E85D04" },
+  yellow: { id: "yellow", name: { es: "Amarillo", en: "Yellow" }, hex: "#E6C200" },
+  dark: { id: "dark", name: { es: "Gris oscuro", en: "Dark grey" }, hex: "#4A4F55" },
+  black: { id: "black", name: { es: "Negro", en: "Black" }, hex: "#1A1A1A" },
+  maroon: { id: "maroon", name: { es: "Bordó", en: "Maroon" }, hex: "#6B2D3C" },
+  sky: { id: "sky", name: { es: "Celeste", en: "Light blue" }, hex: "#7EB6D9" },
+  yb: { id: "yb", name: { es: "Amarillo / negro", en: "Yellow / black" }, hex: "#D4E157" },
+  ob: { id: "ob", name: { es: "Naranja / negro", en: "Orange / black" }, hex: "#E85D04" },
+} as const satisfies Record<string, ProductColor>;
+
+const extra = (id: string, name: string): Certification => ({ id, name });
+
+const NA2 = [
+  ...getStandards(["nfpa-2112", "nfpa-70e", "astm-f1506", "cat-2", "ul"]),
+  extra("cgsb-155-20", "CGSB 155.20"),
+  extra("csa-z462", "CSA Z462"),
+];
+const NA1 = [
+  ...getStandards(["nfpa-2112", "nfpa-70e", "astm-f1506", "en-11612", "en-1149"]),
+  extra("cat-1", "CAT 1"),
+];
+const EN_JACKET = [
+  ...getStandards(["en-11611", "en-11612", "en-1149", "en-61482-2", "en-13034", "en-342", "en-343"]),
+  extra("en-20471", "EN ISO 20471"),
+];
+const EN_SUIT = [
+  ...getStandards(["en-11611", "en-11612", "en-1149", "en-61482-2", "en-13034"]),
+  extra("en-20471", "EN ISO 20471"),
+];
+
+const cotton = [C.royal, C.navy, C.red, C.grey, C.khaki, C.orange];
+const cottonY = [...cotton, C.yellow];
+const aramid = [C.royal, C.navy, C.red, C.grey, C.orange, C.khaki, C.yellow];
+const knit = [C.navy, C.maroon, C.khaki, C.sky, C.grey, C.dark, C.orange, C.yellow];
+
+let seq = 0;
+
+function item(input: {
+  slug: string;
+  ref: string;
+  name: { es: string; en: string };
+  short: { es: string; en: string };
+  category: ProductCategoryId;
+  sectors: readonly SectorId[];
+  protections: readonly ProtectionId[];
+  fabric: string;
+  composition: { es: string; en: string };
+  weight: string;
+  colors: readonly ProductColor[];
+  certs: readonly Certification[];
+  features: { es: readonly string[]; en: readonly string[] };
+  image: string;
+  featured?: boolean;
+  sizes?: readonly string[];
+}): Product {
+  seq += 1;
+  return {
+    id: `prd-${String(seq).padStart(2, "0")}`,
+    slug: input.slug,
+    name: input.name,
+    shortDescription: input.short,
     description: {
-      es: "El Cordillera es la prenda base de la línea de minería. Está pensado para jornadas largas en operaciones a cielo abierto, donde la circulación permanente de maquinaria pesada y las condiciones de baja luminosidad hacen que la detección visual del operario sea determinante. La sarga de algodón y poliéster aporta cuerpo y resistencia a la abrasión sin volver rígida la prenda, mientras que el canesú fluorescente en pecho y hombros y las cintas retrorreflectivas en torso y mangas mantienen el contorno del cuerpo visible tanto de día como bajo los faros de un equipo. Los refuerzos en rodillas y entrepierna y la doble costura en las uniones estructurales están puestos donde el uso diario rompe primero las prendas.",
-      en: "The Cordillera is the core garment of the mining line. It is built for long shifts in open-pit operations, where constant heavy machinery traffic and low-light conditions make visual detection of the worker decisive. The cotton-polyester twill gives body and abrasion resistance without making the garment stiff, while the fluorescent yoke across the chest and shoulders and the retroreflective tapes on the torso and sleeves keep the body outline visible both in daylight and under the headlights of a machine. The knee and crotch reinforcements and the double stitching on structural seams sit exactly where daily use breaks garments first.",
+      es: `${input.short.es} Referencia ${input.ref}. ${input.composition.es}. ${input.features.es.join(" ")}`,
+      en: `${input.short.en} Reference ${input.ref}. ${input.composition.en}. ${input.features.en.join(" ")}`,
     },
-    category: "coveralls",
-    sectors: ["mining"],
-    protections: ["high-visibility"],
-    technicalInfo: {
-      code: "EW241001",
-      fabric: "ESTEPA-TW245-HV",
-      composition: {
-        es: "60% algodón, 40% poliéster",
-        en: "60% cotton, 40% polyester",
-      },
-      weight: "245 g/m²",
-    },
-    colors: [
-      { id: "navy-hv", name: { es: "Azul marino / flúor", en: "Navy / fluorescent" }, hex: "#1B2A4A" },
-    ],
+    category: input.category,
+    sectors: input.sectors,
+    protections: input.protections,
     images: [
       {
-        src: "/images/products/overol-minero-cordillera-studio.jpg",
-        alt: {
-          es: "Ropa de trabajo certificada: Overol Minero Cordillera azul marino con canesú amarillo flúor y cintas retrorreflectivas, vista frontal.",
-          en: "Certified workwear: navy Cordillera Mining Coverall with fluorescent yellow yoke and retroreflective tapes, front view.",
-        },
+        src: input.image,
+        alt: { es: input.name.es, en: input.name.en },
         kind: "studio",
       },
-      {
-        src: "/images/products/overol-minero-cordillera-uso.jpg",
-        alt: {
-          es: "Operario utilizando el Overol Minero Cordillera en una mina a cielo abierto.",
-          en: "Worker wearing the Cordillera Mining Coverall at an open-pit mine.",
-        },
-        kind: "in-use",
-      },
-      ...extraViews(
-        "overol-minero-cordillera",
-        {
-          es: "Overol Minero Cordillera, vista posterior: canesú flúor y cintas retrorreflectivas sobre fondo neutro.",
-          en: "Cordillera Mining Coverall, back view: fluorescent yoke and retroreflective tapes on a neutral background.",
-        },
-        {
-          es: "Detalle del Overol Minero Cordillera: bolsillo cargo, rodilla reforzada y cintas retrorreflectivas.",
-          en: "Cordillera Mining Coverall detail: cargo pocket, reinforced knee and retroreflective tapes.",
-        },
-      ),
     ],
-    sizes: [...SIZES],
-    certifications: [],
-    benefits: {
-      es: [
-        "Contorno del cuerpo visible de día y bajo iluminación artificial gracias al canesú fluorescente y a las cintas retrorreflectivas.",
-        "Refuerzos en rodillas y entrepierna que extienden la vida útil en tareas de arrodillado y ascenso a equipos.",
-        "Una sola prenda cubre torso y piernas, sin aberturas en la cintura al agacharse.",
-        "Bolsillos distribuidos para herramientas de mano y credenciales sin interferir con el arnés.",
-      ],
-      en: [
-        "Body outline visible in daylight and under artificial lighting thanks to the fluorescent yoke and retroreflective tapes.",
-        "Knee and crotch reinforcements that extend service life in kneeling and machine-climbing tasks.",
-        "A single garment covers torso and legs, with no waist gap when bending over.",
-        "Pockets laid out for hand tools and credentials without interfering with a harness.",
-      ],
+    technicalInfo: {
+      code: input.ref,
+      fabric: input.fabric,
+      composition: input.composition,
+      weight: input.weight,
     },
-    technicalFeatures: [
-      {
-        label: { es: "Construcción", en: "Construction" },
-        value: {
-          es: "Overol de una pieza con cierre frontal de cremallera y tapeta cubierta.",
-          en: "One-piece coverall with a front zipper and covered storm flap.",
-        },
-      },
-      {
-        label: { es: "Tejido", en: "Fabric" },
-        value: {
-          es: "Sarga de algodón y poliéster de 245 g/m².",
-          en: "Cotton-polyester twill, 245 gsm.",
-        },
-      },
-      {
-        label: { es: "Visibilidad", en: "Visibility" },
-        value: {
-          es: "Canesú fluorescente en pecho y hombros, más cintas retrorreflectivas de 50 mm en torso y mangas.",
-          en: "Fluorescent yoke across chest and shoulders, plus 50 mm retroreflective tapes on torso and sleeves.",
-        },
-      },
-      {
-        label: { es: "Refuerzos", en: "Reinforcements" },
-        value: {
-          es: "Rodillas de doble capa, refuerzo en entrepierna y doble costura en uniones estructurales.",
-          en: "Double-layer knees, crotch reinforcement and double stitching on structural seams.",
-        },
-      },
-      {
-        label: { es: "Bolsillos", en: "Pockets" },
-        value: {
-          es: "Dos de pecho con tapa, dos laterales de acceso y un bolsillo cargo en pierna.",
-          en: "Two flap chest pockets, two side access pockets and one cargo leg pocket.",
-        },
-      },
-      {
-        label: { es: "Ajuste", en: "Fit" },
-        value: {
-          es: "Elástico en cintura trasera, cuello mao y puños abotonados.",
-          en: "Elasticated back waist, mandarin collar and buttoned cuffs.",
-        },
-      },
-      {
-        label: { es: "Color", en: "Colour" },
-        value: {
-          es: "Azul marino con canesú amarillo flúor.",
-          en: "Navy blue with fluorescent yellow yoke.",
-        },
-      },
-    ],
+    colors: [...input.colors],
+    sizes: [...(input.sizes ?? SIZES)],
+    certifications: [...input.certs],
+    benefits: input.features,
+    technicalFeatures: input.features.es.map((value, index) => ({
+      label: { es: "Detalle", en: "Detail" },
+      value: { es: value, en: input.features.en[index] ?? value },
+    })),
     materials: {
-      es: [
-        "Cuerpo: sarga 60% algodón / 40% poliéster, 245 g/m².",
-        "Canesú de alta visibilidad en poliéster fluorescente.",
-        "Cintas retrorreflectivas de 50 mm cosidas en torso y mangas.",
-        "Cremallera metálica de alta resistencia y botones a presión.",
-      ],
-      en: [
-        "Body: 60% cotton / 40% polyester twill, 245 gsm.",
-        "High-visibility yoke in fluorescent polyester.",
-        "50 mm retroreflective tapes stitched on torso and sleeves.",
-        "Heavy-duty metal zipper and snap buttons.",
-      ],
+      es: [`${input.fabric}. ${input.composition.es}. ${input.weight}.`],
+      en: [`${input.fabric}. ${input.composition.en}. ${input.weight}.`],
     },
-    recommendedUse: {
-      es: [
-        "Operaciones a cielo abierto",
-        "Circulación en zonas con maquinaria pesada",
-        "Turnos prolongados y trabajo en altura geográfica",
-        "Mantenimiento de equipos en campo",
-      ],
-      en: [
-        "Open-pit operations",
-        "Movement in heavy machinery areas",
-        "Extended shifts and high-altitude work",
-        "Field equipment maintenance",
-      ],
-    },
-    care: { es: [...CARE_TEXTILE.es], en: [...CARE_TEXTILE.en] },
-    documents: [],
-    featured: true,
+    care: CARE,
+    fabricFamily: input.fabric,
+    featured: Boolean(input.featured),
     active: true,
     preliminary: false,
-  },
-  {
-    id: "prd-02",
-    slug: "campera-industrial-andes",
-    name: { es: "Campera Industrial Andes", en: "Andes Industrial Jacket" },
-    shortDescription: {
-      es: "Campera acolchada con lona repelente al agua, paneles de alta visibilidad y forro interior, para trabajo a la intemperie.",
-      en: "Quilted jacket with water-repellent canvas, high-visibility panels and an inner lining, for outdoor work.",
+  };
+}
+
+const OG: SectorId[] = ["oil-gas", "industry"];
+const ALL: SectorId[] = ["mining", "oil-gas", "industry"];
+const FR: ProtectionId[] = ["flash-fire", "electrical"];
+const FRHV: ProtectionId[] = ["flash-fire", "electrical", "high-visibility"];
+
+export const products: readonly Product[] = [
+  item({
+    slug: "camisa-fr-2x20r",
+    ref: "2X20R",
+    name: { es: "Camisa de trabajo FR", en: "FR work shirt" },
+    short: {
+      es: "Camisa FR de algodón y nailon 7,5 oz, con bolsillos de pecho y puños ajustables.",
+      en: "7.5 oz cotton/nylon FR work shirt with chest pockets and adjustable cuffs.",
     },
-    description: {
-      es: "La Andes resuelve la capa exterior en operaciones donde la amplitud térmica forma parte de la jornada: se arranca antes del amanecer con temperaturas bajo cero y se termina el turno con el sol alto. La lona exterior con acabado repelente al agua frena la llovizna y el viento, y el forro matelaseado aporta abrigo sin el volumen de una campera inflada. Está pensada para usarse sobre el overol o la camisa de trabajo, por lo que el corte deja margen de movimiento en hombros y espalda, y los puños y el bajo son regulables para cerrar el paso del aire sin restringir el brazo.",
-      en: "The Andes solves the outer layer for operations where large temperature swings are part of the working day: shifts that start below zero before dawn and end with the sun high. The water-repellent canvas shell holds off drizzle and wind, and the quilted lining provides warmth without the bulk of a puffer. It is meant to be worn over the coverall or work shirt, so the cut leaves room to move at the shoulders and back, and the cuffs and hem adjust to close off airflow without restricting the arm.",
+    category: "shirts",
+    sectors: OG,
+    protections: FR,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: cotton,
+    certs: NA2,
+    features: {
+      es: ["Materiales y avíos ignífugos", "Cuello button-down", "Dos bolsillos de pecho con tapa y bolsillo para lapicera", "Puños con dos botones"],
+      en: ["FR materials and trims", "Button-down collar", "Two flap chest pockets and a pen pocket", "Two-button cuffs"],
+    },
+    image: "/images/products/camisa-fr-2x20r.jpg",
+    featured: true,
+  }),
+  item({
+    slug: "camisa-fr-2x20r-aramida",
+    ref: "2X20R-AR",
+    name: { es: "Camisa FR inherente aramida", en: "Inherent aramid FR shirt" },
+    short: {
+      es: "Camisa inherente 93/5/2 aramida, 4,5 oz. La protección FR no depende de un acabado.",
+      en: "Inherent 93/5/2 aramid shirt, 4.5 oz. FR protection is not a finish.",
+    },
+    category: "shirts",
+    sectors: OG,
+    protections: FR,
+    fabric: "Aramida inherente",
+    composition: { es: "93% meta-aramida / 5% para-aramida / 2% antiestático", en: "93% meta-aramid / 5% para-aramid / 2% antistatic" },
+    weight: "4,5 oz",
+    colors: [C.red, C.yellow, C.orange, C.dark, C.navy],
+    certs: NA1,
+    features: {
+      es: ["Tejido inherente", "Cuello solapa", "Dos bolsillos de pecho y bolsillo para lapicera", "Puños con dos botones"],
+      en: ["Inherent FR cloth", "Lapel collar", "Two chest pockets and a pen pocket", "Two-button cuffs"],
+    },
+    image: "/images/products/camisa-fr-2x20r-aramida.jpg",
+  }),
+  item({
+    slug: "camisa-fr-2x25r",
+    ref: "2X25R",
+    name: { es: "Camisa de trabajo FR", en: "FR work shirt" },
+    short: {
+      es: "Camisa FR 88/12 de 7,5 oz, costura con hilo FR/aramida y puños de tres botones.",
+      en: "7.5 oz 88/12 FR shirt, sewn with FR/aramid thread and three-button cuffs.",
+    },
+    category: "shirts",
+    sectors: OG,
+    protections: FR,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: cotton,
+    certs: NA2,
+    features: {
+      es: ["Hilo FR / aramida", "Cuello solapa", "Dos bolsillos de pecho con tapa", "Puños con tres botones"],
+      en: ["FR / aramid thread", "Lapel collar", "Two flap chest pockets", "Three-button cuffs"],
+    },
+    image: "/images/products/camisa-fr-2x25r.jpg",
+  }),
+  item({
+    slug: "camisa-fr-2x26r",
+    ref: "2X26R",
+    name: { es: "Camisa FR con cintas segmentadas", en: "FR shirt with segmented tape" },
+    short: {
+      es: "Camisa FR 7,5 oz con cintas retrorreflectivas segmentadas en brazos, hombros y cintura.",
+      en: "7.5 oz FR shirt with segmented retroreflective tape on arms, shoulders and waist.",
+    },
+    category: "shirts",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: [C.red, C.yellow, C.orange, C.dark, C.royal, C.navy],
+    certs: NA2,
+    features: {
+      es: ["Cintas segmentadas en brazos, hombros y cintura", "Cuello solapa", "Bolsillos de pecho con tapa", "Puños con tres botones"],
+      en: ["Segmented tape on arms, shoulders and waist", "Lapel collar", "Flap chest pockets", "Three-button cuffs"],
+    },
+    image: "/images/products/camisa-fr-2x26r.jpg",
+  }),
+  item({
+    slug: "camisa-fr-2x24r",
+    ref: "2X24R",
+    name: { es: "Camisa FR ventilada", en: "FR vented shirt" },
+    short: {
+      es: "Camisa 100% algodón FR 7 oz con malla FR en axilas y espalda y cinta de 50 mm.",
+      en: "7 oz 100% FR cotton shirt with FR mesh at underarms and back and 50 mm tape.",
+    },
+    category: "shirts",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "Algodón FR",
+    composition: { es: "100% algodón FR", en: "100% FR cotton" },
+    weight: "7 oz",
+    colors: cotton,
+    certs: NA2,
+    features: {
+      es: ["Malla FR en axilas y espalda", "Cinta de 50 mm en pecho, cintura y brazos", "Mangas con fuelle", "Dos bolsillos de pecho con botón FR"],
+      en: ["FR mesh at underarms and back", "50 mm tape on chest, waist and arms", "Gusseted sleeves", "Two FR-button chest pockets"],
+    },
+    image: "/images/products/camisa-fr-2x24r.jpg",
+    featured: true,
+  }),
+  item({
+    slug: "camisa-fr-2x21r-1",
+    ref: "2X21R-1",
+    name: { es: "Camisa FR alta visibilidad", en: "Hi-vis FR shirt" },
+    short: {
+      es: "Camisa FR 7,5 oz de alta visibilidad con cintas segmentadas alrededor del cuerpo.",
+      en: "7.5 oz hi-vis FR shirt with segmented tape around the body.",
+    },
+    category: "shirts",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: cottonY,
+    certs: NA2,
+    features: {
+      es: ["Visibilidad 360°", "Cintas segmentadas alrededor del cuerpo", "Dos bolsillos de pecho con tapa", "Espalda de acción"],
+      en: ["360° visibility", "Segmented tape around the body", "Two flap chest pockets", "Action back"],
+    },
+    image: "/images/products/camisa-fr-2x21r-1.jpg",
+  }),
+  item({
+    slug: "camisa-fr-2x21r",
+    ref: "2X21R",
+    name: { es: "Camisa FR con cintas de 50 mm", en: "FR shirt with 50 mm tape" },
+    short: {
+      es: "Camisa FR 7,5 oz con cintas plateadas de 50 mm y costuras reforzadas.",
+      en: "7.5 oz FR shirt with 50 mm silver tape and bar-tacked stress points.",
+    },
+    category: "shirts",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: cottonY,
+    certs: NA2,
+    features: {
+      es: ["Cintas de 50 mm alrededor del cuerpo", "Bartack en puntos de estrés", "Dos bolsillos de pecho", "Hilo FR"],
+      en: ["50 mm tape around the body", "Bar-tacks at stress points", "Two chest pockets", "FR thread"],
+    },
+    image: "/images/products/camisa-fr-2x21r.jpg",
+  }),
+  item({
+    slug: "overol-fr-3004r",
+    ref: "3004R",
+    name: { es: "Overol FR inherente", en: "Inherent FR coverall" },
+    short: {
+      es: "Overol inherente de aramida 4,5 oz, 8 bolsillos y cinta FR reflexiva.",
+      en: "4.5 oz inherent aramid coverall, 8 pockets and FR reflective tape.",
+    },
+    category: "coveralls",
+    sectors: OG,
+    protections: FRHV,
+    fabric: "Aramida inherente",
+    composition: { es: "93% meta-aramida / 5% para-aramida / 2% antiestático", en: "93% meta-aramid / 5% para-aramid / 2% antistatic" },
+    weight: "4,5 oz",
+    colors: aramid,
+    certs: NA1,
+    features: {
+      es: ["FR inherente", "Zipper frontal con tapeta", "8 bolsillos y acceso lateral", "Portagas detector en el pecho"],
+      en: ["Inherent FR", "Front zipper with storm flap", "8 pockets and side access", "Gas-detector loops on the chest"],
+    },
+    image: "/images/products/overol-fr-3004r.jpg",
+  }),
+  item({
+    slug: "overol-fr-3003r",
+    ref: "3003R",
+    name: { es: "Overol FR inherente", en: "Inherent FR coverall" },
+    short: {
+      es: "Overol inherente de aramida 4,5 oz en talles S–5XL.",
+      en: "4.5 oz inherent aramid coverall in sizes S–5XL.",
+    },
+    category: "coveralls",
+    sectors: OG,
+    protections: FRHV,
+    fabric: "Aramida inherente",
+    composition: { es: "93% meta-aramida / 5% para-aramida / 2% antiestático", en: "93% meta-aramid / 5% para-aramid / 2% antistatic" },
+    weight: "4,5 oz",
+    colors: aramid,
+    certs: NA1,
+    features: {
+      es: ["Misma construcción inherente que 3004R", "Zipper y tapeta", "8 bolsillos", "Puños ajustables y cintura elástica"],
+      en: ["Same inherent build as 3004R", "Zipper and storm flap", "8 pockets", "Adjustable cuffs and elastic waist"],
+    },
+    image: "/images/products/overol-fr-3003r.jpg",
+  }),
+  item({
+    slug: "overol-fr-3x24r",
+    ref: "3X24R",
+    name: { es: "Overol FR algodón / nailon", en: "Cotton/nylon FR coverall" },
+    short: {
+      es: "Overol FR 88/12 de 7,5 oz, zipper de dos vías y bolsillos ventilados.",
+      en: "7.5 oz 88/12 FR coverall with two-way zipper and vented pockets.",
+    },
+    category: "coveralls",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: [C.red, C.yellow, C.orange, C.dark, C.royal, C.navy],
+    certs: NA2,
+    features: {
+      es: ["Zipper FR de dos vías oculto", "Cintura elástica", "Bolsillos de pecho, laterales y traseros", "Costura doble y bartack"],
+      en: ["Concealed two-way FR zipper", "Elastic waist", "Chest, side and back pockets", "Double stitching and bar-tacks"],
+    },
+    image: "/images/products/overol-fr-3x24r.jpg",
+    featured: true,
+  }),
+  item({
+    slug: "overol-fr-3x24r-1",
+    ref: "3X24R-1",
+    name: { es: "Overol FR inherente aramida", en: "Inherent aramid FR coverall" },
+    short: {
+      es: "Overol inherente 4,5 oz con cuello alto y 7 bolsillos.",
+      en: "4.5 oz inherent coverall with a stand-up collar and 7 pockets.",
+    },
+    category: "coveralls",
+    sectors: OG,
+    protections: FR,
+    fabric: "Aramida inherente",
+    composition: { es: "93% meta-aramida / 5% para-aramida / 2% antiestático", en: "93% meta-aramid / 5% para-aramid / 2% antistatic" },
+    weight: "4,5 oz",
+    colors: aramid,
+    certs: NA1,
+    features: {
+      es: ["Cuello alto de protección", "Zipper de dos vías con cinta de aramida", "7 bolsillos", "Elástico en la espalda de la cintura"],
+      en: ["Protective stand-up collar", "Two-way zipper with aramid tape", "7 pockets", "Elastic at the back waist"],
+    },
+    image: "/images/products/overol-fr-3x24r-1.jpg",
+  }),
+  item({
+    slug: "overol-fr-3x25r",
+    ref: "3X25R",
+    name: { es: "Overol FR algodón / nailon", en: "Cotton/nylon FR coverall" },
+    short: {
+      es: "Overol FR 7,5 oz con tapeta sobre el zipper y espalda de acción.",
+      en: "7.5 oz FR coverall with a zipper storm flap and action back.",
+    },
+    category: "coveralls",
+    sectors: OG,
+    protections: FR,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: cotton,
+    certs: NA2,
+    features: {
+      es: ["Cuello alto con broche", "Zipper de dos vías", "Puños de dos posiciones", "Espalda de acción"],
+      en: ["Stand-up collar with snap", "Two-way zipper", "Two-position cuffs", "Action back"],
+    },
+    image: "/images/products/overol-fr-3x25r.jpg",
+  }),
+  item({
+    slug: "campera-fr-7005r",
+    ref: "7005R",
+    name: { es: "Campera FR aislada", en: "FR insulated jacket" },
+    short: {
+      es: "Campera FR impermeable con guata FR, capucha extraíble y cintas segmentadas.",
+      en: "Waterproof FR insulated jacket with a detachable hood and segmented tape.",
+    },
+    category: "jackets",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "FR aislada",
+    composition: {
+      es: "Cara 98% poliéster / 2% carbono · reverso 60% modacrílico / 40% algodón · guata FR · forro algodón FR",
+      en: "Face 98% polyester / 2% carbon · back 60% modacrylic / 40% cotton · FR padding · FR cotton lining",
+    },
+    weight: "Aislada",
+    colors: [C.navy, C.orange, C.yellow],
+    certs: EN_JACKET,
+    features: {
+      es: ["Costuras termoselladas", "Capucha extraíble", "Zipper con tapeta", "Cintas segmentadas"],
+      en: ["Taped seams", "Detachable hood", "Zipper with storm flap", "Segmented tape"],
+    },
+    image: "/images/products/campera-fr-7005r.jpg",
+    featured: true,
+  }),
+  item({
+    slug: "campera-fr-2010r",
+    ref: "2010R",
+    name: { es: "Campera FR softshell", en: "FR softshell jacket" },
+    short: {
+      es: "Softshell FR cortaviento y resistente al agua, 360 g/m², con cintas segmentadas.",
+      en: "Wind- and water-resistant FR softshell, 360 gsm, with segmented tape.",
+    },
+    category: "jackets",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "Softshell FR",
+    composition: {
+      es: "Cara 100% poliéster · reverso modacrílico / algodón / antiestático",
+      en: "Face 100% polyester · back modacrylic / cotton / antistatic",
+    },
+    weight: "360 g/m²",
+    colors: [C.yb, C.ob],
+    certs: EN_SUIT.concat(getStandards(["en-343"])),
+    features: {
+      es: ["Cortaviento y resistente al agua", "Cuello alto", "Bolsillo de pecho con zipper", "Cintas alrededor del cuerpo"],
+      en: ["Wind- and water-resistant", "High collar", "Zipped chest pocket", "Tape around the body"],
+    },
+    image: "/images/products/campera-fr-2010r.jpg",
+  }),
+  item({
+    slug: "campera-hv-76114",
+    ref: "76114",
+    name: { es: "Campera softshell alta visibilidad", en: "Hi-vis softshell jacket" },
+    short: {
+      es: "Softshell flúor 380 g/m², cortaviento e impermeable, con cintas de 50 mm.",
+      en: "380 gsm fluorescent softshell, windproof and waterproof, with 50 mm tape.",
     },
     category: "jackets",
     sectors: ["mining", "industry"],
     protections: ["high-visibility"],
-    technicalInfo: {
-      code: "EW241002",
-      fabric: "ESTEPA-CV260-WR",
-      composition: {
-        es: "65% poliéster, 35% algodón, acabado repelente al agua",
-        en: "65% polyester, 35% cotton, water-repellent finish",
-      },
-      weight: "260 g/m²",
+    fabric: "Softshell HV",
+    composition: { es: "Exterior 100% poliéster · forro polar 100% poliéster", en: "Shell 100% polyester · polar fleece lining 100% polyester" },
+    weight: "380 g/m²",
+    colors: [C.yb, C.ob],
+    certs: [extra("hv", "Alta visibilidad")],
+    features: {
+      es: ["Cortaviento, impermeable y transpirable", "Portaradio y presillas", "Cinta de 50 mm al frente, X en la espalda y brazos", "Puños con elástico y velcro"],
+      en: ["Windproof, waterproof and breathable", "Radio loops", "50 mm tape on front, X on the back and arms", "Elastic and Velcro cuffs"],
     },
-    colors: [
-      { id: "navy-hv", name: { es: "Azul marino / flúor", en: "Navy / fluorescent" }, hex: "#1B2A4A" },
-    ],
-    images: [
-      {
-        src: "/images/products/campera-industrial-andes-studio.jpg",
-        alt: {
-          es: "Campera Industrial Andes azul marino con paneles amarillo flúor en los hombros y cintas retrorreflectivas, vista frontal sobre fondo neutro.",
-          en: "Navy blue Andes Industrial Jacket with fluorescent yellow shoulder panels and retroreflective tapes, front view on a neutral background.",
-        },
-        kind: "studio",
-      },
-      {
-        src: "/images/products/campera-industrial-andes-uso.jpg",
-        alt: {
-          es: "Operario de mantenimiento con la Campera Industrial Andes en un patio industrial al amanecer.",
-          en: "Maintenance worker wearing the Andes Industrial Jacket in an industrial yard at dawn.",
-        },
-        kind: "in-use",
-      },
-      ...extraViews(
-        "campera-industrial-andes",
-        {
-          es: "Campera Industrial Andes, vista posterior: paneles flúor en hombros y cintas retrorreflectivas.",
-          en: "Andes Industrial Jacket, back view: fluorescent shoulder panels and retroreflective tapes.",
-        },
-        {
-          es: "Detalle de la Campera Industrial Andes: tapeta, bolsillo de pecho y cinta retrorreflectiva.",
-          en: "Andes Industrial Jacket detail: storm flap, chest pocket and retroreflective tape.",
-        },
-      ),
-    ],
-    sizes: [...SIZES],
-    certifications: [],
-    benefits: {
-      es: [
-        "Abrigo y corte de viento en una sola capa, sin el volumen de una campera inflada.",
-        "Acabado repelente al agua que resiste llovizna y humedad de rocío.",
-        "Visibilidad mantenida sobre cualquier prenda de base gracias a los paneles fluorescentes y las cintas retrorreflectivas.",
-        "Puños, cuello y bajo regulables para adaptar el cierre al clima del turno.",
-      ],
-      en: [
-        "Warmth and wind protection in a single layer, without the bulk of a puffer.",
-        "Water-repellent finish that resists drizzle and dew.",
-        "Visibility maintained over any base garment thanks to the fluorescent panels and retroreflective tapes.",
-        "Adjustable cuffs, collar and hem to match the weather of the shift.",
-      ],
-    },
-    technicalFeatures: [
-      {
-        label: { es: "Construcción", en: "Construction" },
-        value: {
-          es: "Campera acolchada con capa exterior de lona y forro interior matelaseado.",
-          en: "Quilted jacket with canvas outer shell and matelassé inner lining.",
-        },
-      },
-      {
-        label: { es: "Tejido", en: "Fabric" },
-        value: {
-          es: "Lona de poliéster y algodón con acabado repelente al agua, 260 g/m².",
-          en: "Polyester-cotton canvas with water-repellent finish, 260 gsm.",
-        },
-      },
-      {
-        label: { es: "Visibilidad", en: "Visibility" },
-        value: {
-          es: "Paneles fluorescentes en hombros y mangas, más cintas retrorreflectivas de 50 mm en cuerpo y brazos.",
-          en: "Fluorescent shoulder and sleeve panels, plus 50 mm retroreflective tapes on body and arms.",
-        },
-      },
-      {
-        label: { es: "Cierre", en: "Closure" },
-        value: {
-          es: "Cremallera de doble carro con tapeta a presión.",
-          en: "Two-way zipper with snap-button storm flap.",
-        },
-      },
-      {
-        label: { es: "Bolsillos", en: "Pockets" },
-        value: {
-          es: "Dos bolsillos inferiores con tapa, uno de pecho y un bolsillo interior.",
-          en: "Two lower flap pockets, one chest pocket and one inner pocket.",
-        },
-      },
-      {
-        label: { es: "Ajuste", en: "Fit" },
-        value: {
-          es: "Cuello alto forrado, puños regulables a presión y bajo ajustable.",
-          en: "Lined stand-up collar, snap-adjustable cuffs and adjustable hem.",
-        },
-      },
-      {
-        label: { es: "Color", en: "Colour" },
-        value: {
-          es: "Azul marino con paneles amarillo flúor.",
-          en: "Navy blue with fluorescent yellow panels.",
-        },
-      },
-    ],
-    materials: {
-      es: [
-        "Exterior: lona 65% poliéster / 35% algodón con acabado repelente al agua, 260 g/m².",
-        "Forro: poliéster matelaseado con relleno de fibra.",
-        "Paneles de alta visibilidad en poliéster fluorescente.",
-        "Cintas retrorreflectivas de 50 mm y cremallera de doble carro.",
-      ],
-      en: [
-        "Shell: 65% polyester / 35% cotton canvas with water-repellent finish, 260 gsm.",
-        "Lining: quilted polyester with fibre fill.",
-        "High-visibility panels in fluorescent polyester.",
-        "50 mm retroreflective tapes and two-way zipper.",
-      ],
-    },
-    recommendedUse: {
-      es: [
-        "Trabajo a la intemperie",
-        "Turnos nocturnos y de amanecer",
-        "Mantenimiento externo de instalaciones",
-        "Operaciones con amplitud térmica marcada",
-      ],
-      en: [
-        "Outdoor work",
-        "Night and dawn shifts",
-        "External facility maintenance",
-        "Operations with wide temperature swings",
-      ],
-    },
-    care: {
-      es: [
-        "Lavar a máquina con agua fría en ciclo suave, con los cierres cerrados.",
-        "No utilizar blanqueadores clorados.",
-        "Secar al aire; el secado a alta temperatura afecta el acabado repelente.",
-        "No planchar sobre las cintas retrorreflectivas ni sobre los paneles fluorescentes.",
-        "Reemplazar la prenda ante cortes, quemaduras o desgaste que comprometan su integridad.",
-      ],
-      en: [
-        "Machine wash cold on a gentle cycle with all closures fastened.",
-        "Do not use chlorine bleach.",
-        "Air dry; high-heat drying degrades the water-repellent finish.",
-        "Do not iron over the retroreflective tapes or the fluorescent panels.",
-        "Replace the garment if cuts, burns or wear compromise its integrity.",
-      ],
-    },
-    documents: [],
-    featured: true,
-    active: true,
-    preliminary: false,
-  },
-  {
-    id: "prd-03",
-    slug: "camisa-trabajo-pampa",
-    name: { es: "Camisa de Trabajo Pampa", en: "Pampa Work Shirt" },
-    shortDescription: {
-      es: "Camisa ignífuga FR de algodón FRARTEX, ropa de trabajo certificada para petróleo y gas, con cintas retrorreflectivas en antebrazos.",
-      en: "FRARTEX FR cotton work shirt — certified flame-resistant apparel for oil and gas, with retroreflective forearm tapes.",
-    },
-    description: {
-      es: "La Pampa es la prenda superior de la línea de petróleo y gas, cortada en FRARTEX-2400AS. El tejido inherente ignífugo y antiestático no se funde ni se adhiere a la piel frente a una fuente de calor, y respira en jornadas de sol abierto en el yacimiento. El corte mantiene la manga larga y el puño abotonado como criterio de cobertura permanente, con canesú reforzado en la espalda para soportar el movimiento repetido de brazos. Las cintas retrorreflectivas en los antebrazos hacen visibles las manos y los gestos durante maniobras nocturnas o en zonas de circulación de vehículos.",
-      en: "The Pampa is the upper garment of the oil and gas line, cut in FRARTEX-2400AS. The inherent flame-resistant and antistatic fabric does not melt or stick to the skin near a heat source, and it breathes through long sunny days at the field. The cut keeps the long sleeve and buttoned cuff as a permanent coverage criterion, with a reinforced back yoke to withstand repeated arm movement. The retroreflective tapes on the forearms make hands and gestures visible during night manoeuvres or in vehicle traffic areas.",
-    },
-    category: "shirts",
-    sectors: ["oil-gas"],
-    protections: ["flash-fire", "electrical"],
-    fabricFamily: FRARTEX_FAMILY,
-    technicalInfo: {
-      code: "EW241003",
-      fabric: fabrics.frartex.code,
-      composition: fabrics.frartex.composition,
-      weight: fabrics.frartex.weight,
-    },
-    colors: pickColors("khaki", "navy", "orange"),
-    images: [
-      {
-        src: "/images/products/camisa-trabajo-pampa-studio.jpg",
-        alt: {
-          es: "Camisa ignífuga FR algodón Pampa, ropa de trabajo certificada en color arena con bolsillos de pecho y cintas retrorreflectivas.",
-          en: "Pampa FR cotton flame-resistant work shirt, certified workwear in sand with chest pockets and retroreflective tapes.",
-        },
-        kind: "studio",
-      },
-      {
-        src: "/images/products/camisa-trabajo-pampa-uso.jpg",
-        alt: {
-          es: "Técnico de campo con la Camisa de Trabajo Pampa junto a un cabezal de pozo.",
-          en: "Field technician wearing the Pampa Work Shirt beside a wellhead.",
-        },
-        kind: "in-use",
-      },
-      ...extraViews(
-        "camisa-trabajo-pampa",
-        {
-          es: "Camisa de Trabajo Pampa, vista posterior: canesú y cintas retrorreflectivas en mangas.",
-          en: "Pampa Work Shirt, back view: yoke and retroreflective sleeve tapes.",
-        },
-        {
-          es: "Detalle de la Camisa de Trabajo Pampa: bolsillos de pecho abotonados y cinta en manga.",
-          en: "Pampa Work Shirt detail: buttoned chest pockets and sleeve tape.",
-        },
-      ),
-    ],
-    sizes: [...SIZES],
-    certifications: [...frartexCertifications],
-    benefits: {
-      es: [
-        "Tejido FRARTEX inherente: no se funde ni se adhiere a la piel frente al calor.",
-        "Fibra antiestática integrada, pensada para instalaciones energizadas.",
-        "Cobertura permanente de brazos con manga larga y puño abotonado.",
-        "Manos y gestos visibles en maniobras nocturnas gracias a las cintas en antebrazos.",
-      ],
-      en: [
-        "Inherent FRARTEX fabric: does not melt or stick to the skin near heat.",
-        "Integrated antistatic fibre, intended for energised installations.",
-        "Permanent arm coverage with long sleeves and buttoned cuffs.",
-        "Hands and gestures visible during night manoeuvres thanks to the forearm tapes.",
-      ],
-    },
-    technicalFeatures: [
-      {
-        label: { es: "Construcción", en: "Construction" },
-        value: {
-          es: "Camisa de manga larga con canesú reforzado en la espalda.",
-          en: "Long-sleeve shirt with reinforced back yoke.",
-        },
-      },
-      {
-        label: { es: "Tejido", en: "Fabric" },
-        value: {
-          es: "FRARTEX-2400AS, 88% algodón / 10% nailon / 2% antiestático, 240 g/m².",
-          en: "FRARTEX-2400AS, 88% cotton / 10% nylon / 2% anti-static, 240 gsm.",
-        },
-      },
-      {
-        label: { es: "Visibilidad", en: "Visibility" },
-        value: {
-          es: "Cinta retrorreflectiva de 25 mm en cada antebrazo.",
-          en: "25 mm retroreflective tape on each forearm.",
-        },
-      },
-      {
-        label: { es: "Cierre", en: "Closure" },
-        value: {
-          es: "Botonadura frontal completa con tapeta.",
-          en: "Full front button placket.",
-        },
-      },
-      {
-        label: { es: "Bolsillos", en: "Pockets" },
-        value: {
-          es: "Dos bolsillos de pecho con tapa abotonada.",
-          en: "Two chest pockets with buttoned flaps.",
-        },
-      },
-      {
-        label: { es: "Ajuste", en: "Fit" },
-        value: {
-          es: "Puños abotonados y cuello con entretela.",
-          en: "Buttoned cuffs and interlined collar.",
-        },
-      },
-      {
-        label: { es: "Color", en: "Colour" },
-        value: { es: "Arena, azul marino o naranja alta visibilidad.", en: "Khaki, navy or high-visibility orange." },
-      },
-    ],
-    materials: {
-      es: [
-        "Cuerpo: FRARTEX-2400AS, 88% algodón / 10% nailon / 2% antiestático, 240 g/m².",
-        "Cintas retrorreflectivas de 25 mm cosidas en antebrazos.",
-        "Botones de poliéster de alta resistencia.",
-        "Hilo de costura con costura reforzada en hombros y sisas.",
-      ],
-      en: [
-        "Body: FRARTEX-2400AS, 88% cotton / 10% nylon / 2% anti-static, 240 gsm.",
-        "25 mm retroreflective tapes stitched on the forearms.",
-        "High-strength polyester buttons.",
-        "Reinforced sewing thread at shoulders and armholes.",
-      ],
-    },
-    recommendedUse: {
-      es: [
-        "Campos de producción",
-        "Plantas de tratamiento",
-        "Inspección y control de instalaciones",
-        "Tareas de superficie en yacimiento",
-      ],
-      en: [
-        "Production fields",
-        "Treatment plants",
-        "Facility inspection and control",
-        "Surface tasks at the field",
-      ],
-    },
-    care: { es: [...CARE_TEXTILE.es], en: [...CARE_TEXTILE.en] },
-    documents: [],
-    featured: true,
-    active: true,
-    preliminary: false,
-  },
-  {
-    id: "prd-04",
-    slug: "pantalon-cargo-calafate",
-    name: { es: "Pantalón Cargo Calafate", en: "Calafate Cargo Trousers" },
-    shortDescription: {
-      es: "Pantalón cargo ignífugo FRARTEX, ropa de trabajo certificada con rodillas de doble capa, seis bolsillos y cintas retrorreflectivas.",
-      en: "FRARTEX flame-resistant cargo trousers — certified workwear with double-layer knees, six pockets and retroreflective tapes.",
-    },
-    description: {
-      es: "El Calafate es el pantalón de la línea de petróleo y gas, cortado en FRARTEX-2400AS. Está construido alrededor de una idea simple: el pantalón se rompe siempre en los mismos lugares. Por eso suma rodillas de doble capa con acceso interno para rodilleras, pensadas para tareas de arrodillado sobre rejilla y hormigón, y el mismo tejido inherente ignífugo en todo el cuerpo. Los seis bolsillos incluyen dos cargo de fuelle que aceptan herramientas de mano sin deformar la pierna, y las cintas retrorreflectivas bajas mantienen visible el movimiento del operario a la altura donde lo ve el conductor de un equipo.",
-      en: "The Calafate is the oil and gas line trouser, cut in FRARTEX-2400AS. It is built around a simple idea: trousers always tear in the same places. That is why it adds double-layer knees with internal access for knee pads, made for kneeling on grating and concrete, and uses the same inherent flame-resistant cloth throughout. The six pockets include two bellows cargo pockets that take hand tools without deforming the leg, and the low retroreflective tapes keep the worker's movement visible at the height a machine operator actually sees.",
+    image: "/images/products/campera-hv-76114.jpg",
+  }),
+  item({
+    slug: "pantalon-fr-1x20r",
+    ref: "1X20R",
+    name: { es: "Pantalón FR inherente aramida", en: "Inherent aramid FR trousers" },
+    short: {
+      es: "Pantalón inherente 6 oz, basta abierta para ajustar el largo.",
+      en: "6 oz inherent trousers with an unfinished hem for length.",
     },
     category: "trousers",
-    sectors: ["oil-gas", "industry"],
-    protections: ["flash-fire"],
-    fabricFamily: FRARTEX_FAMILY,
-    technicalInfo: {
-      code: "EW241004",
-      fabric: fabrics.frartex.code,
-      composition: fabrics.frartex.composition,
-      weight: fabrics.frartex.weight,
+    sectors: OG,
+    protections: FR,
+    fabric: "Aramida inherente",
+    composition: { es: "93% meta-aramida / 5% para-aramida / 2% antiestático", en: "93% meta-aramid / 5% para-aramid / 2% antistatic" },
+    weight: "6 oz",
+    colors: aramid,
+    certs: NA1,
+    features: {
+      es: ["Cierre zipper y botón", "Dos delanteros y dos traseros", "Basta sin dobladillo", "Hilo FR"],
+      en: ["Zipper and button fly", "Two front and two back pockets", "Unfinished hem", "FR thread"],
     },
-    colors: pickColors("graphite", "navy", "khaki"),
-    images: [
-      {
-        src: "/images/products/pantalon-cargo-calafate-studio.jpg",
-        alt: {
-          es: "Pantalón cargo ignífugo Calafate, ropa de trabajo FR certificada en grafito con bolsillos de fuelle y rodillas reforzadas.",
-          en: "Calafate flame-resistant cargo trousers, certified FR workwear in graphite with bellows pockets and reinforced knees.",
-        },
-        kind: "studio",
-      },
-      {
-        src: "/images/products/pantalon-cargo-calafate-uso.jpg",
-        alt: {
-          es: "Detalle del Pantalón Cargo Calafate mientras un técnico trabaja arrodillado sobre una rejilla industrial.",
-          en: "Detail of the Calafate Cargo Trousers as a technician kneels on industrial grating.",
-        },
-        kind: "in-use",
-      },
-      ...extraViews(
-        "pantalon-cargo-calafate",
-        {
-          es: "Pantalón Cargo Calafate, vista posterior: bolsillos traseros, rodillas reforzadas y cinta retrorreflectiva baja.",
-          en: "Calafate Cargo Trousers, back view: rear pockets, reinforced knees and low retroreflective tape.",
-        },
-        {
-          es: "Detalle del Pantalón Cargo Calafate: bolsillo cargo de fuelle, rodilla articulada y cinta retrorreflectiva.",
-          en: "Calafate Cargo Trousers detail: bellows cargo pocket, articulated knee and retroreflective tape.",
-        },
-      ),
-    ],
-    sizes: [...SIZES],
-    certifications: [...frartexCertifications],
-    benefits: {
-      es: [
-        "Cuerpo completo en FRARTEX inherente ignífugo y antiestático.",
-        "Rodillas de doble capa con acceso interno para rodilleras.",
-        "Seis bolsillos, dos de ellos cargo de fuelle, para herramientas de mano.",
-        "Cintas retrorreflectivas bajas, a la altura en la que el operador de un equipo detecta el movimiento.",
-      ],
-      en: [
-        "Full body in inherent flame-resistant and antistatic FRARTEX.",
-        "Double-layer knees with internal access for knee pads.",
-        "Six pockets, two of them bellows cargo, for hand tools.",
-        "Low retroreflective tapes, at the height where a machine operator detects movement.",
-      ],
+    image: "/images/products/pantalon-fr-1x20r.jpg",
+    sizes: ["28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48"],
+  }),
+  item({
+    slug: "pantalon-fr-1x21r",
+    ref: "1X21R",
+    name: { es: "Pantalón FR algodón / nailon", en: "Cotton/nylon FR trousers" },
+    short: {
+      es: "Pantalón FR 7,5 oz con cinta plateada de 50 mm en el bajo.",
+      en: "7.5 oz FR trousers with 50 mm silver tape at the hem.",
     },
-    technicalFeatures: [
-      {
-        label: { es: "Construcción", en: "Construction" },
-        value: {
-          es: "Pantalón cargo de corte recto con seis bolsillos.",
-          en: "Straight-cut cargo trousers with six pockets.",
-        },
-      },
-      {
-        label: { es: "Tejido", en: "Fabric" },
-        value: {
-          es: "FRARTEX-2400AS, 88% algodón / 10% nailon / 2% antiestático, 240 g/m².",
-          en: "FRARTEX-2400AS, 88% cotton / 10% nylon / 2% anti-static, 240 gsm.",
-        },
-      },
-      {
-        label: { es: "Refuerzos", en: "Reinforcements" },
-        value: {
-          es: "Rodillas de doble capa con acceso interno para rodilleras y refuerzo en el tiro.",
-          en: "Double-layer knees with internal knee-pad access and crotch reinforcement.",
-        },
-      },
-      {
-        label: { es: "Visibilidad", en: "Visibility" },
-        value: {
-          es: "Cinta retrorreflectiva de 50 mm en cada pierna, por debajo de la rodilla.",
-          en: "50 mm retroreflective tape on each leg, below the knee.",
-        },
-      },
-      {
-        label: { es: "Bolsillos", en: "Pockets" },
-        value: {
-          es: "Dos delanteros de acceso lateral, dos traseros con tapa y dos cargo de fuelle.",
-          en: "Two side-access front pockets, two flap back pockets and two bellows cargo pockets.",
-        },
-      },
-      {
-        label: { es: "Ajuste", en: "Fit" },
-        value: {
-          es: "Cintura con presillas anchas para cinturón y elástico lateral.",
-          en: "Waistband with wide belt loops and side elastic.",
-        },
-      },
-      {
-        label: { es: "Color", en: "Colour" },
-        value: { es: "Grafito, azul marino o arena.", en: "Graphite, navy or khaki." },
-      },
-    ],
-    materials: {
-      es: [
-        "Cuerpo: FRARTEX-2400AS, 88% algodón / 10% nailon / 2% antiestático, 240 g/m².",
-        "Rodillas y tiro con refuerzo del mismo tejido en doble capa.",
-        "Cintas retrorreflectivas de 50 mm cosidas en ambas piernas.",
-        "Cierre metálico y botón troquelado de alta resistencia.",
-      ],
-      en: [
-        "Body: FRARTEX-2400AS, 88% cotton / 10% nylon / 2% anti-static, 240 gsm.",
-        "Knees and crotch reinforced with the same fabric in double layer.",
-        "50 mm retroreflective tapes stitched on both legs.",
-        "Metal zipper and heavy-duty stamped button.",
-      ],
+    category: "trousers",
+    sectors: OG,
+    protections: FRHV,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: aramid,
+    certs: NA2,
+    features: {
+      es: ["Cinta de 50 mm en el bajo", "Dos delanteros y dos traseros", "Bartack en puntos de estrés"],
+      en: ["50 mm hem tape", "Two front and two back pockets", "Bar-tacks at stress points"],
     },
-    recommendedUse: {
-      es: [
-        "Perforación y workover",
-        "Mantenimiento de instalaciones",
-        "Operación de planta",
-        "Tareas de arrodillado sobre rejilla y hormigón",
-      ],
-      en: [
-        "Drilling and workover",
-        "Facility maintenance",
-        "Plant operation",
-        "Kneeling tasks on grating and concrete",
-      ],
-    },
-    care: { es: [...CARE_TEXTILE.es], en: [...CARE_TEXTILE.en] },
-    documents: [],
+    image: "/images/products/pantalon-fr-1x21r.jpg",
     featured: true,
-    active: true,
-    preliminary: false,
-  },
-  {
-    id: "prd-05",
-    slug: "chaleco-alta-visibilidad-zonda",
-    name: { es: "Chaleco de Alta Visibilidad Zonda", en: "Zonda High-Visibility Vest" },
-    shortDescription: {
-      es: "Chaleco liviano en malla fluorescente con cintas retrorreflectivas y bolsillos de trabajo, para llevar sobre cualquier prenda.",
-      en: "Lightweight fluorescent mesh vest with retroreflective tapes and work pockets, to wear over any garment.",
+    sizes: ["28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48"],
+  }),
+  item({
+    slug: "pantalon-fr-1x21r-1",
+    ref: "1X21R-1",
+    name: { es: "Pantalón FR con doble cinta", en: "FR trousers with double tape" },
+    short: {
+      es: "Pantalón FR 7,5 oz con doble cinta retrorreflectiva en cada pierna.",
+      en: "7.5 oz FR trousers with double retroreflective tape on each leg.",
     },
-    description: {
-      es: "El Zonda es la prenda complementaria que se pone encima de todo lo demás. El cuerpo en malla lo mantiene liviano y ventilado, de modo que sumarlo a un overol o a una campera no agrega calor, y las cintas retrorreflectivas horizontales y sobre hombros marcan el torso desde cualquier ángulo de aproximación. La base en tejido sólido azul marino resiste mejor la suciedad en la zona que roza contra materiales y superficies. Los bolsillos están pensados para quien coordina: radio, anotador, lápices y una anilla para la credencial.",
-      en: "The Zonda is the complementary garment that goes on top of everything else. The mesh body keeps it light and ventilated, so adding it over a coverall or jacket does not add heat, and the horizontal and over-shoulder retroreflective tapes mark the torso from any approach angle. The solid navy blue lower panel resists dirt better in the area that rubs against materials and surfaces. The pockets are laid out for whoever coordinates: radio, notepad, pens and a ring for the credential.",
+    category: "trousers",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: aramid,
+    certs: NA2,
+    features: {
+      es: ["Doble cinta de 50 mm", "Cierre FR con broche", "Trabillas bartackeadas"],
+      en: ["Double 50 mm tape", "FR fly with snap", "Bar-tacked belt loops"],
+    },
+    image: "/images/products/pantalon-fr-1x21r-1.jpg",
+    sizes: ["28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48"],
+  }),
+  item({
+    slug: "pantalon-fr-1x29r",
+    ref: "1X29R",
+    name: { es: "Pantalón FR ventilado cargo", en: "FR vented cargo trousers" },
+    short: {
+      es: "Pantalón FR 7,5 oz con malla de ventilación y bolsillo cargo.",
+      en: "7.5 oz FR trousers with ventilation mesh and a cargo pocket.",
+    },
+    category: "trousers",
+    sectors: OG,
+    protections: FR,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: aramid,
+    certs: NA2,
+    features: {
+      es: ["Malla FR en cintura y rodilla", "Bolsillo cargo con tapa", "Listo para bordado"],
+      en: ["FR mesh at waist and knee", "Flap cargo pocket", "Ready for embroidery"],
+    },
+    image: "/images/products/pantalon-fr-1x29r.jpg",
+    sizes: ["28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48"],
+  }),
+  item({
+    slug: "chaleco-trabajo-55002",
+    ref: "55002",
+    name: { es: "Chaleco geólogo multipocket", en: "Multi-pocket geo vest" },
+    short: {
+      es: "Chaleco de trabajo 115 g/m² con múltiples bolsillos. No es una prenda FR.",
+      en: "115 gsm work vest with multiple pockets. Not an FR garment.",
     },
     category: "vests",
-    sectors: ["mining", "oil-gas", "industry"],
+    sectors: ["industry", "mining"],
     protections: ["high-visibility"],
-    technicalInfo: {
-      code: "EW241005",
-      fabric: "ESTEPA-HV150",
-      composition: {
-        es: "Malla 100% poliéster fluorescente y base de poliéster sólido",
-        en: "100% fluorescent polyester mesh with solid polyester lower panel",
-      },
-      weight: "150 g/m²",
+    fabric: "Poliéster",
+    composition: { es: "100% poliéster", en: "100% polyester" },
+    weight: "115 g/m²",
+    colors: [C.black, C.navy, C.red, C.orange, C.yellow],
+    certs: [],
+    features: {
+      es: ["Cierre plástico", "Bolsillos de pecho y bajos", "Portacelular y presillas", "Zona para logo"],
+      en: ["Plastic zipper", "Chest and lower pockets", "Phone pocket and side loops", "Logo area"],
     },
-    colors: [
-      { id: "hv-navy", name: { es: "Amarillo flúor / marino", en: "Fluorescent yellow / navy" }, hex: "#D4E157" },
-    ],
-    images: [
-      {
-        src: "/images/products/chaleco-alta-visibilidad-zonda-studio.jpg",
-        alt: {
-          es: "Chaleco de Alta Visibilidad Zonda en malla amarillo flúor con base azul marino y cintas retrorreflectivas, vista frontal sobre fondo neutro.",
-          en: "Zonda High-Visibility Vest in fluorescent yellow mesh with navy blue lower panel and retroreflective tapes, front view on a neutral background.",
-        },
-        kind: "studio",
-      },
-      {
-        src: "/images/products/chaleco-alta-visibilidad-zonda-uso.jpg",
-        alt: {
-          es: "Supervisor de obra con el Chaleco de Alta Visibilidad Zonda en un patio de materiales.",
-          en: "Site supervisor wearing the Zonda High-Visibility Vest in a materials yard.",
-        },
-        kind: "in-use",
-      },
-      ...extraViews(
-        "chaleco-alta-visibilidad-zonda",
-        {
-          es: "Chaleco de Alta Visibilidad Zonda, vista posterior: malla flúor, base marino y cintas retrorreflectivas.",
-          en: "Zonda High-Visibility Vest, back view: fluorescent mesh, navy panel and retroreflective tapes.",
-        },
-        {
-          es: "Detalle del Chaleco Zonda: bolsillo para radio, portalápices y cinta retrorreflectiva.",
-          en: "Zonda vest detail: radio pocket, pen slots and retroreflective tape.",
-        },
-      ),
-    ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    certifications: [],
-    benefits: {
-      es: [
-        "Cuerpo en malla que suma visibilidad sin sumar calor sobre la indumentaria de base.",
-        "Cintas horizontales y sobre hombros que marcan el torso desde cualquier ángulo.",
-        "Base en tejido sólido que resiste mejor la suciedad en la zona de roce.",
-        "Bolsillo para radio, portalápices y anilla portacredencial para tareas de coordinación.",
-      ],
-      en: [
-        "Mesh body that adds visibility without adding heat over the base clothing.",
-        "Horizontal and over-shoulder tapes that mark the torso from any angle.",
-        "Solid lower panel that resists dirt better in the rubbing area.",
-        "Radio pocket, pen holder and credential ring for coordination tasks.",
-      ],
+    image: "/images/products/chaleco-trabajo-55002.jpg",
+  }),
+  item({
+    slug: "chaleco-fr-5x22rt",
+    ref: "5X22RT",
+    name: { es: "Chaleco de trabajo FR", en: "FR work vest" },
+    short: {
+      es: "Chaleco FR 7,5 oz con cintas de 50 mm, verticales al frente y X en la espalda.",
+      en: "7.5 oz FR vest with 50 mm tape, vertical fronts and an X on the back.",
     },
-    technicalFeatures: [
-      {
-        label: { es: "Construcción", en: "Construction" },
-        value: {
-          es: "Chaleco liviano con cuerpo en malla y base en tejido sólido.",
-          en: "Lightweight vest with mesh body and solid-fabric lower panel.",
-        },
-      },
-      {
-        label: { es: "Tejido", en: "Fabric" },
-        value: {
-          es: "Malla de poliéster fluorescente y base de poliéster de 150 g/m².",
-          en: "Fluorescent polyester mesh with 150 gsm polyester lower panel.",
-        },
-      },
-      {
-        label: { es: "Visibilidad", en: "Visibility" },
-        value: {
-          es: "Cintas retrorreflectivas de 50 mm en torso y sobre ambos hombros.",
-          en: "50 mm retroreflective tapes around the torso and over both shoulders.",
-        },
-      },
-      {
-        label: { es: "Cierre", en: "Closure" },
-        value: {
-          es: "Cremallera frontal completa.",
-          en: "Full-length front zipper.",
-        },
-      },
-      {
-        label: { es: "Bolsillos", en: "Pockets" },
-        value: {
-          es: "Bolsillo para radio, portalápices, bolsillo de pecho con tapa, dos inferiores con tapa y anilla portacredencial.",
-          en: "Radio pocket, pen holder, flap chest pocket, two lower flap pockets and a credential ring.",
-        },
-      },
-      {
-        label: { es: "Uso", en: "Use" },
-        value: {
-          es: "Diseñado para llevarse sobre camisa, campera u overol.",
-          en: "Designed to be worn over a shirt, jacket or coverall.",
-        },
-      },
-      {
-        label: { es: "Color", en: "Colour" },
-        value: {
-          es: "Amarillo flúor con base azul marino.",
-          en: "Fluorescent yellow with navy blue lower panel.",
-        },
-      },
-    ],
-    materials: {
-      es: [
-        "Cuerpo: malla 100% poliéster fluorescente.",
-        "Base y hombros: poliéster sólido azul marino, 150 g/m².",
-        "Cintas retrorreflectivas de 50 mm cosidas en torso y hombros.",
-        "Cremallera de nylon y anilla metálica portacredencial.",
-      ],
-      en: [
-        "Body: 100% fluorescent polyester mesh.",
-        "Lower panel and shoulders: solid navy blue polyester, 150 gsm.",
-        "50 mm retroreflective tapes stitched on torso and shoulders.",
-        "Nylon zipper and metal credential ring.",
-      ],
+    category: "vests",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "FR 88/12",
+    composition: { es: "88% algodón / 12% nailon", en: "88% cotton / 12% nylon" },
+    weight: "7,5 oz",
+    colors: cottonY,
+    certs: NA2,
+    features: {
+      es: ["Cierre de broches", "Bolsillo de pecho con tapa", "Cintas de 50 mm y X en la espalda"],
+      en: ["Snap front", "Flap chest pocket", "50 mm tape and X on the back"],
     },
-    recommendedUse: {
-      es: [
-        "Zonas de circulación de vehículos y maquinaria",
-        "Logística y depósitos",
-        "Supervisión y coordinación de obra",
-        "Visitas técnicas y auditorías en planta",
-      ],
-      en: [
-        "Vehicle and machinery traffic areas",
-        "Logistics and warehousing",
-        "Site supervision and coordination",
-        "Technical visits and plant audits",
-      ],
-    },
-    care: {
-      es: [
-        "Lavar a máquina con agua fría en ciclo suave, con la cremallera cerrada.",
-        "No utilizar blanqueadores clorados.",
-        "Secar al aire, evitando la exposición solar prolongada que apaga el color fluorescente.",
-        "No planchar sobre las cintas retrorreflectivas ni sobre la malla.",
-        "Reemplazar la prenda cuando el fluorescente pierda intensidad o las cintas se despeguen.",
-      ],
-      en: [
-        "Machine wash cold on a gentle cycle with the zipper closed.",
-        "Do not use chlorine bleach.",
-        "Air dry, avoiding prolonged sun exposure that dulls the fluorescent colour.",
-        "Do not iron over the retroreflective tapes or the mesh.",
-        "Replace the garment when the fluorescent colour fades or the tapes come loose.",
-      ],
-    },
-    documents: [],
-    featured: true,
-    active: true,
-    preliminary: false,
-  },
-  {
-    id: "prd-06",
-    slug: "overol-industrial-talampaya",
-    name: { es: "Overol Industrial Talampaya", en: "Talampaya Industrial Coverall" },
-    shortDescription: {
-      es: "Overol con capucha en tejido recubierto y costuras termoselladas, para tareas con salpicaduras y manipulación de insumos.",
-      en: "Hooded coverall in coated fabric with heat-sealed seams, for splash-exposed tasks and material handling.",
-    },
-    description: {
-      es: "El Talampaya cubre las tareas industriales en las que puede haber contacto con líquidos, salpicaduras o polvo del proceso productivo. El tejido de poliéster con recubrimiento de poliuretano presenta una superficie lisa y continua que se enjuaga con facilidad, y las costuras termoselladas eliminan los puntos de aguja como vía de paso. La capucha integrada, los puños y los tobillos elastizados cierran el conjunto sin necesidad de accesorios, y el cierre frontal queda cubierto por una tapeta sellada. La configuración final —capucha, tipo de puño, compatibilidad con el resto del equipamiento— se define junto al cliente según el agente presente y el tiempo de exposición de la tarea.",
-      en: "The Talampaya covers industrial tasks where contact with liquids, splashes or process dust may occur. The polyurethane-coated polyester fabric presents a smooth, continuous surface that rinses easily, and the heat-sealed seams remove needle holes as a path of entry. The integrated hood and the elasticated cuffs and ankles close the assembly without accessories, and the front closure sits behind a sealed storm flap. The final configuration — hood, cuff type, compatibility with the rest of the equipment — is defined together with the client according to the agent present and the exposure time of the task.",
-    },
-    category: "coveralls",
-    sectors: ["industry"],
-    protections: ["chemical"],
-    technicalInfo: {
-      code: "EW241006",
-      fabric: "ESTEPA-PU-CT",
-      composition: {
-        es: "Poliéster con recubrimiento de poliuretano",
-        en: "Polyurethane-coated polyester",
-      },
-      weight: "PU coated",
-    },
-    colors: [
-      { id: "slate", name: { es: "Gris pizarra", en: "Slate grey" }, hex: "#5C6370" },
-    ],
-    images: [
-      {
-        src: "/images/products/overol-industrial-talampaya-studio.jpg",
-        alt: {
-          es: "Overol Industrial Talampaya gris pizarra con capucha integrada y costuras selladas, vista frontal sobre fondo neutro.",
-          en: "Slate grey Talampaya Industrial Coverall with integrated hood and sealed seams, front view on a neutral background.",
-        },
-        kind: "studio",
-      },
-      {
-        src: "/images/products/overol-industrial-talampaya-uso.jpg",
-        alt: {
-          es: "Operador de planta con el Overol Industrial Talampaya manipulando tambores en una instalación de proceso.",
-          en: "Plant operator wearing the Talampaya Industrial Coverall handling drums in a process facility.",
-        },
-        kind: "in-use",
-      },
-      ...extraViews(
-        "overol-industrial-talampaya",
-        {
-          es: "Overol Industrial Talampaya, vista posterior: capucha integrada, cintura elástica y costuras contrastadas.",
-          en: "Talampaya Industrial Coverall, back view: integrated hood, elastic waist and contrast seams.",
-        },
-        {
-          es: "Detalle del Overol Talampaya: tapeta cubierta, puño elastizado y tejido recubierto.",
-          en: "Talampaya Coverall detail: covered storm flap, elastic cuff and coated fabric.",
-        },
-      ),
-    ],
-    sizes: [...SIZES],
-    certifications: [],
-    benefits: {
-      es: [
-        "Superficie lisa y continua que se enjuaga con facilidad al terminar la tarea.",
-        "Costuras termoselladas que eliminan los puntos de aguja como vía de paso.",
-        "Capucha, puños y tobillos elastizados que cierran el conjunto sin accesorios.",
-        "Configuración definida junto al cliente según el agente y el tiempo de exposición.",
-      ],
-      en: [
-        "Smooth, continuous surface that rinses easily at the end of the task.",
-        "Heat-sealed seams that remove needle holes as a path of entry.",
-        "Elasticated hood, cuffs and ankles that close the assembly without accessories.",
-        "Configuration defined with the client according to the agent and exposure time.",
-      ],
-    },
-    technicalFeatures: [
-      {
-        label: { es: "Construcción", en: "Construction" },
-        value: {
-          es: "Overol de una pieza con capucha integrada y cierre frontal cubierto por tapeta sellada.",
-          en: "One-piece coverall with integrated hood and front closure behind a sealed storm flap.",
-        },
-      },
-      {
-        label: { es: "Tejido", en: "Fabric" },
-        value: {
-          es: "Poliéster con recubrimiento de poliuretano, superficie lisa de fácil enjuague.",
-          en: "Polyurethane-coated polyester with an easy-rinse smooth surface.",
-        },
-      },
-      {
-        label: { es: "Costuras", en: "Seams" },
-        value: {
-          es: "Costuras termoselladas en hombros, mangas y piernas.",
-          en: "Heat-sealed seams on shoulders, sleeves and legs.",
-        },
-      },
-      {
-        label: { es: "Ajuste", en: "Fit" },
-        value: {
-          es: "Elástico en capucha, puños, tobillos y cintura.",
-          en: "Elastic at hood, cuffs, ankles and waist.",
-        },
-      },
-      {
-        label: { es: "Compatibilidad", en: "Compatibility" },
-        value: {
-          es: "Corte holgado para usarse sobre la indumentaria de trabajo habitual.",
-          en: "Loose cut to be worn over regular workwear.",
-        },
-      },
-      {
-        label: { es: "Configuración", en: "Configuration" },
-        value: {
-          es: "Variantes de capucha y puño definidas según el agente y el tiempo de exposición de la tarea.",
-          en: "Hood and cuff variants defined according to the agent and the exposure time of the task.",
-        },
-      },
-      {
-        label: { es: "Color", en: "Colour" },
-        value: { es: "Gris pizarra.", en: "Slate grey." },
-      },
-    ],
-    materials: {
-      es: [
-        "Cuerpo: poliéster con recubrimiento de poliuretano.",
-        "Costuras termoselladas con cinta continua.",
-        "Elásticos encapsulados en capucha, puños, tobillos y cintura.",
-        "Cremallera frontal con tapeta sellada.",
-      ],
-      en: [
-        "Body: polyurethane-coated polyester.",
-        "Heat-sealed seams with continuous tape.",
-        "Encapsulated elastics at hood, cuffs, ankles and waist.",
-        "Front zipper with sealed storm flap.",
-      ],
-    },
-    recommendedUse: {
-      es: [
-        "Plantas de proceso",
-        "Manipulación y trasvase de insumos",
-        "Limpieza industrial y mantenimiento húmedo",
-        "Tareas con salpicaduras o polvo de proceso",
-      ],
-      en: [
-        "Process plants",
-        "Material handling and transfer",
-        "Industrial cleaning and wet maintenance",
-        "Tasks with splashes or process dust",
-      ],
-    },
-    care: {
-      es: [
-        "Enjuagar con agua limpia después de cada uso.",
-        "Limpiar con paño húmedo y jabón neutro; no lavar en seco.",
-        "Secar al aire, extendida y alejada de fuentes de calor directo.",
-        "No planchar ni utilizar blanqueadores.",
-        "Guardar colgada o extendida, sin pliegues marcados.",
-        "Descartar la prenda ante perforaciones, cortes o costuras despegadas.",
-      ],
-      en: [
-        "Rinse with clean water after each use.",
-        "Clean with a damp cloth and neutral soap; do not dry clean.",
-        "Air dry flat, away from direct heat sources.",
-        "Do not iron or bleach.",
-        "Store hanging or flat, without sharp creases.",
-        "Discard the garment if there are punctures, cuts or opened seams.",
-      ],
-    },
-    documents: [],
-    featured: true,
-    active: true,
-    preliminary: false,
-  },
-  {
-    id: "prd-07",
-    slug: "camisa-industrial-uspallata",
-    name: { es: "Camisa Industrial Uspallata", en: "Uspallata Industrial Shirt" },
-    shortDescription: {
-      es: "Camisa de trabajo en sarga con codos de doble capa y canesú de hombros en contraste, para taller y mantenimiento diario.",
-      en: "Twill work shirt with double-layer elbows and a contrasting shoulder yoke, for workshop and daily maintenance.",
-    },
-    description: {
-      es: "La Uspallata es la camisa de línea general: la prenda de todos los días en taller, mantenimiento y producción. El refuerzo está puesto donde la camisa de trabajo se gasta primero, es decir en los codos, que apoyan sobre el banco, y en los hombros, que cargan y rozan. El canesú en contraste cumple esa función y además disimula la marca del uso. La sarga de algodón y poliéster mantiene la forma después de muchos lavados y seca más rápido que un algodón puro, algo que importa cuando la misma prenda vuelve al turno siguiente.",
-      en: "The Uspallata is the general-line shirt: the everyday garment for workshop, maintenance and production. The reinforcement sits where a work shirt wears out first, namely the elbows, which rest on the bench, and the shoulders, which carry and rub. The contrasting yoke serves that purpose and also disguises the mark of use. The cotton-polyester twill holds its shape after many washes and dries faster than pure cotton, which matters when the same garment returns for the next shift.",
+    image: "/images/products/chaleco-fr-5x22rt.jpg",
+  }),
+  item({
+    slug: "remera-fr-h2105r-2",
+    ref: "H2105R-2",
+    name: { es: "Remera henley FR", en: "FR henley shirt" },
+    short: {
+      es: "Henley de algodón FR 7 oz, plaqueta de 3 botones y mangas raglán.",
+      en: "7 oz FR cotton henley with a 3-button placket and raglan sleeves.",
     },
     category: "shirts",
-    sectors: ["industry"],
-    protections: [],
-    technicalInfo: {
-      code: "EW241007",
-      fabric: "ESTEPA-TW220",
-      composition: {
-        es: "65% algodón, 35% poliéster",
-        en: "65% cotton, 35% polyester",
-      },
-      weight: "220 g/m²",
+    sectors: OG,
+    protections: FR,
+    fabric: "Algodón FR",
+    composition: { es: "100% algodón FR", en: "100% FR cotton" },
+    weight: "7 oz",
+    colors: knit,
+    certs: NA2,
+    features: {
+      es: ["Plaqueta de 3 botones FR", "Bolsillo de pecho", "Mangas raglán", "Hilo FR"],
+      en: ["3 FR-button placket", "Chest pocket", "Raglan sleeves", "FR thread"],
     },
-    colors: [
-      { id: "steel", name: { es: "Azul acero", en: "Steel blue" }, hex: "#5B6B7A" },
-    ],
-    images: [
-      {
-        src: "/images/products/camisa-industrial-uspallata-studio.jpg",
-        alt: {
-          es: "Camisa Industrial Uspallata en azul acero con canesú de hombros en contraste y codos reforzados, vista frontal sobre fondo neutro.",
-          en: "Steel blue Uspallata Industrial Shirt with contrasting shoulder yoke and reinforced elbows, front view on a neutral background.",
-        },
-        kind: "studio",
-      },
-      {
-        src: "/images/products/camisa-industrial-uspallata-uso.jpg",
-        alt: {
-          es: "Operario metalúrgico con la Camisa Industrial Uspallata trabajando en un banco de taller.",
-          en: "Metalworker wearing the Uspallata Industrial Shirt at a workshop bench.",
-        },
-        kind: "in-use",
-      },
-      ...extraViews(
-        "camisa-industrial-uspallata",
-        {
-          es: "Camisa Industrial Uspallata, vista posterior: canesú en contraste y codos reforzados.",
-          en: "Uspallata Industrial Shirt, back view: contrasting yoke and reinforced elbows.",
-        },
-        {
-          es: "Detalle de la Camisa Uspallata: canesú de hombro, bolsillo de pecho y codo de doble capa.",
-          en: "Uspallata Shirt detail: shoulder yoke, chest pocket and double-layer elbow.",
-        },
-      ),
-    ],
-    sizes: [...SIZES],
-    certifications: [],
-    benefits: {
-      es: [
-        "Codos de doble capa, la zona que primero se gasta al apoyar sobre el banco.",
-        "Canesú de hombros en contraste que refuerza la carga y disimula la marca del uso.",
-        "Sarga mixta que mantiene la forma y seca rápido entre turnos.",
-        "Puños regulables con dos posiciones de botón para trabajar con guante.",
-      ],
-      en: [
-        "Double-layer elbows, the area that wears out first when resting on the bench.",
-        "Contrasting shoulder yoke that reinforces load-bearing and disguises the mark of use.",
-        "Blended twill that holds its shape and dries fast between shifts.",
-        "Two-position adjustable cuffs for working with gloves.",
-      ],
+    image: "/images/products/remera-fr-h2105r-2.jpg",
+  }),
+  item({
+    slug: "remera-fr-h2105r-3",
+    ref: "H2105R-3",
+    name: { es: "Henley FR alta visibilidad", en: "Hi-vis FR henley" },
+    short: {
+      es: "Henley FR 7 oz con cintas segmentadas, verticales y X en la espalda.",
+      en: "7 oz FR henley with segmented tape, verticals and an X on the back.",
     },
-    technicalFeatures: [
-      {
-        label: { es: "Construcción", en: "Construction" },
-        value: {
-          es: "Camisa de manga larga con canesú de hombros en contraste.",
-          en: "Long-sleeve shirt with contrasting shoulder yoke.",
-        },
-      },
-      {
-        label: { es: "Tejido", en: "Fabric" },
-        value: {
-          es: "Sarga de algodón y poliéster de 220 g/m².",
-          en: "Cotton-polyester twill, 220 gsm.",
-        },
-      },
-      {
-        label: { es: "Refuerzos", en: "Reinforcements" },
-        value: {
-          es: "Codos de doble capa y costura reforzada en hombros y sisas.",
-          en: "Double-layer elbows and reinforced seams at shoulders and armholes.",
-        },
-      },
-      {
-        label: { es: "Cierre", en: "Closure" },
-        value: {
-          es: "Botonadura frontal completa.",
-          en: "Full front button placket.",
-        },
-      },
-      {
-        label: { es: "Bolsillos", en: "Pockets" },
-        value: {
-          es: "Dos bolsillos de pecho con tapa abotonada.",
-          en: "Two chest pockets with buttoned flaps.",
-        },
-      },
-      {
-        label: { es: "Ajuste", en: "Fit" },
-        value: {
-          es: "Puños regulables con dos posiciones de botón.",
-          en: "Cuffs adjustable to two button positions.",
-        },
-      },
-      {
-        label: { es: "Color", en: "Colour" },
-        value: {
-          es: "Azul acero con canesú gris grafito.",
-          en: "Steel blue with graphite grey yoke.",
-        },
-      },
-    ],
-    materials: {
-      es: [
-        "Cuerpo: sarga 65% algodón / 35% poliéster, 220 g/m².",
-        "Canesú y codos con refuerzo del mismo tejido en doble capa.",
-        "Botones de poliéster de alta resistencia.",
-        "Hilo de costura de poliéster con costura reforzada en las uniones estructurales.",
-      ],
-      en: [
-        "Body: 65% cotton / 35% polyester twill, 220 gsm.",
-        "Yoke and elbows reinforced with the same fabric in double layer.",
-        "High-strength polyester buttons.",
-        "Polyester sewing thread with reinforced structural seams.",
-      ],
+    category: "shirts",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "Algodón FR",
+    composition: { es: "100% algodón FR", en: "100% FR cotton" },
+    weight: "7 oz",
+    colors: [C.maroon, C.khaki, C.sky, C.grey, C.dark],
+    certs: NA2,
+    features: {
+      es: ["Cintas segmentadas", "Plaqueta de 3 botones", "Bolsillo de pecho"],
+      en: ["Segmented tape", "3-button placket", "Chest pocket"],
     },
-    recommendedUse: {
-      es: [
-        "Taller metalúrgico y mecánico",
-        "Mantenimiento y producción",
-        "Construcción y montaje",
-        "Uso diario en planta",
-      ],
-      en: [
-        "Metalworking and mechanical workshops",
-        "Maintenance and production",
-        "Construction and assembly",
-        "Daily plant use",
-      ],
+    image: "/images/products/remera-fr-h2105r-3.jpg",
+  }),
+  item({
+    slug: "remera-fr-s2101r",
+    ref: "S2101R",
+    name: { es: "Remera crew FR", en: "FR crew shirt" },
+    short: {
+      es: "Remera cuello redondo de algodón FR 7 oz.",
+      en: "7 oz FR cotton crew-neck shirt.",
     },
-    care: { es: [...CARE_TEXTILE.es], en: [...CARE_TEXTILE.en] },
-    documents: [],
-    featured: false,
-    active: true,
-    preliminary: false,
-  },
+    category: "shirts",
+    sectors: OG,
+    protections: FR,
+    fabric: "Algodón FR",
+    composition: { es: "100% algodón FR", en: "100% FR cotton" },
+    weight: "7 oz",
+    colors: knit,
+    certs: NA2,
+    features: {
+      es: ["Cuello redondo", "Bolsillo de pecho", "Hilo FR"],
+      en: ["Crew neck", "Chest pocket", "FR thread"],
+    },
+    image: "/images/products/remera-fr-s2101r.jpg",
+  }),
+  item({
+    slug: "remera-fr-s2102r",
+    ref: "S2102R",
+    name: { es: "Remera crew FR con cintas", en: "FR crew shirt with tape" },
+    short: {
+      es: "Crew FR 7 oz con cintas de 50 mm alrededor del cuerpo.",
+      en: "7 oz FR crew with 50 mm tape around the body.",
+    },
+    category: "shirts",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "Algodón FR",
+    composition: { es: "100% algodón FR", en: "100% FR cotton" },
+    weight: "7 oz",
+    colors: knit,
+    certs: NA2,
+    features: {
+      es: ["Cintas de 50 mm", "Cuello redondo", "Hilo FR"],
+      en: ["50 mm tape", "Crew neck", "FR thread"],
+    },
+    image: "/images/products/remera-fr-s2102r.jpg",
+  }),
+  item({
+    slug: "chomba-fr-p2x01rt",
+    ref: "P2X01RT",
+    name: { es: "Chomba polo FR", en: "FR polo shirt" },
+    short: {
+      es: "Chomba de algodón FR 7 oz con cuello solapa.",
+      en: "7 oz FR cotton polo with a lapel collar.",
+    },
+    category: "shirts",
+    sectors: OG,
+    protections: FR,
+    fabric: "Algodón FR",
+    composition: { es: "100% algodón FR", en: "100% FR cotton" },
+    weight: "7 oz",
+    colors: knit,
+    certs: NA2,
+    features: {
+      es: ["Cuello solapa", "Bolsillo de pecho", "Hilo FR"],
+      en: ["Lapel collar", "Chest pocket", "FR thread"],
+    },
+    image: "/images/products/chomba-fr-p2x01rt.jpg",
+  }),
+  item({
+    slug: "chomba-fr-p2x01rt-1",
+    ref: "P2X01RT-1",
+    name: { es: "Chomba polo FR alta visibilidad", en: "Hi-vis FR polo" },
+    short: {
+      es: "Polo FR 7 oz de alta visibilidad con cintas segmentadas.",
+      en: "7 oz hi-vis FR polo with segmented tape.",
+    },
+    category: "shirts",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "Algodón FR",
+    composition: { es: "100% algodón FR", en: "100% FR cotton" },
+    weight: "7 oz",
+    colors: [C.yb, C.ob],
+    certs: NA2,
+    features: {
+      es: ["Cintas segmentadas", "Cuello contraste", "Corte holgado"],
+      en: ["Segmented tape", "Contrast collar", "Generous fit"],
+    },
+    image: "/images/products/chomba-fr-p2x01rt-1.jpg",
+  }),
+  item({
+    slug: "primera-capa-fr-s2101r",
+    ref: "S2101R-SET",
+    name: { es: "Primera capa FR", en: "FR base layer" },
+    short: {
+      es: "Set de primera capa FR para usar bajo la prenda de trabajo.",
+      en: "FR base-layer set to wear under work garments.",
+    },
+    category: "sets",
+    sectors: OG,
+    protections: FR,
+    fabric: "Algodón FR",
+    composition: { es: "100% algodón FR, o 99/1 antiestático, o 60/39/1 modacrílico", en: "100% FR cotton, or 99/1 antistatic, or 60/39/1 modacrylic" },
+    weight: "7 oz",
+    colors: [C.grey, C.dark, C.navy, C.black, C.khaki],
+    certs: NA2,
+    features: {
+      es: ["Peso medio y transpirable", "Puños y tobillos acanalados", "Cintura elástica"],
+      en: ["Medium weight, breathable", "Ribbed cuffs and ankles", "Elastic waist"],
+    },
+    image: "/images/products/primera-capa-fr-s2101r.jpg",
+  }),
+  item({
+    slug: "pasamontanas-fr-8x01rt",
+    ref: "8X01RT",
+    name: { es: "Pasamontañas FR", en: "FR balaclava" },
+    short: {
+      es: "Pasamontañas de algodón FR 7 oz, con extensión al pecho.",
+      en: "7 oz FR cotton balaclava with a chest extension.",
+    },
+    category: "vests",
+    sectors: OG,
+    protections: FR,
+    fabric: "Algodón FR",
+    composition: { es: "100% algodón FR", en: "100% FR cotton" },
+    weight: "7 oz",
+    colors: [C.navy, C.black, C.khaki],
+    certs: NA2,
+    features: {
+      es: ["Evacúa la humedad", "Protección facial completa", "Extensión al pecho", "Bordes terminados"],
+      en: ["Wicks moisture", "Full face protection", "Chest extension", "Finished edges"],
+    },
+    image: "/images/products/pasamontanas-fr-8x01rt.jpg",
+    sizes: ["U"],
+  }),
+  item({
+    slug: "cuello-fr-8x02r",
+    ref: "8X02R",
+    name: { es: "Cuello / neck gaiter FR", en: "FR neck gaiter" },
+    short: {
+      es: "Gaiter de algodón FR 7 oz para cuello y cara.",
+      en: "7 oz FR cotton gaiter for neck and face.",
+    },
+    category: "vests",
+    sectors: OG,
+    protections: FR,
+    fabric: "Algodón FR",
+    composition: { es: "100% algodón FR", en: "100% FR cotton" },
+    weight: "7 oz",
+    colors: [C.navy, C.black, C.khaki],
+    certs: NA2,
+    features: {
+      es: ["Evacúa la humedad", "Bordes terminados", "Uso en cuello y cara"],
+      en: ["Wicks moisture", "Finished edges", "Neck and face use"],
+    },
+    image: "/images/products/cuello-fr-8x02r.jpg",
+    sizes: ["U"],
+  }),
+  item({
+    slug: "conjunto-fr-s03r",
+    ref: "S03R",
+    name: { es: "Conjunto FR alta visibilidad", en: "Hi-vis FR suit" },
+    short: {
+      es: "Campera 6001R y pantalón 6002R en tejido 80/19/1 de 330 g/m².",
+      en: "Jacket 6001R and trousers 6002R in 80/19/1 cloth, 330 gsm.",
+    },
+    category: "sets",
+    sectors: ALL,
+    protections: FRHV,
+    fabric: "FR HV 330",
+    composition: { es: "80% algodón / 19% poliéster / 1% antiestático", en: "80% cotton / 19% polyester / 1% antistatic" },
+    weight: "330 g/m²",
+    colors: [C.yb, C.ob],
+    certs: EN_SUIT,
+    features: {
+      es: ["Campera con tapeta y 4 bolsillos", "Pantalón con 6 bolsillos y paneles reforzados", "Cintas FR de alta visibilidad"],
+      en: ["Jacket with storm flap and 4 pockets", "Trousers with 6 pockets and reinforced panels", "Hi-vis FR tape"],
+    },
+    image: "/images/products/conjunto-fr-s03r.jpg",
+    featured: true,
+  }),
+  item({
+    slug: "traje-lluvia-fr-s04r",
+    ref: "S04R",
+    name: { es: "Traje de lluvia FR", en: "FR rain suit" },
+    short: {
+      es: "Campera 6003R y pantalón 6004R, impermeables FR con costuras selladas.",
+      en: "Jacket 6003R and trousers 6004R, FR waterproof with taped seams.",
+    },
+    category: "sets",
+    sectors: ALL,
+    protections: [...FRHV, "chemical"],
+    fabric: "FR lluvia",
+    composition: {
+      es: "Cara 98% poliéster / 2% carbono · reverso 60% modacrílico / 40% algodón",
+      en: "Face 98% polyester / 2% carbon · back 60% modacrylic / 40% cotton",
+    },
+    weight: "Impermeable",
+    colors: [C.yb, C.ob],
+    certs: EN_SUIT,
+    features: {
+      es: ["Costuras selladas", "Capucha desmontable", "Tobillos con zipper para bota"],
+      en: ["Taped seams", "Detachable hood", "Zipped ankles for boots"],
+    },
+    image: "/images/products/traje-lluvia-fr-s04r.jpg",
+  }),
+  item({
+    slug: "traje-lluvia-fr-s06r",
+    ref: "S06R",
+    name: { es: "Traje de lluvia FR", en: "FR rain suit" },
+    short: {
+      es: "Campera 6011R y pantalón 6012R en naranja o amarillo, FR impermeable.",
+      en: "Jacket 6011R and trousers 6012R in orange or yellow, waterproof FR.",
+    },
+    category: "sets",
+    sectors: ALL,
+    protections: [...FRHV, "chemical"],
+    fabric: "FR lluvia",
+    composition: {
+      es: "Cara 98% poliéster / 2% carbono · reverso 60% modacrílico / 40% algodón",
+      en: "Face 98% polyester / 2% carbon · back 60% modacrylic / 40% cotton",
+    },
+    weight: "Impermeable",
+    colors: [C.orange, C.yellow],
+    certs: EN_SUIT,
+    features: {
+      es: ["4 bolsillos en campera", "Abertura lateral en pantalón", "Repelente al agua y antiestático"],
+      en: ["4 jacket pockets", "Side zipper on trousers", "Water-repellent and antistatic"],
+    },
+    image: "/images/products/traje-lluvia-fr-s06r.jpg",
+  }),
 ];

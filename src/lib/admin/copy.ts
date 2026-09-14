@@ -102,7 +102,7 @@ export const adminCopy = {
       technicalSheet: {
         title: "Ficha técnica corta",
         description:
-          "El bloque de catálogo: código, tejido, composición, gramaje y colores. En petróleo y gas usá FRARTEX.",
+          "El bloque de catálogo: código, tejido, composición, gramaje y colores. En petróleo y gas usá FR 88/12 o aramida inherente.",
       },
       specs: { title: "Especificaciones", description: "Los bloques vacíos se muestran como “pendiente” en el sitio." },
       certifications: {
@@ -149,11 +149,11 @@ export const adminCopy = {
       preliminaryHint:
         "Mientras esté activo, el sitio aclara que las especificaciones están pendientes de confirmación.",
       fabricFamily: "Familia de tejido",
-      fabricFamilyHint: "Ejemplo: FRARTEX. Se muestra como sello en la ficha y en la tarjeta.",
+      fabricFamilyHint: "Ejemplo: FR 88/12. Se muestra como sello en la ficha y en la tarjeta.",
       techCode: "Código de producto",
       techCodeHint: "El recuadro tipo catálogo. Ejemplo: EW241003.",
       techFabric: "Nombre del tejido",
-      techFabricHint: "Ejemplo: FRARTEX-2400AS.",
+      techFabricHint: "Ejemplo: FR 88/12.",
       techComposition: "Composición",
       techWeight: "Gramaje / peso",
       techWeightHint: "Ejemplo: 240 g/m² · 7 oz.",

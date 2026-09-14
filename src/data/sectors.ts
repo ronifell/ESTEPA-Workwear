@@ -95,8 +95,8 @@ export const sectors: readonly Sector[] = [
       en: "Production fields, treatment plants and refineries present specific risks where apparel selection is part of the operation's safety system.",
     },
     intro: {
-      es: "Nuestra línea para petróleo y gas se construye sobre FRARTEX, un tejido inherente ignífugo y antiestático. Está orientada a operaciones donde conviven riesgos térmicos, eléctricos y de exposición a hidrocarburos, con requerimientos estrictos de identificación y visibilidad.",
-      en: "Our oil and gas line is built on FRARTEX, an inherent flame-resistant and antistatic fabric. It targets operations where thermal, electrical and hydrocarbon exposure risks coexist, with strict identification and visibility requirements.",
+      es: "Nuestra línea para petróleo y gas es ropa FR certificada: algodón/nailon 7,5 oz e inherente de aramida, con normas NFPA, ASTM y EN según cada prenda. Está orientada a operaciones donde conviven riesgos térmicos, eléctricos y de exposición a hidrocarburos.",
+      en: "Our oil and gas line is certified FR apparel: 7.5 oz cotton/nylon and inherent aramid, with NFPA, ASTM and EN standards per garment. It targets operations where thermal, electrical and hydrocarbon risks coexist.",
     },
     image: "/images/sectors/oil-gas.jpg",
     imageAlt: {
