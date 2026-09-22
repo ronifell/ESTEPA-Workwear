@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { useI18n } from "@/components/providers/i18n-provider";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,7 @@ import { Field, SelectField, TextArea, TextInput } from "@/components/ui/field";
 import { ArrowRightIcon, SpinnerIcon } from "@/components/ui/icons";
 import { Notice } from "@/components/ui/notice";
 import { provinces } from "@/data/provinces";
-import type { Dictionary } from "@/i18n";
+import { format, type Dictionary } from "@/i18n";
 import {
   contactSchema,
   type ContactFieldErrors,
@@ -47,8 +48,17 @@ export function ContactForm() {
   const { locale, dictionary } = useI18n();
   const copy = dictionary.contact;
   const formId = useId();
+  const searchParams = useSearchParams();
 
-  const [values, setValues] = useState<FormState>(emptyForm);
+  const [values, setValues] = useState<FormState>(() => {
+    const topic = searchParams.get("tema");
+    const product = searchParams.get("producto");
+    const parts: string[] = [];
+    if (topic === "documentacion") parts.push(copy.prefillDocumentation);
+    if (topic === "licitacion") parts.push(copy.prefillTender);
+    if (product) parts.push(format(copy.prefillProduct, { name: product }));
+    return parts.length > 0 ? { ...emptyForm, message: parts.join("\n\n") } : emptyForm;
+  });
   const [errors, setErrors] = useState<ContactFieldErrors>({});
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState<string | null>(null);

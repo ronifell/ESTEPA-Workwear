@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 
 import { NextResponse } from "next/server";
 
+import { notifyContactLead } from "@/lib/notify-email";
 import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
 import { getLeadStore, StorageUnavailableError, type ContactLead } from "@/lib/storage";
 import { contactSchema } from "@/lib/validation/contact";
@@ -65,6 +66,9 @@ export async function POST(request: Request) {
   try {
     const store = await getLeadStore();
     await store.create(lead);
+    void notifyContactLead(lead).catch((error) => {
+      console.error("[contact] notify failed", error);
+    });
   } catch (error) {
     if (error instanceof StorageUnavailableError) {
       console.error("[contact] storage unavailable", error);

@@ -4,6 +4,7 @@ import { CertStrip } from "@/components/shared/cert-strip";
 import { buttonStyles } from "@/components/ui/button";
 import {
   ArrowRightIcon,
+  DownloadIcon,
   GearIcon,
   GemIcon,
   HeadsetIcon,
@@ -11,6 +12,7 @@ import {
   type IconProps,
 } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
+import { siteConfig } from "@/config/site";
 import { getDictionary } from "@/i18n";
 import type { Dictionary } from "@/i18n";
 import type { Locale } from "@/types";
@@ -74,7 +76,7 @@ export function Hero({ locale }: { readonly locale: Locale }) {
                 <CertStrip locale={locale} />
               </div>
 
-              <div className="animate-rise mt-8 flex flex-col gap-3 sm:flex-row [animation-delay:280ms]">
+              <div className="animate-rise mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap [animation-delay:280ms]">
                 <LocalizedLink
                   route="products"
                   locale={locale}
@@ -90,6 +92,26 @@ export function Hero({ locale }: { readonly locale: Locale }) {
                 >
                   {dictionary.common.requestInformation}
                 </LocalizedLink>
+                {siteConfig.catalogPdfUrl ? (
+                  <a
+                    href={siteConfig.catalogPdfUrl}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className={buttonStyles("ghost", "lg")}
+                  >
+                    <DownloadIcon className="size-4" />
+                    {dictionary.common.downloadCatalog}
+                  </a>
+                ) : (
+                  <LocalizedLink
+                    route="catalog"
+                    locale={locale}
+                    className={buttonStyles("ghost", "lg")}
+                  >
+                    {dictionary.nav.catalog}
+                    <ArrowRightIcon className="size-4" />
+                  </LocalizedLink>
+                )}
               </div>
             </div>
           </div>

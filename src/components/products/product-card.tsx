@@ -91,7 +91,7 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
                 certifications={certifications}
                 locale={locale}
                 compact
-                columns={3}
+                singleLine
               />
             </div>
           ) : null}
@@ -108,10 +108,20 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
                 : dictionary.product.priceOnRequest}
             </span>
 
-            <span className="flex items-center gap-1.5 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-primary transition-colors group-hover:text-accent">
-              {dictionary.common.viewProduct}
-              <ArrowRightIcon className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-            </span>
+            <div className="relative z-10 flex flex-wrap items-center gap-x-4 gap-y-1">
+              <span className="flex items-center gap-1.5 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-primary transition-colors group-hover:text-accent">
+                {dictionary.common.viewProduct}
+                <ArrowRightIcon className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+              </span>
+              <LocalizedLink
+                route="contact"
+                locale={locale}
+                query={{ producto: product.name[locale] }}
+                className="font-display text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-text-muted transition-colors hover:text-accent"
+              >
+                {dictionary.common.requestInformation}
+              </LocalizedLink>
+            </div>
           </div>
         </div>
       </div>

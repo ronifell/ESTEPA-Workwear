@@ -3,7 +3,12 @@ import path from "node:path";
 
 import { FRARTEX_FAMILY, frartexCertifications } from "@/data/fabrics";
 import { products as seedProducts } from "@/data/products";
-import { canonicalizeStandardId, isStandardId, standardsCatalog } from "@/data/standards";
+import {
+  canonicalizeStandardId,
+  isStandardId,
+  retiredStandardIdSet,
+  standardsCatalog,
+} from "@/data/standards";
 import { protectionIds } from "@/lib/product-filters";
 import type { Certification, Product, ProtectionId } from "@/types";
 
@@ -55,6 +60,7 @@ function sanitizeCertifications(
 
   for (const certification of certifications) {
     const id = aliasCertificationId(certification);
+    if (retiredStandardIdSet.has(id)) continue;
     if (seen.has(id)) continue;
     seen.add(id);
 

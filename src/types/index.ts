@@ -8,11 +8,7 @@ export type LocalizedList = Localized<readonly string[]>;
 
 export type SectorId = "mining" | "oil-gas" | "industry";
 
-export type ProtectionId =
-  | "chemical"
-  | "electrical"
-  | "flash-fire"
-  | "high-visibility";
+export type ProtectionId = "electrical" | "flash-fire" | "high-visibility";
 
 export type ProductCategoryId =
   | "coveralls"
@@ -20,7 +16,8 @@ export type ProductCategoryId =
   | "trousers"
   | "sets"
   | "shirts"
-  | "vests";
+  | "vests"
+  | "rain-suits";
 
 export interface Sector {
   readonly id: SectorId;

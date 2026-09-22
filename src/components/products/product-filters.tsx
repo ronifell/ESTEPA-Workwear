@@ -12,6 +12,7 @@ import { sectorsById } from "@/data/sectors";
 import { filterableStandardIds, standardsCatalog } from "@/data/standards";
 import { format, getDictionary } from "@/i18n";
 import {
+  categoryIds,
   protectionIds,
   sectorIds,
   toQuery,
@@ -49,7 +50,9 @@ export function ProductFilters({
     ...protectionIds.filter((id) => !related.includes(id)),
   ];
 
-  const isFiltered = Boolean(filters.sector || filters.protection || filters.standard);
+  const isFiltered = Boolean(
+    filters.sector || filters.protection || filters.standard || filters.category || filters.q,
+  );
 
   const pillars: readonly {
     readonly key: Pillar;
@@ -67,6 +70,48 @@ export function ProductFilters({
       <p className="px-3 pt-2 font-display text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-text-subtle">
         {copy.pillarsLead}
       </p>
+
+      <section className="mt-3 rounded-2xl border border-border bg-sand-50 p-3">
+        <p className="px-1 font-display text-sm font-bold text-navy-900">{copy.garmentType}</p>
+        <p className="mt-1 px-1 text-xs leading-relaxed text-text-muted">{copy.categoryHint}</p>
+        <ul className="mt-3 flex flex-wrap gap-1.5">
+          <li>
+            <LocalizedLink
+              route="products"
+              locale={locale}
+              query={toQuery({ ...filters, category: null })}
+              scroll={false}
+              className={cn(
+                "inline-flex rounded-full border px-3 py-1.5 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.08em] transition-colors",
+                !filters.category
+                  ? "border-navy-900 bg-navy-900 text-white"
+                  : "border-border text-text-muted hover:border-navy-900 hover:text-navy-900",
+              )}
+            >
+              {copy.all}
+            </LocalizedLink>
+          </li>
+          {categoryIds.map((id) => (
+            <li key={id}>
+              <LocalizedLink
+                route="products"
+                locale={locale}
+                query={toQuery({ ...filters, category: id })}
+                scroll={false}
+                aria-current={filters.category === id ? "true" : undefined}
+                className={cn(
+                  "inline-flex rounded-full border px-3 py-1.5 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.08em] transition-colors",
+                  filters.category === id
+                    ? "border-navy-900 bg-navy-900 text-white"
+                    : "border-border text-text-muted hover:border-navy-900 hover:text-navy-900",
+                )}
+              >
+                {dictionary.products.categories[id]}
+              </LocalizedLink>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <div className="mt-2 space-y-2">
         {pillars.map((pillar) => {

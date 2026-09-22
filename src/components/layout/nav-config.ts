@@ -16,6 +16,7 @@ export const sectorNav: readonly NavItem[] = [
 /** Items shown directly in the header, after the sectors group. */
 export const primaryNav: readonly NavItem[] = [
   { route: "products", labelKey: "products" },
+  { route: "catalog", labelKey: "catalog" },
   { route: "protection", labelKey: "protection" },
   { route: "faq", labelKey: "faq" },
   { route: "about", labelKey: "about" },

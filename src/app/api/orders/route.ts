@@ -3,6 +3,7 @@ import { randomInt, randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 
 import { siteConfig } from "@/config/site";
+import { notifyOrder } from "@/lib/notify-email";
 import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
 import { getProductsByIds } from "@/lib/repositories/products";
 import {
@@ -121,6 +122,9 @@ export async function POST(request: Request) {
   try {
     const store = await getOrderStore();
     await store.create(order);
+    void notifyOrder(order).catch((error) => {
+      console.error("[orders] notify failed", error);
+    });
   } catch (error) {
     if (error instanceof StorageUnavailableError) {
       console.error("[orders] storage unavailable", error);

@@ -60,11 +60,11 @@ const NA1 = [
   extra("cat-1", "CAT 1"),
 ];
 const EN_JACKET = [
-  ...getStandards(["en-11611", "en-11612", "en-1149", "en-61482-2", "en-13034", "en-342", "en-343"]),
+  ...getStandards(["en-11611", "en-11612", "en-1149", "en-61482-2", "en-342"]),
   extra("en-20471", "EN ISO 20471"),
 ];
 const EN_SUIT = [
-  ...getStandards(["en-11611", "en-11612", "en-1149", "en-61482-2", "en-13034"]),
+  ...getStandards(["en-11611", "en-11612", "en-1149", "en-61482-2"]),
   extra("en-20471", "EN ISO 20471"),
 ];
 
@@ -456,7 +456,7 @@ export const products: readonly Product[] = [
     },
     weight: "360 g/m²",
     colors: [C.yb, C.ob],
-    certs: EN_SUIT.concat(getStandards(["en-343"])),
+    certs: EN_SUIT,
     features: {
       es: ["Cortaviento y resistente al agua", "Cuello alto", "Bolsillo de pecho con zipper", "Cintas alrededor del cuerpo"],
       en: ["Wind- and water-resistant", "High collar", "Zipped chest pocket", "Tape around the body"],
@@ -853,9 +853,9 @@ export const products: readonly Product[] = [
       es: "Campera 6003R y pantalón 6004R, impermeables FR con costuras selladas.",
       en: "Jacket 6003R and trousers 6004R, FR waterproof with taped seams.",
     },
-    category: "sets",
+    category: "rain-suits",
     sectors: ALL,
-    protections: [...FRHV, "chemical"],
+    protections: FRHV,
     fabric: "FR lluvia",
     composition: {
       es: "Cara 98% poliéster / 2% carbono · reverso 60% modacrílico / 40% algodón",
@@ -878,9 +878,9 @@ export const products: readonly Product[] = [
       es: "Campera 6011R y pantalón 6012R en naranja o amarillo, FR impermeable.",
       en: "Jacket 6011R and trousers 6012R in orange or yellow, waterproof FR.",
     },
-    category: "sets",
+    category: "rain-suits",
     sectors: ALL,
-    protections: [...FRHV, "chemical"],
+    protections: FRHV,
     fabric: "FR lluvia",
     composition: {
       es: "Cara 98% poliéster / 2% carbono · reverso 60% modacrílico / 40% algodón",

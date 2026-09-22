@@ -17,6 +17,7 @@ const categoryIcons: Record<ProductCategoryId, (props: IconProps) => React.JSX.E
   sets: SetsIcon,
   shirts: ShirtIcon,
   vests: VestIcon,
+  "rain-suits": SetsIcon,
 };
 
 export interface PlaceholderImageProps {

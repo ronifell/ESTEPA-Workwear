@@ -9,20 +9,6 @@ import type { Protection, ProtectionId } from "@/types";
  */
 export const protections: readonly Protection[] = [
   {
-    id: "chemical",
-    icon: "chemical",
-    name: { es: "Protección química", en: "Chemical protection" },
-    shortDescription: {
-      es: "Para operaciones con exposición a sustancias y agentes industriales.",
-      en: "For operations with exposure to industrial substances and agents.",
-    },
-    description: {
-      es: "Prendas diseñadas para acompañar operaciones donde la exposición a sustancias y agentes industriales requiere una protección adecuada. La selección del material y de la construcción de la prenda depende del tipo de agente, de la concentración y del tiempo de exposición previsto en cada tarea.",
-      en: "Garments designed to support operations where exposure to industrial substances and agents requires adequate protection. Material and construction choices depend on the type of agent, its concentration and the expected exposure time of each task.",
-    },
-    standards: [],
-  },
-  {
     id: "electrical",
     icon: "electrical",
     name: { es: "Riesgo eléctrico", en: "Electrical risk" },

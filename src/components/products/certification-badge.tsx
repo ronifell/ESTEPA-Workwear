@@ -23,18 +23,20 @@ function MarkCaption({
   kicker,
   title,
   compact,
+  dense,
 }: {
   readonly kicker: string | null;
   readonly title: string;
   readonly compact: boolean;
+  readonly dense: boolean;
 }) {
   return (
-    <span className="mt-2 flex min-h-[1.85rem] w-full min-w-0 flex-col items-center justify-start text-center leading-[1.05]">
+    <span className="mt-1.5 flex min-h-[1.7rem] w-full min-w-0 flex-col items-center justify-start text-center leading-[1.05]">
       {kicker ? (
         <span
           className={cn(
             "font-display font-bold uppercase tracking-[0.12em] text-navy-900",
-            compact ? "text-[0.5rem]" : "text-[0.5625rem]",
+            dense ? "text-[0.4375rem]" : compact ? "text-[0.5rem]" : "text-[0.5625rem]",
           )}
         >
           {kicker}
@@ -43,7 +45,7 @@ function MarkCaption({
       <span
         className={cn(
           "font-display font-bold uppercase tracking-[0.04em] text-navy-900",
-          compact ? "text-[0.6875rem]" : "text-[0.8125rem]",
+          dense ? "text-[0.5625rem]" : compact ? "text-[0.6875rem]" : "text-[0.8125rem]",
         )}
       >
         {title}
@@ -54,12 +56,14 @@ function MarkCaption({
 
 function MarkStack({
   compact,
+  dense,
   kicker,
   title,
   caption = true,
   children,
 }: {
   readonly compact: boolean;
+  readonly dense: boolean;
   readonly kicker: string | null;
   readonly title: string;
   readonly caption?: boolean;
@@ -69,11 +73,13 @@ function MarkStack({
     <span
       className={cn(
         "inline-flex min-w-0 max-w-full flex-col items-center",
-        compact ? "w-[3.6rem]" : "w-[4.4rem]",
+        dense ? "w-[2.45rem]" : compact ? "w-[3.6rem]" : "w-[4.4rem]",
       )}
     >
-      <span className={cn("flex items-end justify-center", compact ? "h-12" : "h-16")}>{children}</span>
-      {caption ? <MarkCaption kicker={kicker} title={title} compact={compact} /> : null}
+      <span className={cn("flex items-end justify-center", dense ? "h-10" : compact ? "h-12" : "h-16")}>
+        {children}
+      </span>
+      {caption ? <MarkCaption kicker={kicker} title={title} compact={compact} dense={dense} /> : null}
     </span>
   );
 }
@@ -314,16 +320,18 @@ function SquareBody() {
 
 function UlCertifiedMark({
   compact,
+  dense,
   band,
 }: {
   readonly compact: boolean;
+  readonly dense: boolean;
   readonly band: "Certified" | "Certificate";
 }) {
   return (
     <svg
       viewBox="0 0 48 72"
       aria-hidden
-      className={cn(compact ? "h-12 w-[2.05rem]" : "h-16 w-[2.75rem]")}
+      className={cn(dense ? "h-10 w-10" : compact ? "h-12 w-12" : "h-16 w-16")}
     >
       <rect x="1.2" y="1.2" width="45.6" height="69.6" rx="12" fill={INK} />
       <circle cx={24} cy={20.2} r={11.4} fill="#fff" />
@@ -370,16 +378,18 @@ function UlCertifiedMark({
 
 function ShieldStamp({
   compact,
+  dense,
   children,
 }: {
   readonly compact: boolean;
+  readonly dense: boolean;
   readonly children: ReactNode;
 }) {
   return (
     <svg
       viewBox="0 0 64 76"
       aria-hidden
-      className={cn(compact ? "h-12 w-[2.55rem]" : "h-16 w-[3.4rem]")}
+      className={cn(dense ? "h-10 w-[2.15rem]" : compact ? "h-12 w-[2.55rem]" : "h-16 w-[3.4rem]")}
     >
       <ShieldBody />
       {children}
@@ -389,16 +399,18 @@ function ShieldStamp({
 
 function SquareStamp({
   compact,
+  dense,
   children,
 }: {
   readonly compact: boolean;
+  readonly dense: boolean;
   readonly children: ReactNode;
 }) {
   return (
     <svg
       viewBox="0 0 64 64"
       aria-hidden
-      className={cn(compact ? "size-12" : "size-16")}
+      className={cn(dense ? "size-10" : compact ? "size-12" : "size-16")}
     >
       <SquareBody />
       {children}
@@ -458,9 +470,11 @@ function glyphOnShield(icon: CertificationIcon) {
 function BadgeFace({
   certification,
   compact,
+  dense,
 }: {
   readonly certification: Certification;
   readonly compact: boolean;
+  readonly dense: boolean;
 }) {
   const icon = resolveCertificationIcon(certification);
   const { kicker, title } = splitName(certification.name);
@@ -468,22 +482,22 @@ function BadgeFace({
 
   if (id === "ul" || icon === "ul") {
     return (
-      <MarkStack compact={compact} kicker="UL" title="Certified" caption={false}>
-        <UlCertifiedMark compact={compact} band="Certified" />
+      <MarkStack compact={compact} dense={dense} kicker="UL" title="Certified" caption={false}>
+        <UlCertifiedMark compact={compact} dense={dense} band="Certified" />
       </MarkStack>
     );
   }
   if (id === "ul-certificate") {
     return (
-      <MarkStack compact={compact} kicker="UL" title="Certificate" caption={false}>
-        <UlCertifiedMark compact={compact} band="Certificate" />
+      <MarkStack compact={compact} dense={dense} kicker="UL" title="Certificate" caption={false}>
+        <UlCertifiedMark compact={compact} dense={dense} band="Certificate" />
       </MarkStack>
     );
   }
   if (id === "nfpa-2112") {
     return (
-      <MarkStack compact={compact} kicker="NFPA" title="2112">
-        <SquareStamp compact={compact}>
+      <MarkStack compact={compact} dense={dense} kicker="NFPA" title="2112">
+        <SquareStamp compact={compact} dense={dense}>
           <g transform="translate(0 1) scale(0.96)">
             <NfpaFlamePictogram />
           </g>
@@ -493,8 +507,8 @@ function BadgeFace({
   }
   if (id === "nfpa-70e") {
     return (
-      <MarkStack compact={compact} kicker="NFPA" title="70E">
-        <SquareStamp compact={compact}>
+      <MarkStack compact={compact} dense={dense} kicker="NFPA" title="70E">
+        <SquareStamp compact={compact} dense={dense}>
           <g transform="translate(-3 0) scale(0.9)">
             <ArcFlashPictogram tone={ON_PLATE} />
           </g>
@@ -504,8 +518,8 @@ function BadgeFace({
   }
   if (id === "astm-f1506") {
     return (
-      <MarkStack compact={compact} kicker="ASTM" title="F1506">
-        <SquareStamp compact={compact}>
+      <MarkStack compact={compact} dense={dense} kicker="ASTM" title="F1506">
+        <SquareStamp compact={compact} dense={dense}>
           <g transform="translate(-3 0) scale(0.9)">
             <ArcFlashPictogram tone={ON_PLATE} />
           </g>
@@ -515,8 +529,8 @@ function BadgeFace({
   }
   if (id === "cat-2") {
     return (
-      <MarkStack compact={compact} kicker="CAT" title="2">
-        <SquareStamp compact={compact}>
+      <MarkStack compact={compact} dense={dense} kicker="CAT" title="2">
+        <SquareStamp compact={compact} dense={dense}>
           <g transform="translate(-4 -1) scale(0.78)" opacity="0.22">
             <ArcFlashPictogram tone={ON_PLATE} />
           </g>
@@ -537,8 +551,10 @@ function BadgeFace({
   }
 
   return (
-    <MarkStack compact={compact} kicker={kicker} title={title}>
-      <ShieldStamp compact={compact}>{glyphOnShield(icon)}</ShieldStamp>
+    <MarkStack compact={compact} dense={dense} kicker={kicker} title={title}>
+      <ShieldStamp compact={compact} dense={dense}>
+        {glyphOnShield(icon)}
+      </ShieldStamp>
     </MarkStack>
   );
 }
@@ -547,10 +563,12 @@ export function CertificationBadge({
   certification,
   locale,
   compact = false,
+  dense = false,
 }: {
   readonly certification: Certification;
   readonly locale: Locale;
   readonly compact?: boolean;
+  readonly dense?: boolean;
 }) {
   const resolved = resolveStandard(certification);
   const description = resolved.description?.[locale] ?? resolved.name;
@@ -562,7 +580,7 @@ export function CertificationBadge({
       content={description}
       className="max-w-full"
     >
-      <BadgeFace certification={resolved} compact={compact} />
+      <BadgeFace certification={resolved} compact={compact} dense={dense} />
     </InfoTooltip>
   );
 }
@@ -571,31 +589,45 @@ export function CertificationRow({
   certifications,
   locale,
   compact = false,
+  dense = false,
   columns,
+  singleLine = false,
   className,
 }: {
   readonly certifications: readonly Certification[];
   readonly locale: Locale;
   readonly compact?: boolean;
+  readonly dense?: boolean;
   readonly columns?: 3;
+  readonly singleLine?: boolean;
   readonly className?: string;
 }) {
   if (certifications.length === 0) return null;
 
-  const threeAcross = columns === 3;
+  const threeAcross = columns === 3 && !singleLine;
 
   return (
     <ul
       className={cn(
-        threeAcross
-          ? "grid w-full grid-cols-3 justify-items-center gap-x-1 gap-y-3"
-          : cn("flex flex-wrap items-start", compact ? "gap-x-3.5 gap-y-4" : "gap-x-5 gap-y-5"),
+        singleLine
+          ? "flex w-full flex-nowrap items-start justify-between gap-x-0.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          : threeAcross
+            ? "grid w-full grid-cols-3 justify-items-center gap-x-1 gap-y-3"
+            : cn("flex flex-wrap items-start", compact ? "gap-x-3.5 gap-y-4" : "gap-x-5 gap-y-5"),
         className,
       )}
     >
       {certifications.map((certification) => (
-        <li key={certification.id} className={threeAcross ? "flex min-w-0 w-full justify-center" : undefined}>
-          <CertificationBadge certification={certification} locale={locale} compact={compact} />
+        <li
+          key={certification.id}
+          className={threeAcross ? "flex min-w-0 w-full justify-center" : "shrink-0"}
+        >
+          <CertificationBadge
+            certification={certification}
+            locale={locale}
+            compact={compact}
+            dense={dense || singleLine}
+          />
         </li>
       ))}
     </ul>

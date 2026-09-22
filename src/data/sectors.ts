@@ -76,7 +76,7 @@ export const sectors: readonly Sector[] = [
         "Internal logistics and transport",
       ],
     },
-    relatedProtections: ["high-visibility", "flash-fire", "chemical"],
+    relatedProtections: ["high-visibility", "flash-fire"],
   },
   {
     id: "oil-gas",
@@ -149,7 +149,7 @@ export const sectors: readonly Sector[] = [
         "Maintenance and inspection",
       ],
     },
-    relatedProtections: ["flash-fire", "electrical", "chemical", "high-visibility"],
+    relatedProtections: ["flash-fire", "electrical", "high-visibility"],
   },
   {
     id: "industry",
@@ -222,7 +222,7 @@ export const sectors: readonly Sector[] = [
         "Maintenance",
       ],
     },
-    relatedProtections: ["flash-fire", "high-visibility", "chemical"],
+    relatedProtections: ["flash-fire", "high-visibility"],
   },
 ];
 

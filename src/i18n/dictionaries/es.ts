@@ -207,6 +207,11 @@ export const es = {
       category: "Categoría",
       standard: "Normas",
       standardHint: "¿Qué norma pide tu operación?",
+      categoryHint: "¿Qué tipo de prenda necesitás reponer?",
+      garmentType: "Tipo de prenda",
+      search: "Buscar",
+      searchPlaceholder: "Código, prenda o tejido — ej. 6003R, aramida, campera",
+      removeFilter: "Quitar filtro",
       step: "Paso {n}",
       all: "Todos",
       clear: "Limpiar filtros",
@@ -231,6 +236,7 @@ export const es = {
       sets: "Conjuntos",
       shirts: "Camisas",
       vests: "Chalecos",
+      "rain-suits": "Trajes de lluvia",
     },
   },
 
@@ -355,8 +361,16 @@ export const es = {
       "Los sellos indican las normas asociadas a cada línea. Los certificados y reportes de laboratorio se entregan en el proceso de homologación de operadoras y contratistas.",
     standardsTitle: "Normas aplicables",
     standardsPending: "Normas en proceso de validación",
-    relatedProductsTitle: "Productos relacionados",
+    relatedProductsTitle: "Productos con esta protección",
     noRelatedProducts: "Aún no hay productos publicados para esta categoría.",
+    documentationTitle: "Documentación técnica y homologación de operadoras",
+    documentationDescription:
+      "Reemplazamos el recuadro de normas pendientes por el respaldo que pide una licitación o un proceso de homologación.",
+    documentationItem1: "Fichas técnicas e informes de ensayo de laboratorio disponibles a pedido.",
+    documentationItem2: "Procesos de homologación y ensayos en curso según normativa internacional.",
+    requestDossier: "Solicitar documentación técnica",
+    requestTender: "Consultar para licitaciones",
+    selectRisk: "Elegí el riesgo",
     howWeWorkTitle: "Cómo seleccionamos cada solución",
     steps: {
       one: {
@@ -529,6 +543,11 @@ export const es = {
     },
     submit: "Enviar consulta",
     submitting: "Enviando…",
+    prefillDocumentation:
+      "Necesitamos el legajo técnico: fichas, informes de ensayo y documentación de homologación para evaluar las prendas ESTEPA.",
+    prefillTender:
+      "Estamos armando una licitación / homologación de operadora y necesitamos asesoramiento sobre la línea certificada ESTEPA.",
+    prefillProduct: "Quiero cotizar {name}.",
     successTitle: "Consulta enviada",
     successDescription:
       "Recibimos tu mensaje. Un asesor se pondrá en contacto a la brevedad.",
@@ -676,7 +695,7 @@ export const es = {
     catalogTitle: "Certificaciones internacionales que ofrecemos",
     catalogNorth: "Norteamérica: NFPA 2112 · NFPA 70E · ASTM F1506 · ASTM F1959 · UL Certified.",
     catalogEurope:
-      "Europa: EN ISO 11611 · EN ISO 11612 · EN 1149 · EN 61482-2 · EN 13034 · EN 17353 · EN 342 · EN 343.",
+      "Europa: EN ISO 11611 · EN ISO 11612 · EN 1149 · EN 61482-2 · EN 17353 · EN 342.",
     catalogArc: "Arco eléctrico: EN 61482-2 · ASTM F1959 · CAT 2.",
     catalogOther: "Otras según línea: ISO 20471 (alta visibilidad) · EN ISO 13688 · IRAM (norma local).",
     valueTitle: "El precio correcto no es el más bajo: es el que menos te cuesta.",

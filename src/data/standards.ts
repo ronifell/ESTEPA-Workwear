@@ -42,16 +42,19 @@ export const heroStandardIds = [
   "nfpa-70e",
 ] as const satisfies readonly StandardId[];
 
+/** Withdrawn from the live catalogue; still recognised so old records can be stripped. */
+export const retiredStandardIds = ["en-13034", "en-343"] as const satisfies readonly StandardId[];
+
+export const retiredStandardIdSet: ReadonlySet<string> = new Set(retiredStandardIds);
+
 /** Standards offered as catalogue filters. */
 export const filterableStandardIds = [
   "en-11611",
   "en-11612",
   "en-1149",
   "en-61482-2",
-  "en-13034",
   "en-17353",
   "en-342",
-  "en-343",
   "ul",
   "nfpa-2112",
   "astm-f1506",

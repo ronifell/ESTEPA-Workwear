@@ -13,6 +13,11 @@ export const defaultLocale: Locale = "es";
 
 const rawSiteUrl = process.env["NEXT_PUBLIC_SITE_URL"]?.trim();
 
+function envText(key: string, fallback: string): string {
+  const value = process.env[key]?.trim() ?? "";
+  return value.length > 0 ? value : fallback;
+}
+
 export const siteConfig = {
   companyName: "ESTEPA Workwear",
   shortName: "ESTEPA",
@@ -20,12 +25,15 @@ export const siteConfig = {
   defaultLocale,
   locales,
 
-  /** Contact data. Left empty until the client provides the real values. */
+  /** Public contact channels. Env overrides these published defaults. */
   contact: {
-    email: process.env["NEXT_PUBLIC_CONTACT_EMAIL"] ?? "",
-    phone: process.env["NEXT_PUBLIC_CONTACT_PHONE"] ?? "",
-    whatsapp: process.env["NEXT_PUBLIC_CONTACT_WHATSAPP"] ?? "",
-    address: process.env["NEXT_PUBLIC_CONTACT_ADDRESS"] ?? "",
+    email: envText("NEXT_PUBLIC_CONTACT_EMAIL", "contacto@estepaworkwear.com"),
+    phone: envText("NEXT_PUBLIC_CONTACT_PHONE", "+54 264 578-6834"),
+    whatsapp: envText("NEXT_PUBLIC_CONTACT_WHATSAPP", "5491131271122"),
+    address: envText(
+      "NEXT_PUBLIC_CONTACT_ADDRESS",
+      "Los Lapachos 4967, Oeste — Rivadavia, San Juan, Argentina",
+    ),
   },
 
   /** Only real profiles should be listed here. */

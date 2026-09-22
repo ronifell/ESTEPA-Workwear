@@ -16,6 +16,7 @@ export const sizeMeasureKeys: Record<
   trousers: { A: "waist", B: "hip", C: "inseam", D: "length" },
   coveralls: { A: "chest", B: "waist", C: "inseam", D: "length" },
   sets: { A: "chest", B: "waist", C: "inseam", D: "length" },
+  "rain-suits": { A: "chest", B: "waist", C: "inseam", D: "length" },
   vests: { A: "shoulder", B: "chest", C: "length", D: "hem" },
 };
 
@@ -197,6 +198,7 @@ const drawings: Record<ProductCategoryId, () => ReactNode> = {
   trousers: TrousersDrawing,
   coveralls: CoverallDrawing,
   sets: SetDrawing,
+  "rain-suits": SetDrawing,
   vests: VestDrawing,
 };
 

@@ -402,6 +402,15 @@ export function FilterIcon(props: IconProps) {
   );
 }
 
+export function SearchIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="m16 16 4.2 4.2" />
+    </Svg>
+  );
+}
+
 export function SparkleIcon(props: IconProps) {
   return (
     <Svg {...props}>

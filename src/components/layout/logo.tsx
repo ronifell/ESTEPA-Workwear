@@ -8,51 +8,31 @@ import type { Locale } from "@/types";
 export interface LogoProps {
   readonly locale: Locale;
   readonly className?: string;
-  /** Light wordmark for dark surfaces. The mark itself stays transparent. */
+  /** Kept for callers; the lockup already works on light and dark surfaces. */
   readonly inverse?: boolean;
   readonly priority?: boolean;
 }
 
 /**
- * Brand lockup: the supplied mark plus the "Workwear" descriptor.
+ * Brand lockup. The mark already includes the wordmark and descriptor.
  */
-export function Logo({
-  locale,
-  className,
-  inverse = false,
-  priority = false,
-}: LogoProps) {
+export function Logo({ locale, className, priority = false }: LogoProps) {
   return (
     <LocalizedLink
       route="home"
       locale={locale}
-      className={cn(
-        "group inline-flex items-center gap-3 rounded-xs transition-opacity hover:opacity-90",
-        className,
-      )}
-      aria-label={`${siteConfig.companyName} — ${
-        locale === "es" ? "Inicio" : "Home"
-      }`}
+      className={cn("group inline-flex shrink-0 items-center rounded-xs transition-opacity hover:opacity-90", className)}
+      aria-label={`${siteConfig.companyName} — ${locale === "es" ? "Inicio" : "Home"}`}
     >
       <Image
         src="/logo.png"
         alt={siteConfig.companyName}
-        width={1774}
-        height={887}
+        width={487}
+        height={132}
         priority={priority}
-        sizes="160px"
-        className="h-8 w-auto sm:h-9"
+        sizes="(min-width: 1024px) 200px, 168px"
+        className="h-9 w-auto sm:h-10 lg:h-11"
       />
-
-      <span
-        aria-hidden
-        className={cn(
-          "hidden font-display text-[0.625rem] font-semibold uppercase leading-none tracking-[0.18em] sm:block",
-          inverse ? "text-text-inverse-muted" : "text-text-muted",
-        )}
-      >
-        Workwear
-      </span>
     </LocalizedLink>
   );
 }

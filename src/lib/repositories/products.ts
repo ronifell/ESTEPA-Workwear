@@ -24,10 +24,11 @@ export interface ProductFilters {
   readonly limit?: number;
   readonly excludeIds?: readonly string[];
   readonly standard?: StandardId;
+  readonly q?: string;
 }
 
 function applyFilters(source: readonly Product[], filters: ProductFilters): Product[] {
-  const { sectors, protections, categories, featured, excludeIds, limit, standard } = filters;
+  const { sectors, protections, categories, featured, excludeIds, limit, standard, q } = filters;
 
   let result = source.filter((product) => product.active);
 
@@ -51,6 +52,11 @@ function applyFilters(source: readonly Product[], filters: ProductFilters): Prod
     result = result.filter((product) =>
       (product.certifications ?? []).some((certification) => certification.id === standard),
     );
+  }
+
+  if (q?.trim()) {
+    const needle = q.trim().toLowerCase();
+    result = result.filter((product) => productMatchesQuery(product, needle));
   }
 
   if (featured !== undefined) {
@@ -143,9 +149,24 @@ export async function countProductsBySector(): Promise<Record<SectorId, number>>
   return counts;
 }
 
+function productMatchesQuery(product: Product, needle: string): boolean {
+  const haystack = [
+    product.slug,
+    product.name.es,
+    product.name.en,
+    product.shortDescription.es,
+    product.shortDescription.en,
+    product.fabricFamily ?? "",
+    product.technicalInfo?.code ?? "",
+    product.technicalInfo?.fabric ?? "",
+  ]
+    .join(" ")
+    .toLowerCase();
+  return haystack.includes(needle);
+}
+
 export async function countProductsByProtection(): Promise<Record<ProtectionId, number>> {
   const counts: Record<ProtectionId, number> = {
-    chemical: 0,
     electrical: 0,
     "flash-fire": 0,
     "high-visibility": 0,

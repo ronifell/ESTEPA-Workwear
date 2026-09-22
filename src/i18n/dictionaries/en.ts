@@ -205,6 +205,11 @@ export const en: Dictionary = {
       category: "Category",
       standard: "Standards",
       standardHint: "Which standard does your operation require?",
+      categoryHint: "Which garment type do you need to replace?",
+      garmentType: "Garment type",
+      search: "Search",
+      searchPlaceholder: "Code, garment or fabric — e.g. 6003R, aramid, jacket",
+      removeFilter: "Remove filter",
       step: "Step {n}",
       all: "All",
       clear: "Clear filters",
@@ -229,6 +234,7 @@ export const en: Dictionary = {
       sets: "Sets",
       shirts: "Shirts",
       vests: "Vests",
+      "rain-suits": "Rain suits",
     },
   },
 
@@ -353,8 +359,16 @@ export const en: Dictionary = {
       "Seals indicate the standards associated with each line. Laboratory certificates and test reports are delivered during operator and contractor homologation.",
     standardsTitle: "Applicable standards",
     standardsPending: "Standards under validation",
-    relatedProductsTitle: "Related products",
+    relatedProductsTitle: "Products with this protection",
     noRelatedProducts: "There are no published products for this category yet.",
+    documentationTitle: "Technical documentation and operator homologation",
+    documentationDescription:
+      "We replaced the pending-standards box with the backing a tender or homologation process actually asks for.",
+    documentationItem1: "Technical sheets and laboratory test reports available on request.",
+    documentationItem2: "Homologation processes and tests in progress under international standards.",
+    requestDossier: "Request technical documentation",
+    requestTender: "Enquire for tenders",
+    selectRisk: "Choose the risk",
     howWeWorkTitle: "How we select each solution",
     steps: {
       one: {
@@ -525,6 +539,11 @@ export const en: Dictionary = {
     },
     submit: "Send enquiry",
     submitting: "Sending…",
+    prefillDocumentation:
+      "We need the technical dossier: datasheets, laboratory test reports and homologation documents to evaluate ESTEPA garments.",
+    prefillTender:
+      "We are preparing a tender / operator homologation and need advice on the certified ESTEPA line.",
+    prefillProduct: "I want to quote {name}.",
     successTitle: "Enquiry sent",
     successDescription: "We received your message. An advisor will contact you shortly.",
     errorTitle: "We could not send your enquiry",
@@ -671,7 +690,7 @@ export const en: Dictionary = {
     catalogTitle: "International certifications we offer",
     catalogNorth: "North America: NFPA 2112 · NFPA 70E · ASTM F1506 · ASTM F1959 · UL Certified.",
     catalogEurope:
-      "Europe: EN ISO 11611 · EN ISO 11612 · EN 1149 · EN 61482-2 · EN 13034 · EN 17353 · EN 342 · EN 343.",
+      "Europe: EN ISO 11611 · EN ISO 11612 · EN 1149 · EN 61482-2 · EN 17353 · EN 342.",
     catalogArc: "Electric arc: EN 61482-2 · ASTM F1959 · CAT 2.",
     catalogOther: "Others by line: ISO 20471 (high visibility) · EN ISO 13688 · IRAM (local standard).",
     valueTitle: "The right price is not the lowest: it is the one that costs you least.",

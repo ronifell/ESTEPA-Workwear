@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { ContactForm } from "@/components/forms/contact-form";
 import { PageHero } from "@/components/shared/page-hero";
@@ -76,7 +77,9 @@ export default async function ContactPage({ params }: PageProps) {
       <Section tone="default">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
           <Reveal className="lg:col-span-7">
-            <ContactForm />
+            <Suspense fallback={<div className="h-96 animate-pulse rounded-3xl border border-border bg-surface-muted" />}>
+              <ContactForm />
+            </Suspense>
           </Reveal>
 
           <Reveal delay={120} className="space-y-5 lg:col-span-5">

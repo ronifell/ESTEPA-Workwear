@@ -44,7 +44,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
     contact.whatsapp
       ? {
           href: `https://wa.me/${contact.whatsapp.replace(/\D/g, "")}`,
-          label: contact.whatsapp,
+          label: locale === "es" ? "WhatsApp" : "WhatsApp",
           Icon: WhatsappIcon,
         }
       : null,
