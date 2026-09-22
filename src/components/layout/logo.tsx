@@ -28,12 +28,13 @@ export function Logo({ locale, className, priority = false }: LogoProps) {
       aria-label={`${siteConfig.companyName} — ${locale === "es" ? "Inicio" : "Home"}`}
     >
       <Image
-        src="/logo.png"
+        src={siteConfig.logoSrc}
         alt={siteConfig.companyName}
         width={2026}
         height={527}
         priority={priority}
         sizes="148px"
+        unoptimized
         className="h-8 w-auto max-w-full sm:h-9"
       />
     </LocalizedLink>

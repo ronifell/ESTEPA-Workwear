@@ -58,7 +58,7 @@ export async function generateMetadata({
     keywords: dictionary.seo.keywords,
     applicationName: siteConfig.companyName,
     alternates: buildAlternates("home", raw),
-    icons: { icon: "/logo.png", apple: "/logo.png" },
+    icons: { icon: siteConfig.logoSrc, apple: siteConfig.logoSrc },
     openGraph: {
       type: "website",
       siteName: siteConfig.companyName,

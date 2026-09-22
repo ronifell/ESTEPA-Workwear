@@ -22,12 +22,13 @@ export default async function AdminLoginPage() {
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center text-center">
           <Image
-            src="/logo.png"
+            src={siteConfig.logoSrc}
             alt={siteConfig.companyName}
-            width={1774}
-            height={887}
+            width={2026}
+            height={527}
             priority
             sizes="180px"
+            unoptimized
             className="h-10 w-auto"
           />
           <h1 className="mt-6 text-2xl text-navy-900">{adminCopy.login.title}</h1>

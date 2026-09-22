@@ -24,6 +24,8 @@ export const siteConfig = {
   url: rawSiteUrl && rawSiteUrl.length > 0 ? rawSiteUrl.replace(/\/$/, "") : "http://localhost:3000",
   defaultLocale,
   locales,
+  /** Cache-busted so a replaced public/logo.png is not kept by Next or the browser. */
+  logoSrc: "/logo.png?v=20260922",
 
   /** Public contact channels. Env overrides these published defaults. */
   contact: {

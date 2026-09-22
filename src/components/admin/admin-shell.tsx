@@ -22,11 +22,12 @@ export function AdminShell({ email, title, subtitle, action, children }: AdminSh
           <Link href="/admin" className="flex items-center gap-3 rounded-xs">
             <span className="flex items-center justify-center rounded-xs bg-sand-100 px-2.5 py-2">
               <Image
-                src="/logo.png"
+                src={siteConfig.logoSrc}
                 alt={siteConfig.companyName}
-                width={1774}
-                height={887}
+                width={2026}
+                height={527}
                 sizes="120px"
+                unoptimized
                 className="h-6 w-auto"
               />
             </span>

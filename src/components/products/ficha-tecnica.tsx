@@ -63,10 +63,11 @@ export function FichaTecnica({
       <header className="flex flex-wrap items-start justify-between gap-4 border-b-2 border-navy-900 px-5 py-4 sm:px-7">
         <div className="flex items-center gap-3">
           <Image
-            src="/logo.png"
+            src={siteConfig.logoSrc}
             alt={siteConfig.companyName}
-            width={1774}
-            height={887}
+            width={2026}
+            height={527}
+            unoptimized
             className="h-10 w-auto sm:h-11"
           />
           <div>
