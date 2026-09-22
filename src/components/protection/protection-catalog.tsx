@@ -22,17 +22,17 @@ export function ProtectionCatalog({
     <div>
       <nav
         aria-label={copy.selectRisk}
-        className="sticky top-16 z-30 -mx-4 mb-10 border-y border-border bg-sand-100/95 px-4 py-3 backdrop-blur-sm lg:top-[4.75rem] lg:mx-0 lg:rounded-full lg:border lg:px-2"
+        className="sticky top-16 z-30 -mx-4 mb-10 border-y border-border bg-sand-100/95 px-4 py-3 backdrop-blur-sm lg:top-[4.75rem] lg:mx-0 lg:rounded-full lg:border lg:px-3 lg:py-3"
       >
-        <ul className="flex gap-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <ul className="flex gap-2 overflow-x-auto sm:gap-3 lg:gap-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {sections.map(({ protection }, index) => (
-            <li key={protection.id} className="shrink-0">
+            <li key={protection.id} className="min-w-0 flex-1">
               <a
                 href={`#${protection.id}`}
-                className="inline-flex items-center gap-2 rounded-full px-3 py-2 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-navy-900 transition-colors hover:bg-white hover:text-accent"
+                className="flex w-full items-center justify-center gap-2.5 rounded-full px-4 py-3 font-display text-sm font-semibold uppercase tracking-[0.08em] text-navy-900 transition-colors hover:bg-white hover:text-accent sm:gap-3 sm:px-5 sm:py-3.5 sm:text-base"
               >
                 <span className="tabular-nums text-accent">{String(index + 1).padStart(2, "0")}</span>
-                {protection.name[locale]}
+                <span className="text-center leading-tight">{protection.name[locale]}</span>
               </a>
             </li>
           ))}
