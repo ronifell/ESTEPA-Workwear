@@ -30,8 +30,8 @@ export function Logo({ locale, className, priority = false }: LogoProps) {
       <Image
         src="/logo.png"
         alt={siteConfig.companyName}
-        width={487}
-        height={132}
+        width={2026}
+        height={527}
         priority={priority}
         sizes="148px"
         className="h-8 w-auto max-w-full sm:h-9"
