@@ -18,7 +18,7 @@ import { getPath } from "@/i18n/routes";
 import { cn } from "@/lib/utils";
 
 const linkStyles =
-  "relative shrink-0 whitespace-nowrap font-display text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-text-muted transition-colors hover:text-primary xl:text-[0.8125rem] xl:tracking-[0.09em]";
+  "relative shrink-0 whitespace-nowrap font-display text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-text-muted transition-colors hover:text-primary xl:text-[0.75rem] xl:tracking-[0.08em] 2xl:text-[0.8125rem]";
 
 const activeUnderline =
   "after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:bg-accent";
@@ -86,12 +86,12 @@ export function SiteHeader() {
         )}
       >
         <div className="container-page">
-          <div className="flex h-16 items-center gap-5 lg:h-[4.75rem] lg:gap-8">
+          <div className="flex h-16 items-center gap-6 lg:h-[4.75rem] lg:gap-10">
             <Logo locale={locale} priority />
 
             <nav
               aria-label={dictionary.nav.mainNavigation}
-              className="hidden min-w-0 flex-1 items-center justify-end gap-3 lg:flex xl:gap-5 2xl:gap-6"
+              className="hidden min-w-0 flex-1 items-center justify-end gap-2.5 lg:flex xl:gap-4 2xl:gap-6"
             >
               <div
                 ref={sectorsRef}
