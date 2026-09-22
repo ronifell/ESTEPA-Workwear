@@ -86,12 +86,12 @@ export function SiteHeader() {
         )}
       >
         <div className="container-page">
-          <div className="flex h-16 items-center gap-6 lg:h-[4.75rem] lg:gap-10">
-            <Logo locale={locale} priority />
+          <div className="flex h-16 items-center lg:h-[4.75rem]">
+            <Logo locale={locale} priority className="mr-10 lg:mr-14" />
 
             <nav
               aria-label={dictionary.nav.mainNavigation}
-              className="hidden min-w-0 flex-1 items-center justify-end gap-2.5 lg:flex xl:gap-4 2xl:gap-6"
+              className="hidden min-w-0 flex-1 items-center justify-end gap-3 lg:flex xl:gap-5 2xl:gap-6"
             >
               <div
                 ref={sectorsRef}
@@ -157,6 +157,7 @@ export function SiteHeader() {
                   locale={locale}
                   className={cn(
                     linkStyles,
+                    item.route === "faq" && "hidden xl:inline",
                     isActive(getPath(item.route, locale)) && `text-primary ${activeUnderline}`,
                   )}
                 >

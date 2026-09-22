@@ -22,7 +22,7 @@ export function Logo({ locale, className, priority = false }: LogoProps) {
       route="home"
       locale={locale}
       className={cn(
-        "group relative z-10 inline-flex shrink-0 items-center rounded-xs transition-opacity hover:opacity-90",
+        "group relative z-10 inline-flex h-8 w-[7.75rem] shrink-0 items-center sm:h-9 sm:w-[8.7rem]",
         className,
       )}
       aria-label={`${siteConfig.companyName} — ${locale === "es" ? "Inicio" : "Home"}`}
@@ -33,9 +33,9 @@ export function Logo({ locale, className, priority = false }: LogoProps) {
         width={2026}
         height={527}
         priority={priority}
-        sizes="168px"
+        sizes="140px"
         unoptimized
-        className="h-8 w-auto sm:h-[2.125rem]"
+        className="h-full w-full object-contain object-left"
       />
     </LocalizedLink>
   );
