@@ -11,9 +11,8 @@ import { Logo } from "@/components/layout/logo";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { primaryNav, sectorNav } from "@/components/layout/nav-config";
 import { useI18n } from "@/components/providers/i18n-provider";
-import { ChevronDownIcon, DownloadIcon, MenuIcon } from "@/components/ui/icons";
+import { ChevronDownIcon, MenuIcon } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
-import { siteConfig } from "@/config/site";
 import { sectors } from "@/data/sectors";
 import { getPath } from "@/i18n/routes";
 import { cn } from "@/lib/utils";
@@ -69,7 +68,6 @@ export function SiteHeader() {
   const isActive = (href: string, exact = false) =>
     exact ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 
-  const homeHref = getPath("home", locale);
   const isSectorActive = sectorNav.some((item) => isActive(getPath(item.route, locale)));
 
   return (
@@ -88,21 +86,13 @@ export function SiteHeader() {
         )}
       >
         <div className="container-page">
-          <div className="flex h-16 items-center gap-4 lg:h-[4.75rem] lg:gap-6">
-            <Logo locale={locale} priority className="shrink-0" />
+          <div className="flex h-16 items-center gap-5 lg:h-[4.75rem] lg:gap-8">
+            <Logo locale={locale} priority />
 
             <nav
               aria-label={dictionary.nav.mainNavigation}
-              className="hidden min-w-0 flex-1 items-center justify-end gap-3 lg:flex xl:gap-4 2xl:gap-6"
+              className="hidden min-w-0 flex-1 items-center justify-end gap-3 lg:flex xl:gap-5 2xl:gap-6"
             >
-              <LocalizedLink
-                route="home"
-                locale={locale}
-                className={cn(linkStyles, isActive(homeHref, true) && `text-primary ${activeUnderline}`)}
-              >
-                {dictionary.nav.home}
-              </LocalizedLink>
-
               <div
                 ref={sectorsRef}
                 className="relative"
@@ -176,18 +166,6 @@ export function SiteHeader() {
             </nav>
 
             <div className="flex shrink-0 items-center gap-1 sm:gap-3">
-              {siteConfig.catalogPdfUrl ? (
-                <a
-                  href={siteConfig.catalogPdfUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  aria-label={dictionary.common.downloadCatalog}
-                  className="hidden h-10 items-center gap-1.5 rounded-full border border-border px-3 font-display text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-navy-900 transition-colors hover:border-navy-900 hover:text-accent xl:inline-flex"
-                >
-                  <DownloadIcon className="size-3.5" />
-                  {dictionary.nav.catalog}
-                </a>
-              ) : null}
               <LanguageSwitcher className="hidden sm:flex" />
               <span aria-hidden className="hidden h-4 w-px bg-border-strong sm:block" />
               <FavoritesNavButton />
