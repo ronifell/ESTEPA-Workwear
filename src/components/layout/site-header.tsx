@@ -87,7 +87,7 @@ export function SiteHeader() {
       >
         <div className="container-page">
           <div className="flex h-16 items-center lg:h-[4.75rem]">
-            <Logo locale={locale} priority className="mr-5 lg:mr-8" />
+            <Logo locale={locale} priority className="-ml-4 mr-9 lg:mr-12" />
 
             <nav
               aria-label={dictionary.nav.mainNavigation}
