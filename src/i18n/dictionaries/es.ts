@@ -67,9 +67,9 @@ export const es = {
       titleLead: "La certificación que las operadoras te exigen.",
       titleAccent: "En cada prenda.",
       description:
-        "Overoles, camisas, pantalones y camperas FR y antiestáticos, con normas internacionales —NFPA, UL, ASTM, EN ISO—. Diseño argentino, estándares globales.",
+        "Overoles, camisas, pantalones y camperas FR, antiestáticos y de alta visibilidad (HV), con normas internacionales —NFPA, UL, ASTM, EN ISO—. Estándares globales.",
       imageAlt:
-        "Ropa ignífuga certificada ESTEPA: operario industrial con indumentaria de trabajo FR y equipo de protección",
+        "Operario con campera de alta visibilidad ESTEPA en una planta de petróleo y gas",
       scroll: "Descubrir más",
       productRail: "Prendas de la línea",
     },
@@ -857,7 +857,7 @@ export const es = {
     home: {
       title: "Ropa de Trabajo FR Certificada | Minería y Petróleo — ESTEPA",
       description:
-        "Indumentaria FR y antiestática certificada (NFPA 2112, EN ISO 11612, EN 1149) para minería, petróleo y gas. Diseño argentino, estándares internacionales.",
+        "Indumentaria FR, antiestática y de alta visibilidad (HV) certificada (NFPA 2112, EN ISO 11612, EN 1149) para minería, petróleo y gas. Estándares internacionales.",
     },
     mining: {
       title: "Ropa ignífuga certificada para minería",

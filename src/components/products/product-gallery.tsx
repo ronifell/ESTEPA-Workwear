@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/ui/icons";
 import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { format } from "@/i18n";
+import { isUploadedMedia } from "@/lib/product-media";
 import { cn } from "@/lib/utils";
 import type { Product, ProductImage } from "@/types";
 
@@ -194,6 +195,7 @@ export function ProductGallery({ product }: { readonly product: Product }) {
                   src={image.src}
                   alt={index === position ? image.alt[locale] : ""}
                   fill
+                  unoptimized={isUploadedMedia(image.src)}
                   priority={index === (canSlide ? 1 : 0)}
                   draggable={false}
                   sizes="(min-width: 1024px) 45vw, 100vw"
@@ -274,6 +276,7 @@ export function ProductGallery({ product }: { readonly product: Product }) {
                   src={image.src}
                   alt=""
                   fill
+                  unoptimized={isUploadedMedia(image.src)}
                   draggable={false}
                   sizes="120px"
                   className="object-cover"

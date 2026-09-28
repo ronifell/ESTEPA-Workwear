@@ -7,7 +7,7 @@ import { SizeDiagram, sizeMeasureIds, sizeMeasureKeys } from "@/components/produ
 import { siteConfig } from "@/config/site";
 import { sectorsById } from "@/data/sectors";
 import { format, getDictionary } from "@/i18n";
-import { primaryProductImage } from "@/lib/product-media";
+import { isUploadedMedia, primaryProductImage } from "@/lib/product-media";
 import { cn } from "@/lib/utils";
 import type { Locale, Product } from "@/types";
 
@@ -183,6 +183,7 @@ export function FichaTecnica({
                   src={photo.src}
                   alt={photo.alt[locale]}
                   fill
+                  unoptimized={isUploadedMedia(photo.src)}
                   priority
                   sizes="(min-width: 1024px) 28vw, 70vw"
                   className="object-contain"

@@ -65,9 +65,9 @@ export const en: Dictionary = {
       titleLead: "The certification operators require.",
       titleAccent: "In every garment.",
       description:
-        "Coveralls, shirts, trousers and jackets — FR and antistatic — with international standards —NFPA, UL, ASTM, EN ISO—. Argentine design, global standards.",
+        "Coveralls, shirts, trousers and jackets — FR, antistatic and high-visibility (HV) — with international standards —NFPA, UL, ASTM, EN ISO—. Global standards.",
       imageAlt:
-        "ESTEPA certified flame-resistant workwear: industrial worker in FR apparel and protective equipment",
+        "Worker in an ESTEPA high-visibility jacket at an oil and gas plant",
       scroll: "Discover more",
       productRail: "Garments in the line",
     },
@@ -851,7 +851,7 @@ export const en: Dictionary = {
     home: {
       title: "Certified FR Workwear | Mining & Oil — ESTEPA",
       description:
-        "Certified FR and antistatic apparel (NFPA 2112, EN ISO 11612, EN 1149) for mining, oil and gas. Argentine design, international standards.",
+        "Certified FR, antistatic and high-visibility (HV) apparel (NFPA 2112, EN ISO 11612, EN 1149) for mining, oil and gas. International standards.",
     },
     mining: {
       title: "Certified flame-resistant mining workwear",

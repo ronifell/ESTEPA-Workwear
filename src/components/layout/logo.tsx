@@ -21,21 +21,18 @@ export function Logo({ locale, className, priority = false }: LogoProps) {
     <LocalizedLink
       route="home"
       locale={locale}
-      className={cn(
-        "group relative z-10 inline-flex h-8 w-[7.75rem] shrink-0 items-center sm:h-9 sm:w-[8.7rem]",
-        className,
-      )}
+      className={cn("group relative z-10 inline-flex shrink-0 items-center", className)}
       aria-label={`${siteConfig.companyName} — ${locale === "es" ? "Inicio" : "Home"}`}
     >
       <Image
         src={siteConfig.logoSrc}
         alt={siteConfig.companyName}
-        width={2026}
-        height={527}
+        width={2082}
+        height={534}
         priority={priority}
-        sizes="140px"
+        sizes="196px"
         unoptimized
-        className="h-full w-full object-contain object-left"
+        className="h-10 w-auto sm:h-11"
       />
     </LocalizedLink>
   );

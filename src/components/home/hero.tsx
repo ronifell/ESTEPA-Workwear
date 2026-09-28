@@ -37,12 +37,12 @@ export function Hero({ locale }: { readonly locale: Locale }) {
         <div className="order-2 relative h-64 w-full sm:h-80 lg:order-none lg:col-start-2 lg:h-auto lg:min-h-[32rem]">
           <div className="absolute inset-0 overflow-hidden lg:inset-3 lg:rounded-3xl">
             <Image
-              src="/images/hero/home.jpg"
+              src="/images/hero/home-cover.jpg"
               alt={hero.imageAlt}
               fill
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover object-[60%_center]"
+              className="object-cover object-[center_30%]"
             />
           </div>
           <div

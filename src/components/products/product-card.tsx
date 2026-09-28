@@ -11,7 +11,7 @@ import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { siteConfig } from "@/config/site";
 import { getDictionary } from "@/i18n";
 import { formatPrice } from "@/lib/format";
-import { primaryProductImage } from "@/lib/product-media";
+import { isUploadedMedia, primaryProductImage } from "@/lib/product-media";
 import { cn } from "@/lib/utils";
 import type { Locale, Product } from "@/types";
 
@@ -54,6 +54,7 @@ export function ProductCard({ product, locale, className, priority }: ProductCar
             src={image.src}
             alt={image.alt[locale]}
             fill
+            unoptimized={isUploadedMedia(image.src)}
             priority={priority}
             sizes="(min-width: 1280px) 22rem, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="object-contain transition-transform duration-500 ease-[var(--ease-out-industrial)] group-hover:scale-[1.03]"

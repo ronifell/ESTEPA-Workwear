@@ -329,46 +329,45 @@ function UlCertifiedMark({
 }) {
   return (
     <svg
-      viewBox="0 0 48 72"
+      viewBox="0 0 64 64"
       aria-hidden
-      className={cn(dense ? "h-10 w-10" : compact ? "h-12 w-12" : "h-16 w-16")}
+      className={cn(dense ? "size-10" : compact ? "size-12" : "size-16")}
     >
-      <rect x="1.2" y="1.2" width="45.6" height="69.6" rx="12" fill={INK} />
-      <circle cx={24} cy={20.2} r={11.4} fill="#fff" />
+      <rect x="3" y="3" width="58" height="58" rx="14" fill={INK} />
+      <circle cx="32" cy="24" r="13" fill="#fff" />
       <text
-        x="24"
-        y="24.4"
+        x="32"
+        y="28.6"
         textAnchor="middle"
         fill={INK}
         fontFamily="var(--font-heading), Archivo, ui-sans-serif, sans-serif"
-        fontSize="11.4"
+        fontSize="13"
         fontWeight="800"
         letterSpacing="-0.04em"
       >
         UL
       </text>
-      <rect x="1.2" y="34.2" width="45.6" height="12.4" fill="#fff" />
       <text
-        x="24"
-        y="43"
+        x="32"
+        y="46.5"
         textAnchor="middle"
-        fill={INK}
+        fill="#fff"
         fontFamily="var(--font-heading), Archivo, ui-sans-serif, sans-serif"
-        fontSize={band === "Certificate" ? "5.4" : "6.2"}
+        fontSize={band === "Certificate" ? "5.2" : "6.4"}
         fontWeight="800"
-        letterSpacing="0.14em"
+        letterSpacing="0.08em"
       >
         {band.toUpperCase()}
       </text>
       <text
-        x="24"
-        y="59.6"
+        x="32"
+        y="55.2"
         textAnchor="middle"
         fill="#fff"
         fontFamily="var(--font-heading), Archivo, ui-sans-serif, sans-serif"
-        fontSize="5.6"
+        fontSize="5.2"
         fontWeight="700"
-        letterSpacing="0.16em"
+        letterSpacing="0.12em"
       >
         SAFETY US
       </text>

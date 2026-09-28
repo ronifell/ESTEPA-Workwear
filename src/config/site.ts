@@ -25,7 +25,7 @@ export const siteConfig = {
   defaultLocale,
   locales,
   /** Cache-busted so a replaced public/logo.png is not kept by Next or the browser. */
-  logoSrc: "/logo.png?v=20260922",
+  logoSrc: "/logo.png?v=20260927",
 
   /** Public contact channels. Env overrides these published defaults. */
   contact: {
