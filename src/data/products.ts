@@ -304,9 +304,9 @@ export const products: readonly Product[] = [
   item({
     slug: "overol-fr-3004r",
     ref: "3004R",
-    name: { es: "Overol FR inherente", en: "Inherent FR coverall" },
+    name: { es: "Mameluco FR inherente", en: "Inherent FR coverall" },
     short: {
-      es: "Overol inherente de aramida 4,5 oz, 8 bolsillos y cinta FR reflexiva.",
+      es: "Mameluco inherente de aramida 4,5 oz, 8 bolsillos y cinta FR reflexiva.",
       en: "4.5 oz inherent aramid coverall, 8 pockets and FR reflective tape.",
     },
     category: "coveralls",
@@ -326,9 +326,9 @@ export const products: readonly Product[] = [
   item({
     slug: "overol-fr-3003r",
     ref: "3003R",
-    name: { es: "Overol FR inherente", en: "Inherent FR coverall" },
+    name: { es: "Mameluco FR inherente", en: "Inherent FR coverall" },
     short: {
-      es: "Overol inherente de aramida 4,5 oz en talles S–5XL.",
+      es: "Mameluco inherente de aramida 4,5 oz en talles S–5XL.",
       en: "4.5 oz inherent aramid coverall in sizes S–5XL.",
     },
     category: "coveralls",
@@ -348,9 +348,9 @@ export const products: readonly Product[] = [
   item({
     slug: "overol-fr-3x24r",
     ref: "3X24R",
-    name: { es: "Overol FR algodón / nailon", en: "Cotton/nylon FR coverall" },
+    name: { es: "Mameluco FR algodón / nailon", en: "Cotton/nylon FR coverall" },
     short: {
-      es: "Overol FR 88/12 de 7,5 oz, zipper de dos vías y bolsillos ventilados.",
+      es: "Mameluco FR 88/12 de 7,5 oz, zipper de dos vías y bolsillos ventilados.",
       en: "7.5 oz 88/12 FR coverall with two-way zipper and vented pockets.",
     },
     category: "coveralls",
@@ -371,9 +371,9 @@ export const products: readonly Product[] = [
   item({
     slug: "overol-fr-3x24r-1",
     ref: "3X24R-1",
-    name: { es: "Overol FR inherente aramida", en: "Inherent aramid FR coverall" },
+    name: { es: "Mameluco FR inherente aramida", en: "Inherent aramid FR coverall" },
     short: {
-      es: "Overol inherente 4,5 oz con cuello alto y 7 bolsillos.",
+      es: "Mameluco inherente 4,5 oz con cuello alto y 7 bolsillos.",
       en: "4.5 oz inherent coverall with a stand-up collar and 7 pockets.",
     },
     category: "coveralls",
@@ -393,9 +393,9 @@ export const products: readonly Product[] = [
   item({
     slug: "overol-fr-3x25r",
     ref: "3X25R",
-    name: { es: "Overol FR algodón / nailon", en: "Cotton/nylon FR coverall" },
+    name: { es: "Mameluco FR algodón / nailon", en: "Cotton/nylon FR coverall" },
     short: {
-      es: "Overol FR 7,5 oz con tapeta sobre el zipper y espalda de acción.",
+      es: "Mameluco FR 7,5 oz con tapeta sobre el zipper y espalda de acción.",
       en: "7.5 oz FR coverall with a zipper storm flap and action back.",
     },
     category: "coveralls",

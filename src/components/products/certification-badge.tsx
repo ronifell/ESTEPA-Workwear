@@ -76,7 +76,7 @@ function MarkStack({
         dense ? "w-[2.45rem]" : compact ? "w-[3.6rem]" : "w-[4.4rem]",
       )}
     >
-      <span className={cn("flex items-end justify-center", dense ? "h-10" : compact ? "h-12" : "h-16")}>
+      <span className={cn("flex items-center justify-center", dense ? "size-10" : compact ? "size-12" : "size-16")}>
         {children}
       </span>
       {caption ? <MarkCaption kicker={kicker} title={title} compact={compact} dense={dense} /> : null}
@@ -388,7 +388,7 @@ function ShieldStamp({
     <svg
       viewBox="0 0 64 76"
       aria-hidden
-      className={cn(dense ? "h-10 w-[2.15rem]" : compact ? "h-12 w-[2.55rem]" : "h-16 w-[3.4rem]")}
+      className={cn(dense ? "size-10" : compact ? "size-12" : "size-16")}
     >
       <ShieldBody />
       {children}
@@ -497,7 +497,7 @@ function BadgeFace({
     return (
       <MarkStack compact={compact} dense={dense} kicker="NFPA" title="2112">
         <SquareStamp compact={compact} dense={dense}>
-          <g transform="translate(0 1) scale(0.96)">
+          <g transform="translate(0 0) scale(0.96)">
             <NfpaFlamePictogram />
           </g>
         </SquareStamp>
@@ -609,7 +609,7 @@ export function CertificationRow({
     <ul
       className={cn(
         singleLine
-          ? "flex w-full flex-nowrap items-start justify-between gap-x-0.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          ? "flex w-full flex-nowrap items-center justify-between gap-x-0.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           : threeAcross
             ? "grid w-full grid-cols-3 justify-items-center gap-x-1 gap-y-3"
             : cn("flex flex-wrap items-start", compact ? "gap-x-3.5 gap-y-4" : "gap-x-5 gap-y-5"),

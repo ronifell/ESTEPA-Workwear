@@ -67,7 +67,7 @@ export const es = {
       titleLead: "La certificación que las operadoras te exigen.",
       titleAccent: "En cada prenda.",
       description:
-        "Overoles, camisas, pantalones y camperas FR, antiestáticos y de alta visibilidad (HV), con normas internacionales —NFPA, UL, ASTM, EN ISO—. Estándares globales.",
+        "Mamelucos, camisas, pantalones y camperas FR, antiestáticos y de alta visibilidad (HV), con normas internacionales —NFPA, UL, ASTM, EN ISO—. Estándares globales.",
       imageAlt:
         "Operario con campera de alta visibilidad ESTEPA en una planta de petróleo y gas",
       scroll: "Descubrir más",
@@ -108,7 +108,7 @@ export const es = {
       eyebrow: "Ropa de trabajo",
       title: "El catálogo ESTEPA",
       description:
-        "Overoles, camisas, pantalones y camperas para minería, petróleo y gas e industria.",
+        "Mamelucos, camisas, pantalones y camperas para minería, petróleo y gas e industria.",
       cta: "Ver catálogo completo",
     },
     certifications: {
@@ -230,7 +230,7 @@ export const es = {
       cta: "Consultar disponibilidad",
     },
     categories: {
-      coveralls: "Overoles",
+      coveralls: "Mamelucos",
       jackets: "Camperas",
       trousers: "Pantalones",
       sets: "Conjuntos",
@@ -399,7 +399,7 @@ export const es = {
     items: [
       {
         q: "¿Qué ropa vende ESTEPA?",
-        a: "Ropa de trabajo técnica: overoles, camisas, pantalones, camperas y chalecos para minería, petróleo y gas e industria. El catálogo está organizado por sector, tipo de protección y norma.",
+        a: "Ropa de trabajo técnica: mamelucos, camisas, pantalones, camperas y chalecos para minería, petróleo y gas e industria. El catálogo está organizado por sector, tipo de protección y norma.",
       },
       {
         q: "¿Qué significa que una prenda está certificada?",
@@ -493,7 +493,7 @@ export const es = {
       "Recorré nuestras líneas organizadas por sector, tipo de protección y categoría de producto.",
     downloadTitle: "Catálogo en PDF",
     downloadDescription:
-      "Descargá el catálogo técnico FR en PDF: camisas, overoles, camperas, pantalones, conjuntos y certificaciones.",
+      "Descargá el catálogo técnico FR en PDF: camisas, mamelucos, camperas, pantalones, conjuntos y certificaciones.",
     bySectorTitle: "Por sector",
     byProtectionTitle: "Por tipo de protección",
     byCategoryTitle: "Por categoría de producto",

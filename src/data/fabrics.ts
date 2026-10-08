@@ -34,7 +34,7 @@ export const fabrics = {
     } satisfies LocalizedText,
     properties: {
       es: [
-        "Algodón / nailon FR 7,5 oz para camisas, overoles y pantalones",
+        "Algodón / nailon FR 7,5 oz para camisas, mamelucos y pantalones",
         "Aramida inherente 4,5–6 oz donde se pide protección que no se lava",
         "Avíos, hilos y cintas FR según cada ficha",
         "Normas NFPA 2112, NFPA 70E, ASTM F1506 y EN ISO según el modelo",

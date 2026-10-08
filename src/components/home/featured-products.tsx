@@ -1,4 +1,4 @@
-import { ProductGrid } from "@/components/products/product-grid";
+import { ProductCategorySections } from "@/components/products/product-category-sections";
 import { buttonStyles } from "@/components/ui/button";
 import { ArrowRightIcon } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
@@ -33,7 +33,9 @@ export function FeaturedProducts({
         }
       />
 
-      <ProductGrid products={products} locale={locale} columns={3} className="mt-12 lg:mt-16" />
+      <div className="mt-12 lg:mt-16">
+        <ProductCategorySections products={products} locale={locale} columns={3} />
+      </div>
     </Section>
   );
 }

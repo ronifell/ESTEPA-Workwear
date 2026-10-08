@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { CatalogBrowser } from "@/components/products/catalog-browser";
-import { ProductGrid } from "@/components/products/product-grid";
+import { ProductCategorySections } from "@/components/products/product-category-sections";
 import { CtaSection } from "@/components/shared/cta-section";
 import { PageHero } from "@/components/shared/page-hero";
 import { Section } from "@/components/ui/section";
@@ -56,7 +56,7 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
 
       <Section tone="default">
         <CatalogBrowser locale={locale} filters={filters} resultsLabel={resultsLabel}>
-          <ProductGrid products={products} locale={locale} columns={3} prioritizeFirst />
+          <ProductCategorySections products={products} locale={locale} columns={3} />
         </CatalogBrowser>
       </Section>
 

@@ -9,6 +9,7 @@ import { buttonStyles } from "@/components/ui/button";
 import { ArrowRightIcon, CloseIcon } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { siteConfig } from "@/config/site";
+import { categoryIds } from "@/lib/product-filters";
 import { cn } from "@/lib/utils";
 
 export interface MobileMenuProps {
@@ -120,6 +121,23 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                   </span>
                   <ArrowRightIcon className="size-4 -translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
                 </LocalizedLink>
+                {item.route === "products" ? (
+                  <ul className="border-b border-border/70 pb-3 pl-9">
+                    {categoryIds.map((id) => (
+                      <li key={id}>
+                        <LocalizedLink
+                          route="products"
+                          locale={locale}
+                          query={{ category: id }}
+                          onClick={onClose}
+                          className="block py-1.5 font-display text-sm font-semibold text-text-muted transition-colors hover:text-accent"
+                        >
+                          {dictionary.products.categories[id]}
+                        </LocalizedLink>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </li>
             ))}
           </ul>

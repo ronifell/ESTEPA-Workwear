@@ -15,6 +15,7 @@ import { ChevronDownIcon, MenuIcon } from "@/components/ui/icons";
 import { LocalizedLink } from "@/components/ui/localized-link";
 import { sectors } from "@/data/sectors";
 import { getPath } from "@/i18n/routes";
+import { categoryIds } from "@/lib/product-filters";
 import { cn } from "@/lib/utils";
 
 const linkStyles =
@@ -29,15 +30,19 @@ export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isSectorsOpen, setIsSectorsOpen] = useState(false);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [renderedPathname, setRenderedPathname] = useState(pathname);
   const sectorsRef = useRef<HTMLDivElement>(null);
+  const productsRef = useRef<HTMLDivElement>(null);
   const sectorsPanelId = useId();
+  const productsPanelId = useId();
 
   // Navigating away closes every overlay.
   if (pathname !== renderedPathname) {
     setRenderedPathname(pathname);
     setIsMobileOpen(false);
     setIsSectorsOpen(false);
+    setIsProductsOpen(false);
   }
 
   useEffect(() => {
@@ -48,13 +53,18 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    if (!isSectorsOpen) return;
+    if (!isSectorsOpen && !isProductsOpen) return;
 
     function onPointerDown(event: MouseEvent) {
-      if (!sectorsRef.current?.contains(event.target as Node)) setIsSectorsOpen(false);
+      const target = event.target as Node;
+      if (isSectorsOpen && !sectorsRef.current?.contains(target)) setIsSectorsOpen(false);
+      if (isProductsOpen && !productsRef.current?.contains(target)) setIsProductsOpen(false);
     }
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setIsSectorsOpen(false);
+      if (event.key === "Escape") {
+        setIsSectorsOpen(false);
+        setIsProductsOpen(false);
+      }
     }
 
     document.addEventListener("mousedown", onPointerDown);
@@ -63,12 +73,14 @@ export function SiteHeader() {
       document.removeEventListener("mousedown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [isSectorsOpen]);
+  }, [isSectorsOpen, isProductsOpen]);
 
   const isActive = (href: string, exact = false) =>
     exact ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 
   const isSectorActive = sectorNav.some((item) => isActive(getPath(item.route, locale)));
+  const productsHref = getPath("products", locale);
+  const isProductsActive = isActive(productsHref);
 
   return (
     <>
@@ -150,20 +162,78 @@ export function SiteHeader() {
                 </div>
               </div>
 
-              {primaryNav.map((item) => (
-                <LocalizedLink
-                  key={item.route}
-                  route={item.route}
-                  locale={locale}
+              <div
+                ref={productsRef}
+                className="relative"
+                onMouseEnter={() => setIsProductsOpen(true)}
+                onMouseLeave={() => setIsProductsOpen(false)}
+              >
+                <button
+                  type="button"
+                  aria-expanded={isProductsOpen}
+                  aria-controls={productsPanelId}
+                  onClick={() => setIsProductsOpen((open) => !open)}
                   className={cn(
                     linkStyles,
-                    item.route === "faq" && "hidden xl:inline",
-                    isActive(getPath(item.route, locale)) && `text-primary ${activeUnderline}`,
+                    "flex items-center gap-1.5",
+                    (isProductsActive || isProductsOpen) && `text-primary ${activeUnderline}`,
                   )}
                 >
-                  {item.route === "faq" ? dictionary.nav.faqShort : dictionary.nav[item.labelKey]}
-                </LocalizedLink>
-              ))}
+                  {dictionary.nav.products}
+                  <ChevronDownIcon
+                    className={cn(
+                      "size-3.5 transition-transform duration-200",
+                      isProductsOpen && "rotate-180",
+                    )}
+                  />
+                </button>
+
+                <div
+                  id={productsPanelId}
+                  hidden={!isProductsOpen}
+                  className="absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 pt-4"
+                >
+                  <div className="animate-fade rounded-2xl border border-border bg-surface p-2 shadow-card-hover">
+                    <LocalizedLink
+                      route="products"
+                      locale={locale}
+                      onClick={() => setIsProductsOpen(false)}
+                      className="block rounded-xl px-3 py-2.5 font-display text-sm font-semibold text-navy-900 transition-colors hover:bg-sand-100"
+                    >
+                      {dictionary.products.filters.all}
+                    </LocalizedLink>
+                    {categoryIds.map((id) => (
+                      <LocalizedLink
+                        key={id}
+                        route="products"
+                        locale={locale}
+                        query={{ category: id }}
+                        onClick={() => setIsProductsOpen(false)}
+                        className="block rounded-xl px-3 py-2.5 font-display text-sm font-semibold text-navy-900 transition-colors hover:bg-sand-100"
+                      >
+                        {dictionary.products.categories[id]}
+                      </LocalizedLink>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {primaryNav
+                .filter((item) => item.route !== "products")
+                .map((item) => (
+                  <LocalizedLink
+                    key={item.route}
+                    route={item.route}
+                    locale={locale}
+                    className={cn(
+                      linkStyles,
+                      item.route === "faq" && "hidden xl:inline",
+                      isActive(getPath(item.route, locale)) && `text-primary ${activeUnderline}`,
+                    )}
+                  >
+                    {item.route === "faq" ? dictionary.nav.faqShort : dictionary.nav[item.labelKey]}
+                  </LocalizedLink>
+                ))}
             </nav>
 
             <div className="flex shrink-0 items-center gap-1 sm:gap-3">

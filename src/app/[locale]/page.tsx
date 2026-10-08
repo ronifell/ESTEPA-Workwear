@@ -9,7 +9,7 @@ import { Industries } from "@/components/home/industries";
 import { Protections } from "@/components/home/protections";
 import { CtaSection } from "@/components/shared/cta-section";
 import { resolveLocale } from "@/i18n";
-import { getFeaturedProducts } from "@/lib/repositories/products";
+import { getProducts } from "@/lib/repositories/products";
 import { buildMetadataFromDictionary } from "@/lib/seo";
 
 interface PageProps {
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function HomePage({ params }: PageProps) {
   const locale = resolveLocale((await params).locale);
-  const featured = await getFeaturedProducts(6);
+  const featured = await getProducts();
 
   return (
     <>
