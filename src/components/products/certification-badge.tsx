@@ -76,7 +76,7 @@ function MarkStack({
         dense ? "w-[2.45rem]" : compact ? "w-[3.6rem]" : "w-[4.4rem]",
       )}
     >
-      <span className={cn("flex items-center justify-center", dense ? "size-10" : compact ? "size-12" : "size-16")}>
+      <span className={cn("flex items-start justify-center", dense ? "size-10" : compact ? "size-12" : "size-16")}>
         {children}
       </span>
       {caption ? <MarkCaption kicker={kicker} title={title} compact={compact} dense={dense} /> : null}
@@ -609,7 +609,7 @@ export function CertificationRow({
     <ul
       className={cn(
         singleLine
-          ? "flex w-full flex-nowrap items-center justify-between gap-x-0.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          ? "flex w-full flex-nowrap items-start justify-between gap-x-0.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           : threeAcross
             ? "grid w-full grid-cols-3 justify-items-center gap-x-1 gap-y-3"
             : cn("flex flex-wrap items-start", compact ? "gap-x-3.5 gap-y-4" : "gap-x-5 gap-y-5"),

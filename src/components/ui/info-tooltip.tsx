@@ -170,7 +170,7 @@ export function InfoTooltip({
           if (tooltipRef.current?.contains(event.relatedTarget as Node)) return;
           hide();
         }}
-        className="inline-flex cursor-help rounded-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="inline-flex items-start cursor-help rounded-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         {children}
       </button>
