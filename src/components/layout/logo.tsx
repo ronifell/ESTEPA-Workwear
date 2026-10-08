@@ -22,7 +22,7 @@ export function Logo({ locale, className, priority = false }: LogoProps) {
       route="home"
       locale={locale}
       className={cn(
-        "group relative z-20 inline-flex h-10 w-[9.75rem] shrink-0 items-center sm:h-11 sm:w-[10.75rem]",
+        "group relative z-30 inline-flex h-10 w-[9.75rem] shrink-0 items-center overflow-hidden sm:h-11 sm:w-[10.75rem]",
         className,
       )}
       aria-label={`${siteConfig.companyName} — ${locale === "es" ? "Inicio" : "Home"}`}

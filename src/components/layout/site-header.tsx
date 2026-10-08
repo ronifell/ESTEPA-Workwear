@@ -19,7 +19,7 @@ import { categoryIds } from "@/lib/product-filters";
 import { cn } from "@/lib/utils";
 
 const linkStyles =
-  "relative shrink-0 whitespace-nowrap font-display text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-text-muted transition-colors hover:text-primary xl:text-[0.75rem] xl:tracking-[0.08em] 2xl:text-[0.8125rem]";
+  "relative shrink-0 whitespace-nowrap font-display text-[0.6875rem] font-semibold uppercase tracking-[0.04em] text-text-muted transition-colors hover:text-primary xl:text-[0.75rem] 2xl:tracking-[0.06em]";
 
 const activeUnderline =
   "after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:bg-accent";
@@ -99,11 +99,11 @@ export function SiteHeader() {
       >
         <div className="container-page">
           <div className="flex h-16 items-center lg:h-[4.75rem]">
-            <Logo locale={locale} priority className="-ml-4 mr-9 lg:mr-12" />
+            <Logo locale={locale} priority className="-ml-3 mr-4 bg-sand-100 xl:mr-6" />
 
             <nav
               aria-label={dictionary.nav.mainNavigation}
-              className="hidden min-w-0 flex-1 items-center justify-end gap-3 lg:flex xl:gap-5 2xl:gap-6"
+              className="hidden min-w-0 flex-1 items-center justify-end gap-2 lg:flex xl:gap-3 2xl:gap-5"
             >
               <div
                 ref={sectorsRef}
@@ -227,7 +227,7 @@ export function SiteHeader() {
                     locale={locale}
                     className={cn(
                       linkStyles,
-                      item.route === "faq" && "hidden xl:inline",
+                      item.route === "faq" && "hidden 2xl:inline",
                       isActive(getPath(item.route, locale)) && `text-primary ${activeUnderline}`,
                     )}
                   >
